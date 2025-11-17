@@ -1,0 +1,74 @@
+<h2>Panneau d'Administration des Personnages</h2>
+
+<button routerLink="/admin/documents" class="btn-admin-nav">
+    Gérer les Documents
+</button>
+
+<button routerLink="/admin/scenario" class="btn-admin-nav">
+    Accéder au scénario
+</button>
+
+<button (click)="basculerFiltre()">
+    {{ afficherSeulementRencontre ? 'Afficher TOUS les personnages' : 'Afficher seulement les RENCONTRÉS' }}
+</button>
+
+<div class="admin-grid">
+  <div *ngFor="let p of personnages$ | async" class="admin-card">
+    
+    <h3>{{ p.nom }}</h3>
+    <p>Age : {{ p.age }}</p>
+    <p>Profession : {{ p.profession }}</p>
+    <p>
+        Statut: <strong 
+            [class.rencontre-oui]="p.rencontre"
+            [class.rencontre-non]="!p.rencontre">
+            {{ p.rencontre ? 'Rencontré' : 'Non rencontré' }}
+        </strong>
+    </p>
+
+    <button (click)="basculerRencontre(p)">
+        {{ p.rencontre ? 'Passer en non rencontré' : 'Rendre Rencontré' }}
+    </button>
+
+    <hr>
+    
+    <div class="secrets-management">
+        <h4>Secrets du MJ</h4>
+        
+        @if(p.secrets && p.secrets.length > 0) {
+            <table class="secret-table">
+                <thead>
+                    <tr>
+                        <th>Clé</th>
+                        <th class="col-revele">Révélé</th>
+                        <th>Détail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(secret of p.secrets; track secret.cle) {
+                    
+                    }
+                    <tr *ngFor="let secret of p.secrets" [class.revele-active]="secret.debloque">
+                        <td>{{ secret.cle }}</td>
+                        <td class="col-revele">
+                            <input type="checkbox" 
+                                   [checked]="secret.debloque" 
+                                   (change)="toggleSecret(p.nom, secret.cle)">
+                        </td>
+                        <td>
+                            {{ secret.valeur }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        } @else { 
+            <p class="no-secret">Aucun secret défini.</p>
+         }
+        <ng-template #noSecrets>
+            <p class="no-secret">Aucun secret défini.</p>
+        </ng-template>
+        
+        <p class="secret-info-note">Cocher envoie la commande à tous les clients.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<h2></h2>
+
+<button routerLink="/admin/personnages" class="btn-admin-nav">
+Gérer les Personnages
+</button>
+
+<button routerLink="/admin/documents" class="btn-admin-nav">
+    Gérer les Documents
+</button>
+
+<div class="scenario-tracker-page">
+    <div class="tracker-header">
+        <h1>Suivi de l'Intrigue Principale</h1>
+        <p>Gérez ici la progression des investigateurs dans l'histoire.</p>
+    </div>
+
+    <div class="scenario-list">
+        @for(step of scenario; track step.id) {
+            <div class="step-card">
+                <div class="step-info">
+                    <span class="step-id">{{ step.id }}</span>
+                    <h2>{{ step.title }}</h2>
+                    <p class="description">{{ step.description }}</p>
+                </div>
+
+                <div class="step-status">
+                    <span class="status-badge" [class]="getStatusClass(step.status)">
+                        {{ step.status }}
+                    </span>
+
+                    <div class="status-actions">
+                        <button 
+                            (click)="updateStatus(step, 'EN COURS')"
+                            [disabled]="step.status === 'EN COURS'"
+                            class="btn-action btn-in-progress">
+                            En Cours
+                        </button>
+                        
+                        <button 
+                            (click)="updateStatus(step, 'COMPLÉTÉ')"
+                            [disabled]="step.status === 'COMPLÉTÉ'"
+                            class="btn-action btn-complete">
+                            Complété
+                        </button>
+                        
+                        <button 
+                            (click)="updateStatus(step, 'BLOQUÉ')"
+                            [disabled]="step.status === 'BLOQUÉ'"
+                            class="btn-action btn-blocked">
+                            Bloqué
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

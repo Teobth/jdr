@@ -1,0 +1,132 @@
+[
+  {
+    "nom": "M. Victor",
+    "age": 26,
+    "profession": "??",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/victor.png",
+    "secrets": [
+      {
+        "cle": "Ressenti de Lherbier",
+        "valeur": "Il le trouve antipathique, mais lui offre un verre de vin chaud.",
+        "debloque": false
+      },
+      {
+        "cle": "Identité",
+        "valeur": "Il est connu sous le nom de Totor Tout-Miel mais s'appelle en réalité Victor Drouet. Il est proxénète dans le quartier de Pigalle.",
+        "debloque": false
+      },
+      {
+        "cle": "Raison de sa présence",
+        "valeur": "Il croit reconnaitre la morte comme son Olga.",
+        "debloque": false
+      },
+      {
+        "cle": "Témoignage",
+        "valeur": "Il croit reconnaitre la morte comme son Olga.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Docteur Sardes",
+    "age": 46,
+    "profession": "Médecin légiste",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/sardes.png",
+    "secrets": [
+      {
+        "cle": "Condition physique de la victime",
+        "valeur": "20 ans, bonne santé, mains non calleuses, retrouvée nue mais sans trace de violence sexuelle. Elle portait un anneau à l'annulaire droit bon marché",
+        "debloque": false
+      },
+      {
+        "cle": "Cause de la mort",
+        "valeur": "Hémorragie due à une profonde blessure au cou, fracture aux côtes gauches. La victime a été vidée de son sang.",
+        "debloque": false
+      },
+      {
+        "cle": "Rapport oral",
+        "valeur": "Trace de succion autour de la blessure.",
+        "debloque": false
+      },
+      {
+        "cle": "Hypthèse personnelle",
+        "valeur": "Oeuvre d'un maniac",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Francois Michaud",
+    "age": 34,
+    "profession": "Journaliste en herbe",
+    "rencontre": true,
+    "portraitUrl": "assets/portraits/francois.png",
+    "secrets": [
+      {
+        "cle": "Vengeance",
+        "valeur": "A besoin que justice soit faite.",
+        "debloque": false
+      },
+      {
+        "cle": "Mauvaise source",
+        "valeur": "Il n'est pas pour la véracité de ses informations. Il préfère le sensationnel.",
+        "debloque": false
+      },
+      {
+        "cle": "Carrière",
+        "valeur": "Espère que cette affaire propulsera sa carrière de journaliste.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Joseph Janvier",
+    "age": 54,
+    "profession": "Inspecteur de police",
+    "rencontre": true,
+    "portraitUrl": "assets/portraits/joseph.png",
+    "secrets": [
+      {
+        "cle": "Objectif 1",
+        "valeur": "Il cherche à identifier la morte, elle n'apparait dans aucune liste de personne disparue.",
+        "debloque": false
+      },
+      {
+        "cle": "Objectif 2",
+        "valeur": "Reconstituer ses faits et gestes.",
+        "debloque": false
+      },
+      {
+        "cle": "Objectif 3",
+        "valeur": "Retrouver la tombe, plusieurs policiers sont à l'affaire entre les portes de Paris et le champs de Lherbier.",
+        "debloque": false
+      },
+      {
+        "cle": "Objectif 4",
+        "valeur": "Sur la piste d'un maniac,il a chargé deux agents de téléphoner à tous les asiles de la région parisienne au cas où ils auraient eu une évasion.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Gustave Lherbier",
+    "age": 69,
+    "profession": "Agriculteur",
+    "rencontre": true,
+    "portraitUrl": "assets/portraits/gustave.png",
+    "secrets": [
+      {
+        "cle": "Relation",
+        "valeur": "Gustave n'est pas aimé de ses voisins",
+        "debloque": false
+      },
+      {
+        "cle": "Du pays",
+        "valeur": "Il connait très bien les berges de la Seine",
+        "debloque": false
+      }
+    ]
+  }
+]

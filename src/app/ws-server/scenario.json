@@ -1,0 +1,30 @@
+[
+  {
+    "id": "step-1",
+    "title": "Les journaux annoncent la découverte",
+    "description": "Découvertes du corps de la victime et premières rumeurs dans les journaux locaux. Nos investigateurs peuvent parler aux premiers intervenants.",
+    "status": "EN COURS",
+    "order": 1
+  },
+  {
+    "id": "step-2",
+    "title": "Dr Sardes rend son autopsie à la police",
+    "description": "Le médecin légiste partage ses conclusions avec l'inspecteur Janvier ou les investigateurs. Si les investigateurs décident d'enquêter en ville, ils n'auront pas de réponses tangibles",
+    "status": "BLOQUÉ",
+    "order": 2
+  },
+  {
+    "id": "step-3",
+    "title": "L'homme à la casquette",
+    "description": "Victor Douet parle à Lherbier et se renseigne après le passage de la police. Il cherche à savoir si elle a un grain de beauté à la hanche gauche. Si il est arrêté, il a un couteau sur lui. Il a plusieurs alias comme 'Totor Tout-Miel ou M.Victor",
+    "status": "BLOQUÉ",
+    "order": 3
+  },
+  {
+    "id": "step-4",
+    "title": "Confrontation Finale",
+    "description": "Affrontement avec l'antagoniste principal qui cherche également l'artefact.",
+    "status": "BLOQUÉ",
+    "order": 4
+  }
+]

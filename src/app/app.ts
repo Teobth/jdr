@@ -1,12 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
+  standalone: true,
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css'],
+  imports: [
+    RouterOutlet, // Permet d'utiliser <router-outlet>
+    RouterLink,    // Permet d'utiliser la directive routerLink dans la balise <a>
+    RouterLinkActive,
+    CommonModule
+  ]
 })
 export class App {
-  protected title = 'jdr';
+  protected title = 'Jeu de Rôle';
 }

@@ -1,0 +1,136 @@
+:host {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+    text-transform: none;
+}
+
+.document-image {
+    /* Limiter la taille de l'image pour qu'elle ne prenne pas toute la carte */
+    max-width: 100%;
+    width: 300px; 
+    height: auto; 
+
+    /* Styles d'habillage pour le thème */
+    border: 5px solid var(--couleur-accent-sec);
+    border-radius: 5px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
+    
+    /* Assurer que l'image est bien cadrée sans déformation excessive */
+    object-fit: cover; 
+}
+
+/* Carte de Détails (Fiche d'identité) */
+.detail-card {
+    width: 100%;
+    max-width: 650px; 
+    padding: 40px;
+    
+    background-color: var(--couleur-boite-info);
+    color: var(--couleur-texte-primaire);
+    
+    border: 3px solid var(--couleur-accent-sec);
+    border-radius: 5px;
+    
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+
+    text-transform: none;
+}
+
+/* Titre du Personnage */
+.detail-card h2 {
+    font-size: 3em;
+    font-family: var(--font-titre);
+    color: var(--couleur-accent-or);
+    letter-spacing: 4px;
+    border-bottom: 2px solid var(--couleur-accent-or);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+/* Conteneur des Statistiques */
+.stats-container {
+    padding: 20px 40px;
+    background-color: var(--couleur-fond-primaire);
+    border: 1px solid var(--couleur-bordure);
+    margin-bottom: 30px;
+    text-align: left;
+    border-radius: 2px;
+}
+
+/* Lignes de Statistique (pour Id et Nom) */
+.stats-container p {
+    display: flex;
+    justify-content: space-between; 
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--couleur-bordure);
+    font-size: 1.2em;
+}
+
+/* Suppression de la bordure pour la dernière ligne */
+.stats-container p:last-child {
+    border-bottom: none;
+}
+
+
+/* Bloc contenant le texte long (doit être appliqué à une <div> ou <p> entourant le contenu) */
+.content-block { 
+    /* Similaire au style des autres lignes */
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--couleur-bordure);
+    font-size: 1.2em;
+    overflow-wrap: break-word;
+    word-break: normal;
+    white-space: normal; 
+}
+
+.content-block strong {
+    /* Le titre "Contenu" se met sur une ligne pour laisser le texte s'étaler en dessous */
+    display: block; 
+    margin-bottom: 5px;
+    
+    color: var(--couleur-accent-sec);
+    text-transform: none;
+    font-weight: 700;
+}
+
+.content-text {
+    /* Styles pour la valeur de contenu */
+    font-family: Arial, sans-serif;
+    color: var(--couleur-texte-primaire);
+    font-size: 1.3em;
+    text-transform: none !important;
+    white-space: pre-wrap;
+}
+
+/* Règle générale pour les Strong (clé de stat) */
+.stats-container strong {
+    color: var(--couleur-accent-sec);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* Valeur de la Statistique (Ex: 18) */
+.stat-value {
+    font-family: var(--font-titre);
+    color: var(--couleur-accent-or);
+    font-size: 1.3em;
+}
+
+/* Lien de retour */
+.back-link {
+    display: inline-block;
+    padding: 10px 25px;
+    margin-top: 20px;
+    background-color: var(--couleur-accent-sec);
+    color: var(--couleur-texte-primaire);
+    border: 1px solid var(--couleur-accent-or);
+    border-radius: 0;
+    font-weight: 700;
+    transition: background-color 0.3s;
+}
+
+.back-link:hover {
+    background-color: var(--couleur-accent-or);
+}

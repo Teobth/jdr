@@ -1,1 +1,145 @@
-/* You can add global styles to this file, and also import other style files */
+/* Importation des Polices : Classiques et Art Déco */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400&display=swap');
+
+/* --- Variables CSS Art Déco (Thème Sombre par Défaut) --- */
+:root {
+    /* Couleurs de base inspirées du style Art Déco/Années 20 */
+    --couleur-fond-primaire: #1c1c1c; /* Noir très foncé, chic */
+    --couleur-texte-primaire: #f5f5f5; /* Blanc cassé, papier */
+    --couleur-accent-or: #a87d3a;    /* Or/Bronze subtil */
+    --couleur-accent-sec: #005663;   /* Bleu-vert canard (Art Déco) */
+    --couleur-boite-info: #2c2c2c;  /* Fond des éléments pour contraste */
+    --couleur-bordure: #4a4a4a;     /* Gris foncé élégant */
+    --couleur-lien: var(--couleur-accent-or); 
+
+    --font-titre: 'Cinzel', serif; /* Police décorative pour titres */
+    --font-corps: 'Lato', sans-serif; /* Police claire et lisible pour le corps */
+}
+
+/* --- Thème CLAIR (Optionnel, si le système n'est pas en mode sombre) --- */
+/* Vous pouvez définir un thème clair pour le jour, mais l'Art Déco est souvent sombre */
+@media (prefers-color-scheme: light) {
+    :root {
+        --couleur-fond-primaire: #f0f0f0; 
+        --couleur-texte-primaire: #333333;
+        --couleur-boite-info: #ffffff;
+        --couleur-bordure: #cccccc;
+    }
+}
+
+/* --- Styles Généraux --- */
+body {
+    font-family: var(--font-corps);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--couleur-fond-primaire);
+    color: var(--couleur-texte-primaire);
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-titre);
+    color: var(--couleur-accent-or);
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+}
+
+a {
+    color: var(--couleur-lien);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/* --- Header et Navigation (Style Élégant) --- */
+header {
+    background-color: #0c0c0c; 
+    padding: 1rem 0;
+    border-bottom: 3px solid var(--couleur-accent-or); /* Soulignement chic */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.main-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center; /* Centrer la navigation principale */
+    align-items: center;
+}
+
+.main-nav .logo {
+    font-family: var(--font-titre);
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--couleur-accent-or);
+    margin-right: 40px;
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-nav ul li {
+    margin: 0 20px;
+}
+
+.main-nav ul li a {
+    color: var(--couleur-texte-primaire);
+    font-weight: 400;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    position: relative;
+    letter-spacing: 1px;
+}
+
+/* Style de l'onglet ACTIF */
+nav ul li a.active-tab { 
+    color: var(--couleur-accent-or); 
+    border-bottom: 2px solid var(--couleur-accent-or);
+    background-color: var(--couleur-boite-info);
+    border-radius: 4px 4px 0 0;
+    padding-bottom: 10px;
+}
+
+/* --- Contenu Principal --- */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: #0c0c0c;
+    color: #a0a0a0;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 40px;
+    border-top: 1px solid var(--couleur-bordure);
+    font-size: 0.9em;
+}
+
+.personnage-grid {
+    display: grid !important; /* Force l'application de la grille */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important; 
+    gap: 30px !important; 
+}
+
+.personnage-grid .personnage-card {
+    float: none !important;
+    width: auto !important; 
+}
+
+div.document-card::before {
+    content: none !important; 
+    display: none !important; 
+}
+
+div.personnage-card::before {
+    content: none !important; 
+    display: none !important; 
+}
+

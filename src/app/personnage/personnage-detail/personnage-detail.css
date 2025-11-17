@@ -1,0 +1,227 @@
+/* src/app/personnage-detail/personnage-detail.component.css */
+
+/* --- Conteneur Principal --- */
+:host {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px; /* Plus d'espace */
+}
+
+/* Carte de Détails (Aspect Manuscrit Lourd) */
+.detail-card {
+    width: 100%;
+    max-width: 800px; /* Légèrement plus large pour les grandes fiches */
+    padding: 50px; /* Plus de padding */
+    
+    background-color: var(--couleur-boite-info); /* Charbon */
+    color: var(--couleur-texte-primaire);
+    
+    /* Bordure épaisse en Or Vicié pour le côté précieux/ancien */
+    border: 4px solid var(--couleur-accent-or);
+    border-radius: 0; /* Plus de coins arrondis, look carré/document */
+    
+    /* Ombre très profonde pour l'effet "livre posé" */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9); 
+    text-align: center;
+    
+    /* Légère texture intérieure (optionnel) */
+    /* background-image: url('chemin/vers/texture-papier.png'); */
+}
+
+/* Titre du Personnage (Gravure) */
+.detail-card h2 {
+    font-size: 3.5em;
+    font-family: var(--font-titre);
+    color: var(--couleur-accent-or);
+    letter-spacing: 0.2em; /* Très espacé */
+    text-shadow: 0 0 10px rgba(130, 100, 50, 0.7); /* Grosse lueur Or Vicié */
+    
+    /* Soulignement très marqué */
+    border-bottom: 3px double var(--couleur-accent-sec); 
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    
+    font-weight: 700;
+}
+
+/* --- Photo du Personnage (Portrait d'Époque) --- */
+
+.photo-wrapper {
+    margin-bottom: 40px;
+    display: inline-block;
+    /* On retire le cercle pour revenir à un cadre carré/rectangle classique */
+    border-radius: 0; 
+    overflow: hidden;
+    line-height: 0;
+    
+    /* Mettre un cadre en Or autour du portrait */
+    border: 5px solid var(--couleur-accent-or);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+}
+
+.personnage-photo {
+    width: 300px; /* Agrandir légèrement le portrait */
+    height: 300px; 
+    
+    border: none;
+    border-radius: 0; /* Carré */
+    box-shadow: none;
+    
+    object-fit: cover; 
+    transition: filter 0.3s;
+    
+    /* Filtre appliqué à la photo de détail pour l'immersion */
+    filter: sepia(0.6) contrast(1.1) brightness(0.9) saturate(0.8) grayscale(0.1);
+}
+
+.personnage-photo:hover {
+    /* Au survol, la couleur se révèle/le filtre est levé (ou au contraire, assombri) */
+    filter: sepia(0.3) contrast(1.2) brightness(0.8); 
+    transform: none; /* Retirer le scale qui n'est pas cohérent avec un document */
+}
+
+/* --- Conteneur des Statistiques (Infos de base) --- */
+
+.stats-container {
+    padding: 30px 40px;
+    background-color: #121417; /* Fond plus sombre encore */
+    border: 1px solid var(--couleur-accent-or);
+    margin-bottom: 40px;
+    text-align: left;
+    border-radius: 0;
+    font-family: var(--font-corps);
+}
+
+/* Ligne de Statistique */
+.stats-container p {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 12px 0;
+    /* Ligne de séparation très fine */
+    border-bottom: 1px dashed var(--couleur-bordure); 
+    font-size: 1.1em;
+}
+
+.stats-container strong {
+    /* Les clés de stat en Or Vicié */
+    color: var(--couleur-accent-or); 
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+/* Valeur de la Statistique */
+.stat-value,
+.stats-container p > span:not(.stat-key) { 
+    font-family: var(--font-mono); /* Police machine à écrire ou mono */
+    color: var(--couleur-texte-primaire); /* Garder la valeur lisible */
+    font-size: 1.1em;
+}
+
+/* --- Séparateur (Fissure ou Déchirure) --- */
+
+.separator {
+    border: none;
+    height: 3px; /* Plus épais */
+    /* Dégradé rouge sang pour un effet de déchirure */
+    background: linear-gradient(to right, 
+        transparent, 
+        var(--couleur-accent-sec) 20%, 
+        var(--couleur-accent-sec) 80%, 
+        transparent
+    );
+    margin: 40px 0;
+    box-shadow: 0 0 10px var(--couleur-accent-sec); /* Petite lueur rouge autour de la ligne */
+}
+
+/* --- Informations Révélées (Secrets Dangereux) --- */
+
+.revealed-secrets {
+    padding: 30px 40px;
+    margin-bottom: 40px;
+    /* Fond très sombre, bordure Rouge Sang */
+    background-color: #121417;
+    border: 3px solid var(--couleur-accent-sec);
+    border-radius: 0;
+    text-align: left;
+}
+
+.revealed-secrets h3 {
+    font-size: 2em;
+    /* Titre des secrets en Rouge Sang */
+    color: var(--couleur-accent-sec); 
+    border-bottom: 2px solid var(--couleur-accent-sec);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 0 5px rgba(100, 20, 20, 0.7); /* Lueur rouge menaçante */
+}
+
+.revealed-secrets li {
+    padding: 10px 0;
+    margin-left: 15px;
+    font-size: 1.1em;
+    line-height: 1.5;
+    /* Lignes pointillées pour le secret */
+    border-bottom: 1px dashed var(--couleur-bordure); 
+}
+
+.secret-key {
+    font-weight: bold;
+    color: var(--couleur-accent-or); /* Clé du secret en Or Vicié */
+    margin-right: 10px;
+    text-transform: uppercase;
+}
+
+.secret-value {
+    color: var(--couleur-texte-primaire);
+    font-family: var(--font-mono); /* Secret écrit à la main/machine à écrire */
+    word-wrap: break-word; 
+}
+
+.no-secret-message {
+    font-style: italic;
+    text-align: center;
+    color: var(--couleur-bordure);
+    padding: 15px;
+    font-family: var(--font-mono);
+}
+
+/* --- Lien de retour et Message d'Erreur --- */
+
+.back-link {
+    display: inline-block;
+    padding: 15px 40px;
+    margin-top: 30px;
+    /* Couleur du bouton : Rouge Sang avec cadre Or Vicié */
+    background-color: var(--couleur-accent-sec); 
+    color: var(--couleur-texte-primaire);
+    border: 2px solid var(--couleur-accent-or);
+    border-radius: 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    letter-spacing: 0.1em;
+}
+
+.back-link:hover {
+    /* Au survol, inversement des couleurs (l'Or prend le dessus) */
+    background-color: var(--couleur-accent-or);
+    color: var(--couleur-fond-primaire); /* Texte sombre */
+    box-shadow: 0 0 15px var(--couleur-accent-or);
+    border-color: var(--couleur-accent-sec);
+}
+
+.error-message {
+    text-align: center;
+    /* Utiliser le Rouge Sang et la police mono pour le message d'erreur */
+    color: var(--couleur-accent-sec); 
+    font-family: var(--font-mono);
+    font-weight: bold;
+    padding: 60px;
+    border: 2px dashed var(--couleur-accent-sec);
+    max-width: 500px;
+    margin: 0 auto;
+}

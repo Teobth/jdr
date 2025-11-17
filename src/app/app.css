@@ -1,0 +1,60 @@
+/* --- Variables de Thème (Doivent être définies dans votre fichier CSS global ou ici) --- */
+:root {
+  --nav-bg-color: #f0f0f0;      /* Arrière-plan de la navigation (clair) */
+  --nav-text-color: #333333;
+  --nav-active-color: #a0522d;  /* Couleur accentuation (marron) */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --nav-bg-color: #1e1e1e;
+    --nav-text-color: #e0e0e0;
+    --nav-active-color: #d4a373; /* Couleur accentuation (cuivré) */   
+  }
+}
+
+/* --- Style de la Barre de Navigation --- */
+.main-nav {
+    display: flex;
+    justify-content: center; /* Centrer les liens */
+    background-color: var(--nav-bg-color);
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Espace entre la nav et le contenu */
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--nav-text-color);
+    padding: 10px 20px;
+    margin: 0 15px;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s, border-bottom 0.3s;
+}
+
+/* Effet au survol (hover) */
+.main-nav a:hover {
+    background-color: rgba(var(--nav-text-color), 0.1);
+}
+
+/* --- Style de l'Onglet ACTIF --- */
+.main-nav a.active-link {
+    /* Mettre en évidence l'onglet actif avec la couleur accentuée */
+    color: var(--nav-active-color); 
+    
+    /* Soulignement épais pour indiquer l'onglet actif */
+    border-bottom: 3px solid var(--nav-active-color);
+    
+    background-color: rgba(var(--nav-active-color), 0.1);
+}
+
+/* --- Style global du router-outlet (pour une transition plus douce) --- */
+
+/* La transition n'est pas automatique avec le router-outlet et est un sujet complexe.
+   Cependant, on peut s'assurer que le contenu principal est bien stylisé. */
+main {
+    padding: 0 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+}

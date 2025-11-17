@@ -1,0 +1,83 @@
+/* src/app/home/home.component.css */
+
+:host {
+    display: block; 
+    padding: 40px 20px;
+}
+
+/* Style de l'encadré principal (type annonce ou affiche) */
+.adventure-intro {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 50px 70px; /* Plus d'espace pour l'élégance */
+    
+    background-color: var(--couleur-boite-info);
+    border: 5px double var(--couleur-accent-or); /* Double bordure Art Déco */
+    border-radius: 0; /* Coins vifs */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6); 
+    text-align: center;
+    line-height: 1.7;
+}
+
+h2 {
+    font-size: 3em;
+    letter-spacing: 5px;
+    margin-bottom: 40px;
+    color: var(--couleur-accent-or);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.adventure-intro p {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+    text-align: left;
+    font-weight: 300;
+}
+
+.adventure-intro strong {
+    color: var(--couleur-accent-sec); /* Utilise le bleu canard pour les points clés */
+    font-weight: 700;
+}
+
+/* Appel à l'Action (Bouton Élégant) */
+.call-to-action {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 15px 35px;
+    
+    background-color: var(--couleur-accent-sec); /* Utilise la couleur secondaire (Bleu-vert) */
+    color: var(--couleur-texte-primaire);
+    
+    border: 1px solid var(--couleur-accent-or);
+    border-radius: 0;
+    font-weight: 700;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.call-to-action:hover {
+    background-color: var(--couleur-accent-or); /* Inversion des couleurs au survol */
+    color: var(--couleur-fond-primaire);
+    transform: translateY(-2px);
+}
+
+/* Style pour la boîte de Lore (Règles de sélection) */
+.lore-box {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 25px;
+  background-color: var(--couleur-fond-primaire);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 0;
+  box-shadow: 0 0 10px rgba(168, 125, 58, 0.5); /* Lueur d'or */
+  text-align: left;
+}
+
+.lore-box h3 {
+  color: var(--couleur-accent-sec); 
+  margin-top: 0;
+  border-bottom: 1px solid var(--couleur-accent-sec);
+  padding-bottom: 10px;
+  font-size: 1.5em;
+}

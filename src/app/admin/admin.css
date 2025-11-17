@@ -1,0 +1,318 @@
+/* ==================================================================== */
+/* 🛠️ 1. STYLES DE GRILLE GÉNÉRAUX (admin-grid & admin-card) */
+/* ==================================================================== */
+
+.admin-grid {
+    display: flex;       /* Active Flexbox */
+    flex-wrap: wrap;     /* Permet aux cartes de passer à la ligne */
+    gap: 20px;           /* Espace de 20px entre toutes les cartes */
+    justify-content: flex-start; /* Alignement au début */
+    padding: 10px 0;
+}
+
+.admin-card {
+    /* Assure que padding et border sont inclus dans la largeur */
+    box-sizing: border-box; 
+    
+    /* Pour la grille 3 colonnes avec gap: 20px */
+    width: calc(33.333% - 13.333px); 
+    
+    background-color: #333;
+    color: #f0f0f0;
+    border: 1px solid #777;
+    padding: 15px; 
+    border-radius: 8px;
+    margin-bottom: 0; /* Géré par le gap du conteneur */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
+    transition: transform 0.2s, box-shadow 0.2s; 
+}
+
+.admin-card:hover {
+    transform: translateY(-3px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); 
+}
+
+/* ==================================================================== */
+/* 🚦 2. STYLES DE STATUT (Bande de couleur à gauche) */
+/* ==================================================================== */
+
+/* Personnages: Rencontré / Non rencontré */
+.rencontre-oui { 
+    color: #5cb85c; /* Vert */
+    font-weight: bold; 
+    border-left: 5px solid #5cb85c; 
+    padding-left: 5px; 
+} 
+.rencontre-non { 
+    color: #aaaaaa; /* Gris */
+    font-weight: bold; 
+    border-left: 5px solid #aaaaaa; 
+    padding-left: 5px; 
+}
+
+/* Documents: Visible / Caché (Accessible / Non accessible) */
+.visible-oui, .accessible-oui { 
+    color: #4CAF50; /* Vert vif */
+    font-weight: bold; 
+    border-left: 5px solid #4CAF50; 
+    padding-left: 5px; 
+} 
+.visible-non, .accessible-non { 
+    color: #f44336; /* Rouge */
+    font-weight: bold; 
+    border-left: 5px solid #f44336; 
+    padding-left: 5px; 
+}
+
+/* ==================================================================== */
+/* 🚪 3. STYLES DES BOUTONS DE NAVIGATION (btn-admin-nav) */
+/* ==================================================================== */
+
+.btn-admin-nav {
+    background-color: #91713a;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-right: 15px; 
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-decoration: none; /* Pour routerLink */
+    display: inline-block;
+    line-height: 1;
+}
+
+.btn-admin-nav:hover {
+    background-color: #7c2020;
+}
+
+/* ==================================================================== */
+/* 📝 4. STYLES DE LA SECTION SECRETS */
+/* ==================================================================== */
+
+.secrets-management {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #555;
+}
+
+.secret-title {
+    color: #ddd;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.secret-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+}
+
+.secret-table th, .secret-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+.secret-table th {
+    background-color: #444;
+    color: #fff;
+}
+
+.col-revele {
+    width: 10%; 
+    text-align: center !important;
+}
+
+.revele-active {
+    font-weight: bold;
+    color: #4CAF50; 
+}
+
+/* ==================================================================== */
+/* 📊 5. STYLES DU TABLEAU DE BORD (admin-dashboard) */
+/* ==================================================================== */
+
+.admin-dashboard-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.admin-link-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px; 
+    margin-top: 30px;
+}
+
+.admin-card-link {
+    display: block;
+    text-decoration: none; 
+    color: #f0f0f0; 
+    background-color: #333;
+    border: 1px solid #777;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-card-link:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.admin-card-link h3 {
+    margin-top: 0;
+    color: #ddd;
+    border-bottom: 2px solid;
+    padding-bottom: 5px;
+}
+
+.character-link h3 { border-color: #5cb85c; } 
+.document-link h3 { border-color: #f0ad4e; }
+
+/* --- Base de la Page --- */
+.scenario-tracker-page {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: var(--couleur-fond-primaire);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    color: var(--couleur-texte-primaire);
+}
+
+.tracker-header {
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--couleur-accent-or);
+    padding-bottom: 15px;
+}
+
+.tracker-header h1 {
+    font-family: var(--font-titre);
+    color: var(--couleur-accent-or);
+    font-size: 2.5em;
+    letter-spacing: 2px;
+}
+
+.tracker-header p {
+    color: var(--couleur-texte-secondaire);
+    font-style: italic;
+}
+
+/* --- Cartes des Étapes --- */
+
+.step-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 25px;
+    margin-bottom: 20px;
+    background-color: var(--couleur-boite-info);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+}
+
+.step-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.step-info {
+    flex-grow: 1;
+    margin-right: 20px;
+    text-align: left;
+}
+
+.step-id {
+    display: block;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: var(--couleur-accent-sec);
+    margin-bottom: 5px;
+}
+
+.step-info h2 {
+    font-size: 1.5em;
+    color: var(--couleur-accent-or);
+    margin: 0 0 10px 0;
+}
+
+.description {
+    color: var(--couleur-texte-secondaire);
+    font-size: 1em;
+}
+
+/* --- Statut et Actions --- */
+
+.step-status {
+    flex-shrink: 0;
+    width: 250px;
+    text-align: right;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 15px;
+    margin-bottom: 15px;
+    border-radius: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Couleurs des Statuts */
+.bloque {
+    background-color: #a00000; /* Rouge foncé */
+    color: white;
+    border: 1px solid #ff5050;
+}
+
+.en-cours {
+    background-color: #a87a00; /* Jaune/Orange foncé */
+    color: var(--couleur-texte-primaire);
+    border: 1px solid #ffc040;
+}
+
+.complete {
+    background-color: #007000; /* Vert foncé */
+    color: white;
+    border: 1px solid #60ff60;
+}
+
+/* --- Boutons d'Action --- */
+
+.status-actions button {
+    margin-left: 5px;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.status-actions button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.btn-in-progress {
+    background-color: #ffc040; /* Jaune clair */
+    color: #403000;
+}
+.btn-complete {
+    background-color: #60ff60; /* Vert clair */
+    color: #004000;
+}
+.btn-blocked {
+    background-color: #ff5050; /* Rouge clair */
+    color: #500000;
+}

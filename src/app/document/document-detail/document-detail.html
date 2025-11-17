@@ -1,0 +1,30 @@
+@if (document$ | async; as doc) {
+    <div class="detail-card">
+        <h2>Détails du Document</h2>
+        
+        <div class="photo-wrapper">
+            <a [href]="'/assets/docs/' + doc.id + '.png'">
+                <img [src]="doc.imageUrl" 
+                    [alt]="'Doc ' + doc.id" 
+                    class="document-image">
+            </a>
+        </div>
+
+        <div class="stats-container">
+            <p><strong>Titre :</strong> {{ doc.titre }}</p>
+            
+            <div class="content-block"> 
+                <strong>Contenu :</strong> 
+                <p class="content-text">{{ doc.contenu }}</p>
+            </div>
+        </div>
+        
+        <hr class="separator">
+        <a routerLink="/documents" class="back-link">Retour à la liste des documents</a>
+    </div>
+}
+@else {
+    <div class="error-message">
+        <p>Document non trouvé.</p>
+    </div>
+}
