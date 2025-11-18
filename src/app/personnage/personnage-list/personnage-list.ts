@@ -20,7 +20,7 @@ export class PersonnageListComponent implements OnInit {
   ngOnInit(): void {
     // 1. Abonnement au flux de données du service
     this.personnages$ = this.personnageService.personnages$.pipe(
-      // 2. Filtration : Nous filtrons les données pour n'afficher que les jouables
+      // 2. Filtre : Afficher que les jouables
       map(personnages => personnages.filter(p => p.rencontre))
     );
   }

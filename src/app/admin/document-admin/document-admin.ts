@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-admin-documents',
   imports: [CommonModule, RouterModule],
   templateUrl: './document-admin.html',
-  styleUrls: ['../admin.css'] // Réutilise les styles de grille existants
+  styleUrls: ['../admin.css']
 })
 export class AdminDocumentsComponent implements OnInit {
 
@@ -17,7 +17,6 @@ export class AdminDocumentsComponent implements OnInit {
 
   private filtreVisibiliteSubject = new BehaviorSubject<boolean>(false);
   
-  // Propriété pour l'affichage du bouton (état initial : faux)
   afficherSeulementVisibles: boolean = false; 
 
   constructor(public documentService: DocumentService) {}
@@ -29,9 +28,7 @@ export class AdminDocumentsComponent implements OnInit {
       
     ]).pipe(
       map(([tousLesDocuments, seulementVisible]) => {
-        // Met à jour la propriété simple
         this.afficherSeulementVisibles = seulementVisible;
-        
         if (seulementVisible) {
           return tousLesDocuments.filter(d => d.accessible);
         } else {

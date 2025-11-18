@@ -44,39 +44,36 @@ constructor(@Inject(PLATFORM_ID) private platformId: Object) {
       this.socket$ = webSocket(this.WS_URL);
 
       // 2. Abonnement aux messages du serveur
-    this.socket$.subscribe(
-      (message) => {
-        let newPersonnagesData: Personnage[] | undefined;
-        
-        // --- Traitement de l'état INITIAL ---
-        if (message.type === 'INITIAL_STATE') {
-            if (message.payload && message.payload.personnages) {
-                newPersonnagesData = message.payload.personnages;
-            }
-        } 
-        
-        // --- Traitement de la mise à jour spécifique ---
-        else if (message.type === 'UPDATE_PERSONNAGES') {
-            // Le payload est déjà le tableau (fonctionne comme avant)
-            newPersonnagesData = message.payload;
-        }
-        
-        // Mettre à jour l'état seulement si de nouvelles données ont été trouvées
-        if (newPersonnagesData) {
-            console.log(`Données de personnages reçues. Nombre: ${newPersonnagesData.length}`);
-            this.personnagesDataSource = newPersonnagesData;
-            this.personnagesSubject.next(this.personnagesDataSource);
-        }
-      },
-      (err) => console.error('Erreur de connexion WebSocket:', err),
-      () => console.warn('Connexion WebSocket terminée.')
-    );
+      this.socket$.subscribe({
+        next: (message) => {
+          let newPersonnagesData: Personnage[] | undefined;
+
+          // --- Traitement de l'état INITIAL ---
+          if (message.type === 'INITIAL_STATE') {
+              if (message.payload && message.payload.personnages) {
+                  newPersonnagesData = message.payload.personnages;
+              }
+          } 
+          
+          // --- Traitement de la mise à jour spécifique ---
+          else if (message.type === 'UPDATE_PERSONNAGES') {
+              // Le payload est déjà le tableau (fonctionne comme avant)
+              newPersonnagesData = message.payload;
+          }
+          
+          // Mettre à jour l'état seulement si de nouvelles données ont été trouvées
+          if (newPersonnagesData) {
+              console.log(`Données de personnages reçues. Nombre: ${newPersonnagesData.length}`);
+              this.personnagesDataSource = newPersonnagesData;
+              this.personnagesSubject.next(this.personnagesDataSource);
+          }
+        },
+        error: (err) => console.error('Erreur de connexion WebSocket:', err),
+        complete: () => console.warn('Connexion WebSocket terminée.')
+      });
       
     } else {
       console.warn("Exécution côté serveur (Node/SSR): La connexion WebSocket est ignorée.");
-      // Optionnel : Vous pourriez charger l'état initial par défaut ici pour le SSR
-      // this.personnagesDataSource = [vos données initiales ici];
-      // this.personnagesSubject.next(this.personnagesDataSource);
     }
   }
 
@@ -87,21 +84,18 @@ constructor(@Inject(PLATFORM_ID) private platformId: Object) {
   }
 
   getPersonnagesRencontre(): Personnage[] {
-    // Cette méthode synchrone utilise toujours la source de données actuelle
     return this.personnagesDataSource.filter(p => p.rencontre);
   }
 
   // --- MÉTHODE DE MUTATION ET NOTIFICATION ---
   toggleRencontre(p: Personnage): void {
     if (this.socket$) {
-      // Envoyer la commande au serveur via le WebSocket
       this.socket$.next({ 
         type: 'TOGGLE_RENCONTRE_COMMAND',
         personnageNom: p.nom
       });
     } else {
         console.error("Tentative de toggleRencontre sans connexion WebSocket (Serveur ou non connecté).");
-        // Gérer le cas où l'action est tentée sans connexion
     }
   }
   
@@ -110,7 +104,7 @@ constructor(@Inject(PLATFORM_ID) private platformId: Object) {
       this.socket$.next({ 
         type: 'TOGGLE_SECRET_COMMAND',
         personnageNom: personnageNom,
-        secretCle: secretCle // Clé du secret à débloquer/bloquer
+        secretCle: secretCle
       });
     } else {
         console.error("Tentative de toggleSecret sans connexion WebSocket.");

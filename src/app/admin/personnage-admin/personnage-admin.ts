@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // 👈 Importez AsyncPipe
-import { Observable, BehaviorSubject, combineLatest, map, startWith } from 'rxjs'; // 👈 Nouveaux imports RxJS
-import { Personnage, PersonnageService } from '../../personnage/personnageService'; // L'import du service doit être correct
+import { CommonModule } from '@angular/common';
+import { Observable, BehaviorSubject, combineLatest, map, startWith } from 'rxjs';
+import { Personnage, PersonnageService } from '../../personnage/personnageService';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  standalone: true, // Ajoutez standalone: true si ce n'est pas déjà fait
+  standalone: true,
   selector: 'app-admin-personnages',
   imports: [CommonModule, RouterModule],
   templateUrl: './personnage-admin.html',
@@ -18,7 +18,6 @@ export class AdminPersonnagesComponent implements OnInit {
   private filtreRencontreSubject = new BehaviorSubject<boolean>(false);
   afficherSeulementRencontre$ = this.filtreRencontreSubject.asObservable();
   
-  // Vous pouvez utiliser une propriété simple pour l'état initial
   afficherSeulementRencontre: boolean = false; 
 
   constructor(public personnageService: PersonnageService) {}
@@ -39,7 +38,7 @@ export class AdminPersonnagesComponent implements OnInit {
         if (seulementRencontre) {
           return tousLesPersonnages.filter(p => p.rencontre);
         } else {
-          // Afficher tous les personnages (y compris les PNJ)
+          // Afficher tous les personnages (y compris les non rencontrés)
           return tousLesPersonnages; 
         }
       })
@@ -47,19 +46,15 @@ export class AdminPersonnagesComponent implements OnInit {
   }
 
   basculerFiltre(): void {
-    // 🎯 Utiliser le BehaviorSubject pour la réactivité
     const nouvelEtat = !this.filtreRencontreSubject.value;
     this.filtreRencontreSubject.next(nouvelEtat);
   }
 
   basculerRencontre(p: Personnage): void {
-    // 🎯 Utiliser la méthode réactive du service
     this.personnageService.toggleRencontre(p);
-    // Plus besoin de rafraîchir manuellement, le flux le fait
   }
 
   toggleSecret(personnageNom: string, secretCle: string): void {
-    // 🛑 Utilise la méthode du service que nous avons créée précédemment
     this.personnageService.toggleSecretDebloque(personnageNom, secretCle);
   }
 }

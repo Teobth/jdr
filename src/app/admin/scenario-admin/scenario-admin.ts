@@ -63,7 +63,6 @@ export class ScenarioAdminComponent implements OnInit {
 
     ws.onclose = () => {
       console.log('Connexion WebSocket fermée. Tentative de reconnexion dans 5s...');
-      // Tentative de reconnexion simple (en production, utilisez une stratégie plus robuste)
       setTimeout(() => this.connectWebSocket(), 5000); 
     };
 
@@ -76,9 +75,6 @@ export class ScenarioAdminComponent implements OnInit {
   // --- Envoi de la Commande de Mise à Jour ---
   
   updateStatus(step: ScenarioStep, newStatus: 'BLOQUÉ' | 'EN COURS' | 'COMPLÉTÉ'): void {
-    // La logique côté client pour un retour utilisateur immédiat est commentée
-    // step.status = newStatus; 
-    
     // 1. Préparer la commande pour le serveur
     const command = {
       type: 'UPDATE_STATUS_COMMAND',
@@ -92,13 +88,9 @@ export class ScenarioAdminComponent implements OnInit {
       console.log(`Commande envoyée pour l'étape ${step.id} : ${newStatus}`);
     } else {
       console.error('WebSocket non connecté ou prêt. Impossible d\'envoyer la commande.');
-      // Vous pourriez mettre à jour l'état local ici si l'envoi échoue
     }
-    
-    // Le statut *sera* mis à jour quand le serveur renverra la diffusion ('UPDATE_SCENARIO').
   }
   
-  // Votre méthode utilitaire reste la même
   getStatusClass(status: string): string {
         switch (status) {
       case 'BLOQUÉ':

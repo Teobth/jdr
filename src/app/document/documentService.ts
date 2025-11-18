@@ -18,12 +18,8 @@ export interface Doc {
 export class DocumentService {
 
   // --- PROPRIÉTÉS ---
-  // Utilisation de la nouvelle interface AppDocument partout
   private documentsDataSource: Doc[] = []; 
-
-  // Ajustez l'URL si nécessaire
   private WS_URL = WS_BASE_URL; 
-  
   private socket$: WebSocketSubject<any> | null = null;
   private documentsSubject = new BehaviorSubject<Doc[]>(this.documentsDataSource);
   documents$ = this.documentsSubject.asObservable();
@@ -36,8 +32,8 @@ constructor(@Inject(PLATFORM_ID) private platformId: Object) {
 
       this.socket$ = webSocket(this.WS_URL);
 
-      this.socket$.subscribe(
-        (message) => {
+      this.socket$.subscribe({
+        next: (message) => {
           let newDocumentsData: Doc[] | undefined;
 
           if (message.type === 'INITIAL_STATE') {
@@ -56,9 +52,9 @@ constructor(@Inject(PLATFORM_ID) private platformId: Object) {
             this.documentsSubject.next(this.documentsDataSource);
           }
         },
-        (err) => console.error('Erreur de connexion WebSocket:', err),
-        () => console.warn('Connexion WebSocket terminée.')
-      );
+        error: (err) => console.error('Erreur de connexion WebSocket:', err),
+        complete: () => console.warn('Connexion WebSocket terminée.')
+      });
       
     } else {
       console.warn("Exécution côté serveur (Node/SSR): La connexion WebSocket est ignorée.");
@@ -76,7 +72,6 @@ constructor(@Inject(PLATFORM_ID) private platformId: Object) {
   // --- MÉTHODE DE MUTATION ET NOTIFICATION ---
   toggleAcces(doc: Doc): void {
     if (this.socket$) {
-      // Envoyer la commande au serveur via le WebSocket
       this.socket$.next({ 
         type: 'TOGGLE_ACCES_COMMAND',
         documentTitre: doc.titre

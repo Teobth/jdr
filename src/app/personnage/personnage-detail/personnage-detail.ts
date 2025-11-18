@@ -43,8 +43,8 @@ export class PersonnageDetailComponent implements OnInit {
   }
   
   /**
-   * Méthode de filtrage pour le template (remplace le pipe).
-   * Elle est appelée par le *ngFor dans le HTML.
+   * Méthode de filtrage pour le template.
+   * Elle est appelée par le @For dans le HTML.
    */
   getSecretsDebloques(): Secret[] {
     // Vérifie que le personnage et ses secrets existent

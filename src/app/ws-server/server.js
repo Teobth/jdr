@@ -12,7 +12,7 @@ const SCENARIO_FILE = './scenario.json';
 // --- STOCKAGE CENTRALISÉ (Sources de Vérité) ---
 let personnagesData = require(PERSONNAGES_FILE);
 let documentsData = require(DOCUMENTS_FILE); 
-let scenarioData = require(SCENARIO_FILE); // Chargement des données du scénario
+let scenarioData = require(SCENARIO_FILE);
 
 // Création du serveur WebSocket
 const wss = new WebSocket.Server({ port: PORT }, () => {
@@ -81,7 +81,7 @@ const broadcastDocuments = () => {
     });
 };
 
-// Fonction pour diffuser le tableau de scénario à tous les clients (NOUVEAU)
+// Fonction pour diffuser le tableau de scénario à tous les clients
 const broadcastScenario = () => {
     const message = JSON.stringify({
         type: 'UPDATE_SCENARIO',
@@ -96,7 +96,7 @@ const broadcastScenario = () => {
 };
 
 
-// --- Commandes SCÉNARIO (NOUVEAU) ---
+// --- Commandes SCÉNARIO ---
 const updateScenarioStatus = (stepId, newStatus) => {
     const index = scenarioData.findIndex(s => s.id === stepId);
     if (index !== -1) {
@@ -161,15 +161,15 @@ wss.on('connection', (ws) => {
         payload: {
             personnages: personnagesData,
             documents: documentsData,
-            scenario: scenarioData // Ajout des données du scénario
+            scenario: scenarioData
         }
     }));  
   
     // 2. Écouter les messages du client (Commandes)
     ws.on('message', (message) => {
-        const data = JSON.parse(message.toString()); // Utiliser .toString() pour les buffers Node.js
+        const data = JSON.parse(message.toString());
         
-        // Commandes SCÉNARIO (NOUVEAU)
+        // Commandes Scénario
         if (data.type === 'UPDATE_STATUS_COMMAND') {
             updateScenarioStatus(data.stepId, data.newStatus);
         }
