@@ -51,6 +51,9 @@ export class ScenarioAdminComponent implements OnInit {
           // Mettre à jour les données du scénario (initial ou mise à jour)
           this.scenario = data.payload.scenario || data.payload; 
           
+          //Trier les étapes par ID
+          this.sortScenarioById();
+
           // Déclencher la détection de changement pour mettre à jour l'affichage
           this.cdr.detectChanges(); 
           
@@ -92,7 +95,7 @@ export class ScenarioAdminComponent implements OnInit {
   }
   
   getStatusClass(status: string): string {
-        switch (status) {
+    switch (status) {
       case 'BLOQUÉ':
         return 'bloque';
       case 'EN COURS':
@@ -102,5 +105,9 @@ export class ScenarioAdminComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+  private sortScenarioById(): void {
+    this.scenario.sort((a, b) => a.id - b.id);
   }
 }

@@ -1,5 +1,318 @@
 [
   {
+    "nom": "Jeanne Gilliac",
+    "age": 49,
+    "profession": "Domestique",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/jeanne.png",
+    "secrets": [
+      {
+        "cle": "Amie de Jeanne",
+        "valeur": "",
+        "debloque": false
+      }
+    ]
+  },  
+  {
+    "nom": "Mme Vannier",
+    "age": 53,
+    "profession": "Domestique",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/vannier.png",
+    "secrets": [
+      {
+        "cle": "Amie de Jeanne",
+        "valeur": "Elle était en très bon terme avec Jeanne, la domestique des Maillards. Elle lui disait qu'il s'en passait des drôle à la villa. Jeanne a failli démissionner plusieurs fois, surtout depuis que le russe qu'elle appelle Rasputin est venu à la villa. Elle a vu Jeanne la dernière fois le 3 novembre, Mme Maillard lui avait donné 6 mois de gages et lui avait promis des nouvelles.",
+        "debloque": false
+      },
+      {
+        "cle": "Frère de Jeanne",
+        "valeur": "Mme Vanier ne sait pas où est partie Jeanne, mais elle sait qu'elle a un frère qui vit à Paris.",
+        "debloque": false
+      }
+    ]
+  },  
+  {
+    "nom": "M Delorme",
+    "age": 61,
+    "profession": "Cadre d'usine",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/delorme.png",
+    "secrets": [
+      {
+        "cle": "Relation avec Marie",
+        "valeur": "Il avait de très bonnes relations avec Marie avant qu'une distance s'installe depuis mi 1920, à cause de son cousin qui a fait de long séjour à la villa. Il était accompagné de deux neveux peu sympatiques. Ils sont partis en taxi début novembre dans un G7.",
+        "debloque": false
+      }
+    ]
+  },  
+  {
+    "nom": "Me Leblanc",
+    "age": 64,
+    "profession": "Notaire",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/leblanc.png",
+    "secrets": [
+      {
+        "cle": "Inquiétude",
+        "valeur": "Depuis deux ans, Marie verse de grosses sommes à une association cultuelle, 'Notre-Dame-de-Toute-Protection. Il pense que c'est de l'abus de faiblesse.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Hélène Maillard",
+    "age": 12,
+    "profession": "",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/helene.png",
+    "secrets": [
+      {
+        "cle": "Enfance difficile",
+        "valeur": "Elle suit les cours à la maison avec sa grand-mère. Elle est souvent malade et fait des cauchemars morbides",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Irène Alexeïevna Tcherkova",
+    "age": 17,
+    "profession": "",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/irene.png",
+    "secrets": [
+      {
+        "cle": "Retour en France",
+        "valeur": "Née à Moscou en 1894, elle retourne en France avec sa mère et et sa fille, Hélène.",
+        "debloque": false
+      },
+      {
+        "cle": "Mort",
+        "valeur": "Irène meurt de la grippe en 1919.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Marie Maillard",
+    "age": 52,
+    "profession": "Ex-directrice d'école",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/marie.png",
+    "secrets": [
+      {
+        "cle": "Origine",
+        "valeur": "Issue d'une famille de diplomates, son père était attaché commerciale à l'ambassade de Saint-Petersburg de 1879 à 1888. En 1893 elle épouse un russe, Alexis Kyrilovitch Tcherkoff. Elle devient veuve deux ans plus tard. C'est à cette période qu'elle ouvre son école pour jeunes filles de la petite noblesse.",
+        "debloque": false
+      },
+      {
+        "cle": "Retour en France",
+        "valeur": "Elle a repris son nom de jeune fille et est retournée en France en 1912 à Meudon.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Igor Loban",
+    "age": 33,
+    "profession": "Chauffeur de taxi",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/igor.png",
+    "secrets": [
+      {
+        "cle": "Quotidien",
+        "valeur": "Depuis juillet 1921, il partage sa licence de taxi avec son oncle et travaille en soirée. Il tourne souvent autour de Pigalle et des cabarets russes.",
+        "debloque": false
+      },
+      {
+        "cle": "Passé",
+        "valeur": "Il alternait les petits boulots et période de chomage à Kiev.",
+        "debloque": false
+      },
+      {
+        "cle": "Relation avec Olga",
+        "valeur": "A vu Olga quelquefois avant de se rendre compte qu'ils ne s'entendaient pas.",
+        "debloque": false
+      },
+      {
+        "cle": "Relation avec la fraternité",
+        "valeur": "Arrivé en France en 1920, il a vécu un an rue Vercingétorix avant d'habiter avec son oncle à Levallois. Il vie désormais seul.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Anastase Ierzoff",
+    "age": 35,
+    "profession": "Fermier",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/anastase.png",
+    "secrets": [
+      {
+        "cle": "Quotidien",
+        "valeur": "Il a acheté une ferme vers Juvisy et y fait pousser de la Luzerne pour nourrir ses lapins. Il aimerait trouver quelqu'un pur l'aider et plus largement pour partager sa vie.",
+        "debloque": false
+      },
+      {
+        "cle": "Passé",
+        "valeur": "Cousin éloigné d'Andrei, il a été séminariste puis s'est inscrit à une école de droit juste avant que la guerre n'éclate.",
+        "debloque": false
+      },
+      {
+        "cle": "Relation avec Olga",
+        "valeur": "Elle est venu plusieurs jours dans sa ferme vers la mi-mai. Elle n'est plus revenu depuis, il la regrette",
+        "debloque": false
+      },
+      {
+        "cle": "Relation avec la fraternité",
+        "valeur": "Anastase en pense beaucoup de bien. Il est arrivé en France depuis la Yougoslavie et il a passé deux mois là-bas.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Sergeï Pétrovitch Gouroff",
+    "age": 45,
+    "profession": "Traducteur",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/sergei.png",
+    "secrets": [
+      {
+        "cle": "Quotidien",
+        "valeur": "Partage sa vie entre une association monarchique et le bar, il a l'alcool hargneux et n'est pas souvent sobre après 15h.",
+        "debloque": false
+      },
+      {
+        "cle": "Passé",
+        "valeur": "Il avait un poste au ministère des affaires étrangères en Russie. En 1918 il a fuit pour la Finlande.",
+        "debloque": false
+      },
+      {
+        "cle": "Relation avec Olga",
+        "valeur": "Il n'a pas voulu d'Olga, car trop moderne, trop forte tête.",
+        "debloque": false
+      },
+      {
+        "cle": "Relation avec la fraternité",
+        "valeur": "Il leur doit son passeport car la Russie l'a rendu apatride, il les a remercié en faisant du bénévola plusieurs mois.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Evgeni Baltabeff",
+    "age": 27,
+    "profession": "Ouvrier",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/evgeni.png",
+    "secrets": [
+      {
+        "cle": "Quotidien",
+        "valeur": "Il travaille en tant qu'ouvrier dans une usine Renault de 6h à 16h, sauf le dimanche. Passe ses soirées à apprendre le français et le dimanche à se promener au bord de Seine. Sors parfois au cinéma avec une voisine russe.",
+        "debloque": false
+      },
+      {
+        "cle": "Passé",
+        "valeur": "A combattu pendant le grande guerre, était paysan avant cela.",
+        "debloque": false
+      },
+      {
+        "cle": "Relation avec Olga",
+        "valeur": "Il a rencontré une seule fois Olga en avril. Elle était trop bien pour lui",
+        "debloque": false
+      },
+      {
+        "cle": "Relation avec la fraternité",
+        "valeur": "Réfugié en Roumanie, il a été pris en charge par le centre de Bucarest. Il a séjourné rue Vercingétorix d’août à octobre 1922, le temps de retrouver des copains de régiment qui lui ont trouvé un boulot à l'usine.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Andrei Ierzoff",
+    "age": 35,
+    "profession": "Directeur de la fraternelle d’aide aux réfugiés de Russie",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/andrei.png",
+    "secrets": [
+      {
+        "cle": "Où logeait Olga",
+        "valeur": "À la fraternité, au 5e étage dans la mansarde n°2, elle est partie sans prévenir fin mai.",
+        "debloque": false
+      },
+      {
+        "cle": "Se doute des raisons de son départ",
+        "valeur": "Elle a été mis en contact avec des célibatairs russes. Elle préférait rester seule et indépendante.",
+        "debloque": false
+      },
+      {
+        "cle": "Liste des quatre contacts masculins",
+        "valeur": "Evgeni Baltabeff, Sergeï Gouroff, Anastase Ierzoff et Igor Loban.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Bella",
+    "age": 23,
+    "profession": "Proxénète",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/bella.png",
+    "secrets": []
+  },
+  {
+    "nom": "La Blonde Louisette",
+    "age": 22,
+    "profession": "Fille de joie",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/louisette.png",
+    "secrets": [
+      {
+        "cle": "Relation avec Olga",
+        "valeur": "A été très proche d'Olga. Elle savait qu'Olga n'aimait pas faire le trottoir.",
+        "debloque": false
+      },
+      {
+        "cle": "Sentiment sur Olga",
+        "valeur": "Olga semblait plus heureuse depuis une dizaine de jour cependant.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Madeleine la Brestoise",
+    "age": 23,
+    "profession": "Fille de joie",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/madeleine.png",
+    "secrets": [
+      {
+        "cle": "Relation avec Olga",
+        "valeur": "Elles travaillaient toutes les deux pour Victor. Elles se sont bien entendues.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "Olga",
+    "age": 20,
+    "profession": "Inconnue",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/olga.png",
+    "secrets": [
+      {
+        "cle": "Passé",
+        "valeur": "La préfecture dispose d'une fiche au nom d'Olga Romanov. Prise dans une rafle de police.",
+        "debloque": false
+      },
+      {
+        "cle": "Identité",
+        "valeur": "Son vrai nom est Olga Dimitrovna Rogova et elle est née à Moscou en 1902. Son passeport a été fait en juin 1923 à Helsinki et est valable dix ans.",
+        "debloque": false
+      }
+    ]
+  },
+  {
     "nom": "M. Victor",
     "age": 26,
     "profession": "??",
@@ -23,7 +336,17 @@
       },
       {
         "cle": "Témoignage",
-        "valeur": "Il croit reconnaitre la morte comme son Olga.",
+        "valeur": "Ne connait pas le passé d'Olga. Il l'a receuilli en juin 1923 avant de l'inciter à se prostituer.",
+        "debloque": false
+      },
+      {
+        "cle": "Activités",
+        "valeur": "Il se concentre sur la rue Berthe, au pied du Sacré-Coeur. Tous les commerçants connaissaient mademoisselle Olga.",
+        "debloque": false
+      },
+      {
+        "cle": "Ses filles",
+        "valeur": "Il fait travailler deux filles, Madeleine la Brestoise et La Blonde Louisette. Bella s'occupe du business quand Victor n'est pas là.",
         "debloque": false
       }
     ]
@@ -36,23 +359,18 @@
     "portraitUrl": "assets/portraits/sardes.png",
     "secrets": [
       {
-        "cle": "Condition physique de la victime",
-        "valeur": "20 ans, bonne santé, mains non calleuses, retrouvée nue mais sans trace de violence sexuelle. Elle portait un anneau à l'annulaire droit bon marché",
+        "cle": "Autopsie",
+        "valeur": "20 ans, bonne santé, mains non calleuses, retrouvée nue mais sans trace de violence sexuelle. Elle portait un anneau à l'annulaire droit bon marché. Hémorragie due à une profonde blessure au cou, fracture aux côtes gauches. La victime a été vidée de son sang. Trace de succion autour de la blessure. Oeuvre d'un maniac.",
         "debloque": false
       },
       {
-        "cle": "Cause de la mort",
-        "valeur": "Hémorragie due à une profonde blessure au cou, fracture aux côtes gauches. La victime a été vidée de son sang.",
+        "cle": "Les deux autres autopsies",
+        "valeur": "Victimes agées de 20 à 30 ans, elle ont été en terre pendant au moins 18 mois et 12 mois. Aucune information exploitable pour la première, la deuxième victime avait des éclats de métal dans la jambe droite.",
         "debloque": false
       },
       {
-        "cle": "Rapport oral",
-        "valeur": "Trace de succion autour de la blessure.",
-        "debloque": false
-      },
-      {
-        "cle": "Hypthèse personnelle",
-        "valeur": "Oeuvre d'un maniac",
+        "cle": "Similitude avec Olga",
+        "valeur": "Les trois femmes avaient un anneau à l'annulaire droit. La fracture du côté gauche est similaire sur les trois cas.",
         "debloque": false
       }
     ]

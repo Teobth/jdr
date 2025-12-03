@@ -24,9 +24,9 @@ export class DocumentDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.document$ = this.route.paramMap.pipe(
-      map(params => params.get('id')),
-      switchMap(nom => this.documentService.documents$.pipe(
-        map(documents => documents.find(d => d.id.toLowerCase() === nom?.toLowerCase()))
+      map(params => Number(params.get('id'))),
+      switchMap(idNumber => this.documentService.documents$.pipe(
+        map(documents => documents.find(d => d.id === idNumber))
       )),
       map(d => {
         this.doc = d;

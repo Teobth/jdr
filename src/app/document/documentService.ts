@@ -5,7 +5,7 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { WS_BASE_URL } from '../constante';
 
 export interface Doc {
-  id: string;
+  id: number;
   titre: string;
   contenu: string;
   accessible: boolean;

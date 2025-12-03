@@ -155,7 +155,7 @@ const toggleAcces = (titre) => {
 wss.on('connection', (ws) => {
     console.log('Nouveau client connecté.');
 
-    // 1. Envoyer l'état INITIAL des TROIS tableaux de données
+    // 1. Envoyer l'état INITIAL des tableaux de données
     ws.send(JSON.stringify({
         type: 'INITIAL_STATE',
         payload: {

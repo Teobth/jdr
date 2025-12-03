@@ -245,6 +245,7 @@
 }
 
 .description {
+    white-space: pre-wrap;
     color: var(--couleur-texte-secondaire);
     font-size: 1em;
 }
