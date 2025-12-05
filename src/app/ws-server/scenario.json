@@ -78,8 +78,44 @@
     "status": "BLOQUÉ"
   },
   {
-    "id": 210,
-    "title": "Le rodeur",
+    "id": 220,
+    "title": "La servante, Jeanne Gilliac",
+    "description": "C'est madame Vannier qui met sur la piste les investigateur à propos du frère de Jeanne. Il habite à Belleville et tient un épicerie. \nJeanne est une femme sèche qui ne tient pas en place. Elle informe que les Maillard sont partis dans le sud et qu'ils reviendraient fin mars. \nSi les investigateurs insiste, elle se livre plus et leur parle de 'Raspoutine', de son vrai nom Alexandre Gourov.",
+    "status": "BLOQUÉ"
+  },
+  {
+    "id": 230,
+    "title": "Information en amont sur le monastère",
+    "description": "Si les investigateurs s'informe, ils apprennent sans trop de mal que : \n-L'église orthodoxe russe hors frontière s'est séparée en 1920 de Moscou. Elle survit à Paris grâce à des dons privés et des arrangements avec l'archevêché. \n-Le monastère est installé avenue de l'Observatoire, non loin de là où Igor Loban à chargé un client le 3 novembre. \n-12 moines y sont installés dans les locaux d'un couvent de bénédictines fermés en 1905. \n-Il a récement fait parlé de lui dans la presse.",
+    "status": "BLOQUÉ"
+  },
+  {
+    "id": 240,
+    "title": "La descente de Police",
+    "description": "En demandant les faits à M.Bosson, il explique que tout le mois de décembre ils ont des lettres anonymes affirmant que le monastère était une couverture pour les services secrets russes. \nDébut janvier, une enquête du voisinage a permis d'apprendre que les riverains s'inquiétaient des drôles de bruits et chants mystérieux du monastère. La perquisition sur place s'est fait dans le calme, deux françaises et un russe y faisait une retraite spirituelle.",
+    "status": "BLOQUÉ"
+  },
+  {
+    "id": 250,
+    "title": "Notre Dame de Toute Protection",
+    "description": "De l'extérieur, il n'y a qu'un grand mur le long de la rue de l'Observatoire. Une grande porte en bois massif avec un heurtoir en fer forgé permet d'entrer dans la cour pavée. De grands batiments hausmanniens encadrent le monastère. Des batiments sont organisés autour d'un parc planté de grands arbres. On distingue une petite villa à gauche de l'entrée, une chapelle adossée au cloitre au centre et un long batiment abritant les cellules et le réfectoire. \nRester à proximité une nuit permet d'entendre les bruits ce qui est déroutant. Les riverains indiquent que les bruits se font entendre toutes les nuits depuis novembre et qu'il est impossible de s'y habituer. \nEn essayant d'entrer, à moins de se présenter comme étant venu pour Mme Maillard, les investigateurs sont bloqués devant l'entrée.",
+    "status": "BLOQUÉ"
+  },
+  {
+    "id": 260,
+    "title": "Prise de contacte",
+    "description": "Les investigateurs voient pour la première fois Mme Maillard ainsi que le père Isaac, ils sont éreintés par leur combat contre 'les ténèbres' depuis novembre. Hélène prie dans une salle à côté surveillée par un moine. \nSi les investigateurs veulent rester, ils doivent jeuner, se vétir comme les moines. Les femmes ne peuvent qu'accéder à la maison des hôtes, à la chapelle et au jardin. À la tombée de la nuit, Hélène est emmenée dans l'église. Isaac met quatres coupelles d'eau bénite aux quatre coins cardinaux. Une partie du contenu est versée en cercle autour de la petite fille. Il prononce ensuite des prières comme un exorcisme en russe. \nLes notes restantes de Borislav sont : \n- La Chronique du temps passé (Drame de Polotsk au XIe siècle où les morts refusaient de se reposer et sortaient des cimetières pour agresser les vivants. Derrière eux des traces de sabots indiquaient qu'ils étaient à cheval). \n- De Masticatione Mortuorum in Tumulis (traité qui veut prouvé que les morts qui reviennent à la vie n'existe pas.) \n- Un ensemble de note russe.",
+    "status": "BLOQUÉ"
+  },
+  {
+    "id": 270,
+    "title": "La nuit de la mort",
+    "description": "Durant la nuit, des cris perçant retentissent dans tout le monastère, comme une porcherie. Les moines chantent fort, Hélène réveillée par les bruits se met à prier. Du sang coule des murs et une pourriure sèche se fait sentir. Les cierges s'éteignent un à un. Il y a une sensation de pression comme si le monastère était au fond de l'océan. Puis d'un seul coup, tout s'arrête et redevient calme.",
+    "status": "BLOQUÉ"
+  },
+  {
+    "id": 280,
+    "title": "La maison des morts inquiets",
     "description": "",
     "status": "BLOQUÉ"
   }

@@ -1,5 +1,34 @@
 [
   {
+    "nom": "Père Isaac",
+    "age": 52,
+    "profession": "Supérieur du monastère",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/isaac.png",
+    "secrets": [
+      {
+        "cle": "Délivrance",
+        "valeur": "Il voit la venue des investigateurs comme une bénédiction. Après des mois de lutte.",
+        "debloque": false
+      },
+      {
+        "cle": "Hélène",
+        "valeur": "Elle prie dans une pièce à part. Elle a les cheveux blancs, est amaigrie, mais elle va bien. Elle a quelque chose de lointain.",
+        "debloque": false
+      },
+      {
+        "cle": "Borislav",
+        "valeur": "Il est mort dans la nuit après de la descente de police. Le groupe n'avait pas eu le temps de resacrer les lieux. Le démon s'est acharné sur lui et il est mort étouffé dans son propre sang. Il a été enterré par les moines dans le jardin du monastère. Préalablement décapité avec un pieu dans le cœur.",
+        "debloque": false
+      },
+      {
+        "cle": "Ivan et Youri",
+        "valeur": "Ils n'ont jamais séjourné au monastère. Ils ne font que récupérer le courrier. Après la mort de Borislav, ils ont promis à Mme Maillard de l'aider.",
+        "debloque": false
+      }
+    ]
+  },
+  {
     "nom": "Jeanne Gilliac",
     "age": 49,
     "profession": "Domestique",
@@ -7,8 +36,18 @@
     "portraitUrl": "assets/portraits/jeanne.png",
     "secrets": [
       {
-        "cle": "Amie de Jeanne",
-        "valeur": "",
+        "cle": "Raspoutine",
+        "valeur": "Elle n'apprécie pas cet homme qu'elle appelle Raspoutine. Il est venu la première fois à la villa en juin 1920 et n'est jamais vraiment parti depuis. Elle le soupçonne d'être le père d'Hélène. Il a pris l'ascendant à la villa, débauchant le personnel et aménageant les chambres à sa guise. Des potages et des légumes à tous les menus et des prières.",
+        "debloque": false
+      },
+      {
+        "cle": "Les neveux",
+        "valeur": "Ivan et Youri sont les fils de Borislav Gourov. Ils passaient des jours entier à la cuisine et avait le droit à beaucoup d'alcool.",
+        "debloque": false
+      },
+      {
+        "cle": "L'évènement du 2 novembre",
+        "valeur": "Le bruit sourd entendu dans toute la rue ce jour-là venait de la villa. Tous les murs ont tremblé, avec un bruit affreux, comme une procherie se baffrant à dix centimètres de vos oreilles. Borislav est sorti de la chambre noire en portant Hélène inconsciente et couverte de sang dans ses bras. Ils ont envoyé Youri appeler un taxi dans un café, le lendemain tout le monde était parti.",
         "debloque": false
       }
     ]
@@ -69,7 +108,7 @@
     "secrets": [
       {
         "cle": "Enfance difficile",
-        "valeur": "Elle suit les cours à la maison avec sa grand-mère. Elle est souvent malade et fait des cauchemars morbides",
+        "valeur": "Elle suit les cours à la maison avec sa grand-mère. Elle est souvent malade et fait des cauchemars morbides. Elle fait des poèmes sordides sur la mort et les ténèbres, tous les animaux la fuient.",
         "debloque": false
       }
     ]
@@ -83,7 +122,7 @@
     "secrets": [
       {
         "cle": "Retour en France",
-        "valeur": "Née à Moscou en 1894, elle retourne en France avec sa mère et et sa fille, Hélène.",
+        "valeur": "Née à Moscou enfillette 1894, elle retourne en France avec sa mère et et sa fille, Hélène.",
         "debloque": false
       },
       {
@@ -108,6 +147,21 @@
       {
         "cle": "Retour en France",
         "valeur": "Elle a repris son nom de jeune fille et est retournée en France en 1912 à Meudon.",
+        "debloque": false
+      },
+      {
+        "cle": "La famille Gouroff",
+        "valeur": "Elle est maudite depuis un incident qui s'est produit il y a 50 ans. Piotr l'oncle de Borislav a affronté une créature et depuis les descendants de Piotr sont anormaux.",
+        "debloque": false
+      },
+      {
+        "cle": "Borislav",
+        "valeur": "Il a sauvé Hélène mais la créature veut la récupérer à tout prix. Elle a des serviteur mortel d'après lui.",
+        "debloque": false
+      },
+      {
+        "cle": "Ivan et Youri",
+        "valeur": "La dernière fois qu'ils sont venus, ils ont emporté une partie des notes de leur père.",
         "debloque": false
       }
     ]

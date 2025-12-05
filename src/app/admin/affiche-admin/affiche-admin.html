@@ -1,5 +1,4 @@
 <div class="admin-control-panel">
-
   <h3>Sélection de l'Affiche Publique</h3>
 
   <select [(ngModel)]="selectedDisplayId" (change)="onDisplayChange()">
@@ -8,12 +7,10 @@
       <option 
         [ngValue]="option.id"
       >
-        {{ option.imageUrl }} 
+        {{ option.description }} 
       </option>
     } @empty {
       <option disabled>Aucune option disponible</option>
     }
   </select>
-  
-  <p>ID sélectionné à diffuser : **{{ selectedDisplayId }}**</p>
 </div>

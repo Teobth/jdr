@@ -1,22 +1,32 @@
 [
   {
     "id": 1,
-    "imageUrl": "assets/textures/paris_flood.jpg",
-    "description": "Affiche le texte d'introduction et le lore de base. Idéal au début de la session."
+    "imageUrl": "assets/affiche/floodPeople.png",
+    "description": "Présentation Acte 1"
   },
   {
     "id": 2,
-    "imageUrl": "Affiche: Indices & Documents",
-    "description": "Utilisé pour afficher un indice important ou un document d'enquête à l'écran général (ex: plan, photo, coupure de presse)."
+    "imageUrl": "assets/affiche/morgue.png",
+    "description": "La morgue"
   },
   {
     "id": 3,
-    "imageUrl": "Tableau de Bord: Statistiques & Clés",
-    "description": "Affiche des statistiques d'état de l'aventure (ex: niveau d'alarme, temps restant, ressources partagées)."
+    "imageUrl": "assets/affiche/police.png",
+    "description": "L'Hôtel de Police"
   },
   {
     "id": 4,
-    "imageUrl": "Interlude: Pause (Écran Noir/Logo)",
-    "description": "Affiche un écran de pause simple pour les intermèdes ou les discussions privées."
+    "imageUrl": "assets/affiche/rueParis.png",
+    "description": "Le quartier de Paris"
+  },
+  {
+    "id": 5,
+    "imageUrl": "assets/affiche/fraternelle.png",
+    "description": "La Fraternelle"
+  },
+  {
+    "id": 6,
+    "imageUrl": "assets/affiche/seineCampagne.png",
+    "description": "Les bords de Seine"
   }
 ]

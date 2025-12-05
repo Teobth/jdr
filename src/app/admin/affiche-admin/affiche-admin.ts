@@ -2,23 +2,16 @@ import { Component, OnInit } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HomeService } from '../../home/homeService'; // Votre service WebSocket
+import { HomeService } from '../../home/homeService';
 
 import * as displayOptions from '../../../assets/display-options.json'; 
 
 const SESSION_STORAGE_KEY = 'selectedDisplayId';
 
-export interface Presentation {
-  cle: number;
-  balise: string;
-  valeur: string;
-}
-
 export interface Affiche {
   id: number;
   imageUrl: string; 
   description: string;
-  presentations: Presentation[];
 }
 
 @Component({

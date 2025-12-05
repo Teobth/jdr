@@ -30,6 +30,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.selectionSubscription = this.homeService.getDisplayUpdates().subscribe({
       next: (message) => {
+        if (message === null)
+          return;
         if (message.type === 'UPDATE_DISPLAY_ID' && message.displayId !== undefined) {
           const newAfficheId = message.displayId; 
           this.detailsAffiche = this.listeOptions.find(a => a.id === newAfficheId);
@@ -43,7 +45,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // **Très important : se désabonner pour éviter les fuites de mémoire !**
     if (this.selectionSubscription) {
       this.selectionSubscription.unsubscribe();
     }

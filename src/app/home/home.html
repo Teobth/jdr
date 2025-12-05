@@ -1,36 +1,88 @@
 <article class="adventure-intro">
-  <h2>Les Maudits</h2>
-
-<div class="lore-box">
-  <h3>La Blanche Morte</h3>
-  <p>Meudon. Janvier 1924. La crue de la Seine s'est retirée il y a peu, laissant derrière elle une odeur âcre de boue et d’humidité tenace. La ville, habituellement vibrante, est enveloppée d'un manteau de grisaille et de froid glacial.</p>
-  <p>Votre présence ici, le long de la Seine, est motivée par le caractère inhabituel de la nouvelle.</p>
-  <p>Vous êtes au lieu dit "Les chataingers". Un petit groupe de policiers en manteaux trempés et de badauds curieux est rassemblé. L'atmosphère est lourde, non seulement de l'humidité du fleuve, mais d'un malaise palpable.</p>
-</div>
-
-<article class="adventure-intro">
 @switch (detailsAffiche?.id) { 
   
   @case (1) { 
+      <h2 class="adventure-intro">Les Maudits</h2>
+
       <div class="case-display">
-        <h3>Bienvenue dans l'Aventure !</h3>
+        <h1>Meudon, 1924</h1>
+        <p></p>
         <img 
           [src]="detailsAffiche?.imageUrl" 
           [alt]="'Affiche de l\'aventure : ' + detailsAffiche?.description"
           class="affiche-details"
         >
-        <p>{{ detailsAffiche?.description }}</p>
-        <p>Le Grand Écran est configuré sur l'écran d'accueil.</p>
       </div>
+      <div class="lore-box">
+        <h3>Acte 1 : La Blanche Morte</h3>
+        <p>La crue de la Seine s'est retirée il y a peu, laissant derrière elle une odeur âcre de boue et d’humidité tenace. La ville, habituellement vibrante, est enveloppée d'un manteau de grisaille et de froid glacial.</p>
+        <p>Votre présence ici, le long de la Seine, est motivée par le caractère inhabituel de la nouvelle.</p>
+        <p>Vous êtes au lieu dit "Les chataingers". Un petit groupe de policiers en manteaux trempés et de badauds curieux est rassemblé. L'atmosphère est lourde, non seulement de l'humidité du fleuve, mais d'un malaise palpable.</p>
+      </div>
+      <a routerLink="/documents" class="call-to-action">Jetez un oeil sur vos documents, rencontrez vos interlocuteurs et commencez l'Aventure</a>
     }
 
     @case (2) { 
       <div class="case-display warning">
-        <h3>Attention Requise !</h3>
-        <p>Affiche actuelle : **{{ detailsAffiche?.imageUrl }}**</p>
-        <p>{{ detailsAffiche?.description }}</p>
-        <p>Le Grand Écran est configuré sur une alerte ou un tableau spécial.</p>
+        <h1>La morgue</h1>
+        <img 
+          [src]="detailsAffiche?.imageUrl" 
+          [alt]="'Affiche de l\'aventure : ' + detailsAffiche?.description"
+          class="affiche-details"
+        >
       </div>
+      <div class="lore-box">
+        <p>Une odeur rance, métallique, presque insupportable, emplit l'air. Les murs froids et carrelés de la morgue sont éclairés par une lumière blafarde qui accentue l'atmosphère oppressante du lieu. Des tables en acier inoxydable, tachées de sang séché, sont alignées de manière ordonnée, chacune portant le poids silencieux des secrets qu'elles renferment.</p>
+        <p>Un silence assourdissant rend l'atmosphère oppressante</p>
+      </div>
+    }
+
+    @case (3) { 
+      <div class="case-display warning">
+        <h1>L'hôtel de police</h1>
+        <img 
+          [src]="detailsAffiche?.imageUrl" 
+          [alt]="'Affiche de l\'aventure : ' + detailsAffiche?.description"
+          class="affiche-details"
+        >
+        <p>Des bureaux encombrés de dossiers, des téléphones qui sonnent sans réponse, et des agents de police affairés créent une ambiance de tension palpable. L'odeur de café fort et de papier vieilli flotte dans l'air, mêlée à une légère senteur de sueur et de cuir usé.</p>
+      </div> 
+    }
+
+    @case (4) { 
+      <div class="case-display warning">
+        <h1>Les rues de Paris</h1>
+        <img 
+          [src]="detailsAffiche?.imageUrl" 
+          [alt]="'Affiche de l\'aventure : ' + detailsAffiche?.description"
+          class="affiche-details"
+        >
+        <p>Les pavés humides reflètent les lumières tamisées des réverbères, créant une atmosphère à la fois mystérieuse et envoûtante. L'air est chargé de l'odeur mêlée de pluie fraîche, de fumée de charbon et de pain frais provenant des boulangeries avoisinantes.</p>
+      </div> 
+    }
+
+    @case (5) { 
+      <div class="case-display warning">
+        <h1>La Fraternelle</h1>
+        <img 
+          [src]="detailsAffiche?.imageUrl" 
+          [alt]="'Affiche de l\'aventure : ' + detailsAffiche?.description"
+          class="affiche-details"
+        >
+        <p>Une atmosphère austère règne dans la salle commune de La Fraternelle, où les murs en bois sombre et les lourds rideaux rouges absorbent le peu de lumière qui filtre à travers les fenêtres embuées. L'odeur persistante de tabac à pipe, mêlée à celle du vieux cuir des fauteuils usés, crée une ambiance à la fois chaleureuse et légèrement oppressante.</p>
+      </div> 
+    }
+
+    @case (6) { 
+      <div class="case-display warning">
+        <h1>Le bord de Seine</h1>
+        <img 
+          [src]="detailsAffiche?.imageUrl" 
+          [alt]="'Affiche de l\'aventure : ' + detailsAffiche?.description"
+          class="affiche-details"
+        >
+        <p>Le murmure apaisant de la Seine contraste avec l'agitation lointaine de la ville. Les quais, bordés d'arbres dénudés par l'hiver, sont baignés dans une lumière douce et diffuse, créant une atmosphère presque irréelle. L'air frais est chargé de l'odeur humide de l'eau mêlée à celle des feuilles mortes et du bois flotté.</p>
+      </div> 
     }
 
     @default {
@@ -38,5 +90,4 @@
     }
   }
 
-<a routerLink="/documents" class="call-to-action">Jetez un oeil sur vos documents, rencontrez vos interlocuteurs et commencez l'Aventure</a>
 </article>

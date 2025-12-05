@@ -1,16 +1,18 @@
 @if (personnage$ | async; as personnage) {
     <div class="detail-card">
-        <h2>{{ personnage.nom }}</h2>
+        <h1>{{ personnage.nom }}</h1>
         
-        <div class="photo-wrapper">
-            <img [src]="personnage.portraitUrl" 
-                 [alt]="'Photo de ' + personnage.nom" 
-                 class="personnage-photo">
-        </div>
+        <div class="personnage-description">
+            <div class="photo-wrapper">
+                <img [src]="personnage.portraitUrl" 
+                    [alt]="'Photo de ' + personnage.nom" 
+                    class="personnage-photo">
+            </div>
 
-        <div class="stats-container">
-            <p><strong>Age : </strong> <span class="stat-value">{{ personnage.age }}</span></p>
-            <p><strong>Profession :</strong> <span class="stat-value">{{ personnage.profession }}</span></p>
+            <div class="stats-container">
+                <p><strong>Age : </strong> <span class="stat-value">{{ personnage.age }}</span></p>
+                <p><strong>Profession :</strong> <span class="stat-value">{{ personnage.profession }}</span></p>
+            </div>
         </div>
         
     <hr class="separator">

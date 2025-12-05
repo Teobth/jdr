@@ -44,6 +44,12 @@
     font-weight: 700;
 }
 
+.personnage-description {
+    display: flex;
+    align-items: flex-start; 
+    gap: 20px; 
+}
+
 /* --- Photo du Personnage (Portrait d'Époque) --- */
 
 .photo-wrapper {
@@ -90,6 +96,8 @@
     text-align: left;
     border-radius: 0;
     font-family: var(--font-corps);
+    flex: 1 0 0%;
+
 }
 
 /* Ligne de Statistique */
@@ -98,7 +106,6 @@
     justify-content: space-between; 
     align-items: center; 
     padding: 12px 0;
-    /* Ligne de séparation très fine */
     border-bottom: 1px dashed var(--couleur-bordure); 
     font-size: 1.1em;
 }
