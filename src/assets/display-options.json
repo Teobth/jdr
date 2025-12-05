@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "imageUrl": "assets/textures/paris_flood.jpg",
+    "description": "Affiche le texte d'introduction et le lore de base. Idéal au début de la session."
+  },
+  {
+    "id": 2,
+    "imageUrl": "Affiche: Indices & Documents",
+    "description": "Utilisé pour afficher un indice important ou un document d'enquête à l'écran général (ex: plan, photo, coupure de presse)."
+  },
+  {
+    "id": 3,
+    "imageUrl": "Tableau de Bord: Statistiques & Clés",
+    "description": "Affiche des statistiques d'état de l'aventure (ex: niveau d'alarme, temps restant, ressources partagées)."
+  },
+  {
+    "id": 4,
+    "imageUrl": "Interlude: Pause (Écran Noir/Logo)",
+    "description": "Affiche un écran de pause simple pour les intermèdes ou les discussions privées."
+  }
+]

@@ -10,6 +10,7 @@ import { AdminDocumentsComponent } from './admin/document-admin/document-admin';
 import { AdminComponent } from './admin/admin';
 import { DocumentDetailComponent } from './document/document-detail/document-detail';
 import { ScenarioAdminComponent } from './admin/scenario-admin/scenario-admin';
+import { AfficheComponent } from './admin/affiche-admin/affiche-admin';
 
 export const routes: Routes = [
   // 2. Définir la route par défaut (la racine /) pour l'accueil
@@ -30,6 +31,8 @@ export const routes: Routes = [
 
   { path: 'admin/documents', component: AdminDocumentsComponent },
 
-  { path: 'admin/scenario', component: ScenarioAdminComponent }
+  { path: 'admin/scenario', component: ScenarioAdminComponent },
+
+  { path: 'admin/affiche', component: AfficheComponent}
 
 ];

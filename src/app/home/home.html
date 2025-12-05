@@ -8,5 +8,35 @@
   <p>Vous êtes au lieu dit "Les chataingers". Un petit groupe de policiers en manteaux trempés et de badauds curieux est rassemblé. L'atmosphère est lourde, non seulement de l'humidité du fleuve, mais d'un malaise palpable.</p>
 </div>
 
-  <a routerLink="/documents" class="call-to-action">Jeté un oeil sur vos documents, rencontrez vos interlocuteurs et commencez l'Aventure</a>
+<article class="adventure-intro">
+@switch (detailsAffiche?.id) { 
+  
+  @case (1) { 
+      <div class="case-display">
+        <h3>Bienvenue dans l'Aventure !</h3>
+        <img 
+          [src]="detailsAffiche?.imageUrl" 
+          [alt]="'Affiche de l\'aventure : ' + detailsAffiche?.description"
+          class="affiche-details"
+        >
+        <p>{{ detailsAffiche?.description }}</p>
+        <p>Le Grand Écran est configuré sur l'écran d'accueil.</p>
+      </div>
+    }
+
+    @case (2) { 
+      <div class="case-display warning">
+        <h3>Attention Requise !</h3>
+        <p>Affiche actuelle : **{{ detailsAffiche?.imageUrl }}**</p>
+        <p>{{ detailsAffiche?.description }}</p>
+        <p>Le Grand Écran est configuré sur une alerte ou un tableau spécial.</p>
+      </div>
+    }
+
+    @default {
+      <p>Chargement en cours ou affichage non configuré.</p>
+    }
+  }
+
+<a routerLink="/documents" class="call-to-action">Jeté un oeil sur vos documents, rencontrez vos interlocuteurs et commencez l'Aventure</a>
 </article>

@@ -81,3 +81,10 @@ h2 {
   padding-bottom: 10px;
   font-size: 1.5em;
 }
+
+.affiche-details {
+  width: 100%;
+  /*height: 250px;*/
+  object-fit: cover; 
+  object-position: top; 
+}

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -11,7 +12,8 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
     RouterOutlet, // Permet d'utiliser <router-outlet>
     RouterLink,    // Permet d'utiliser la directive routerLink dans la balise <a>
     RouterLinkActive,
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class App {
