@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { WS_BASE_URL } from '../../constante';
+import { AfficheComponent } from "../affiche-admin/affiche-admin";
 
 declare var WebSocket: any;
 
@@ -18,7 +19,7 @@ interface ScenarioStep {
   templateUrl: './scenario-admin.html',
   styleUrls: ['../admin.css'],
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule]
+  imports: [RouterModule, FormsModule, AfficheComponent]
 })
 export class ScenarioAdminComponent implements OnInit {
 

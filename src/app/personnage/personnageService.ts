@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { WS_BASE_URL } from '../constante';
 
-// --- INTERFACE (Aucun changement nécessaire) ---
+// --- INTERFACE ---
 export interface Secret {
   cle: string;
   valeur: string;

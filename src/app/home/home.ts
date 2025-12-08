@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
+ 
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
 import { HomeService } from './homeService'; 
@@ -15,9 +15,8 @@ import * as displayOptions from '../../assets/display-options.json';
   styleUrls: ['./home.css'],
   imports: [
     RouterModule,
-    CommonModule,
-    FormsModule 
-  ]
+    FormsModule
+]
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
