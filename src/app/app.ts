@@ -13,7 +13,7 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
     RouterLink,
     RouterLinkActive,
     FormsModule
-  ]
+]
 })
 export class App {
   protected title = 'Jeu de Rôle';

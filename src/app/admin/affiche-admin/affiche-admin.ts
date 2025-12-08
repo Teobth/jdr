@@ -8,10 +8,17 @@ import * as displayOptions from '../../../assets/display-options.json';
 
 const SESSION_STORAGE_KEY = 'selectedDisplayId';
 
+export interface Presentation {
+  cle: number;
+  balise: string;
+  valeur: string;
+}
+
 export interface Affiche {
   id: number;
   imageUrl: string; 
   description: string;
+  presentations: Presentation[];
 }
 
 @Component({
