@@ -1,5 +1,38 @@
 [
   {
+    "nom": "Elizabeth Ierzova",
+    "age": 45,
+    "profession": "Riche héritière",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/elizabeth.png",
+    "secrets": [
+      {
+        "cle": "Au bord du gouffre",
+        "valeur": "Sa peau a des reflets grisâtres, ses yeux sont cernés et elle semble épuisée. Elle ne sort presque plus de chez elle.",
+        "debloque": false
+      }
+    ]
+  },
+  {
+    "nom": "George Ierzoff",
+    "age": 67,
+    "profession": "Propriétaire de la Fraternelle",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/george.png",
+    "secrets": [
+      {
+        "cle": "Descendant de Sofia",
+        "valeur": "Il sait tout sur Sofia, c'est lui qui regroupe les descendants de la famille",
+        "debloque": false
+      },
+      {
+        "cle": "Effrayant",
+        "valeur": "Une aura effrayante se dégage de lui, on le sent capable de tout pour son propre intérêt",
+        "debloque": false
+      }
+    ]
+  },
+  {
     "nom": "Père Isaac",
     "age": 52,
     "profession": "Supérieur du monastère",

@@ -6,9 +6,9 @@ const PORT = '3000';
 
 // --- FICHIERS DE DONNÉES ---
 const FILES = {
-    PERSONNAGES: './personnages.json',
-    DOCUMENTS: './documents.json', 
-    SCENARIO: './scenario.json',
+    PERSONNAGES: '../../assets/json/personnages.json',
+    DOCUMENTS: '../../assets/json/documents.json', 
+    SCENARIO: '../../assets/json/scenario.json',
 };
 
 // --- CLASSE DE GESTION DES DONNÉES (StateManager) ---

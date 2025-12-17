@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HomeService } from '../../home/homeService';
 
-import * as displayOptions from '../../../assets/display-options.json'; 
+import * as displayOptions from '../../../assets/json/display-options.json'; 
 
 const SESSION_STORAGE_KEY = 'selectedDisplayId';
 

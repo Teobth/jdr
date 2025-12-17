@@ -3,7 +3,7 @@
     "id": 10,
     "title": "Les journaux annoncent la découverte",
     "description": "Découvertes du corps de la victime et premières rumeurs dans les journaux locaux. Nos investigateurs peuvent parler aux premiers intervenants.",
-    "status": "EN COURS"
+    "status": "COMPLÉTÉ"
   },
   {
     "id": 20,
@@ -38,7 +38,7 @@
   {
     "id": 70,
     "title": "Carré de soupirants",
-    "description": "Nos équêteurs questionnent les quatres suspects. Evgeni est ukrainien et connait la coutume de mariage. Il habite à Boulogne, proche de Meudon. Il n'a cependant pas pu rencontré Anna car il est arrivé en France après sa mort. Sergei à rencontré Anna, mais est petit est frêle pour égorger quelqu'un par derrière. Il a de même peur du sang. Anastase monte sur Paris vendre ses lapins puis discuté avec des amis à Pigalle une fois par semaine. Il est de même le plus proche d'Olga des quatre. Néanmoins il ne sait pas situer Meudon sur une carte et ne manque pas de place dans sa ferme pour cacher des corps. Pour Igor, il peut aller n'importe où assez furtivement avec son taxi et est ukrainien. Cependant il vit au nord-est tandis que la tombe est situé au sud-ouest.",
+    "description": "Nos équêteurs questionnent les quatres suspects : \nEvgeni est ukrainien et connait la coutume de mariage. Il habite à Boulogne, proche de Meudon. Il n'a cependant pas pu rencontré Anna car il est arrivé en France après sa mort. \nSergei à rencontré Anna, mais est petit est frêle pour égorger quelqu'un par derrière. Il a de même peur du sang. \nAnastase monte sur Paris vendre ses lapins puis discuté avec des amis à Pigalle une fois par semaine. Il est de même le plus proche d'Olga des quatre. Néanmoins il ne sait pas situer Meudon sur une carte et ne manque pas de place dans sa ferme pour cacher des corps. \nIgor, il peut aller n'importe où assez furtivement avec son taxi et est ukrainien. Cependant il vit au nord-est tandis que la tombe est situé au sud-ouest.",
     "status": "BLOQUÉ"
   },
   {
@@ -116,7 +116,37 @@
   {
     "id": 280,
     "title": "La maison des morts inquiets",
-    "description": "",
+    "description": "La fraternelle a bonne réputation auprès des autorités, elle est financée par des dons privés. Ses statuts datent de 1919 et indiquent que la mission de la fraternelle est de sauver à tout prix les réfugiés arrivant de tous les territoires russes. Elle est présidée par George Alexandrovitch Ierzoff, avec une certaine Elizabeth Alexandrovna Ierzova pour trésorière, et Andreï Georgevitch Ierzoff comme secrétaire. \nLes structures identiques à la Fraternelle ne font pas bonne presse du lieu cependant. Ils lui reprochent d'être trop sélective dans les réfugiés qu'elle aide. \nL'immeuble appartient à George depuis janvier 1920, les impôts sont réglés en temps et en heure. Ces trois dernières années, 6 personnes sont décédées dans la fraternelle : \n- Egon Baltabeff (42 ans) et Sandra Ierzova (73 ans) ont été emportés par des crises cardiaques. \n- Le petit Boris Zadornoff (3 mois) est mort subitement dans son sommeil. \n- Jacob Oumanoff (36 ans) et Anton Komzine (39 ans) ont succombé à un « épuisement consécutif à des privations ». Enfin, Konstantina Nassonova (24 ans) a succombé à la tuberculose. \nLes voisins se plaignent car le propriétaire à donné congé à plusieurs locataires pour faire de la place aux réfugiés. D'ailleurs même si ils se tiennent tranquille, ce sont quand même des étrangers.",
+    "status": "BLOQUÉ"
+  },
+  {
+    "id": 290,
+    "title": "George Ierzoff et Elizabeth Ierzova",
+    "description": "Ce sont des frères et soeurs devenus apatrides en 1922. Ils sont titulaires d'un passeport Nansen valable jusqu'en 1932. Ils sont originaires de Polotsk et ont hérité d'une grande fortune. À leur arrivée, ils étaient accompagnés d'une tante agées : Natalia Ierzova. Le carnet mondain du Figaro du 17 septembre 1919 mentionne son décès, elle est enterrée au cimetière du Montparnasse. \nLes Ierzoff habite un immeuble bourgeois du 16e arrondissement. C'est George qui accueille les investigateurs. Il les reçoit dans un salon rempli de masque mortuaire. Elizabeth, elle, est alitée et ne peut recevoir. Ils ont un valet Hippolyte marié à Josée, la bonne. Dimitri est le chauffeur de George, c'est un lointain cousin. En cas de doute sur les investigateurs, George les fait suivre par Dimitri. Et dans le pire des cas, demande à Dimitri de dérober un objet sur eux. Sofia se chargera d'eux la nuit suivante.",
+    "status": "BLOQUÉ"
+  },
+  {
+    "id": 300,
+    "title": "La tombe de Natalia",
+    "description": "C'est une chapelle massive, un petit peu prétentieuse dans le carré orthodoxe du cimetière du Montparnasse. La porte est fermée à clé en permanence. Le seule caveau est au nom de Natalia Ierzova, 1833-1919. Le cercueil ne contient que des sacs de sable. Cercueil qui n'est d'ailleurs pas la première fois profané. Des traces de griffures sont visibles à l'intérieur du caveau. En creusant la terre meuble derrière le cercueil, ils atterissent tout droit sur des goules.",
+    "status": "BLOQUÉ"
+  },
+  {
+    "id": 310,
+    "title": "Le personnel de la fraternelle",
+    "description": "Lieux : \nL’association occupe la partie gauche du rez-de-chaussée de l’immeuble. Ce qui devrait être une boutique a été converti en salle de réception et secrétariat. Deux petites pièces, à l’arrière, abritent deux bureaux, celui d’Andreï Ierzoff et celui d’Alexandre Zadornoff, l’administrateur. Ce dernier sert également de salle d’archives. \nPersonnel : \nLe secrétariat est assuré par Alina Nassonova (la vingtaine évaporée, lit des magazines de cinéma) et par Maria Komzine (la trentaine sérieuse, s’exerce à la sténo pendant ses pauses). Elles reçoivent le public et aident les deux cadres. Alexandre Nicolaïevitch Zadornoff, l’administrateur, est jeune, débordé et amoureux de Maria. Son activité principale est d’aider les nouveaux arrivants à trouver du travail et un logement en région parisienne. Il passe l’essentiel de son temps au téléphone, et consacre ses soirées à la comptabilité. Andreï Ierzoff, quant à lui, se charge des contacts avec les autorités françaises et les bureaux de la Fraternelle à l’étranger. \nAbsolument. Voici un résumé en deux phrases : Les locaux sont ouverts au public du lundi au vendredi, de 8h30 à 12h30 et de 14h à 18h, mais les horaires de travail des employés sont plus étendus, notamment pour Zadornoff et Andreï. En plus de ces activités, des cours de français sont dispensés par une bénévole le soir, et d'autres personnes comme Elizabeth ou George fréquentent occasionnellement l'immeuble.",
+    "status": "BLOQUÉ"
+  },
+  {
+    "id": 320,
+    "title": "Enquête sur les ex-résidents",
+    "description": "En trois ans, la Fraternelle a aidé près de 250 réfugiés à s'installer et refaire leur vie, principalement en région parisienne, et ces derniers maintiennent le contact et offrent leur soutien à l'organisation. Si les investigateurs interrogent ces anciens réfugiés, ils entendront qu'ils ont été contactés hors de Russie, soumis à un interrogatoire pour vérifier leur loyauté, puis dotés de papiers et envoyés en France, résidant souvent brièvement rue Vercingétorix.",
+    "status": "BLOQUÉ"
+  },
+  {
+    "id": 330,
+    "title": "Fouille du RDC",
+    "description": "Bien que les portes et serrures soient solides, l'immeuble ne contient pas d'argent important, mais une quantité massive de paperasse, incluant les dossiers détaillés de chaque réfugié, des listes de candidats, et de nombreuses informations généalogiques remontant parfois au XIXe siècle. Un point notable est que la machine à écrire trouvée dans le bureau d'Alexandre est la même que celle utilisée pour rédiger les lettres anonymes adressées au commissaire Bosson, et les informations généalogiques excessives s'expliquent par l'intérêt de George pour le sujet.",
     "status": "BLOQUÉ"
   }
 ]

@@ -4,9 +4,9 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
 import { HomeService } from './homeService'; 
 import { Affiche } from '../admin/affiche-admin/affiche-admin'; 
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 
-import * as displayOptions from '../../assets/display-options.json';
+import * as displayOptions from '../../assets/json/display-options.json';
 
 @Component({
   standalone: true, 
@@ -25,10 +25,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private selectionSubscription!: Subscription;
 
+  private destroy$ = new Subject<void>();
+
   constructor(private homeService: HomeService) { } 
 
   ngOnInit(): void {
-    this.selectionSubscription = this.homeService.getDisplayUpdates().subscribe({
+    this.selectionSubscription = this.homeService.getDisplayUpdates()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next: (message) => {
         if (message === null)
           return;
@@ -47,6 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.selectionSubscription) {
       this.selectionSubscription.unsubscribe();
+      this.destroy$?.complete();
     }
   }
 }

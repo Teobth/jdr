@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { WS_BASE_URL } from '../constante';
 
 @Injectable({ providedIn: 'root' })
-export class HomeService {
+export class HomeService implements OnDestroy {
 
   private readonly WS_URL = WS_BASE_URL
   private socket: WebSocketSubject<any>;
@@ -34,5 +34,10 @@ export class HomeService {
   // Réception : utilisé par l'écran public pour recevoir le changement
   public getDisplayUpdates(): Observable<any> {
     return this.lastMessageSubject.asObservable();  
+  }
+
+  ngOnDestroy(): void {
+    this.socket.complete();
+    this.lastMessageSubject.complete();
   }
 }
