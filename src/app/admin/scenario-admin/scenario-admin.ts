@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { WS_BASE_URL } from '../../constante';
 import { AfficheComponent } from "../affiche-admin/affiche-admin";
 
@@ -19,11 +19,13 @@ interface ScenarioStep {
   templateUrl: './scenario-admin.html',
   styleUrls: ['../admin.css'],
   standalone: true,
-  imports: [RouterModule, FormsModule, AfficheComponent]
+  imports: [RouterModule, FormsModule, AfficheComponent, CommonModule]
 })
 export class ScenarioAdminComponent implements OnInit {
 
   scenario: ScenarioStep[] = [];
+  afficherSeulementNonCompletes: boolean = false; // État du filtre
+  
   private ws: WebSocket | null = null;
   private readonly WS_URL = WS_BASE_URL;
   
@@ -32,9 +34,25 @@ export class ScenarioAdminComponent implements OnInit {
   ngOnInit(): void {
     this.connectWebSocket();
   }
+
+  /**
+   * Retourne la liste filtrée selon l'état du bouton
+   */
+  get filteredScenario(): ScenarioStep[] {
+    if (this.afficherSeulementNonCompletes) {
+      return this.scenario.filter(step => step.status !== 'COMPLÉTÉ');
+    }
+    return this.scenario;
+  }
+
+  /**
+   * Bascule l'affichage entre "Tout" et "Non complétés"
+   */
+  basculerFiltre(): void {
+    this.afficherSeulementNonCompletes = !this.afficherSeulementNonCompletes;
+  }
   
   private connectWebSocket(): void {
-    // 1. Ouvrir la connexion
     const ws = new WebSocket(this.WS_URL);
     this.ws = ws;
 
@@ -42,69 +60,46 @@ export class ScenarioAdminComponent implements OnInit {
       console.log('Connexion WebSocket établie.');
     };
 
-    // 2. Gérer les messages reçus du serveur
     ws.onmessage = (event: { data: string; }) => {
       try {
         const data = JSON.parse(event.data);
-        console.log('Message reçu:', data.type);
-
         if (data.type === 'INITIAL_STATE' || data.type === 'UPDATE_SCENARIO') {
-          // Mettre à jour les données du scénario (initial ou mise à jour)
           this.scenario = data.payload.scenario || data.payload; 
-          
-          //Trier les étapes par ID
           this.sortScenarioById();
-
-          // Déclencher la détection de changement pour mettre à jour l'affichage
           this.cdr.detectChanges(); 
-          
-          console.log(`Scénario mis à jour, ${this.scenario.length} étapes chargées.`);
         }
       } catch (error) {
-        console.error("Erreur lors de la réception/parsing du message WebSocket:", error);
+        console.error("Erreur WebSocket:", error);
       }
     };
 
     ws.onclose = () => {
-      console.log('Connexion WebSocket fermée. Tentative de reconnexion dans 5s...');
       setTimeout(() => this.connectWebSocket(), 5000); 
     };
 
     ws.onerror = (error: any) => {
-      console.error('Erreur WebSocket:', error);
       this.ws?.close();
     };
   }
-
-  // --- Envoi de la Commande de Mise à Jour ---
   
   updateStatus(step: ScenarioStep, newStatus: 'BLOQUÉ' | 'EN COURS' | 'COMPLÉTÉ'): void {
-    // 1. Préparer la commande pour le serveur
     const command = {
       type: 'UPDATE_STATUS_COMMAND',
       stepId: step.id,
       newStatus: newStatus
     };
     
-    // 2. Envoyer la commande via WebSocket
     if (this.ws && this.ws.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify(command));
-      console.log(`Commande envoyée pour l'étape ${step.id} : ${newStatus}`);
-    } else {
-      console.error('WebSocket non connecté ou prêt. Impossible d\'envoyer la commande.');
     }
   }
   
   getStatusClass(status: string): string {
     switch (status) {
-      case 'BLOQUÉ':
-        return 'bloque';
-      case 'EN COURS':
-        return 'en-cours';
-      case 'COMPLÉTÉ':
-        return 'complete';
-      default:
-        return '';
+      case 'BLOQUÉ': return 'bloque';
+      case 'EN COURS': return 'en-cours';
+      case 'COMPLÉTÉ': return 'complete';
+      default: return '';
     }
   }
 

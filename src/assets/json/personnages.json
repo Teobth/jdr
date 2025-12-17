@@ -466,7 +466,7 @@
     "nom": "Francois Michaud",
     "age": 34,
     "profession": "Journaliste en herbe",
-    "rencontre": true,
+    "rencontre": false,
     "portraitUrl": "assets/portraits/francois.png",
     "secrets": [
       {
@@ -490,7 +490,7 @@
     "nom": "Joseph Janvier",
     "age": 54,
     "profession": "Inspecteur de police",
-    "rencontre": true,
+    "rencontre": false,
     "portraitUrl": "assets/portraits/joseph.png",
     "secrets": [
       {

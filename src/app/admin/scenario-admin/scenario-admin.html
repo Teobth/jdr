@@ -1,22 +1,31 @@
 <h2>Gestion du Scénario</h2>
 
-<button routerLink="/admin/personnages" class="btn-admin-nav">
-Gérer les Personnages
-</button>
+<div class="admin-nav-bar" style="margin-bottom: 20px; display: flex; gap: 10px;">
+    <button routerLink="/admin/personnages" class="btn-admin-nav">
+        Gérer les Personnages
+    </button>
 
-<button routerLink="/admin/documents" class="btn-admin-nav">
-    Gérer les Documents
-</button>
+    <button routerLink="/admin/documents" class="btn-admin-nav">
+        Gérer les Documents
+    </button>
+
+    <button (click)="basculerFiltre()" class="btn-admin-filter">
+        {{ afficherSeulementNonCompletes ? 'Afficher TOUT le scénario' : 'Masquer les étapes COMPLÉTÉES' }}
+    </button>
+</div>
 
 <app-admin-affiche></app-admin-affiche>
 
 <div class="scenario-tracker-page">
     <div class="tracker-header">
         <h1>Suivi de l'Intrigue Principale</h1>
+        <p v-if="afficherSeulementNonCompletes" style="color: orange;">
+            <em>Filtre actif : étapes complétées masquées</em>
+        </p>
     </div>
 
     <div class="scenario-list">
-        @for(step of scenario; track step.id) {
+        @for(step of filteredScenario; track step.id) {
             <div class="step-card">
                 <div class="step-info">
                     <span class="step-id">{{ step.id }}</span>
@@ -52,6 +61,10 @@ Gérer les Personnages
                         </button>
                     </div>
                 </div>
+            </div>
+        } @empty {
+            <div style="padding: 40px; text-align: center; background: #f9f9f9; border-radius: 8px;">
+                <p>Aucune étape à afficher avec ce filtre.</p>
             </div>
         }
     </div>

@@ -1,7 +1,7 @@
 @if (personnages$ | async; as personnages) {
     
     <div class="header">
-        <h2>Vos rencontres</h2>
+        <h2>Vos rencontres ({{ personnages.length }})</h2>
 
         @if(personnages.length === 0) {
           <p>Vous n'avez encore rencontré aucun personnage.</p>
