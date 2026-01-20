@@ -6,7 +6,7 @@ import { HomeService } from './homeService';
 import { Affiche } from '../admin/affiche-admin/affiche-admin'; 
 import { Subject, Subscription, takeUntil } from 'rxjs';
 
-import * as displayOptions from '../../assets/json/display-options.json';
+import * as displayOptions from '../ws-server/contenuJson/display-options.json';
 
 @Component({
   standalone: true, 
