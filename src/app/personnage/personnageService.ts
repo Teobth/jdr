@@ -80,7 +80,16 @@ constructor(@Inject(PLATFORM_ID) private platformId: Object) {
   // --- MÉTHODES D'ACCÈS CLASSIQUES (Aucun changement nécessaire) ---
 
   getPersonnageParNom(nom: string): Personnage | undefined {
-    return this.personnagesDataSource.find(p => p.nom.toLowerCase() === nom.toLowerCase());
+      console.log("Recherche de :", nom);
+      console.log("Contenu actuel de personnagesDataSource :", this.personnagesDataSource);
+
+      return this.personnagesDataSource.find(p => {
+          if (!p || p.nom === undefined) {
+              console.error("Objet mal formé détecté :", p);
+              return false;
+          }
+          return p.nom.toLowerCase() === nom.toLowerCase();
+      });
   }
 
   getPersonnagesRencontre(): Personnage[] {

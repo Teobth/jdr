@@ -50,7 +50,7 @@
         "debloque": false
       }
     ]
-  },"??",
+  },
   {
     "nom": "George Ierzoff",
     "age": 67,
@@ -441,7 +441,7 @@
     "nom": "M. Victor",
     "age": 26,
     "profession": "Proxénète",
-    "rencontre": true,
+    "rencontre": false,
     "portraitUrl": "assets/portraits/victor.png",
     "secrets": [
       {
@@ -452,7 +452,7 @@
       {
         "cle": "Identité",
         "valeur": "Il est connu sous le nom de Totor Tout-Miel mais s'appelle en réalité Victor Drouet. Il est proxénète dans le quartier de Pigalle.",
-        "debloque": true
+        "debloque": false
       },
       {
         "cle": "Raison de sa présence",
@@ -462,7 +462,7 @@
       {
         "cle": "Témoignage",
         "valeur": "Ne connait pas le passé d'Olga. Il l'a receuilli en juin 1923 avant de l'inciter à se prostituer.",
-        "debloque": true
+        "debloque": false
       },
       {
         "cle": "Activités",
@@ -480,13 +480,13 @@
     "nom": "Docteur Sardes",
     "age": 46,
     "profession": "Médecin légiste",
-    "rencontre": true,
+    "rencontre": false,
     "portraitUrl": "assets/portraits/sardes.png",
     "secrets": [
       {
         "cle": "Autopsie",
         "valeur": "20 ans, bonne santé, mains non calleuses, retrouvée nue mais sans trace de violence sexuelle. Elle portait un anneau à l'annulaire droit bon marché. Hémorragie due à une profonde blessure au cou, fracture aux côtes gauches. La victime a été vidée de son sang. Trace de succion autour de la blessure. Oeuvre d'un maniac.",
-        "debloque": true
+        "debloque": false
       },
       {
         "cle": "Les deux autres autopsies",
@@ -504,7 +504,7 @@
     "nom": "Francois Michaud",
     "age": 34,
     "profession": "Journaliste en herbe",
-    "rencontre": true,
+    "rencontre": false,
     "portraitUrl": "assets/portraits/francois.png",
     "secrets": [
       {
@@ -528,7 +528,7 @@
     "nom": "Joseph Janvier",
     "age": 54,
     "profession": "Inspecteur de police",
-    "rencontre": true,
+    "rencontre": false,
     "portraitUrl": "assets/portraits/joseph.png",
     "secrets": [
       {

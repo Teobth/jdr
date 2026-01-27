@@ -3,25 +3,25 @@
     "id": 10,
     "title": "Les journaux annoncent la découverte",
     "description": "Découvertes du corps de la victime et premières rumeurs dans les journaux locaux. Nos investigateurs peuvent parler aux premiers intervenants.",
-    "status": "COMPLÉTÉ"
+    "status": "EN COURS"
   },
   {
     "id": 20,
     "title": "Dr Sardes rend son autopsie à la police",
     "description": "Le médecin légiste partage ses conclusions avec l'inspecteur Janvier ou les investigateurs. Si les investigateurs décident d'enquêter en ville, ils n'auront pas de réponses tangibles",
-    "status": "EN COURS"
+    "status": "BLOQUÉ"
   },
   {
     "id": 30,
     "title": "L'homme à la casquette",
     "description": "Victor Douet parle à Lherbier et se renseigne après le passage de la police. Il cherche à savoir si elle a un grain de beauté à la hanche gauche. Si il est arrêté, il a un couteau sur lui. Il a plusieurs alias comme 'Totor Tout-Miel ou M.Victor",
-    "status": "EN COURS"
+    "status": "BLOQUÉ"
   },
   {
     "id": 40,
     "title": "Prise d'information chez Victor rue Berthe",
     "description": "Rencontre des 'collègues' de Victor puis de la chambre d'Olga avec journal intime et carte de visite. Fin mars, Olga quitte Helsinki pour Paris. Elle n'a pas le niveau en français et se doit trouver un autre emplois en attendant de s'améliorer. En avril mai, ses notes sont séparées par de longs intervalles. Elle est décue de l'aide reçu de la fraternelle et se sent seule. En mai, elle fait un cauchemar récurrent où elle revoit sa grand-mère. Elle fuie le centre et rencontre Victor le 8 mai. Ensuite les notes redeviennent sordides jusqu'au 29 décembre.",
-    "status": "EN COURS"
+    "status": "BLOQUÉ"
   },
   {
     "id": 50,

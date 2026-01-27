@@ -6,9 +6,9 @@ const PORT = '3000';
 
 // --- FICHIERS DE DONNÉES ---
 const FILES = {
-    PERSONNAGES: '/home/teo/jdr/src/app/ws-server/contenuJson/personnages.json',
-    DOCUMENTS: '/home/teo/jdr/src/app/ws-server/contenuJson/documents.json', 
-    SCENARIO: '/home/teo/jdr/src/app/ws-server/contenuJson/scenario.json',
+    PERSONNAGES: '/home/teo/programme/jdr/src/app/ws-server/contenuJson/personnages.json',
+    DOCUMENTS: '/home/teo/programme/jdr/src/app/ws-server/contenuJson/documents.json', 
+    SCENARIO: '/home/teo/programme/jdr/src/app/ws-server/contenuJson/scenario.json',
 };
 
 // --- CLASSE DE GESTION DES DONNÉES (StateManager) ---

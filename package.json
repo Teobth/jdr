@@ -7,7 +7,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:jdr": "node dist/jdr/server/server.mjs"
+
+
+    "dev": "concurrently \"node src/app/ws-server/server.js\" \"ng serve\" "
   },
   "private": true,
   "dependencies": {

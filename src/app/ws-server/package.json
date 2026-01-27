@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }

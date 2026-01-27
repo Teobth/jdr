@@ -1,1 +1,1 @@
-export const WS_BASE_URL: string = 'ws://10.125.248.23:3000' //'ws://192.168.1.40:3000';
+export const WS_BASE_URL: string = 'ws://192.168.1.49:3000';
