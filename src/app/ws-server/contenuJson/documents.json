@@ -44,35 +44,35 @@
   {
     "id": 60,
     "titre": "Le journal d'Olga (2)",
-    "accessible": false,
-    "contenu": "27 décembre. Dieu me sauve. Je l’ai rencontré dans un café au pied de la butte. Il m’a reconnue tout de suite. Nous avons un peu parlé. Je n’ai rien osé lui dire, mais je crois qu’il a compris. Il a demandé à me revoir. \n30 décembre. Nouveau rendez-vous. Quelques minutes volées à la surveillance de Bella. Parler russe avec lui m’apaise. Il m’a dit que si je voulais changer d’air, il connaissait des gens, en banlieue. \n3 janvier. Samedi, 19 h 00, devant la gare de Meudon . Une dernière chance ? Il faut que je garde des pièces pour me payer le billet.",
+    "accessible": true,
+    "contenu": "27 décembre. Dieu me sauve. Je l’ai rencontré dans un café au pied de la butte. Il m’a reconnue tout de suite. Nous avons un peu parlé. Je n’ai rien osé lui dire, mais je crois qu’il a compris. Il a demandé à me revoir. \n\n30 décembre. Nouveau rendez-vous. Quelques minutes volées à la surveillance de Bella. Parler russe avec lui m’apaise. Il m’a dit que si je voulais changer d’air, il connaissait des gens, en banlieue. \n\n3 janvier. Samedi, 19 h 00, devant la gare de Meudon . Une dernière chance ? Il faut que je garde des pièces pour me payer le billet.",
     "imageUrl": "/assets/docs/6_journal_intime.png"
   },
   {
     "id": 50,
     "titre": "Le journal d'Olga (1)",
-    "accessible": false,
-    "contenu": "29 mai. Il est trois heures du matin. J’ai rêvé du pays. J’étais une petite fille, dans une grande maison blanche pleine de passages et de couloirs. C’était l’anniversaire de grand-mère. J’avais préparé un compliment en vers. J’étais morte de trac. Je me cachais dans des recoins, mais je me retrouvais toujours dans un salon plein de monde – mes parents, mes oncles et tantes, des cousins, des vieux que je ne reconnaissais pas. Et puis, à un moment, on me faisait avancer. Grand-mère était énorme, dans une robe noire toute rêche, avec une voilette qui cachait son visage. Forcément, j’ai bafouillé. Alors, elle m’a attrapée et je savais qu’elle ne me lâcherait pas et que j’allais mourir si je voyais sous sa voilette. Je me suis réveillée juste à temps. Je ne crois pas que je me rendormirai. \n30 mai. Il y avait des porcs, des grognements, ces affreux bruits de fouissement qu’ils font lorsqu’ils fouillent dans leur auge, sauf que leurs auges étaient pleines de bras et de jambes et de torses. Un vieillard me chuchotait des secrets à l’oreille, des secrets de sang que je ne veux pas connaître. Un autre, un brave homme, menait son troupeau à l’abattoir sans cesser de s’inquiéter pour ses bêtes. Réveillée en sursaut. J’étouffais. Il m’a fallu plusieurs minutes pour recommencer à respirer normalement. Ce sont mes pires cauchemars depuis des années. J’ai peur de mourir dans mon sommeil la nuit prochaine. Impossible de rester dans cette chambre. Je dois bouger. Anastase ? Non. Il est bon, mais je ne veux pas vivre avec lui. Je trouverai quelque chose.",
+    "accessible": true,
+    "contenu": "29 mai. Il est trois heures du matin. J’ai rêvé du pays. J’étais une petite fille, dans une grande maison blanche pleine de passages et de couloirs. C’était l’anniversaire de grand-mère. J’avais préparé un compliment en vers. J’étais morte de trac. Je me cachais dans des recoins, mais je me retrouvais toujours dans un salon plein de monde – mes parents, mes oncles et tantes, des cousins, des vieux que je ne reconnaissais pas. Et puis, à un moment, on me faisait avancer. Grand-mère était énorme, dans une robe noire toute rêche, avec une voilette qui cachait son visage. Forcément, j’ai bafouillé. Alors, elle m’a attrapée et je savais qu’elle ne me lâcherait pas et que j’allais mourir si je voyais sous sa voilette. Je me suis réveillée juste à temps. Je ne crois pas que je me rendormirai. \n\n30 mai. Il y avait des porcs, des grognements, ces affreux bruits de fouissement qu’ils font lorsqu’ils fouillent dans leur auge, sauf que leurs auges étaient pleines de bras et de jambes et de torses. Un vieillard me chuchotait des secrets à l’oreille, des secrets de sang que je ne veux pas connaître. Un autre, un brave homme, menait son troupeau à l’abattoir sans cesser de s’inquiéter pour ses bêtes. Réveillée en sursaut. J’étouffais. Il m’a fallu plusieurs minutes pour recommencer à respirer normalement. Ce sont mes pires cauchemars depuis des années. J’ai peur de mourir dans mon sommeil la nuit prochaine. Impossible de rester dans cette chambre. Je dois bouger. Anastase ? Non. Il est bon, mais je ne veux pas vivre avec lui. Je trouverai quelque chose.",
     "imageUrl": "/assets/docs/5_journal_intime.png"
   },
   {
     "id": 40,
     "titre": "La carte de visite",
-    "accessible": false,
+    "accessible": true,
     "contenu": "Fraternelle d’aide aux réfugiés de Russie \n\nAndreï Georgevitch Ierzoff \n\n5, rue Vercingétorix, Paris XIV e\nGobelins 93-32",
     "imageUrl": "/assets/docs/4_carte.png"
   },
   {
     "id": 30,
     "titre": "Le vampire de Meudon ?",
-    "accessible": false,
+    "accessible": true,
     "contenu": "PARIS. L'identité de la belle inconnue retrouvée dans un champ reste un mystère. En revanche, la police en sait davantage sur les circonstances de sa mort. \nL'inspecteur Janvier, en charge du dossier, se déclare préoccupé par certains aspects du rapport d'autopsie. \nLa victime est morte égorgée, d'un coup-précis porté à la carotide par une lame très affûtée, sans doute un rasoir, a-t-il expliqué à la presse. D'après le médecin légiste, elle est morte voici une huitaine de jours, aux alentours de l'Epiphanie. Son corps a été enterré. Nous supposons qu'elle a été exhumée par la crue de la Seine. Pour l'heure, nous estimons que le fleuve ne l'a pas transportée très loin. Nous concentrons done nos recherches en amont, entre Meudon et Billancourt, à la recherche de la tombe. Malheureusement, il reste encore de nombreuses zones inondées, qui ne pourront être pleinement explorées qu'une fois la crue calmée.. \n(Voir aussi notre appel à témoins en page 1) \nF. Michaud, le 14 janvier 1924",
     "imageUrl": "/assets/docs/3_journal.png"
   },
   {
     "id": 20,
     "titre": "Avez-vous vu cette femme ?",
-    "accessible": false,
+    "accessible": true,
     "contenu": "Personne ne s'étant présenté pour reconnaître le corps de la jeune femme retrouvée dans un champ, à Meudon, la police publie cet appel à témoins. \nHabitants de Billancourt, d'Issy ou de Meudon, si vous vous souvenez d'avoir vu une femme ressemblant à ce portrait aux alentours du samedi 5 ou dimanche 6 janvier, contactez la police ! \nNotre journaliste, François Michaud, fait le point sur l'enquête in page 3.",
     "imageUrl": "/assets/docs/2_journal.png"
   },

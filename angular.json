@@ -29,6 +29,7 @@
                 "output": "assets"
               }
             ],
+            "prerender": false,
             "styles": [
               "src/styles.css"
             ],

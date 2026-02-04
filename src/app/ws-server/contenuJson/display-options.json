@@ -28,5 +28,10 @@
     "id": 6,
     "imageUrl": "assets/affiche/seineCampagne.png",
     "description": "Les bords de Seine"
+  },
+    {
+    "id": 7,
+    "imageUrl": "assets/affiche/villa.png",
+    "description": "La Villa Désirée"
   }
 ]

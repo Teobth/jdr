@@ -1,5 +1,34 @@
 [
   {
+    "nom": "Sofia",
+    "age": "??",
+    "profession": "Non-morte",
+    "rencontre": false,
+    "portraitUrl": "assets/portraits/sofia.png",
+    "secrets": [
+      {
+        "cle": "Attaque psychique",
+        "valeur": "1D10, les pv sont illusoire et ne font que tomber la victime dans le coma.",
+        "debloque": false
+      },
+      {
+        "cle": "Dévoration psychique",
+        "valeur": "La victime doit dormir et Sofia doit avoir un objet qui lui appartient. 70%/90%, 1D10 par round jusqu'à ce que mort s'en suive",
+        "debloque": false
+      },
+      {
+        "cle": "Forger des illusions",
+        "valeur": "30%, perturbe les sens.",
+        "debloque": false
+      },
+      {
+        "cle": "Possession",
+        "valeur": "190%, contrôle que les maudits. Partage le score entre chacun. Elle doit garder le contrôle en faisant un nouveau test chaque tour.",
+        "debloque": false
+      }
+    ]
+  },
+  {
     "nom": "Youri Gouroff",
     "age": 24,
     "profession": "Chomeur",
@@ -187,7 +216,7 @@
   {
     "nom": "Irène Alexeïevna Tcherkova",
     "age": 17,
-    "profession": "",
+    "profession": "Morte",
     "rencontre": false,
     "portraitUrl": "assets/portraits/irene.png",
     "secrets": [
@@ -246,22 +275,32 @@
     "secrets": [
       {
         "cle": "Quotidien",
-        "valeur": "Depuis juillet 1921, il partage sa licence de taxi avec son oncle et travaille en soirée. Il tourne souvent autour de Pigalle et des cabarets russes.",
+        "valeur": "Igor conduit un taxi G7 depuis juillet 1921, partageant la licence avec son oncle. Il travaille de soirée et rentre vers 3 heures du matin à Levallois. Il patrouille souvent dans le secteur de Pigalle et ses cabarets russes.",
         "debloque": false
       },
       {
         "cle": "Passé",
-        "valeur": "Il alternait les petits boulots et période de chomage à Kiev.",
+        "valeur": "Originaire de Kiev, il enchaînait les petits boulots avant-guerre. Il vante ses campagnes en Galicie (1914-1917), mais reste suspectement silencieux sur son rôle durant la guerre civile.",
         "debloque": false
       },
       {
         "cle": "Relation avec Olga",
-        "valeur": "A vu Olga quelquefois avant de se rendre compte qu'ils ne s'entendaient pas.",
+        "valeur": "Il s'agit de l'assassin, mais il reste prudent. Il prétend l'avoir rencontrée brièvement au printemps avant de décider qu'ils n'étaient pas compatibles.",
+        "debloque": false
+      },
+      {
+        "cle": "En sa faveur / défaveur",
+        "valeur": "Son taxi lui permet de circuler partout sans attirer l'attention, notamment près de la rue Berthe. En sa faveur, il habite au nord-est alors que les crimes sont au sud-ouest, bien qu'il connaisse parfaitement la région.",
         "debloque": false
       },
       {
         "cle": "Relation avec la fraternité",
-        "valeur": "Arrivé en France en 1920, il a vécu un an rue Vercingétorix avant d'habiter avec son oncle à Levallois. Il vie désormais seul.",
+        "valeur": "Arrivé en France en 1920, il a logé un an rue Vercingétorix avant de s'installer à Levallois, d'abord chez son oncle Ivan, puis dans sa propre chambre de bonne.",
+        "debloque": false
+      },
+      {
+        "cle": "Malediction",
+        "valeur": "Igor est insomniaque. Plus inquiétant encore : il est consumé par un besoin pathologique de sang.",
         "debloque": false
       }
     ]
@@ -275,22 +314,32 @@
     "secrets": [
       {
         "cle": "Quotidien",
-        "valeur": "Il a acheté une ferme vers Juvisy et y fait pousser de la Luzerne pour nourrir ses lapins. Il aimerait trouver quelqu'un pur l'aider et plus largement pour partager sa vie.",
+        "valeur": "Cousin éloigné d’Andreï, il vit dans une fermette à Juvisy où il élève des lapins. Il est ravi de sa vie rurale mais se sent esclave de son élevage. Il cherche activement quelqu'un pour l'aider ou pour se marier (ce qui, pour lui, revient au même).",
         "debloque": false
       },
       {
         "cle": "Passé",
-        "valeur": "Cousin éloigné d'Andrei, il a été séminariste puis s'est inscrit à une école de droit juste avant que la guerre n'éclate.",
+        "valeur": "Ancien séminariste ayant perdu la foi, il s'est tourné vers le droit. Il venait de s'inscrire au barreau quand la guerre a éclaté.",
         "debloque": false
       },
       {
         "cle": "Relation avec Olga",
-        "valeur": "Elle est venu plusieurs jours dans sa ferme vers la mi-mai. Elle n'est plus revenu depuis, il la regrette",
+        "valeur": "Il la regrette sincèrement. Elle a passé quelques jours à sa ferme en mai pour tester la vie à la campagne, mais elle a finalement renoncé à s'habituer aux lapins.",
+        "debloque": false
+      },
+      {
+        "cle": "En sa faveur / défaveur",
+        "valeur": "Il est le plus proche d'Olga et traîne souvent à Pigalle, où il aurait pu la croiser. En sa faveur : il ne sait pas situer Meudon et, s'il était le tueur, il aurait sûrement enterré le corps dans ses terres plutôt que de se compliquer la vie.",
         "debloque": false
       },
       {
         "cle": "Relation avec la fraternité",
-        "valeur": "Anastase en pense beaucoup de bien. Il est arrivé en France depuis la Yougoslavie et il a passé deux mois là-bas.",
+        "valeur": "Il en pense beaucoup de bien. Arrivé via la Yougoslavie en 1920, il a logé deux mois rue Vercingétorix avant d'emprunter de l'argent à son grand-oncle George pour acheter sa ferme.",
+        "debloque": false
+      },
+      {
+        "cle": "Malediction",
+        "valeur": "Anastase est hémophile. Plus troublant : il lui arrive de manger certains de ses lapins crus au lieu de les vendre au boucher.",
         "debloque": false
       }
     ]
@@ -304,22 +353,37 @@
     "secrets": [
       {
         "cle": "Quotidien",
-        "valeur": "Partage sa vie entre une association monarchique et le bar, il a l'alcool hargneux et n'est pas souvent sobre après 15h.",
+        "valeur": "« Monsieur Gouroff » vit dans un petit appartement du quartier latin. Il gagne chichement sa vie comme traducteur et partage ses loisirs entre une association monarchiste et les bistrots. Après 15 heures, il est rarement sobre. Il a l’alcool amer, voire hargneux.",
         "debloque": false
       },
       {
         "cle": "Passé",
-        "valeur": "Il avait un poste au ministère des affaires étrangères en Russie. En 1918 il a fuit pour la Finlande.",
+        "valeur": "Ancien conseiller d’État à Saint-Pétersbourg, il occupait un poste au ministère des Affaires étrangères. Il a fui en Finlande début 1918 avant d'arriver en France en 1919.",
         "debloque": false
       },
       {
         "cle": "Relation avec Olga",
-        "valeur": "Il n'a pas voulu d'Olga, car trop moderne, trop forte tête.",
+        "valeur": "Il prétend l'avoir rejetée car elle était « trop moderne et occidentale ». En réalité, Olga l’a planté là au bout d’un quart d’heure.",
+        "debloque": false
+      },
+      {
+        "cle": "En sa faveur / défaveur",
+        "valeur": "Il est petit et frêle. Bien qu'égorger quelqu'un n'exige pas de force, il a une peur panique du sang et s'évanouit à la moindre coupure. En sa défaveur, il a également connu Anna Oumanova.",
         "debloque": false
       },
       {
         "cle": "Relation avec la fraternité",
-        "valeur": "Il leur doit son passeport car la Russie l'a rendu apatride, il les a remercié en faisant du bénévola plusieurs mois.",
+        "valeur": "Apatride depuis 1922, il doit son passeport Nansen à la Fraternelle. Il a remboursé sa dette en travaillant comme bénévole pour eux début 1923. Il apprécie Andreï.",
+        "debloque": false
+      },
+      {
+        "cle": "Frère de Borislav",
+        "valeur": "Sergeï est le frère cadet de Borislav. Il n’a pas vu Borislav depuis 1916, ses deux imbéciles de neveux depuis encore plus longtemps, et que cela lui convient très bien. Il connaît l’existence d’Hélène, de manière un peu floue : « une bâtarde que son frère a eue en couchaillant avec une petite Française, il y a une dizaine d’années ». Sergeï ne se rappelle pas du nom de famille de sa mère. S’il est interrogé sur les légendes familiales, il confirme que son grand-père Piotr est mort subitement en 1874, avant sa naissance, au cours d’un voyage dans le berceau de la famille : Polotsk, dans l’ouest de la Russie. Ses connaissances s’arrêtent là.",
+        "debloque": false
+      },
+      {
+        "cle": "Malediction",
+        "valeur": "Sergeï dégage en permanence une vague odeur de lait tourné. Son alcoolisme sert à apaiser des angoisses morbides et informes liées à la mort.",
         "debloque": false
       }
     ]
@@ -333,22 +397,32 @@
     "secrets": [
       {
         "cle": "Quotidien",
-        "valeur": "Il travaille en tant qu'ouvrier dans une usine Renault de 6h à 16h, sauf le dimanche. Passe ses soirées à apprendre le français et le dimanche à se promener au bord de Seine. Sors parfois au cinéma avec une voisine russe.",
+        "valeur": "« Eugène » travaille aux usines Renault, à Billancourt. Il embauche à 6 heures du matin et sort à 16 heures, six jours par semaine. Il vit dans une chambre délabrée à Boulogne, qu’il partage avec deux autres Russes. Il passe la plupart de ses soirées à prendre des cours de français, et ses dimanches à se promener sur les bords de Seine. De temps en temps, il va au cinéma avec une jeune fille russe, généralement une voisine.",
         "debloque": false
       },
       {
         "cle": "Passé",
-        "valeur": "A combattu pendant le grande guerre, était paysan avant cela.",
+        "valeur": "Evgeni a servi pendant la Grande Guerre. Avant 1914, il était paysan.",
         "debloque": false
       },
       {
         "cle": "Relation avec Olga",
-        "valeur": "Il a rencontré une seule fois Olga en avril. Elle était trop bien pour lui",
+        "valeur": "Il a rencontré Olga une seule fois, en avril. Avec une pointe d’amertume, il explique qu’elle était « trop bien pour lui ». C’était une « demoiselle » et il n’est qu’un petit ouvrier.",
+        "debloque": false
+      },
+      {
+        "cle": "En sa faveur / défaveur",
+        "valeur": "Originaire d’Ukraine, il connaît la coutume du mariage posthume. C’est un solitaire. Son contremaître se porte garant de lui. Il est arrivé en France en août 1922, et n’a donc pas pu tuer Anna Oumanova, morte depuis des mois.",
         "debloque": false
       },
       {
         "cle": "Relation avec la fraternité",
-        "valeur": "Réfugié en Roumanie, il a été pris en charge par le centre de Bucarest. Il a séjourné rue Vercingétorix d’août à octobre 1922, le temps de retrouver des copains de régiment qui lui ont trouvé un boulot à l'usine.",
+        "valeur": "Réfugié en Roumanie, il a été pris en charge par le centre de Bucarest. Il a séjourné rue Vercingétorix d’août à octobre 1922, le temps de retrouver des copains de régiment qui lui ont trouvé un boulot à l’usine.",
+        "debloque": false
+      },
+      {
+        "cle": "Malediction",
+        "valeur": "Evgeni est boiteux et docile.",
         "debloque": false
       }
     ]
@@ -356,7 +430,7 @@
   {
     "nom": "Andrei Ierzoff",
     "age": 35,
-    "profession": "Directeur de la fraternelle d’aide aux réfugiés de Russie",
+    "profession": "Directeur de la fraternelle",
     "rencontre": false,
     "portraitUrl": "assets/portraits/andrei.png",
     "secrets": [
@@ -374,6 +448,11 @@
         "cle": "Liste des quatre contacts masculins",
         "valeur": "Evgeni Baltabeff, Sergeï Gouroff, Anastase Ierzoff et Igor Loban.",
         "debloque": false
+      },
+      {
+        "cle": "Malediction",
+        "valeur": "Vulnérable à la lumière, Mémoire parfaite",
+        "debloque": false
       }
     ]
   },
@@ -381,7 +460,7 @@
     "nom": "Bella",
     "age": 23,
     "profession": "Proxénète",
-    "rencontre": false,
+    "rencontre": true,
     "portraitUrl": "assets/portraits/bella.png",
     "secrets": []
   },
@@ -389,13 +468,13 @@
     "nom": "La Blonde Louisette",
     "age": 22,
     "profession": "Fille de joie",
-    "rencontre": false,
+    "rencontre": true,
     "portraitUrl": "assets/portraits/louisette.png",
     "secrets": [
       {
         "cle": "Relation avec Olga",
         "valeur": "A été très proche d'Olga. Elle savait qu'Olga n'aimait pas faire le trottoir.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Sentiment sur Olga",
@@ -408,21 +487,21 @@
     "nom": "Madeleine la Brestoise",
     "age": 23,
     "profession": "Fille de joie",
-    "rencontre": false,
+    "rencontre": true,
     "portraitUrl": "assets/portraits/madeleine.png",
     "secrets": [
       {
         "cle": "Relation avec Olga",
         "valeur": "Elles travaillaient toutes les deux pour Victor. Elles se sont bien entendues.",
-        "debloque": false
+        "debloque": true
       }
     ]
   },
   {
     "nom": "Olga",
     "age": 20,
-    "profession": "Inconnue",
-    "rencontre": false,
+    "profession": "La Blanche Morte",
+    "rencontre": true,
     "portraitUrl": "assets/portraits/olga.png",
     "secrets": [
       {
@@ -441,7 +520,7 @@
     "nom": "M. Victor",
     "age": 26,
     "profession": "Proxénète",
-    "rencontre": false,
+    "rencontre": true,
     "portraitUrl": "assets/portraits/victor.png",
     "secrets": [
       {
@@ -452,27 +531,27 @@
       {
         "cle": "Identité",
         "valeur": "Il est connu sous le nom de Totor Tout-Miel mais s'appelle en réalité Victor Drouet. Il est proxénète dans le quartier de Pigalle.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Raison de sa présence",
         "valeur": "Il croit reconnaitre la morte comme son Olga.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Témoignage",
         "valeur": "Ne connait pas le passé d'Olga. Il l'a receuilli en juin 1923 avant de l'inciter à se prostituer.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Activités",
         "valeur": "Il se concentre sur la rue Berthe, au pied du Sacré-Coeur. Tous les commerçants connaissaient mademoisselle Olga.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Ses filles",
         "valeur": "Il fait travailler deux filles, Madeleine la Brestoise et La Blonde Louisette. Bella s'occupe du business quand Victor n'est pas là.",
-        "debloque": false
+        "debloque": true
       }
     ]
   },
@@ -480,7 +559,7 @@
     "nom": "Docteur Sardes",
     "age": 46,
     "profession": "Médecin légiste",
-    "rencontre": false,
+    "rencontre": true,
     "portraitUrl": "assets/portraits/sardes.png",
     "secrets": [
       {
@@ -504,7 +583,7 @@
     "nom": "Francois Michaud",
     "age": 34,
     "profession": "Journaliste en herbe",
-    "rencontre": false,
+    "rencontre": true,
     "portraitUrl": "assets/portraits/francois.png",
     "secrets": [
       {
@@ -520,7 +599,7 @@
       {
         "cle": "Carrière",
         "valeur": "Espère que cette affaire propulsera sa carrière de journaliste.",
-        "debloque": false
+        "debloque": true
       }
     ]
   },
@@ -528,28 +607,28 @@
     "nom": "Joseph Janvier",
     "age": 54,
     "profession": "Inspecteur de police",
-    "rencontre": false,
+    "rencontre": true,
     "portraitUrl": "assets/portraits/joseph.png",
     "secrets": [
       {
         "cle": "Objectif 1",
         "valeur": "Il cherche à identifier la morte, elle n'apparait dans aucune liste de personne disparue.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Objectif 2",
         "valeur": "Reconstituer ses faits et gestes.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Objectif 3",
         "valeur": "Retrouver la tombe, plusieurs policiers sont à l'affaire entre les portes de Paris et le champs de Lherbier.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Objectif 4",
         "valeur": "Sur la piste d'un maniac,il a chargé deux agents de téléphoner à tous les asiles de la région parisienne au cas où ils auraient eu une évasion.",
-        "debloque": false
+        "debloque": true
       }
     ]
   },
@@ -568,7 +647,7 @@
       {
         "cle": "Du pays",
         "valeur": "Il connait très bien les berges de la Seine",
-        "debloque": false
+        "debloque": true
       }
     ]
   }

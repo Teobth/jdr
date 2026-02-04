@@ -85,6 +85,18 @@
       </div> 
     }
 
+    @case (7) {
+      <div class="case-display warning">
+        <h1>La Villa Désiré</h1>
+        <img 
+          [src]="detailsAffiche?.imageUrl" 
+          [alt]="'Affiche de l\'aventure : ' + detailsAffiche?.description"
+          class="affiche-details"
+        >
+        <p></p>
+      </div>
+    }
+
     @default {
       <p>Chargement en cours ou affichage non configuré.</p>
     }

@@ -1,13 +1,5 @@
 <h2>Panneau d'Administration des Documents</h2>
 
-<button routerLink="/admin/personnages" class="btn-admin-nav">
-    Gérer les Personnages
-</button>
-
-<button routerLink="/admin/scenario" class="btn-admin-nav">
-    Accéder au scénario
-</button>
-
 <button (click)="basculerFiltre()">
     {{ afficherSeulementVisibles ? 'Afficher TOUS les documents' : 'Afficher seulement les VISIBLES' }}
 </button>
@@ -15,17 +7,16 @@
 <div class="admin-grid">
     @for(doc of documents$ | async; track doc.id) {
         <div class="admin-card">
-            <h3>{{ doc.titre }}</h3> <p>ID: {{ doc.id }}</p>
+            <h3>{{ doc.titre }}</h3>
             <p>
-                Statut: <strong 
+                <strong 
+                    style="cursor: pointer; user-select: none;"
+                    (click)="basculerAcces(doc)"
                     [class.visible-oui]="doc.accessible"
                     [class.visible-non]="!doc.accessible">
-                    {{ doc.accessible ? 'Visible pour les joueurs' : 'Caché pour les joueurs' }}
+                    {{ doc.accessible ? 'Visible' : 'Caché' }}
                 </strong>
             </p>
-            <button (click)="basculerAcces(doc)">
-                {{ doc.accessible ? 'Rendre Caché' : 'Rendre Visible' }}
-            </button>
         </div>
     }
 </div>

@@ -37,4 +37,9 @@ export class DocumentDetailComponent implements OnInit {
         this.doc = d;
     });
   }
+
+  ouvrirDocument(id: string | number) {
+    const url = `${id}`;
+    window.open(url, '_blank');
+  }
 }

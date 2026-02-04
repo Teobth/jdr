@@ -3,7 +3,7 @@
         <h2>Détails du Document</h2>
         
         <div class="photo-wrapper">
-            <a [href]="'/assets/docs/' + doc.id + '.png'">
+            <a [href]="doc.imageUrl">
                 <img [src]="doc.imageUrl" 
                     [alt]="'Doc ' + doc.id" 
                     class="document-image">

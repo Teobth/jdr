@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-
-// 1. Importer les nouveaux composants
 import { HomeComponent } from './home/home'; 
 import { PersonnageListComponent } from './personnage/personnage-list/personnage-list'; 
 import { PersonnageDetailComponent } from './personnage/personnage-detail/personnage-detail';
@@ -13,10 +11,8 @@ import { ScenarioAdminComponent } from './admin/scenario-admin/scenario-admin';
 import { AfficheComponent } from './admin/affiche-admin/affiche-admin';
 
 export const routes: Routes = [
-  // 2. Définir la route par défaut (la racine /) pour l'accueil
   { path: '', component: HomeComponent }, 
   
-  // 3. Définir la route pour la liste des personnages
   { path: 'personnages', component: PersonnageListComponent }, 
   
   { path: 'personnages/:nom', component: PersonnageDetailComponent },
@@ -25,14 +21,16 @@ export const routes: Routes = [
 
   { path: 'documents/:id', component: DocumentDetailComponent },
 
-  { path: 'admin', component: AdminComponent },
-
-  { path: 'admin/personnages', component: AdminPersonnagesComponent },
-
-  { path: 'admin/documents', component: AdminDocumentsComponent },
-
-  { path: 'admin/scenario', component: ScenarioAdminComponent },
-
-  { path: 'admin/affiche', component: AfficheComponent}
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      { path: 'personnages', component: AdminPersonnagesComponent },
+      { path: 'documents', component: AdminDocumentsComponent },
+      { path: 'scenario', component: ScenarioAdminComponent },
+      { path: 'affiches', component: AfficheComponent },
+      { path: '', redirectTo: 'scenario', pathMatch: 'full' }
+    ]
+  }
 
 ];
