@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { WS_BASE_URL } from '../constante';
 
 @Injectable({ providedIn: 'root' })
-export class HomeService implements OnDestroy {
+export class LieuService implements OnDestroy {
 
   private readonly WS_URL = WS_BASE_URL
   private socket: WebSocketSubject<any>;

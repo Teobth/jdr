@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { WS_BASE_URL } from '../../constante';
-import { AfficheComponent } from "../affiche-admin/affiche-admin";
+import { WS_BASE_URL } from '../constante';
+import { AfficheComponent } from "./admin-affiche";
 
 declare var WebSocket: any;
 
@@ -16,15 +16,15 @@ interface ScenarioStep {
 
 @Component({
   selector: 'app-scenario-tracker',
-  templateUrl: './scenario-admin.html',
-  styleUrls: ['../admin.css'],
+  templateUrl: '../html/admin-scenario.html',
+  styleUrls: ['../css/admin.css'],
   standalone: true,
   imports: [RouterModule, FormsModule, AfficheComponent, CommonModule]
 })
 export class ScenarioAdminComponent implements OnInit {
 
   scenario: ScenarioStep[] = [];
-  afficherSeulementNonCompletes: boolean = false; // État du filtre
+  afficherSeulementNonCompletes: boolean = true;
   
   private ws: WebSocket | null = null;
   private readonly WS_URL = WS_BASE_URL;

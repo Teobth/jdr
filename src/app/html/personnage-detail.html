@@ -1,0 +1,44 @@
+@let p = personnage();
+
+@if (p) {
+    <div class="detail-card">
+        <h1>{{ p.nom }}</h1>
+        
+        <div class="personnage-description">
+            <div class="photo-wrapper">
+                <img [src]="p.portraitUrl" 
+                    [alt]="'Photo de ' + p.nom" 
+                    class="personnage-photo">
+            </div>
+
+            <div class="stats-container">
+                <p><strong>Age : </strong> <span class="stat-value">{{ p.age }}</span></p>
+                <p><strong>Profession :</strong> <span class="stat-value">{{ p.profession }}</span></p>
+            </div>
+        </div>
+        
+        <hr class="separator">
+
+        <div class="revealed-secrets">
+            <h3>Informations Révélées</h3>
+            
+            @if (secretsDebloques().length > 0) {
+                <ul>
+                    @for (secret of secretsDebloques(); track secret.cle) {
+                        <li>
+                            <span class="secret-key">{{ secret.cle }}:</span> 
+                            <span class="secret-value">{{ secret.valeur }}</span>
+                        </li>
+                    }
+                </ul>
+            } @else {
+                <p class="no-secret-message">Aucune information supplémentaire n'a été découverte.</p>
+            }
+        </div>
+        <a routerLink="/personnages" class="back-link">Retour à la liste</a>
+    </div>
+} @else {
+    <div class="error-message">
+        <p>Personnage inconnu. Êtes-vous sûr de l'avoir déjà rencontré ?</p>
+    </div>
+}

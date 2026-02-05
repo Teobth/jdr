@@ -1,0 +1,25 @@
+@if (documentsFiltres().length > 0) {
+  <h2>Vos documents ({{ documentsFiltres().length }})</h2>
+
+  <div class="document-grid">
+    
+    @for (doc of documentsFiltres(); track doc.id) { 
+      <div class="document-card">
+        <a [routerLink]="['/documents', doc.id]"> 
+            
+          <img [src]="doc.imageUrl" [alt]="'Photo du document ' + doc.titre">
+
+          <div class="info"> 
+            <h3>{{ doc.titre }}</h3> 
+          </div>
+        </a>
+      </div>
+    } @empty {
+      }
+  </div>
+} 
+@else {
+  <div class="empty-list-message">
+      <p>Aucun document n'est actuellement accessible.</p>
+  </div>
+}

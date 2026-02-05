@@ -1,12 +1,5 @@
 [
   {
-    "id": 120,
-    "titre": "Carte de Meudon",
-    "accessible": false,
-    "contenu": "Carte de Meudon et des environs immédiats.",
-    "imageUrl": "/assets/docs/12_carte.png"
-  },
-  {
     "id": 110,
     "titre": "Les notes de Borislav (2)",
     "accessible": false,
@@ -28,6 +21,13 @@
     "imageUrl": "/assets/docs/9_journal.png"
   },
   {
+    "id": 81,
+    "titre": "La photo de famille",
+    "accessible": false,
+    "contenu": "",
+    "imageUrl": "/assets/docs/8_photo.png"
+  },
+  {
     "id": 80,
     "titre": "Étiquette du trousseau de clés",
     "accessible": false,
@@ -37,7 +37,7 @@
   {
     "id": 70,
     "titre": "Le vampire de Meudon avait déjà frappé !",
-    "accessible": false,
+    "accessible": true,
     "contenu": "MEUDON. Nos lecteurs ont suivi, dans nos éditions du 12 et du 14 janvier, l'affaire de la blanche morte découverte par les inondations. Nous savons désormais qu'elle n'est pas la seule victime de son mystérieux assassin! Avec une ténacité méritoire, les policiers ont bravé la neige et la glace jusqu'à la découverte de sa tombe. La malheureuse reposait à quelques centaines de mètres de l'endroit où on l'a retrouvée, sur l'ile Séguin, dans un creux envahi par les ronces que l'inondation avait changé en étang. \nCe serait déjà un beau succès pour la police, mais il y a mieux... ou pire, selon votre point de vue. Deux autres jeunes femmes gisaient là, dans des tombes peu profondes. Nos sources laissent entendre qu'elles présentaient le même type de blessure que l'inconnue du 12 janvier. \nDans notre article du 14, nous avions utilisé l'expression vampire de Meudon». Nous point l'avions d'un accompagnée d'interrogation et, avouons-le, nous n'étions qu'à demi sérieux. Hélas, la réalité nous a rattrapés, et de quelle manière! La paisible Meudon rejoint Whitechapel et Hanovre dans la sinistre liste des villes hantées par un tueur de femmes. Jack l'Éventreur n'a jamais été retrouvé, et son homologue germanique déjoue toujours les efforts de la police allemande. Souhaitons meilleure chance à l'inspecteur Janvier! \nF. Michaud",
     "imageUrl": "/assets/docs/7_journal.png"
   },
@@ -82,5 +82,12 @@
     "accessible": true,
     "contenu": "MEUDON. Les récentes inondations ont infligé un très vilain choc à Gustave Lherbier, cultivateur au lieu-dit des Châtaigners, entre Bas-Meudon et Sèvres. Son champ, situé en bordure de Seine, a été sous les eaux pendant plusieurs jours. Hier, lorsque la Seine a consenti à regagner son lit, M. Lherbier est venu constater les dégâts. II a alors découvert le terrible cadeau du fleuve, un cadavre. \nNous avons pu l'interroger alors qu'il était déjà un peu remis du choc. Laissons-lui la parole: Je ne l'ai pas remarquée tout de suite. C'est quand je me suis approché de la grande haie que j'ai vu qu'il y avait quelque chose de blanc pris dedans. La pauvre fille était tout emberlificotée dans les ronces, même qu'il a fallu je prête un coupe-coupe aux policiers pour qu'ils la dégagent. Une fois que j'ai été sûr qu'elle était morte ce n'était pas bien difficile, elle était blanche comme de la neige, que et elle ne respirait pas - j'ai fait comme on dit dans les journaux: j'ai touché à rien, et j'ai été prévenir. \nLe plus terrible, c'est quand ils l'ont dégagée. Allongée sur le brancard, toute påle... Pour sûr, personne n'est joli à regarder après avoir passé du temps dans l'eau, mais je me suis dit qu'elle avait dû être très belle, avant. C'est affreux, Monsieur, vous savez, surtout quand on est père de famille et qu'on pense que ça pourrait être l'une de vos filles... Je vais en faire des cauchemars, c'est sûr. \nSelon nos sources, la police a écarté d'emblée l'hypothèse de l'accident pour s'orienter vers la piste d'un meurtre. L'enquête a été confiée à la brigade criminelle de Paris. Le corps de l'inconnue a été transféré à l'Institut médico-légal pour examen. \nF. Michaud",
     "imageUrl": "/assets/docs/1_journal.png"
+  },
+  {
+    "id": 1,
+    "titre": "Carte de Meudon",
+    "accessible": true,
+    "contenu": "Carte de Meudon et des environs immédiats.",
+    "imageUrl": "/assets/docs/12_carte.png"
   }
 ]

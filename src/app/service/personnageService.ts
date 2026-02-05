@@ -3,6 +3,7 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { WS_BASE_URL } from '../constante';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 // --- INTERFACE ---
 export interface Secret {
@@ -20,64 +21,35 @@ export interface Personnage {
   secrets: Secret[];
 }
 
-@Injectable({
-  providedIn: 'root' 
-})
+@Injectable({ providedIn: 'root' })
 export class PersonnageService {
-
-  // --- PROPRIÉTÉS ---
   private personnagesDataSource: Personnage[] = [];
-
-  private WS_URL = WS_BASE_URL; 
-  
   private socket$: WebSocketSubject<any> | null = null;
-  private personnagesSubject = new BehaviorSubject<Personnage[]>(this.personnagesDataSource);
+  private personnagesSubject = new BehaviorSubject<Personnage[]>([]);
   personnages$ = this.personnagesSubject.asObservable();
-  
-constructor(@Inject(PLATFORM_ID) private platformId: Object) { 
-    
+  readonly personnagesSignal = toSignal(this.personnages$, { initialValue: [] as Personnage[] });
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
-      
-      console.log("Exécution côté client: Tentative de connexion WebSocket.");
-
-      // 1. Initialisation du Socket UNIQUEMENT dans le navigateur
-      this.socket$ = webSocket(this.WS_URL);
-
-      // 2. Abonnement aux messages du serveur
+      this.socket$ = webSocket(WS_BASE_URL);
       this.socket$.subscribe({
         next: (message) => {
           let newPersonnagesData: Personnage[] | undefined;
-
-          // --- Traitement de l'état INITIAL ---
+          
           if (message.type === 'INITIAL_STATE') {
-              if (message.payload && message.payload.personnages) {
-                  newPersonnagesData = message.payload.personnages;
-              }
-          } 
-          
-          // --- Traitement de la mise à jour spécifique ---
-          else if (message.type === 'UPDATE_PERSONNAGES') {
-              // Le payload est déjà le tableau (fonctionne comme avant)
-              newPersonnagesData = message.payload;
+            newPersonnagesData = message.payload?.personnages;
+          } else if (message.type === 'UPDATE_PERSONNAGES') {
+            newPersonnagesData = message.payload;
           }
-          
-          // Mettre à jour l'état seulement si de nouvelles données ont été trouvées
+
           if (newPersonnagesData) {
-              console.log(`Données de personnages reçues. Nombre: ${newPersonnagesData.length}`);
-              this.personnagesDataSource = newPersonnagesData;
-              this.personnagesSubject.next(this.personnagesDataSource);
+            this.personnagesDataSource = newPersonnagesData;
+            this.personnagesSubject.next(this.personnagesDataSource);
           }
-        },
-        error: (err) => console.error('Erreur de connexion WebSocket:', err),
-        complete: () => console.warn('Connexion WebSocket terminée.')
+        }
       });
-      
-    } else {
-      console.warn("Exécution côté serveur (Node/SSR): La connexion WebSocket est ignorée.");
     }
   }
-
-  // --- MÉTHODES D'ACCÈS CLASSIQUES (Aucun changement nécessaire) ---
 
   getPersonnageParNom(nom: string): Personnage | undefined {
       console.log("Recherche de :", nom);
@@ -96,7 +68,6 @@ constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     return this.personnagesDataSource.filter(p => p.rencontre);
   }
 
-  // --- MÉTHODE DE MUTATION ET NOTIFICATION ---
   toggleRencontre(p: Personnage): void {
     if (this.socket$) {
       this.socket$.next({ 

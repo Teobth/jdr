@@ -1,17 +1,17 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home'; 
-import { PersonnageListComponent } from './personnage/personnage-list/personnage-list'; 
-import { PersonnageDetailComponent } from './personnage/personnage-detail/personnage-detail';
-import { AdminPersonnagesComponent } from './admin/personnage-admin/personnage-admin';
-import { DocumentListComponent } from './document/document-list/document-list';
-import { AdminDocumentsComponent } from './admin/document-admin/document-admin';
-import { AdminComponent } from './admin/admin';
-import { DocumentDetailComponent } from './document/document-detail/document-detail';
-import { ScenarioAdminComponent } from './admin/scenario-admin/scenario-admin';
-import { AfficheComponent } from './admin/affiche-admin/affiche-admin';
+import { LieuComponent } from './Components/lieu'; 
+import { PersonnageListComponent } from './Components/personnage-list'; 
+import { PersonnageDetailComponent } from './Components/personnage-detail';
+import { AdminPersonnagesComponent } from './Components/admin-personnage';
+import { DocumentListComponent } from './Components/document-list';
+import { AdminDocumentsComponent } from './Components/admin-document';
+import { AdminComponent } from './Components/admin';
+import { DocumentDetailComponent } from './Components/document-detail';
+import { ScenarioAdminComponent } from './Components/admin-scenario';
+import { AfficheComponent } from './Components/admin-affiche';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent }, 
+  { path: '', component: LieuComponent }, 
   
   { path: 'personnages', component: PersonnageListComponent }, 
   

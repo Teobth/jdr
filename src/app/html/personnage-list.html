@@ -1,0 +1,28 @@
+<div class="header">
+    <h2>Vos rencontres ({{ personnagesFiltres().length }})</h2>
+
+    @if(personnagesFiltres().length === 0) {
+      <p>Vous n'avez encore rencontré aucun personnage.</p>
+    }
+</div>
+
+<div class="personnage-grid">
+  
+  @for (p of personnagesFiltres(); track p.nom) {
+    <div class="personnage-card"> 
+        
+      <a [routerLink]="['/personnages', p.nom]"> 
+          
+        <img [src]="p.portraitUrl" [alt]="'Portrait de ' + p.nom">
+
+        <div class="info"> 
+            <h3>{{ p.nom }}</h3>
+
+            <p><span class="stat-value">{{ p.age }} ans</span></p>
+            <p><span class="stat-value">{{ p.profession }}</span></p>
+
+          </div>
+      </a>
+    </div>
+  }
+</div>

@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
  
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
-import { HomeService } from './homeService'; 
-import { Affiche } from '../admin/affiche-admin/affiche-admin'; 
+import { LieuService } from '../service/LieuService'; 
+import { Affiche } from './admin-affiche'; 
 import { Subject, Subscription, takeUntil } from 'rxjs';
 
 import * as displayOptions from '../ws-server/contenuJson/display-options.json';
@@ -11,14 +11,14 @@ import * as displayOptions from '../ws-server/contenuJson/display-options.json';
 @Component({
   standalone: true, 
   selector: 'app-home',
-  templateUrl: './home.html', 
-  styleUrls: ['./home.css'],
+  templateUrl: '../html/lieu.html', 
+  styleUrls: ['../css/lieu.css'],
   imports: [
     RouterModule,
     FormsModule
 ]
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class LieuComponent implements OnInit, OnDestroy {
 
   listeOptions: Affiche[] = (displayOptions as any).default || displayOptions;  
   detailsAffiche: Affiche | undefined = undefined;
@@ -27,10 +27,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private homeService: HomeService) { } 
+  constructor(private lieuService: LieuService) { } 
 
   ngOnInit(): void {
-    this.selectionSubscription = this.homeService.getDisplayUpdates()
+    this.selectionSubscription = this.lieuService.getDisplayUpdates()
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: (message) => {

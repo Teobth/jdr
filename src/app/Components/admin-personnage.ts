@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable, BehaviorSubject, combineLatest, map, startWith } from 'rxjs';
-import { Personnage, PersonnageService } from '../../personnage/personnageService';
+import { Personnage, PersonnageService } from '../service/personnageService';
 import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
   selector: 'app-admin-personnages',
   imports: [CommonModule, RouterModule],
-  templateUrl: './personnage-admin.html',
-  styleUrls: ['../admin.css']
+  templateUrl: '../html/admin-personnage.html',
+  styleUrls: ['../css/admin.css']
 })
 export class AdminPersonnagesComponent implements OnInit {
 

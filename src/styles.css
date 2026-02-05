@@ -16,17 +16,6 @@
     --font-corps: 'Lato', sans-serif; /* Police claire et lisible pour le corps */
 }
 
-/* --- Thème CLAIR (Optionnel, si le système n'est pas en mode sombre) --- */
-/* Vous pouvez définir un thème clair pour le jour, mais l'Art Déco est souvent sombre */
-@media (prefers-color-scheme: light) {
-    :root {
-        --couleur-fond-primaire: #f0f0f0; 
-        --couleur-texte-primaire: #333333;
-        --couleur-boite-info: #ffffff;
-        --couleur-bordure: #cccccc;
-    }
-}
-
 /* --- Styles Généraux --- */
 body {
     font-family: var(--font-corps);

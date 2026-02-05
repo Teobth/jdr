@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HomeService } from '../../home/homeService';
+import { LieuService } from '../service/LieuService';
 
-import * as displayOptions from '../../ws-server/contenuJson/display-options.json'; 
+import * as displayOptions from "../ws-server/contenuJson/display-options.json"
 
 const SESSION_STORAGE_KEY = 'selectedDisplayId';
 
@@ -25,8 +25,8 @@ export interface Affiche {
   standalone: true,
   selector: 'app-admin-affiche',
   imports: [RouterModule, FormsModule],
-  templateUrl: './affiche-admin.html',
-  styleUrls: ['../admin.css']
+  templateUrl: '../html/admin-affiche.html',
+  styleUrls: ['../css/admin.css']
 })
 export class AfficheComponent implements OnInit {
   
@@ -34,7 +34,7 @@ export class AfficheComponent implements OnInit {
   
   public selectedDisplayId: number | undefined = this.options[0]?.id; 
 
-  constructor(private homeService: HomeService) { } 
+  constructor(private LieuService: LieuService) { } 
 
   ngOnInit(): void {
     this.loadSavedDisplayId();
@@ -73,6 +73,6 @@ export class AfficheComponent implements OnInit {
       displayId: this.selectedDisplayId
     };
     
-    this.homeService.sendDisplayChoice(payload);
+    this.LieuService.sendDisplayChoice(payload);
   }
 }

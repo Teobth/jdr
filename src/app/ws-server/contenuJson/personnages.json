@@ -270,7 +270,7 @@
     "nom": "Igor Loban",
     "age": 33,
     "profession": "Chauffeur de taxi",
-    "rencontre": false,
+    "rencontre": true,
     "portraitUrl": "assets/portraits/igor.png",
     "secrets": [
       {
@@ -285,8 +285,8 @@
       },
       {
         "cle": "Relation avec Olga",
-        "valeur": "Il s'agit de l'assassin, mais il reste prudent. Il prétend l'avoir rencontrée brièvement au printemps avant de décider qu'ils n'étaient pas compatibles.",
-        "debloque": false
+        "valeur": "Il prétend l'avoir rencontrée brièvement au printemps avant de décider qu'ils n'étaient pas compatibles.",
+        "debloque": true
       },
       {
         "cle": "En sa faveur / défaveur",
@@ -309,13 +309,13 @@
     "nom": "Anastase Ierzoff",
     "age": 35,
     "profession": "Fermier",
-    "rencontre": false,
+    "rencontre": true,
     "portraitUrl": "assets/portraits/anastase.png",
     "secrets": [
       {
         "cle": "Quotidien",
         "valeur": "Cousin éloigné d’Andreï, il vit dans une fermette à Juvisy où il élève des lapins. Il est ravi de sa vie rurale mais se sent esclave de son élevage. Il cherche activement quelqu'un pour l'aider ou pour se marier (ce qui, pour lui, revient au même).",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Passé",
@@ -325,7 +325,7 @@
       {
         "cle": "Relation avec Olga",
         "valeur": "Il la regrette sincèrement. Elle a passé quelques jours à sa ferme en mai pour tester la vie à la campagne, mais elle a finalement renoncé à s'habituer aux lapins.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "En sa faveur / défaveur",
@@ -348,13 +348,13 @@
     "nom": "Sergeï Pétrovitch Gouroff",
     "age": 45,
     "profession": "Traducteur",
-    "rencontre": false,
+    "rencontre": true,
     "portraitUrl": "assets/portraits/sergei.png",
     "secrets": [
       {
         "cle": "Quotidien",
         "valeur": "« Monsieur Gouroff » vit dans un petit appartement du quartier latin. Il gagne chichement sa vie comme traducteur et partage ses loisirs entre une association monarchiste et les bistrots. Après 15 heures, il est rarement sobre. Il a l’alcool amer, voire hargneux.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Passé",
@@ -364,7 +364,7 @@
       {
         "cle": "Relation avec Olga",
         "valeur": "Il prétend l'avoir rejetée car elle était « trop moderne et occidentale ». En réalité, Olga l’a planté là au bout d’un quart d’heure.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "En sa faveur / défaveur",
@@ -392,13 +392,13 @@
     "nom": "Evgeni Baltabeff",
     "age": 27,
     "profession": "Ouvrier",
-    "rencontre": false,
+    "rencontre": true,
     "portraitUrl": "assets/portraits/evgeni.png",
     "secrets": [
       {
         "cle": "Quotidien",
         "valeur": "« Eugène » travaille aux usines Renault, à Billancourt. Il embauche à 6 heures du matin et sort à 16 heures, six jours par semaine. Il vit dans une chambre délabrée à Boulogne, qu’il partage avec deux autres Russes. Il passe la plupart de ses soirées à prendre des cours de français, et ses dimanches à se promener sur les bords de Seine. De temps en temps, il va au cinéma avec une jeune fille russe, généralement une voisine.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Passé",
@@ -408,7 +408,7 @@
       {
         "cle": "Relation avec Olga",
         "valeur": "Il a rencontré Olga une seule fois, en avril. Avec une pointe d’amertume, il explique qu’elle était « trop bien pour lui ». C’était une « demoiselle » et il n’est qu’un petit ouvrier.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "En sa faveur / défaveur",
@@ -431,23 +431,23 @@
     "nom": "Andrei Ierzoff",
     "age": 35,
     "profession": "Directeur de la fraternelle",
-    "rencontre": false,
+    "rencontre": true,
     "portraitUrl": "assets/portraits/andrei.png",
     "secrets": [
       {
         "cle": "Où logeait Olga",
         "valeur": "À la fraternité, au 5e étage dans la mansarde n°2, elle est partie sans prévenir fin mai.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Se doute des raisons de son départ",
         "valeur": "Elle a été mis en contact avec des célibatairs russes. Elle préférait rester seule et indépendante.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Liste des quatre contacts masculins",
         "valeur": "Evgeni Baltabeff, Sergeï Gouroff, Anastase Ierzoff et Igor Loban.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Malediction",
@@ -570,12 +570,12 @@
       {
         "cle": "Les deux autres autopsies",
         "valeur": "Victimes agées de 20 à 30 ans, elle ont été en terre pendant au moins 18 mois et 12 mois. Aucune information exploitable pour la première, la deuxième victime avait des éclats de métal dans la jambe droite.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Similitude avec Olga",
         "valeur": "Les trois femmes avaient un anneau à l'annulaire droit. La fracture du côté gauche est similaire sur les trois cas.",
-        "debloque": false
+        "debloque": true
       }
     ]
   },

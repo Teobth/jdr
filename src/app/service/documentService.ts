@@ -3,6 +3,7 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { WS_BASE_URL } from '../constante';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 export interface Doc {
   id: number;
@@ -16,48 +17,31 @@ export interface Doc {
   providedIn: 'root' 
 })
 export class DocumentService {
-
-  // --- PROPRIÉTÉS ---
-  private documentsDataSource: Doc[] = []; 
-  private WS_URL = WS_BASE_URL; 
-  private socket$: WebSocketSubject<any> | null = null;
-  private documentsSubject = new BehaviorSubject<Doc[]>(this.documentsDataSource);
+  private documentsDataSource: Doc[] = [];
+  private socket$: WebSocketSubject<any> | null = null
+  private documentsSubject = new BehaviorSubject<Doc[]>([]);
   documents$ = this.documentsSubject.asObservable();
+  readonly documentsSignal = toSignal(this.documents$, { initialValue: [] as Doc[] });
   
-constructor(@Inject(PLATFORM_ID) private platformId: Object) { 
-    
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
-      
-      console.log("Exécution côté client: Tentative de connexion WebSocket.");
-
-      this.socket$ = webSocket(this.WS_URL);
-
+      this.socket$ = webSocket(WS_BASE_URL);
       this.socket$.subscribe({
         next: (message) => {
           let newDocumentsData: Doc[] | undefined;
 
           if (message.type === 'INITIAL_STATE') {
-            if (message.payload && message.payload.documents) {
-              newDocumentsData = message.payload.documents;
-            }
-          } 
-          
-          else if (message.type === 'UPDATE_DOCUMENTS') {
-            newDocumentsData = message.payload; 
+            newDocumentsData = message.payload?.documents;
+          } else if (message.type === 'UPDATE_DOCUMENTS') {
+            newDocumentsData = message.payload;
           }
 
           if (newDocumentsData) {
-            console.log(`Données de documents reçues. Nombre: ${newDocumentsData.length}`);
-            this.documentsDataSource = newDocumentsData; 
+            this.documentsDataSource = newDocumentsData;
             this.documentsSubject.next(this.documentsDataSource);
           }
-        },
-        error: (err) => console.error('Erreur de connexion WebSocket:', err),
-        complete: () => console.warn('Connexion WebSocket terminée.')
+        }
       });
-      
-    } else {
-      console.warn("Exécution côté serveur (Node/SSR): La connexion WebSocket est ignorée.");
     }
   }
 

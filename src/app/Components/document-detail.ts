@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Observable, map, switchMap } from 'rxjs'
-import { Doc, DocumentService } from '../documentService'; 
+import { Doc, DocumentService } from '../service/documentService'; 
 
 @Component({
   standalone: true,
   selector: 'app-document-detail',
-  templateUrl: './document-detail.html',
-  styleUrls: ['./document-detail.css'],
+  templateUrl: '../html/document-detail.html',
+  styleUrls: ['../css/document-detail.css'],
   imports: [CommonModule, RouterLink] 
 })
 export class DocumentDetailComponent implements OnInit {
