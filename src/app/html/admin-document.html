@@ -1,11 +1,11 @@
 <h2>Panneau d'Administration des Documents</h2>
 
 <button (click)="basculerFiltre()">
-    {{ afficherSeulementCaches ? 'Afficher TOUS les documents' : 'Afficher seulement les CACHES' }}
+    {{ afficherSeulementCaches() ? 'Afficher TOUS les documents' : 'Afficher seulement les CACHES' }}
 </button>
 
 <div class="admin-grid">
-    @for(doc of documents$ | async; track doc.id) {
+    @for(doc of documentsFiltre(); track doc.id) {
         <div class="admin-card">
             <h3>{{ doc.titre }}</h3>
             <p>

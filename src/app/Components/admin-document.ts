@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
-import { Observable, BehaviorSubject, combineLatest, map, startWith } from 'rxjs'; 
 import { Doc, DocumentService } from '../service/documentService';
 import { RouterModule } from '@angular/router';
 
@@ -11,36 +10,18 @@ import { RouterModule } from '@angular/router';
   templateUrl: '../html/admin-document.html',
   styleUrls: ['../css/admin.css']
 })
-export class AdminDocumentsComponent implements OnInit {
+export class AdminDocumentsComponent {
+  private documentService = inject(DocumentService);
+  readonly afficherSeulementCaches = signal(true);
 
-  documents$!: Observable<Doc[]>; 
-
-  private filtreVisibiliteSubject = new BehaviorSubject<boolean>(false);
-  
-  afficherSeulementCaches: boolean = true; 
-
-  constructor(public documentService: DocumentService) {}
-
-  ngOnInit(): void {
-    this.documents$ = combineLatest([
-      this.documentService.documents$, 
-      this.filtreVisibiliteSubject.asObservable().pipe(startWith(this.afficherSeulementCaches))
-      
-    ]).pipe(
-      map(([tousLesDocuments, seulementCache]) => {
-        this.afficherSeulementCaches = seulementCache;
-        if (seulementCache) {
-          return tousLesDocuments.filter(d => !d.accessible);
-        } else {
-          return tousLesDocuments; 
-        }
-      })
-    );
-  }
+  readonly documentsFiltre = computed(() => {
+    const tous = this.documentService.documentsSignal();
+    const filtre = this.afficherSeulementCaches();
+    return filtre ? tous.filter(d => !d.accessible) : tous;
+  });
 
   basculerFiltre(): void {
-    const nouvelEtat = !this.filtreVisibiliteSubject.value;
-    this.filtreVisibiliteSubject.next(nouvelEtat);
+    this.afficherSeulementCaches.update(v => !v);
   }
 
   basculerAcces(doc: Doc): void {

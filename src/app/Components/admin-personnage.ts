@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, BehaviorSubject, combineLatest, map, startWith } from 'rxjs';
 import { Personnage, PersonnageService } from '../service/personnageService';
 import { RouterModule } from '@angular/router';
 
@@ -11,43 +10,19 @@ import { RouterModule } from '@angular/router';
   templateUrl: '../html/admin-personnage.html',
   styleUrls: ['../css/admin.css']
 })
-export class AdminPersonnagesComponent implements OnInit {
+export class AdminPersonnagesComponent {
+  private personnageService = inject(PersonnageService);
 
-  personnages$!: Observable<Personnage[]>; 
+  readonly afficherSeulementRencontre = signal(false);
 
-  private filtreRencontreSubject = new BehaviorSubject<boolean>(false);
-  afficherSeulementRencontre$ = this.filtreRencontreSubject.asObservable();
-  
-  afficherSeulementRencontre: boolean = false; 
-
-  constructor(public personnageService: PersonnageService) {}
-
-  ngOnInit(): void {
-    this.personnages$ = combineLatest([
-      // 1. Le flux de données du service (mis à jour par toggleJouable/BroadcastChannel)
-      this.personnageService.personnages$, 
-      // 2. Le flux du filtre local (mis à jour par basculerFiltre)
-      this.filtreRencontreSubject.asObservable().pipe(startWith(this.afficherSeulementRencontre))
-      
-    ]).pipe(
-      // Appliquer la logique de filtre à chaque fois qu'un des flux change
-      map(([tousLesPersonnages, seulementRencontre]) => {
-        // Mettre à jour la propriété simple pour l'affichage du bouton
-        this.afficherSeulementRencontre = seulementRencontre;
-        
-        if (seulementRencontre) {
-          return tousLesPersonnages.filter(p => p.rencontre);
-        } else {
-          // Afficher tous les personnages (y compris les non rencontrés)
-          return tousLesPersonnages; 
-        }
-      })
-    );
-  }
+  readonly personnageFiltre = computed(() => {
+    const tous = this.personnageService.personnagesSignal();
+    const filtre = this.afficherSeulementRencontre();
+    return filtre ? tous.filter(p => p.rencontre) : tous;
+  });
 
   basculerFiltre(): void {
-    const nouvelEtat = !this.filtreRencontreSubject.value;
-    this.filtreRencontreSubject.next(nouvelEtat);
+    this.afficherSeulementRencontre.update(v => !v);
   }
 
   basculerRencontre(p: Personnage): void {

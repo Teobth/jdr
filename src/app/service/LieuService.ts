@@ -1,43 +1,41 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common'; // <--- TRÈS IMPORTANT
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { WS_BASE_URL } from '../constante';
 
 @Injectable({ providedIn: 'root' })
 export class LieuService implements OnDestroy {
+  private readonly platformId = inject(PLATFORM_ID);
+  private socket$: WebSocketSubject<any> | null = null;
 
-  private readonly WS_URL = WS_BASE_URL
-  private socket: WebSocketSubject<any>;
-  private connectionStatus = new BehaviorSubject<boolean>(false);
-  private lastMessageSubject = new BehaviorSubject<any>(null);
+  private readonly lastMessageSubject = new BehaviorSubject<any>(null);
+  readonly lastMessage = toSignal(this.lastMessageSubject.asObservable(), { initialValue: null });
 
   constructor() {
-    this.socket = webSocket(this.WS_URL);
-    this.socket.subscribe({
-      next: (msg) => { this.lastMessageSubject.next(msg); },
-      error: (err) => {
-          console.error('Erreur ou fermeture de la socket. Tentative de reconnexion?', err);
-          this.connectionStatus.next(false);
-      },
-      complete: () => {
-          console.log('Socket fermée par le serveur. Tentative de reconnexion.');
-          this.connectionStatus.next(false);
-      }
-      });  
+    if (isPlatformBrowser(this.platformId)) {
+      this.connect();
+    }
   }
 
-  // Envoi : utilisé par l'Admin pour diffuser le choix
+  private connect(): void {
+    this.socket$ = webSocket(WS_BASE_URL);
+    
+    this.socket$.subscribe({
+      next: (msg) => this.lastMessageSubject.next(msg),
+      error: (err) => console.error('Erreur WS:', err)
+    });
+  }
+
   public sendDisplayChoice(payload: any): void {
-    this.socket.next(payload);
-  }
-
-  // Réception : utilisé par l'écran public pour recevoir le changement
-  public getDisplayUpdates(): Observable<any> {
-    return this.lastMessageSubject.asObservable();  
+    if (this.socket$) {
+      this.socket$.next(payload);
+    }
   }
 
   ngOnDestroy(): void {
-    this.socket.complete();
+    this.socket$?.complete();
     this.lastMessageSubject.complete();
   }
 }

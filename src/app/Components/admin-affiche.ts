@@ -1,25 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, inject, signal, effect, PLATFORM_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LieuService } from '../service/LieuService';
-
-import * as displayOptions from "../ws-server/contenuJson/display-options.json"
+import * as displayOptionsData from "../ws-server/contenuJson/display-options.json";
+import { isPlatformBrowser } from '@angular/common';
 
 const SESSION_STORAGE_KEY = 'selectedDisplayId';
-
-export interface Presentation {
-  cle: number;
-  balise: string;
-  valeur: string;
-}
-
-export interface Affiche {
-  id: number;
-  imageUrl: string; 
-  description: string;
-  presentations: Presentation[];
-}
 
 @Component({
   standalone: true,
@@ -28,51 +14,41 @@ export interface Affiche {
   templateUrl: '../html/admin-affiche.html',
   styleUrls: ['../css/admin.css']
 })
-export class AfficheComponent implements OnInit {
-  
-  public options: Affiche[] = (displayOptions as any).default || displayOptions; 
-  
-  public selectedDisplayId: number | undefined = this.options[0]?.id; 
+export class AfficheComponent {
+  private platformId = inject(PLATFORM_ID);
+  private lieuService = inject(LieuService);
+  readonly options = signal<any[]>((displayOptionsData as any).default || displayOptionsData);
 
-  constructor(private LieuService: LieuService) { } 
+  readonly selectedDisplayId = signal<number | undefined>(this.getInitialId());
 
-  ngOnInit(): void {
-    this.loadSavedDisplayId();
-  }
-
-  private loadSavedDisplayId(): void {
-    const savedId = sessionStorage.getItem(SESSION_STORAGE_KEY);
-    
-    if (savedId !== null) {
-      const parsedId = Number(savedId);
-      const optionExists = this.options.some(option => option.id === parsedId);
-      
-      if (optionExists) {
-        this.selectedDisplayId = parsedId;
-        console.log(`ID chargé depuis sessionStorage : ${this.selectedDisplayId}`);
-      } else {
-        this.selectedDisplayId = this.options[0]?.id;
+  constructor() {
+    effect(() => {
+      const id = this.selectedDisplayId();
+      if (id !== undefined) {
+        this.saveAndSend(id);
       }
-
-    } else {
-      this.selectedDisplayId = this.options[0]?.id;
-    }
+    });
   }
 
-  public onDisplayChange(): void {
-  if (this.selectedDisplayId === undefined) {
-      console.warn("Aucun ID sélectionné.");
-      return;
-    }
-    
-    sessionStorage.setItem(SESSION_STORAGE_KEY, this.selectedDisplayId.toString());
-    console.log(`Nouvel ID sauvegardé dans sessionStorage : ${this.selectedDisplayId}`);
+  private saveAndSend(id: number): void {
+    sessionStorage.setItem(SESSION_STORAGE_KEY, id.toString());
     
     const payload = { 
       type: 'UPDATE_DISPLAY_ID_COMMAND',
-      displayId: this.selectedDisplayId
+      displayId: id
     };
-    
-    this.LieuService.sendDisplayChoice(payload);
+    this.lieuService.sendDisplayChoice(payload);
+  }
+
+  onDisplayChange(newId: number): void {
+    this.selectedDisplayId.set(newId);
+  }
+
+  getInitialId() {
+    if (isPlatformBrowser(this.platformId)) {
+      const stored = sessionStorage.getItem('votre_cle');
+      return stored ? parseInt(stored, 10) : undefined;
+    }
+    return undefined;
   }
 }

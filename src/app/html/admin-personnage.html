@@ -1,11 +1,11 @@
 <h2>Panneau d'Administration des Personnages</h2>
 
 <button (click)="basculerFiltre()">
-  {{ afficherSeulementRencontre ? 'Afficher TOUS les personnages' : 'Afficher seulement les RENCONTRÉS' }}
+  {{ afficherSeulementRencontre() ? 'Afficher TOUS les personnages' : 'Afficher seulement les RENCONTRÉS' }}
 </button>
 
 <div class="admin-grid">
-  @for (p of personnages$ | async; track p) {
+  @for (p of personnageFiltre(); track p) {
     <div class="admin-card">
       <h3>{{ p.nom }}</h3>
       <p>{{ p.age }} ans</p>

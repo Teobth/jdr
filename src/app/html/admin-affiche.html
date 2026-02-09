@@ -1,17 +1,18 @@
 <div class="admin-control-panel">
-
   <h3>Sélection de l'Affiche Publique</h3>
 
-  <select [(ngModel)]="selectedDisplayId" (change)="onDisplayChange()">
-    
-    @for (option of options; track option.id) {
-      <option 
-        [ngValue]="option.id"
-      >
-        {{ option.description }} 
-      </option>
-    } @empty {
-      <option disabled>Aucune option disponible</option>
-    }
-  </select>
+  @if (options() && options().length > 0) {
+    <select 
+      [ngModel]="selectedDisplayId()" 
+      (ngModelChange)="onDisplayChange($event)">
+      
+      @for (option of options(); track option.id) {
+        <option [ngValue]="option.id">
+          {{ option.description }} 
+        </option>
+      }
+    </select>
+  } @else {
+    <p>Chargement des options ou aucune option disponible...</p>
+  }
 </div>

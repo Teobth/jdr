@@ -1,11 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
- 
+import { Component, inject, computed } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
 import { LieuService } from '../service/LieuService'; 
-import { Affiche } from './admin-affiche'; 
-import { Subject, Subscription, takeUntil } from 'rxjs';
-
+// On importe l'interface pour typer proprement si possible
 import * as displayOptions from '../ws-server/contenuJson/display-options.json';
 
 @Component({
@@ -13,45 +10,34 @@ import * as displayOptions from '../ws-server/contenuJson/display-options.json';
   selector: 'app-home',
   templateUrl: '../html/lieu.html', 
   styleUrls: ['../css/lieu.css'],
-  imports: [
-    RouterModule,
-    FormsModule
-]
+  imports: [RouterModule, FormsModule]
 })
-export class LieuComponent implements OnInit, OnDestroy {
+export class LieuComponent {
+  private lieuService = inject(LieuService);
 
-  listeOptions: Affiche[] = (displayOptions as any).default || displayOptions;  
-  detailsAffiche: Affiche | undefined = undefined;
+  // On récupère les options depuis le JSON
+  readonly listeOptions = (displayOptions as any).default || displayOptions;
 
-  private selectionSubscription!: Subscription;
+  // IMPORTANT : On utilise directement le signal déjà exposé par le service
+  // Ne pas refaire un toSignal() ici si le service le propose déjà.
+  private displayUpdate = this.lieuService.lastMessage;
 
-  private destroy$ = new Subject<void>();
+  readonly detailsAffiche = computed(() => {
+    const message = this.displayUpdate(); // Appel du signal
+    
+    if (!message) return undefined;
 
-  constructor(private lieuService: LieuService) { } 
+    let id: number | undefined;
 
-  ngOnInit(): void {
-    this.selectionSubscription = this.lieuService.getDisplayUpdates()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next: (message) => {
-        if (message === null)
-          return;
-        if (message.type === 'UPDATE_DISPLAY_ID' && message.displayId !== undefined) {
-          const newAfficheId = message.displayId; 
-          this.detailsAffiche = this.listeOptions.find(a => a.id === newAfficheId);
-
-        } else if (message.type === 'INITIAL_STATE' && message.payload.displayId !== undefined) {
-          const initialAfficheId = message.payload.displayId;
-          this.detailsAffiche = this.listeOptions.find(a => a.id === initialAfficheId);
-        }
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.selectionSubscription) {
-      this.selectionSubscription.unsubscribe();
-      this.destroy$?.complete();
+    // Normalisation selon la structure de vos messages WebSocket
+    if (message.type === 'UPDATE_DISPLAY_ID') {
+      id = message.displayId;
+    } else if (message.type === 'INITIAL_STATE') {
+      id = message.payload?.displayId;
     }
-  }
+
+    return id !== undefined 
+      ? this.listeOptions.find((a: any) => a.id === id) 
+      : undefined;
+  });
 }
