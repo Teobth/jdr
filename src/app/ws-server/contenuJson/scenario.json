@@ -45,43 +45,43 @@
     "id": 80,
     "title": "Resserrer l'étau",
     "description": "L’enquête permet d’établir que Loban est leur meilleur suspect. S’ils creusent dans sa direction, ils peuvent grappiller assez d’informations pour établir sa culpabilité. \n   Ivan Loban, l’oncle d’Igor, peut confirmer que son neveu conduisait le taxi dans les soirées du 27 et du 30 décembre, ainsi que le 3 janvier, autrement dit aux dates où Olga a rencontré son sauveur. \n   Igor est actuellement célibataire, mais il a eu une histoire avec une certaine Anna Kozlova, une petite vendeuse. Pour la Noël 1922, il lui a offert une petite croix d’argent. Elizabeth Zadornova, qui avait disparu un mois plus tôt, possédait une croix très semblable. \n   Une filature prudente, étalée sur plusieurs jours, montre que tous les jeudis, aux petites heures du matin, il se rend aux Halles, au stand de boucherie de M. Glandier. Il lui achète un grand verre de sang de bœuf, qu’il boit sur place. Glandier prend ça avec philosophie : « C’est un nanémique qu’a besoin d’un traitement, qu’il dit. Moi, j’crois plutôt qu’c’est comme qui dirait un spécial, mais on s’en fout, il paye. » \n   Montrer des photos d’Igor et d’Olga dans les cafés de la place Pigalle et de la butte Montmartre exige du doigté ou d’être de la police. Il en ressort que oui, ces deux oiseaux ont bien été vus ensemble un soir, dans la dernière semaine de décembre. Témoignage peu fiable, d’une source qui souhaite rester anonyme, mais témoignage… \n   Enfin, et même si ce genre de confirmation est davantage du ressort de la police, quelques jours après chacun des meurtres, Igor s’est présenté chez un fripier de la porte de Saint-Ouen et lui a vendu quelques affaires féminines, chapeaux, sacs à main, gants, chaussures… (Il jetait à la Seine robes et chemisiers, trop endommagés par le sang, mais pour le reste, faut pas gâcher.)",
-    "status": "EN COURS"
+    "status": "COMPLÉTÉ"
   },
   {
     "id": 90,
     "title": "Réaction de Loban",
     "description": "Après un premier interrogatoire, Loban s'achète un pistolet et s'entraine de temps en temps en campagne. Après un deuxième, il décampe de chez lui et va se cacher quelque part.",
-    "status": "EN COURS"
+    "status": "COMPLÉTÉ"
   },
   {
     "id": 100,
     "title": "Arrestation",
     "description": "Si c'est la police, ils prennent un temps à monter de le dossier puis l'arrête à dix contre un en pleine course. Si ce sont les enquêteurs, il leur tire dessus pour les faire peur. De plus la remise à la police se fait avec un peu d'amertume de leur côté. Loban ne parlera plus, prétendant ne pas être francophone. Il a sur lui un trousseau de clé avec une étiquette. Si il a fuit, il se réfugie dans un manoir au Haut-Meudon.",
-    "status": "BLOQUÉ"
+    "status": "COMPLÉTÉ"
   },
   {
     "id": 110,
     "title": "Mort de Loban",
     "description": "George Ierzoff demande à Sofia de tuer Igor. Pour cela il se fait passer pour un oncle d'Igor, Maxime Loban pour récupérer ses affaires dans son appartement moyennant finance. Le soir même Elizabeth Ierzova remonte la rue Vercingétorix avec un grand sac comme toujours. Elle donne le contenu à Nadia Igoumnova qui va voir Sofia pour lui lancer la chemise d'Igor dans sa gueule. Loban est retrouvé le lendemain mort dans sa cellule, étouffé dans son sommeil. À côté de lui, la couverture tombée au sol a des marques de dentition animale dessus.",
-    "status": "BLOQUÉ"
+    "status": "COMPLÉTÉ"
   },
   {
     "id": 200,
     "title": "La Villa Désiré",
     "description": "La rue des Essarts est une petite rue tranquille remplie de pavillon 1900. C'est la dernière maison de l'impasse vers un chemin cavalier s'enfonçant dans une forêt. La villa d'en face appartient à Georges de Montbois. Celle à côté, aux Villequier qui vivent à Paris et n'y retourneront pas avant Pâques. À côté de l'amiral se trouve la demeure des Delormes. Deux incidents ont eu lieu en 1923, le 2 novembre un bruit sourd a retenti dans toute la rue, les Maillard sont partis peu de temps après. De plus un rodeur a été aperçu à plusieurs reprise. \nLa boîte aux lettres ne contient rien d'intéressant, mais la relève du courrier s'est faite encore il y a moins de 10 jours. Le petit salon et la cuisine sont sales et en désordre. Un couteau ensanglanté est présent dans la cuisine. Un samovar est présent dans la grand salon, des oeufs décorés sont en vitrine. Des photos de Mme Maillard plus jeune avec des gens en blouse de travail sont éparpillées un peu partout. \nÀ l'étage, une chambre des ténèbres est tapissée de noir et quatre crânes de porc sont à ses angles. Quelques gouttes de sang sont séchées par terre. \nLa chambre de lumière, la chambre d'Hélène tapissée de blanc. Des tableaux sont accrochés. \nAu grenier les chambres des anciens domestiques ont été transformé en débarras sauf une, qui est normale.",
-    "status": "BLOQUÉ"
+    "status": "EN COURS"
   },
   {
     "id": 210,
     "title": "Le départ des maillards",
     "description": "Le taxi les ayant cherché est celui d'Igor, l'appel de réservation a été passé depuis un café à Meudon par Borislav se présentant comme M.Maillard. La course à durer deux heures, puis Loban à récupérer un passager vers Montparnasse.",
-    "status": "BLOQUÉ"
+    "status": "EN COURS"
   },
   {
     "id": 220,
     "title": "La servante, Jeanne Gilliac",
     "description": "C'est madame Vannier qui met sur la piste les investigateur à propos du frère de Jeanne. Il habite à Belleville et tient un épicerie. \nJeanne est une femme sèche qui ne tient pas en place. Elle informe que les Maillard sont partis dans le sud et qu'ils reviendraient fin mars. \nSi les investigateurs insiste, elle se livre plus et leur parle de 'Raspoutine', de son vrai nom Alexandre Gourov.",
-    "status": "BLOQUÉ"
+    "status": "EN COURS"
   },
   {
     "id": 230,

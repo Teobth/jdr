@@ -4,6 +4,7 @@
     "age": "??",
     "profession": "Non-morte",
     "rencontre": false,
+    "mort": false,
     "portraitUrl": "assets/portraits/sofia.png",
     "secrets": [
       {
@@ -33,6 +34,7 @@
     "age": 24,
     "profession": "Chomeur",
     "rencontre": false,
+    "mort": false,
     "portraitUrl": "assets/portraits/youri.png",
     "secrets": [
       {
@@ -52,6 +54,7 @@
     "age": 22,
     "profession": "Chomeur",
     "rencontre": false,
+    "mort": false,
     "portraitUrl": "assets/portraits/ivan.png",
     "secrets": [
       {
@@ -71,6 +74,7 @@
     "age": 45,
     "profession": "Riche héritière",
     "rencontre": false,
+    "mort": false,
     "portraitUrl": "assets/portraits/elizabeth.png",
     "secrets": [
       {
@@ -85,6 +89,7 @@
     "age": 67,
     "profession": "Propriétaire de la Fraternelle",
     "rencontre": false,
+    "mort": false,
     "portraitUrl": "assets/portraits/george.png",
     "secrets": [
       {
@@ -104,6 +109,7 @@
     "age": 52,
     "profession": "Supérieur du monastère",
     "rencontre": false,
+    "mort": false,
     "portraitUrl": "assets/portraits/isaac.png",
     "secrets": [
       {
@@ -132,23 +138,24 @@
     "nom": "Jeanne Gilliac",
     "age": 49,
     "profession": "Domestique",
-    "rencontre": false,
+    "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/jeanne.png",
     "secrets": [
       {
         "cle": "Raspoutine",
         "valeur": "Elle n'apprécie pas cet homme qu'elle appelle Raspoutine. Il est venu la première fois à la villa en juin 1920 et n'est jamais vraiment parti depuis. Elle le soupçonne d'être le père d'Hélène. Il a pris l'ascendant à la villa, débauchant le personnel et aménageant les chambres à sa guise. Des potages et des légumes à tous les menus et des prières.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Les neveux",
         "valeur": "Ivan et Youri sont les fils de Borislav Gourov. Ils passaient des jours entier à la cuisine et avait le droit à beaucoup d'alcool.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "L'évènement du 2 novembre",
         "valeur": "Le bruit sourd entendu dans toute la rue ce jour-là venait de la villa. Tous les murs ont tremblé, avec un bruit affreux, comme une procherie se baffrant à dix centimètres de vos oreilles. Borislav est sorti de la chambre noire en portant Hélène inconsciente et couverte de sang dans ses bras. Ils ont envoyé Youri appeler un taxi dans un café, le lendemain tout le monde était parti.",
-        "debloque": false
+        "debloque": true
       }
     ]
   },
@@ -156,18 +163,19 @@
     "nom": "Mme Vannier",
     "age": 53,
     "profession": "Domestique",
-    "rencontre": false,
+    "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/vannier.png",
     "secrets": [
       {
         "cle": "Amie de Jeanne",
         "valeur": "Elle était en très bon terme avec Jeanne, la domestique des Maillards. Elle lui disait qu'il s'en passait des drôle à la villa. Jeanne a failli démissionner plusieurs fois, surtout depuis que le russe qu'elle appelle Rasputin est venu à la villa. Elle a vu Jeanne la dernière fois le 3 novembre, Mme Maillard lui avait donné 6 mois de gages et lui avait promis des nouvelles.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Frère de Jeanne",
         "valeur": "Mme Vanier ne sait pas où est partie Jeanne, mais elle sait qu'elle a un frère qui vit à Paris.",
-        "debloque": false
+        "debloque": true
       }
     ]
   },
@@ -175,13 +183,14 @@
     "nom": "M Delorme",
     "age": 61,
     "profession": "Cadre d'usine",
-    "rencontre": false,
+    "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/delorme.png",
     "secrets": [
       {
         "cle": "Relation avec Marie",
         "valeur": "Il avait de très bonnes relations avec Marie avant qu'une distance s'installe depuis mi 1920, à cause de son cousin qui a fait de long séjour à la villa. Il était accompagné de deux neveux peu sympatiques. Ils sont partis en taxi début novembre dans un G7.",
-        "debloque": false
+        "debloque": true
       }
     ]
   },
@@ -190,6 +199,7 @@
     "age": 64,
     "profession": "Notaire",
     "rencontre": false,
+    "mort": false,
     "portraitUrl": "assets/portraits/leblanc.png",
     "secrets": [
       {
@@ -203,7 +213,8 @@
     "nom": "Hélène Maillard",
     "age": 12,
     "profession": "",
-    "rencontre": false,
+    "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/helene.png",
     "secrets": [
       {
@@ -218,6 +229,7 @@
     "age": 17,
     "profession": "Morte",
     "rencontre": false,
+    "mort": false,
     "portraitUrl": "assets/portraits/irene.png",
     "secrets": [
       {
@@ -236,7 +248,8 @@
     "nom": "Marie Maillard",
     "age": 52,
     "profession": "Ex-directrice d'école",
-    "rencontre": false,
+    "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/marie.png",
     "secrets": [
       {
@@ -271,12 +284,13 @@
     "age": 33,
     "profession": "Chauffeur de taxi",
     "rencontre": true,
+    "mort": true,
     "portraitUrl": "assets/portraits/igor.png",
     "secrets": [
       {
         "cle": "Quotidien",
         "valeur": "Igor conduit un taxi G7 depuis juillet 1921, partageant la licence avec son oncle. Il travaille de soirée et rentre vers 3 heures du matin à Levallois. Il patrouille souvent dans le secteur de Pigalle et ses cabarets russes.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Passé",
@@ -291,12 +305,12 @@
       {
         "cle": "En sa faveur / défaveur",
         "valeur": "Son taxi lui permet de circuler partout sans attirer l'attention, notamment près de la rue Berthe. En sa faveur, il habite au nord-est alors que les crimes sont au sud-ouest, bien qu'il connaisse parfaitement la région.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Relation avec la fraternité",
         "valeur": "Arrivé en France en 1920, il a logé un an rue Vercingétorix avant de s'installer à Levallois, d'abord chez son oncle Ivan, puis dans sa propre chambre de bonne.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Malediction",
@@ -310,6 +324,7 @@
     "age": 35,
     "profession": "Fermier",
     "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/anastase.png",
     "secrets": [
       {
@@ -330,7 +345,7 @@
       {
         "cle": "En sa faveur / défaveur",
         "valeur": "Il est le plus proche d'Olga et traîne souvent à Pigalle, où il aurait pu la croiser. En sa faveur : il ne sait pas situer Meudon et, s'il était le tueur, il aurait sûrement enterré le corps dans ses terres plutôt que de se compliquer la vie.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Relation avec la fraternité",
@@ -349,6 +364,7 @@
     "age": 45,
     "profession": "Traducteur",
     "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/sergei.png",
     "secrets": [
       {
@@ -369,7 +385,7 @@
       {
         "cle": "En sa faveur / défaveur",
         "valeur": "Il est petit et frêle. Bien qu'égorger quelqu'un n'exige pas de force, il a une peur panique du sang et s'évanouit à la moindre coupure. En sa défaveur, il a également connu Anna Oumanova.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Relation avec la fraternité",
@@ -393,6 +409,7 @@
     "age": 27,
     "profession": "Ouvrier",
     "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/evgeni.png",
     "secrets": [
       {
@@ -413,7 +430,7 @@
       {
         "cle": "En sa faveur / défaveur",
         "valeur": "Originaire d’Ukraine, il connaît la coutume du mariage posthume. C’est un solitaire. Son contremaître se porte garant de lui. Il est arrivé en France en août 1922, et n’a donc pas pu tuer Anna Oumanova, morte depuis des mois.",
-        "debloque": false
+        "debloque": true
       },
       {
         "cle": "Relation avec la fraternité",
@@ -432,6 +449,7 @@
     "age": 35,
     "profession": "Directeur de la fraternelle",
     "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/andrei.png",
     "secrets": [
       {
@@ -461,6 +479,7 @@
     "age": 23,
     "profession": "Proxénète",
     "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/bella.png",
     "secrets": []
   },
@@ -469,6 +488,7 @@
     "age": 22,
     "profession": "Fille de joie",
     "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/louisette.png",
     "secrets": [
       {
@@ -488,6 +508,7 @@
     "age": 23,
     "profession": "Fille de joie",
     "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/madeleine.png",
     "secrets": [
       {
@@ -502,6 +523,7 @@
     "age": 20,
     "profession": "La Blanche Morte",
     "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/olga.png",
     "secrets": [
       {
@@ -521,6 +543,7 @@
     "age": 26,
     "profession": "Proxénète",
     "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/victor.png",
     "secrets": [
       {
@@ -560,6 +583,7 @@
     "age": 46,
     "profession": "Médecin légiste",
     "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/sardes.png",
     "secrets": [
       {
@@ -584,6 +608,7 @@
     "age": 34,
     "profession": "Journaliste en herbe",
     "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/francois.png",
     "secrets": [
       {
@@ -608,6 +633,7 @@
     "age": 54,
     "profession": "Inspecteur de police",
     "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/joseph.png",
     "secrets": [
       {
@@ -637,6 +663,7 @@
     "age": 69,
     "profession": "Agriculteur",
     "rencontre": true,
+    "mort": false,
     "portraitUrl": "assets/portraits/gustave.png",
     "secrets": [
       {

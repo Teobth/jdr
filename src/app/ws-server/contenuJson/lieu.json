@@ -1,0 +1,147 @@
+[
+  {
+    "id": 1,
+    "nom": "Acte I : La blanche morte",
+    "imageUrl": "assets/affiche/floodPeople.png",
+    "description": [
+      { "balise": "h2", "contenu": "Les Maudits" },
+      { "balise": "h1", "contenu": "Meudon, 1924" },
+      { "balise": "h3", "contenu": "Acte I : La Blanche Morte" },
+      { "balise": "p", "contenu": "La crue de la Seine s'est retirée il y a peu, laissant derrière elle une odeur âcre de boue et d’humidité tenace. La ville, habituellement vibrante, est enveloppée d'un manteau de grisaille et de froid glacial." },
+      { "balise": "p", "contenu": "Votre présence ici, le long de la Seine, est motivée par le caractère inhabituel de la nouvelle." },
+      { "balise": "p", "contenu": "Vous êtes au lieu dit 'Les chataingers'. Un petit groupe de policiers en manteaux trempés et de badauds curieux est rassemblé. L'atmosphère est lourde, non seulement de l'humidité du fleuve, mais d'un malaise palpable." }
+    ]
+  },
+  {
+    "id": 2,
+    "nom": "La morgue",
+    "imageUrl": "assets/affiche/morgue.png",
+    "description": [
+      { "balise": "h1", "contenu": "La morgue" },
+      { "balise": "p", "contenu": "Une odeur rance, métallique, presque insupportable, emplit l'air. Les murs froids et carrelés de la morgue sont éclairés par une lumière blafarde qui accentue l'atmosphère oppressante du lieu. Des tables en acier inoxydable, tachées de sang séché, sont alignées de manière ordonnée, chacune portant le poids silencieux des secrets qu'elles renferment." },
+      { "balise": "p", "contenu": "Un silence assourdissant rend l'atmosphère oppressante" }
+    ]
+  },
+  {
+    "id": 3,
+    "nom": "L'Hôtel de Police",
+    "imageUrl": "assets/affiche/police.png",
+    "description": [
+      { "balise": "h1", "contenu": "L'hôtel de police" },
+      { "balise": "p", "contenu": "Des bureaux encombrés de dossiers, des téléphones qui sonnent sans réponse, et des agents de police affairés créent une ambiance de tension palpable. L'odeur de café fort et de papier vieilli flotte dans l'air, mêlée à une légère senteur de sueur et de cuir usé." }
+    ]
+  },
+  {
+    "id": 4,
+    "nom": "Le quartier de Paris",
+    "imageUrl": "assets/affiche/rueParis.png",
+    "description": [
+      { "balise": "h1", "contenu": "Les rues de Paris" },
+      { "balise": "p", "contenu": "Les pavés humides reflètent les lumières tamisées des réverbères, créant une atmosphère à la fois mystérieuse et envoûtante. L'air est chargé de l'odeur mêlée de pluie fraîche, de fumée de charbon et de pain frais provenant des boulangeries avoisinantes." }
+    ]
+  },
+  {
+    "id": 5,
+    "nom": "La Fraternelle",
+    "imageUrl": "assets/affiche/fraternelle.png",
+    "description": [
+      { "balise": "h1", "contenu": "La Fraternelle" },
+      { "balise": "p", "contenu": "Une atmosphère austère règne dans la salle commune de La Fraternelle, où les murs en bois sombre et les lourds rideaux rouges absorbent le peu de lumière qui filtre à travers les fenêtres embuées. L'odeur persistante de tabac à pipe, mêlée à celle du vieux cuir des fauteuils usés, crée une ambiance à la fois chaleureuse et légèrement oppressante." }
+    ]
+  },
+  {
+    "id": 6,
+    "nom": "Les bords de Seine",
+    "imageUrl": "assets/affiche/seineCampagne.png",
+    "description": [
+      { "balise": "h1", "contenu": "Le bord de Seine" },
+      { "balise": "p", "contenu": "Le murmure apaisant de la Seine contraste avec l'agitation lointaine de la ville. Les quais, bordés d'arbres dénudés par l'hiver, sont baignés dans une lumière douce et diffuse, créant une atmosphère presque irréelle. L'air frais est chargé de l'odeur humide de l'eau mêlée à celle des feuilles mortes et du bois flotté." }
+    ]
+  },
+  {
+    "id": 7,
+    "nom": "Acte II : La mort de Loban",
+    "imageUrl": "assets/affiche/une.png",
+    "description": [
+      { "balise": "h2", "contenu": "Les Maudits" },
+      { "balise": "h3", "contenu": "Acte II : De mystère en mystère" },
+      { "balise": "p", "contenu": "Le lendemain, Loban est retrouvé mort dans sa cellule. Son visage est violacé, ses yeux exorbités…" },
+      { "balise": "p", "contenu": "Quelque chose l’a étouffé, mais quoi ? L’autopsie ne montre aucun signe d’agression. Faute de mieux, sa mort sera mise sur le compte d’une crise d’épilepsie au cours de laquelle il aurait avalé sa langue." },
+      { "balise": "p", "contenu": "La seule bizarrerie concerne sa couverture. Elle est retrouvée par terre, comme s’il l’avait jetée au sol en se débattant. L’un des bords présente un long accroc dentelé, comme si un animal avait tiré dessus – un gros chien, peut-être…" }
+    ]
+  },
+  {
+    "id": 8,
+    "nom": "La Villa Désirée",
+    "imageUrl": "assets/affiche/villa.png",
+    "description": [
+      { "balise": "h1", "contenu": "La Villa Désiré" },
+      { "balise": "p", "contenu": "La villa est un honnête cube de pierre chaulée avec un toit d’ardoise, comme on en voit des centaines autour de Paris. Le jardin, assez vaste, comporte une cabane de jardinier sans mystère. Il est entouré de murs – dont un, percé d’une petite porte, donne directement sur la forêt. L’autre accès est une haute grille en fer forgé." }
+    ]
+  },
+  {
+    "id": 9,
+    "nom": "La forêt",
+    "imageUrl": "assets/affiche/foret.png",
+    "description": [
+      { "balise": "h1", "contenu": "La fôret" },
+      { "balise": "p", "contenu": "L'air y est lourd, chargé d'une odeur de terre rance et de bois moisi. Ici, la lumière du soleil ne touche jamais le sol ; elle est filtrée par une canopée si dense qu'elle ne laisse passer qu'une lueur blafarde, d'un gris maladif." }
+    ]
+  },
+  {
+    "id": 10,
+    "nom": "Notre-Dame-de-Toute-Protection",
+    "imageUrl": "assets/affiche/orthodoxe.png",
+    "description": [
+      { "balise": "h1", "contenu": "Notre-Dame-de-Toute-Protection" },
+      { "balise": "p", "contenu": "De l’extérieur, on ne voit qu’un haut mur qui longe l’avenue de l’Observatoire, coupé par une porte cochère peinte en noir. Le couvent est encadré par des immeubles haussmanniens, qui le dominent de toute leur hauteur." }
+    ]
+  },
+  {
+    "id": 11,
+    "nom": "Acte III : La maison des morts inquiets",
+    "imageUrl": "assets/affiche/versingetorix.png",
+    "description": [
+      { "balise": "h2", "contenu": "Les Maudits" },
+      { "balise": "h3", "contenu": "Acte III : La Maison des Morts Inquiets" },
+      { "balise": "p", "contenu": "Cette fois plus de doutes, vous savez qu'il se trame quelque chose au 5 rue Versingétorix. L'allée ne vous a jamais paru aussi obscure. À vous de trouver ce qui ne tourne pas rond ici et de faire la lumière sur les agissements de la Fraternelle." }
+    ]
+  },
+  {
+    "id": 12,
+    "nom": "Appartement de George",
+    "imageUrl": "assets/affiche/appartGeorge.png",
+    "description": [
+      { "balise": "h1", "contenu": "L'appartement de George" },
+      { "balise": "p", "contenu": "George est un homme de goût, mais son goût penche vers le crépuscule. Des meubles en acajou massif, sculptés de motifs dont les courbes semblent étrangement organiques, encombrent l'espace, créant un labyrinthe de bois sombre et d'ombres projetées." },
+      { "balise": "p", "contenu": "Le clou du spectacle reste sa collection privée. Disposés sur des présentoirs en velours ou accrochés à hauteur de visage, des dizaines de masques mortuaires vous observent." }
+    ]
+  },
+  {
+    "id": 13,
+    "nom": "Cimetière de Montparnasse",
+    "imageUrl": "assets/affiche/cimetiere.png",
+    "description": [
+      { "balise": "h1", "contenu": "Le cimetière de Montparnasse" },
+      { "balise": "p", "contenu": "Vous êtes dans un labyrinthe de pierres tombales, de mausolées et de statues funéraires, où les allées sinueuses sont bordées d'arbres centenaires dont les branches tordues semblent murmurer des secrets oubliés. L'air y est chargé d'une odeur de terre fraîchement retournée, de fleurs fanées et d'encens, créant une atmosphère à la fois solennelle et mystérieuse." }
+    ]
+  },
+  {
+    "id": 14,
+    "nom": "Au sein de la fraternelle",
+    "imageUrl": "assets/affiche/habitation.png",
+    "description": [
+      { "balise": "h1", "contenu": "Les pauvres âmes" },
+      { "balise": "p", "contenu": "À l'intérieur, les escaliers de bois gémissent sous chaque pas, comme s'ils protestaient contre le poids de la tristesse humaine qu'ils supportent. Les papiers peints, décollés par la moisissure, pendent comme des lambeaux de peau morte le long des couloirs étroits et sombres, où l'unique ampoule nue grésille avec un bruit d'insecte agonisant." }
+    ]
+  },
+  {
+    "id": 15,
+    "nom": "Le domaine de l'irréel",
+    "imageUrl": "assets/affiche/reve.jpg",
+    "description": [
+      { "balise": "h1", "contenu": "Le rêve de Sofia" },
+      { "balise": "p", "contenu": "Les murs de l'immeuble ne sont plus recouverts de papier peint, mais d'une peau humaine parcheminée, moite et fiévreuse. Là où le plâtre s'effritait, on voit maintenant des côtes saillantes et des veines qui pulsent d'un liquide noir et huileux. Les marches de l'escalier sont devenues des langues molles et rugueuses qui tentent de s'enrouler autour de vos chevilles à chaque pas." }
+    ]
+  }
+]

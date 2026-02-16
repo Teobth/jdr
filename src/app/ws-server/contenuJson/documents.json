@@ -30,7 +30,7 @@
   {
     "id": 81,
     "titre": "La photo de famille",
-    "accessible": false,
+    "accessible": true,
     "contenu": "",
     "imageUrl": "/assets/docs/8_photo.png"
   },

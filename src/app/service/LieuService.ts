@@ -1,9 +1,21 @@
 import { Injectable, OnDestroy, inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common'; // <--- TRÈS IMPORTANT
+import { isPlatformBrowser } from '@angular/common';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { BehaviorSubject } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { WS_BASE_URL } from '../constante';
+
+export interface Description {
+  balise: string;
+  contenu: string;
+}
+
+export interface Lieu {
+  id: number;
+  nom: string;
+  imageUrl: string;
+  descriptions: Description[];
+}
 
 @Injectable({ providedIn: 'root' })
 export class LieuService implements OnDestroy {

@@ -53,7 +53,6 @@ export class DocumentService {
     return this.documentsDataSource.filter(d => d.accessible);
   }
 
-  // --- MÉTHODE DE MUTATION ET NOTIFICATION ---
   toggleAcces(doc: Doc): void {
     if (this.socket$) {
       this.socket$.next({ 

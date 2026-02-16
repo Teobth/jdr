@@ -2,8 +2,7 @@ import { Component, inject, computed } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
 import { LieuService } from '../service/LieuService'; 
-// On importe l'interface pour typer proprement si possible
-import * as displayOptions from '../ws-server/contenuJson/display-options.json';
+import * as displayOptions from '../ws-server/contenuJson/lieu.json';
 
 @Component({
   standalone: true, 
@@ -12,10 +11,10 @@ import * as displayOptions from '../ws-server/contenuJson/display-options.json';
   styleUrls: ['../css/lieu.css'],
   imports: [RouterModule, FormsModule]
 })
+
 export class LieuComponent {
   private lieuService = inject(LieuService);
 
-  // On récupère les options depuis le JSON
   readonly listeOptions = (displayOptions as any).default || displayOptions;
 
   // IMPORTANT : On utilise directement le signal déjà exposé par le service

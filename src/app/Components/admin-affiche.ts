@@ -2,7 +2,7 @@ import { Component, inject, signal, effect, PLATFORM_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LieuService } from '../service/LieuService';
-import * as displayOptionsData from "../ws-server/contenuJson/display-options.json";
+import * as displayOptionsData from "../ws-server/contenuJson/lieu.json";
 import { isPlatformBrowser } from '@angular/common';
 
 const SESSION_STORAGE_KEY = 'selectedDisplayId';
@@ -44,9 +44,9 @@ export class AfficheComponent {
     this.selectedDisplayId.set(newId);
   }
 
-  getInitialId() {
+  getInitialId(): number | undefined {
     if (isPlatformBrowser(this.platformId)) {
-      const stored = sessionStorage.getItem('votre_cle');
+      const stored = sessionStorage.getItem(SESSION_STORAGE_KEY); // Utilise la même clé !
       return stored ? parseInt(stored, 10) : undefined;
     }
     return undefined;

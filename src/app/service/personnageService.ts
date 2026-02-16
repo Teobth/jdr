@@ -5,7 +5,6 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { WS_BASE_URL } from '../constante';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-// --- INTERFACE ---
 export interface Secret {
   cle: string;
   valeur: string;
@@ -17,6 +16,7 @@ export interface Personnage {
   age: number;
   profession: string;
   rencontre: boolean;
+  mort: boolean;
   portraitUrl: string;
   secrets: Secret[];
 }
