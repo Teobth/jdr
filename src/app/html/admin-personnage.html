@@ -11,14 +11,23 @@
       <p>{{ p.age }} ans</p>
       <p>{{ p.profession }}</p>
       <p>
-      <strong
-        style="cursor: pointer; user-select: none;"
-        (click)="basculerRencontre(p)"
-        [class.rencontre-oui]="p.rencontre"
-        [class.rencontre-non]="!p.rencontre">
-        {{ p.rencontre ? 'Rencontré' : 'Non rencontré' }}
-      </strong>
-    </p>
+        <strong
+          style="cursor: pointer; user-select: none;"
+          (click)="basculerRencontre(p)"
+          [class.actif]="p.rencontre"
+          [class.inactif]="!p.rencontre">
+          {{ p.rencontre ? 'Rencontré' : 'Non rencontré' }}
+        </strong>
+      </p>
+      <p>
+        <strong
+          style="cursor: pointer; user-select: none;"
+          (click)="basculerMort(p)"
+          [class.inactif]="p.mort"
+          [class.actif]="!p.mort">
+          {{ p.mort ? 'Mort' : 'Vivant' }}
+        </strong>
+      </p>
     @if(p.rencontre) {
     <hr>
       <div class="secrets-management">
@@ -28,18 +37,17 @@
             <thead>
               <tr>
                 <th>Clé</th>
-                <th class="col-revele">Révélé</th>
                 <th>Détail</th>
               </tr>
             </thead>
             <tbody>
               @for (secret of p.secrets; track secret) {
-                <tr [class.revele-active]="secret.debloque">
-                  <td>{{ secret.cle }}</td>
-                  <td class="col-revele">
-                    <input type="checkbox"
-                      [checked]="secret.debloque"
-                      (change)="toggleSecret(p.nom, secret.cle)">
+                <tr 
+                  style="cursor: pointer; user-select: none;"
+                  (click)="toggleSecret(p.nom, secret.cle)"
+                  [class.revele-active]="secret.debloque">
+                  <td>
+                    {{ secret.cle }}
                   </td>
                   <td>
                     {{ secret.valeur }}

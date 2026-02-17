@@ -29,6 +29,10 @@ export class AdminPersonnagesComponent {
     this.personnageService.toggleRencontre(p);
   }
 
+  basculerMort(p: Personnage): void {
+    this.personnageService.toggleMort(p);
+  }
+
   toggleSecret(personnageNom: string, secretCle: string): void {
     this.personnageService.toggleSecretDebloque(personnageNom, secretCle);
   }

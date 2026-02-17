@@ -1,7 +1,7 @@
 import { Component, inject, signal, effect, PLATFORM_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { LieuService } from '../service/LieuService';
+import { LieuService } from '../service/lieuService';
 import * as displayOptionsData from "../ws-server/contenuJson/lieu.json";
 import { isPlatformBrowser } from '@angular/common';
 

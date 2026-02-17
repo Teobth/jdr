@@ -12,11 +12,15 @@
     <div class="personnage-card"> 
         
       <a [routerLink]="['/personnages', p.nom]"> 
-          
-        <img [src]="p.portraitUrl" [alt]="'Portrait de ' + p.nom">
+        <div class="image-container">
+          <img [src]="p.portraitUrl" [alt]="'Portrait de ' + p.nom">
+          @if (p.mort) {
+            <div class="croix-mort"></div>
+          }
+        </div>
 
         <div class="info"> 
-            <h3>{{ p.nom }}</h3>
+            <h3 class="nom-personnage">{{ p.nom }}</h3>
 
             <p><span class="stat-value">{{ p.age }} ans</span></p>
             <p><span class="stat-value">{{ p.profession }}</span></p>

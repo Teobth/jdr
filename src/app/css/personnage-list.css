@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Nosifer&family=Creepster&display=swap');
 /* --- Grille de Personnages --- */
 .personnage-grid {
     display: grid;
@@ -18,6 +19,19 @@
     position: relative;
 }
 
+.personnage-card:has(.croix-mort) img {
+    filter: brightness(0.3) contrast(1.1);
+    transition: filter 0.5s ease-in-out;
+}
+
+.personnage-card:has(.croix-mort) .nom-personnage {
+    font-family: 'Nosifer', cursive;
+    color: #8a0303;       
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.5s ease;
+}
+
 /* Image du personnage */
 .personnage-card img {
     width: 100%;
@@ -25,6 +39,42 @@
     object-fit: contain;
     display: block;
     border-bottom: 2px solid var(--couleur-accent-or);
+    transition: filter 0.3s ease;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+}
+
+.croix-mort {
+    position: absolute;
+    top: 0%;
+    right: -13%;
+    width: 125%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.croix-mort::before, .croix-mort::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 10px;
+    background-color: rgba(255, 0, 0, 0.8);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.croix-mort::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.croix-mort::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 /* Contenu de la carte */

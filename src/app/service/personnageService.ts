@@ -78,6 +78,17 @@ export class PersonnageService {
         console.error("Tentative de toggleRencontre sans connexion WebSocket (Serveur ou non connecté).");
     }
   }
+
+  toggleMort(p: Personnage): void {
+    if (this.socket$) {
+      this.socket$.next({ 
+        type: 'TOGGLE_MORT_COMMAND',
+        personnageNom: p.nom
+      });
+    } else {
+        console.error("Tentative de toggleMort sans connexion WebSocket (Serveur ou non connecté).");
+    }
+  }
   
   toggleSecretDebloque(personnageNom: string, secretCle: string): void {
     if (this.socket$) {

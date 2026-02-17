@@ -110,12 +110,30 @@ class StateManager {
         }
     }
 
+    // --- Commande Histoire ---
+    updateData(newHistoire) {
+        this.scenarioData = newHistoire;
+        console.log(`Histoire mise à jour.`);
+        
+        this.saveAndBroadcast('SCENARIO', 'UPDATE_SCENARIO', this.scenarioData);
+    }
+
     // --- Commandes Personnages ---
     toggleRencontre(nom) {
         const index = this.personnagesData.findIndex(p => p.nom === nom);
         if (index !== -1) {
             this.personnagesData[index].rencontre = !this.personnagesData[index].rencontre;
             console.log(`Statut de rencontre de ${nom} changé.`);
+            
+            this.saveAndBroadcast('PERSONNAGES', 'UPDATE_PERSONNAGES', this.personnagesData);
+        }
+    }
+
+    toggleMort(nom) {
+        const index = this.personnagesData.findIndex(p => p.nom === nom);
+        if (index !== -1) {
+            this.personnagesData[index].mort = !this.personnagesData[index].mort;
+            console.log(`Statut de mort de ${nom} changé.`);
             
             this.saveAndBroadcast('PERSONNAGES', 'UPDATE_PERSONNAGES', this.personnagesData);
         }
@@ -205,6 +223,14 @@ wss.on('connection', (ws) => {
 
                 case 'UPDATE_DISPLAY_ID_COMMAND': 
                     stateManager.updateDisplayId(data.displayId);
+                    break;
+
+                case 'TOGGLE_MORT_COMMAND':
+                    stateManager.toggleMort(data.personnageNom); 
+                    break;
+
+                case 'UPDATE_HISTOIRE_COMMAND':
+                    stateManager.updateData(data.histoire);
                     break;
                     
                 default:

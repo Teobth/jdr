@@ -12,8 +12,8 @@
                 <strong 
                     style="cursor: pointer; user-select: none;"
                     (click)="basculerAcces(doc)"
-                    [class.visible-oui]="doc.accessible"
-                    [class.visible-non]="!doc.accessible">
+                    [class.actif]="doc.accessible"
+                    [class.inactif]="!doc.accessible">
                     {{ doc.accessible ? 'Visible' : 'Caché' }}
                 </strong>
             </p>

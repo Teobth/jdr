@@ -180,6 +180,15 @@
     ]
   },
   {
+    "nom": "George de Montbois",
+    "age": 63,
+    "profession": "Retraité de la marine",
+    "rencontre": true,
+    "mort": false,
+    "portraitUrl": "assets/portraits/montbois.png",
+    "secrets": []
+  },
+  {
     "nom": "M Delorme",
     "age": 61,
     "profession": "Cadre d'usine",
@@ -523,7 +532,7 @@
     "age": 20,
     "profession": "La Blanche Morte",
     "rencontre": true,
-    "mort": false,
+    "mort": true,
     "portraitUrl": "assets/portraits/olga.png",
     "secrets": [
       {

@@ -56,7 +56,8 @@
 }
 
 .admin-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     flex-wrap: wrap;
     gap: 20px;
     justify-content: flex-start;
@@ -65,7 +66,7 @@
 
 .admin-card {
     box-sizing: border-box; 
-    width: calc(33.333% - 13.333px); 
+    width: 100%;
     background-color: #333;
     color: #f0f0f0;
     border: 1px solid #777;
@@ -85,28 +86,14 @@
 /* 🚦 2. STYLES DE STATUT (Bande de couleur à gauche) */
 /* ==================================================================== */
 
-/* Personnages: Rencontré / Non rencontré */
-.rencontre-oui { 
+/* boolean: vrai / faux */
+.actif { 
     color: #5cb85c; /* Vert */
     font-weight: bold; 
     border-left: 5px solid #5cb85c; 
     padding-left: 5px; 
 } 
-.rencontre-non { 
-    color: #f44336; /* Rouge */
-    font-weight: bold; 
-    border-left: 5px solid #f44336; 
-    padding-left: 5px; 
-}
-
-/* Documents: Visible / Caché (Accessible / Non accessible) */
-.visible-oui, .accessible-oui { 
-    color: #4CAF50; /* Vert vif */
-    font-weight: bold; 
-    border-left: 5px solid #4CAF50; 
-    padding-left: 5px; 
-} 
-.visible-non, .accessible-non { 
+.inactif { 
     color: #f44336; /* Rouge */
     font-weight: bold; 
     border-left: 5px solid #f44336; 
