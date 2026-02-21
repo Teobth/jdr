@@ -1,14 +1,36 @@
 const WebSocket = require('ws');
 const fs = require('fs');
 
+const express = require('express');
+const app = express();
+
 // Le port que vous utiliserez pour la connexion WebSocket
 const PORT = '3000'; 
 
+const histoire = 2;
+let dossier = '';
+switch (histoire) {
+    case 1:
+        dossier = 'Par cinq mètres de fond';
+        break;
+    case 2:
+        dossier = 'Les maudits';
+        break;
+    default:
+        dossier = 'Les maudits';
+}
+
+const photosPath = '/home/teo/Documents/JDR/Scénar.json/' + dossier;
+app.use('/images', express.static(photosPath));
+let port = 3000 + histoire;
+app.listen(port, () => console.log("Serveur d'images sur le port " + port + ". Le dossier utilisé est : " + dossier));
+
 // --- FICHIERS DE DONNÉES ---
 const FILES = {
-    PERSONNAGES: '/home/teo/programme/jdr/src/app/ws-server/contenuJson/personnages.json',
-    DOCUMENTS: '/home/teo/programme/jdr/src/app/ws-server/contenuJson/documents.json', 
-    SCENARIO: '/home/teo/programme/jdr/src/app/ws-server/contenuJson/scenario.json',
+    PERSONNAGES: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/personnages.json',
+    DOCUMENTS: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/documents.json', 
+    SCENARIO: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/scenario.json',
+    AFFICHE: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/affiche.json'
 };
 
 // --- CLASSE DE GESTION DES DONNÉES (StateManager) ---
@@ -21,6 +43,7 @@ class StateManager {
         this.personnagesData = this.loadData(FILES.PERSONNAGES, []);
         this.documentsData = this.loadData(FILES.DOCUMENTS, []);
         this.scenarioData = this.loadData(FILES.SCENARIO, []);
+        this.affichesData = this.loadData(FILES.AFFICHE, []);
         this.currentDisplayId = 1;
     }
 
@@ -34,13 +57,11 @@ class StateManager {
      */
     loadData(filePath, defaultData) {
         try {
-            return require(filePath);
+            const raw = fs.readFileSync(filePath, 'utf-8');
+            return JSON.parse(raw);
         } catch (error) {
-            if (error.code === 'MODULE_NOT_FOUND' || error instanceof SyntaxError) {
-                console.warn(`[WARN] Fichier non trouvé ou invalide: ${filePath}. Initialisation avec données par défaut.`);
-                return defaultData;
-            }
-            throw error; // Renvoyer les autres erreurs
+            console.warn(`[WARN] Erreur chargement ${filePath}`, error);
+            return defaultData;
         }
     }
 
@@ -77,7 +98,7 @@ class StateManager {
     broadcastDisplayUpdate() {
         const message = JSON.stringify({
             type: 'UPDATE_DISPLAY_ID',
-            displayId: this.currentDisplayId
+            payload: { displayId: this.currentDisplayId }
         });
 
         this.wss.clients.forEach(client => {
@@ -91,8 +112,6 @@ class StateManager {
         if (typeof newId === 'number') {
             this.currentDisplayId = newId;
             this.broadcastDisplayUpdate();
-        } else {
-            console.warn(`Tentative de définir un ID d'affichage non numérique: ${newId}`);
         }
     }
     
@@ -108,14 +127,6 @@ class StateManager {
         } else {
             console.warn(`Étape de scénario avec ID ${stepId} non trouvée.`);
         }
-    }
-
-    // --- Commande Histoire ---
-    updateData(newHistoire) {
-        this.scenarioData = newHistoire;
-        console.log(`Histoire mise à jour.`);
-        
-        this.saveAndBroadcast('SCENARIO', 'UPDATE_SCENARIO', this.scenarioData);
     }
 
     // --- Commandes Personnages ---
@@ -170,7 +181,8 @@ class StateManager {
             personnages: this.personnagesData,
             documents: this.documentsData,
             scenario: this.scenarioData,
-            displayId: this.currentDisplayId
+            affiches: this.affichesData,
+            displayId: this.currentDisplayId,
         };
     }
 }
@@ -195,7 +207,7 @@ wss.on('connection', (ws) => {
     // 1. Envoyer l'état INITIAL des tableaux de données
     ws.send(JSON.stringify({
         type: 'INITIAL_STATE',
-        payload: stateManager.getInitialState() // Utilisation de la méthode de la classe
+        payload: stateManager.getInitialState()
     }));  
   
     // 2. Écouter les messages du client (Commandes)
@@ -227,10 +239,6 @@ wss.on('connection', (ws) => {
 
                 case 'TOGGLE_MORT_COMMAND':
                     stateManager.toggleMort(data.personnageNom); 
-                    break;
-
-                case 'UPDATE_HISTOIRE_COMMAND':
-                    stateManager.updateData(data.histoire);
                     break;
                     
                 default:

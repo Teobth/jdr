@@ -1,27 +1,27 @@
 <article class="adventure-intro">
-  @if(!detailsAffiche()) { 
-    <p>Chargement en cours...</p>
-  } @else {
-    <div class="case-display" [class.warning]="detailsAffiche().id !== 1 && detailsAffiche().id !== 7">
+  @if(detailsAffiche(); as lieu) { 
+    <div class="case-display" [class.warning]="lieu.id !== 1 && lieu.id !== 7">
       
-      @for (item of detailsAffiche().description; track $index) {
+      @for (item of lieu.description; track $index) {
         
         @switch (item.balise) {
           @case ('h1') { <h1>{{ item.contenu }}</h1> }
           @case ('h2') { <h2 class="adventure-intro">{{ item.contenu }}</h2> }
           @case ('h3') { <h3 class="lore-box">{{ item.contenu }}</h3> }
-          @case ('p') { <p class="">{{ item.contenu }}</p> }
+          @case ('p') { <p>{{ item.contenu }}</p> }
         }
 
         @if ($index === 1) {
           <img 
-            [src]="detailsAffiche().imageUrl" 
-            [alt]="'Affiche de l\'aventure : ' + detailsAffiche().nom"
+            [src]="lieu.imageUrl" 
+            [alt]="'Affiche de l\'aventure : ' + lieu.nom"
             class="affiche-details"
           >
         }
       }
       
     </div>
+  } @else {
+    <p>Chargement de l'ambiance...</p>
   }
 </article>
