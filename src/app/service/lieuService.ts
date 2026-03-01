@@ -13,7 +13,7 @@ export interface Lieu {
 }
 
 @Injectable({ providedIn: 'root' })
-export class LieuService implements OnDestroy {
+export class LieuService implements OnDestroy {  
   private platformId = inject(PLATFORM_ID);
   private socket$: WebSocketSubject<any> | null = null;
   

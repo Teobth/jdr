@@ -7,7 +7,7 @@
       <div class="document-card">
         <a [routerLink]="['/documents', doc.id]"> 
             
-          <img [src]="doc.imageUrl" [alt]="'Photo du document ' + doc.titre">
+          <img [src]="doc.fullImageUrl" [alt]="'Photo du document ' + doc.titre">
 
           <div class="info"> 
             <h3>{{ doc.titre }}</h3> 

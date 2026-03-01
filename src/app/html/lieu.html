@@ -13,7 +13,7 @@
 
         @if ($index === 1) {
           <img 
-            [src]="lieu.imageUrl" 
+            [src]="getUrl(lieu)"
             [alt]="'Affiche de l\'aventure : ' + lieu.nom"
             class="affiche-details"
           >

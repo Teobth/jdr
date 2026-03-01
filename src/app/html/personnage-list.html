@@ -13,7 +13,7 @@
         
       <a [routerLink]="['/personnages', p.nom]"> 
         <div class="image-container">
-          <img [src]="p.portraitUrl" [alt]="'Portrait de ' + p.nom">
+          <img [src]="p.fullImageUrl" [alt]="'Portrait de ' + p.nom">
           @if (p.mort) {
             <div class="croix-mort"></div>
           }

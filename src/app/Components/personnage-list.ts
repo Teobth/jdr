@@ -1,7 +1,8 @@
-import { Component, computed, OnInit } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { RouterLink } from '@angular/router';
-import { PersonnageService, Personnage } from '../service/personnageService'; 
+import { PersonnageService, Personnage } from '../service/personnageService';
+import { ImageBuilderService } from '../service/imageBuilderService';
 
 @Component({
   standalone: true, 
@@ -12,11 +13,16 @@ import { PersonnageService, Personnage } from '../service/personnageService';
 })
 
 export class PersonnageListComponent {
-  constructor(private personnageService: PersonnageService) { }
+  private personnageService = inject(PersonnageService);
+  private imageService = inject(ImageBuilderService);
 
   readonly personnagesFiltres = computed(() => {
     return this.personnageService.personnagesSignal().filter(p => p.rencontre);
   });
+
+  getUrl(p: Personnage): string {
+    return this.imageService.generateImageUrl(p.portraitUrl);
+  }
 
   onToggleRencontre(p: Personnage): void {
       this.personnageService.toggleRencontre(p);

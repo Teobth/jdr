@@ -1,9 +1,10 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { computed, inject, Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { WS_BASE_URL } from '../constante';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { ImageBuilderService } from './imageBuilderService';
 
 export interface Secret {
   cle: string;
@@ -18,16 +19,28 @@ export interface Personnage {
   rencontre: boolean;
   mort: boolean;
   portraitUrl: string;
+  fullImageUrl: string;
   secrets: Secret[];
 }
 
 @Injectable({ providedIn: 'root' })
 export class PersonnageService {
+  private imageBuilder = inject(ImageBuilderService);
+  
   private personnagesDataSource: Personnage[] = [];
   private socket$: WebSocketSubject<any> | null = null;
   private personnagesSubject = new BehaviorSubject<Personnage[]>([]);
+
   personnages$ = this.personnagesSubject.asObservable();
-  readonly personnagesSignal = toSignal(this.personnages$, { initialValue: [] as Personnage[] });
+
+  readonly personnagesRawSignal = toSignal(this.personnages$, { initialValue: [] as Personnage[] });
+
+  readonly personnagesSignal = computed(() => {
+    return this.personnagesRawSignal().map(p => ({
+      ...p,
+      fullImageUrl: this.imageBuilder.generateImageUrl(p.portraitUrl)
+    }));
+  });
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {

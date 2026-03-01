@@ -2,7 +2,8 @@ import { Component, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
-import { LieuService } from '../service/lieuService'; 
+import { Lieu, LieuService } from '../service/lieuService'; 
+import { ImageBuilderService } from '../service/imageBuilderService';
 
 @Component({
   standalone: true, 
@@ -14,6 +15,7 @@ import { LieuService } from '../service/lieuService';
 
 export class LieuComponent {
   private lieuService = inject(LieuService);
+  private imageBuilder = inject(ImageBuilderService);
 
   readonly detailsAffiche = computed(() => {
     const lieuRecu = this.lieuService.lieuActuel();
@@ -25,4 +27,9 @@ export class LieuComponent {
       (item: any) => Number(item.id) === Number(lieuRecu.id)
     );
   });
+
+
+  protected getUrl(l:Lieu) {
+    return this.imageBuilder.generateImageUrl(l.imageUrl || '')
+  }
 }
