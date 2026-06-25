@@ -6,9 +6,11 @@
         
         <div class="personnage-description">
             <div class="photo-wrapper">
-                <img [src]="p.fullImageUrl" 
-                    [alt]="'Photo de ' + p.nom" 
-                    class="personnage-photo">
+                <a [href]="personnage()?.fullImageUrl">
+                    <img [src]="p.fullImageUrl" 
+                        [alt]="'Photo de ' + p.nom" 
+                        class="personnage-photo">
+                </a>
             </div>
 
             <div class="stats-container">

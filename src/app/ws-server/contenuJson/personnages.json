@@ -1,0 +1,77 @@
+[
+{
+    "nom": "Francois Michaud",
+    "age": 34,
+    "profession": "Journaliste en herbe",
+    "rencontre": true,
+    "mort": false,
+    "portraitUrl": ":3002/images/portraits/francois.png",
+    "secrets": [
+      {
+        "cle": "Vengeance",
+        "valeur": "A besoin que justice soit faite.",
+        "debloque": false
+      },
+      {
+        "cle": "Mauvaise source",
+        "valeur": "Il n'est pas pour la véracité de ses informations. Il préfère le sensationnel.",
+        "debloque": false
+      },
+      {
+        "cle": "Carrière",
+        "valeur": "Espère que cette affaire propulsera sa carrière de journaliste.",
+        "debloque": true
+      }
+    ]
+  },
+  {
+    "nom": "Joseph Janvier",
+    "age": 54,
+    "profession": "Inspecteur de police",
+    "rencontre": true,
+    "mort": false,
+    "portraitUrl": ":3002/images/portraits/joseph.png",
+    "secrets": [
+      {
+        "cle": "Objectif 1",
+        "valeur": "Il cherche à identifier la morte, elle n'apparait dans aucune liste de personne disparue.",
+        "debloque": true
+      },
+      {
+        "cle": "Objectif 2",
+        "valeur": "Reconstituer ses faits et gestes.",
+        "debloque": true
+      },
+      {
+        "cle": "Objectif 3",
+        "valeur": "Retrouver la tombe, plusieurs policiers sont à l'affaire entre les portes de Paris et le champs de Lherbier.",
+        "debloque": true
+      },
+      {
+        "cle": "Objectif 4",
+        "valeur": "Sur la piste d'un maniac,il a chargé deux agents de téléphoner à tous les asiles de la région parisienne au cas où ils auraient eu une évasion.",
+        "debloque": true
+      }
+    ]
+  },
+  {
+    "nom": "Gustave Lherbier",
+    "age": 69,
+    "profession": "Agriculteur",
+    "rencontre": true,
+    "mort": false,
+    "portraitUrl": ":3002/images/portraits/gustave.png",
+    "secrets": [
+      {
+        "cle": "Relation",
+        "valeur": "Gustave n'est pas aimé de ses voisins",
+        "debloque": false
+      },
+      {
+        "cle": "Du pays",
+        "valeur": "Il connait très bien les berges de la Seine",
+        "debloque": true
+      }
+    ]
+  }
+]
