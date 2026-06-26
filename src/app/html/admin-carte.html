@@ -68,13 +68,59 @@
         <button (click)="onAjouterPion()" [disabled]="!personnageAAjouter">Ajouter</button>
       </div>
 
+      <div class="palette-decors">
+        @for (groupe of categoriesDecors(); track groupe.categorie) {
+          <div class="groupe-decor">
+            <span class="palette-label">{{ groupe.label }} :</span>
+            @for (d of groupe.decors; track d.id) {
+              <button
+                type="button"
+                class="pinceau-btn"
+                [class.pinceau-actif]="decorSelectionne() === d.id"
+                [style.borderColor]="d.couleur"
+                (click)="choisirPinceau(d.id)"
+                [title]="d.label"
+              >
+                {{ d.label }}
+              </button>
+            }
+          </div>
+        }
+        <button
+          type="button"
+          class="pinceau-btn pinceau-gomme"
+          [class.pinceau-actif]="decorSelectionne() === 'GOMME'"
+          (click)="choisirGomme()"
+          title="Effacer le décor"
+        >
+          Gomme
+        </button>
+        <button
+          type="button"
+          class="pinceau-btn pinceau-mur"
+          [class.pinceau-actif]="modeMur()"
+          (click)="toggleModeMur()"
+          title="Poser/retirer des murs sur les bords des cases"
+        >
+          Mode Murs
+        </button>
+      </div>
+
       @if (pionSelectionne()) {
         <p class="info-selection">
           Pion sélectionné : <strong>{{ pionSelectionne() }}</strong> — cliquez une case libre pour le déplacer.
           <button (click)="annulerSelection()" class="btn-annuler">Annuler</button>
         </p>
+      } @else if (modeMur()) {
+        <p class="info-selection">
+          Mode Murs actif — cliquez un bord d'hexagone pour poser ou retirer un mur.
+        </p>
+      } @else if (decorSelectionne()) {
+        <p class="info-selection">
+          Pinceau actif : <strong>{{ decorSelectionne() === 'GOMME' ? 'Gomme' : decorSelectionne() }}</strong> — cliquez une case pour l'appliquer.
+        </p>
       } @else {
-        <p class="info-selection">Cliquez sur un pion pour le sélectionner, puis sur une case pour le déplacer.</p>
+        <p class="info-selection">Cliquez sur un pion pour le sélectionner, ou choisissez un décor à peindre.</p>
       }
 
       <svg
@@ -92,11 +138,48 @@
               [class.hexagone-selectionnee]="c.nomPersonnageSurCase === pionSelectionne()"
             />
 
+            @if (c.decorSvg) {
+              <g [innerHTML]="c.decorSvg"></g>
+            }
+
             @if (c.nomPersonnageSurCase) {
-              <circle [attr.cx]="c.x" [attr.cy]="c.y" r="16" class="pion" />
-              <text [attr.x]="c.x" [attr.y]="c.y" class="pion-label">{{ getNomAffiche(c.nomPersonnageSurCase) }}</text>
+              <circle
+                [attr.cx]="c.x" [attr.cy]="c.y" r="16" class="pion"
+                (click)="onClickPion($event, c.nomPersonnageSurCase)"
+              />
+              <text
+                [attr.x]="c.x" [attr.y]="c.y" class="pion-label"
+                (click)="onClickPion($event, c.nomPersonnageSurCase)"
+              >{{ getNomAffiche(c.nomPersonnageSurCase) }}</text>
             }
           </g>
+        }
+
+        <!-- Murs déjà posés (toujours visibles) -->
+        @for (c of cases(); track 'murs_' + c.q + '_' + c.r) {
+          @for (cote of c.cotesMurs; track cote.cote) {
+            @if (cote.actif) {
+              <line
+                [attr.x1]="cote.x1" [attr.y1]="cote.y1"
+                [attr.x2]="cote.x2" [attr.y2]="cote.y2"
+                class="mur-trait"
+              />
+            }
+          }
+        }
+
+        <!-- Poignées de bord cliquables, affichées seulement en mode Murs -->
+        @if (modeMur()) {
+          @for (c of cases(); track 'poignees_' + c.q + '_' + c.r) {
+            @for (cote of c.cotesMurs; track cote.cote) {
+              <circle
+                [attr.cx]="cote.xMid" [attr.cy]="cote.yMid" r="5"
+                class="poignee-mur"
+                [class.poignee-active]="cote.actif"
+                (click)="onClickCote($event, c, cote.cote)"
+              />
+            }
+          }
         }
       </svg>
 

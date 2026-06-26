@@ -23,6 +23,6 @@ export class MonPersonnageComponent {
   });
 
   readonly secretsDebloques = computed(() => {
-    return this.personnage()?.secrets.filter(s => s.debloque) ?? [];
+    return this.personnage()?.secrets ?? [];
   });
 }

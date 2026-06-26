@@ -26,6 +26,10 @@
             [class.hexagone-occupee]="!!c.nomPersonnageSurCase"
           />
 
+          @if (c.decorSvg) {
+            <g [innerHTML]="c.decorSvg"></g>
+          }
+
           @if (c.nomPersonnageSurCase) {
             <circle
               [attr.cx]="c.x"
@@ -41,6 +45,17 @@
             >{{ getNomAffiche(c.nomPersonnageSurCase) }}</text>
           }
         </g>
+      }
+
+      <!-- Murs -->
+      @for (c of cases(); track 'murs_' + c.q + '_' + c.r) {
+        @for (seg of c.segmentsMurs; track seg.x1 + '_' + seg.y1) {
+          <line
+            [attr.x1]="seg.x1" [attr.y1]="seg.y1"
+            [attr.x2]="seg.x2" [attr.y2]="seg.y2"
+            class="mur-trait"
+          />
+        }
       }
     </svg>
   } @else {

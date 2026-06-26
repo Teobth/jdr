@@ -71,3 +71,11 @@
     dominant-baseline: central;
     pointer-events: none;
 }
+
+.mur-trait {
+    /* stroke: var(--couleur-accent-or); */
+    stroke:#fff;
+    stroke-width: 4;
+    stroke-linecap: round;
+    pointer-events: none;
+}

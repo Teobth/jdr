@@ -19,11 +19,11 @@ import { adminGuard } from './service/adminGuard';
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
 
-  { path: '', component: LieuComponent, canActivate: [authGuard] },
-
-  { path: 'mon-personnage', component: MonPersonnageComponent, canActivate: [authGuard] },
+  { path: '', component: MonPersonnageComponent, canActivate: [authGuard] },
 
   { path: 'carte', component: CarteComponent, canActivate: [authGuard] },
+
+  { path: 'lieu', component: LieuComponent, canActivate: [authGuard]},
 
   { path: 'personnages', component: PersonnageListComponent, canActivate: [authGuard] },
   

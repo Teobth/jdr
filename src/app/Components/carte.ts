@@ -1,8 +1,10 @@
 import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CarteService } from '../service/carteService';
 import { AuthService } from '../service/authService';
 import { PersonnageService } from '../service/personnageService';
+import { getTypeDecor } from '../service/decorsService';
 
 const TAILLE_HEX = 40;
 
@@ -15,6 +17,8 @@ interface CaseAffichee {
   nomPersonnageSurCase: string | null;
   estMonPion: boolean;
   estAdjacenteAuMonPion: boolean;
+  decorSvg: SafeHtml | null;
+  segmentsMurs: { x1: number; y1: number; x2: number; y2: number }[];
 }
 
 @Component({
@@ -28,6 +32,7 @@ export class CarteComponent {
   private carteService = inject(CarteService);
   private authService = inject(AuthService);
   private personnageService = inject(PersonnageService);
+  private sanitizer = inject(DomSanitizer);
 
   readonly carte = computed(() => this.carteService.carteActive());
 
@@ -54,16 +59,25 @@ export class CarteComponent {
     const monPion = this.monPion();
     const { offsetX, offsetY } = this.dimensionsSvg();
     const toutesLesCases = this.carteService.genererCasesGrille(carte.rayon);
+    const decors = carte.decors ?? [];
+    const murs = carte.murs ?? [];
 
     return toutesLesCases.map(({ q, r }) => {
       const { x, y } = this.carteService.axialVersPixel(q, r, TAILLE_HEX);
       const pionSurCase = carte.pions.find(p => p.q === q && p.r === r);
+      const decorSurCase = decors.find(d => d.q === q && d.r === r);
       const estAdjacente = monPion
-        ? this.carteService.sontAdjacentes(monPion.q, monPion.r, q, r) && !pionSurCase
+        ? this.carteService.sontAdjacentes(monPion.q, monPion.r, q, r)
+          && !pionSurCase
+          && !this.carteService.existeMurEntre(carte, monPion.q, monPion.r, q, r)
         : false;
 
       const cx = x + offsetX;
       const cy = y + offsetY;
+      const typeDecor = decorSurCase ? getTypeDecor(decorSurCase.type) : undefined;
+
+      const mursDeLaCase = murs.filter(m => m.q === q && m.r === r);
+      const segmentsMurs = mursDeLaCase.map(m => this.carteService.segmentCote(cx, cy, TAILLE_HEX, m.cote));
 
       return {
         q, r,
@@ -72,7 +86,11 @@ export class CarteComponent {
         points: this.carteService.pointsHexagone(cx, cy, TAILLE_HEX - 2),
         nomPersonnageSurCase: pionSurCase?.nomPersonnage ?? null,
         estMonPion: pionSurCase?.nomPersonnage.toLowerCase() === this.monNom()?.toLowerCase(),
-        estAdjacenteAuMonPion: estAdjacente
+        estAdjacenteAuMonPion: estAdjacente,
+        decorSvg: typeDecor
+          ? this.sanitizer.bypassSecurityTrustHtml(typeDecor.rendu(cx, cy, TAILLE_HEX * 0.6))
+          : null,
+        segmentsMurs
       };
     });
   });

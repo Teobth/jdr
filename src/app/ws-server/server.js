@@ -221,6 +221,40 @@ class StateManager {
     }
 
     /**
+     * Indice du côté opposé (le côté `i` d'une case correspond au côté
+     * `OPPOSES[i]` de la case voisine adjacente dans cette direction).
+     */
+    static get OPPOSES() {
+        return [1, 0, 3, 2, 5, 4];
+    }
+
+    /**
+     * Renvoie l'indice de direction (0-5, dans le même ordre que getVoisins)
+     * allant de (q1,r1) vers la case adjacente (q2,r2), ou -1 si non adjacentes.
+     */
+    getDirectionVers(q1, r1, q2, r2) {
+        const voisins = this.getVoisins(q1, r1);
+        return voisins.findIndex(v => v.q === q2 && v.r === r2);
+    }
+
+    /**
+     * Vérifie si un mur bloque le passage entre deux cases adjacentes (q1,r1) et (q2,r2),
+     * qu'il ait été posé du côté de l'une ou de l'autre case (mur "miroir").
+     */
+    existeMurEntre(carte, q1, r1, q2, r2) {
+        const murs = carte.murs || [];
+        const direction = this.getDirectionVers(q1, r1, q2, r2);
+        if (direction === -1) return false; // pas adjacentes
+
+        const directionOpposee = StateManager.OPPOSES[direction];
+
+        const murCoteA = murs.some(m => m.q === q1 && m.r === r1 && m.cote === direction);
+        const murCoteB = murs.some(m => m.q === q2 && m.r === r2 && m.cote === directionOpposee);
+
+        return murCoteA || murCoteB;
+    }
+
+    /**
      * Vérifie que (q, r) est bien à l'intérieur d'une grille hexagonale de rayon donné.
      */
     estDansLaGrille(q, r, rayon) {
@@ -230,7 +264,7 @@ class StateManager {
 
     /**
      * Déplacement d'un joueur : ne peut bouger que son propre pion, d'une case adjacente,
-     * et seulement si la case cible est libre et dans la grille.
+     * et seulement si la case cible est libre, dans la grille, et qu'aucun mur ne bloque le passage.
      */
     deplacerPionJoueur(nomPersonnage, qCible, rCible) {
         const carte = this.getCarteActive();
@@ -256,6 +290,12 @@ class StateManager {
         const estAdjacente = voisins.some(v => v.q === qCible && v.r === rCible);
         if (!estAdjacente) {
             console.warn(`Déplacement refusé pour ${nomPersonnage} : case non adjacente.`);
+            return;
+        }
+
+        // Vérifier qu'aucun mur ne bloque le passage entre les deux cases
+        if (this.existeMurEntre(carte, pion.q, pion.r, qCible, rCible)) {
+            console.warn(`Déplacement refusé pour ${nomPersonnage} : un mur bloque le passage.`);
             return;
         }
 
@@ -343,7 +383,9 @@ class StateManager {
             nom,
             rayon,
             active: false,
-            pions: []
+            pions: [],
+            decors: [],
+            murs: []
         });
         this.saveAndBroadcast('CARTES', 'UPDATE_CARTES', this.cartesData);
     }
@@ -361,6 +403,60 @@ class StateManager {
      */
     mjSupprimerCarte(carteId) {
         this.cartesData = this.cartesData.filter(c => c.id !== carteId);
+        this.saveAndBroadcast('CARTES', 'UPDATE_CARTES', this.cartesData);
+    }
+
+    /**
+     * Pose ou retire un décor sur une case d'une carte donnée.
+     * Si type est null/undefined, le décor de la case est supprimé.
+     */
+    mjPeindreDecor(carteId, q, r, type) {
+        const carte = this.cartesData.find(c => c.id === carteId);
+        if (!carte) return;
+
+        if (!carte.decors) carte.decors = [];
+
+        if (!this.estDansLaGrille(q, r, carte.rayon)) {
+            console.warn('Case hors de la grille, décor non posé.');
+            return;
+        }
+
+        const index = carte.decors.findIndex(d => d.q === q && d.r === r);
+
+        if (!type) {
+            // Effacer le décor de cette case
+            if (index !== -1) carte.decors.splice(index, 1);
+        } else if (index !== -1) {
+            carte.decors[index].type = type;
+        } else {
+            carte.decors.push({ q, r, type });
+        }
+
+        this.saveAndBroadcast('CARTES', 'UPDATE_CARTES', this.cartesData);
+    }
+
+    /**
+     * Bascule un mur sur le côté `cote` (0-5) de la case (q, r) :
+     * l'ajoute s'il n'existe pas, le retire s'il existe déjà.
+     */
+    mjToggleMur(carteId, q, r, cote) {
+        const carte = this.cartesData.find(c => c.id === carteId);
+        if (!carte) return;
+
+        if (!carte.murs) carte.murs = [];
+
+        if (!this.estDansLaGrille(q, r, carte.rayon)) {
+            console.warn('Case hors de la grille, mur non posé.');
+            return;
+        }
+
+        const index = carte.murs.findIndex(m => m.q === q && m.r === r && m.cote === cote);
+        if (index !== -1) {
+            carte.murs.splice(index, 1);
+        } else {
+            carte.murs.push({ q, r, cote });
+        }
+
         this.saveAndBroadcast('CARTES', 'UPDATE_CARTES', this.cartesData);
     }
     
@@ -481,6 +577,14 @@ wss.on('connection', (ws) => {
 
                 case 'MJ_SUPPRIMER_CARTE_COMMAND':
                     stateManager.mjSupprimerCarte(data.carteId);
+                    break;
+
+                case 'MJ_PEINDRE_DECOR_COMMAND':
+                    stateManager.mjPeindreDecor(data.carteId, data.q, data.r, data.decorType);
+                    break;
+
+                case 'MJ_TOGGLE_MUR_COMMAND':
+                    stateManager.mjToggleMur(data.carteId, data.q, data.r, data.cote);
                     break;
                     
                 default:

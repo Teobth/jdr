@@ -11,12 +11,27 @@ export interface Pion {
   r: number;
 }
 
+export interface Decor {
+  q: number;
+  r: number;
+  type: string;
+}
+
+export interface Mur {
+  q: number;
+  r: number;
+  /** Côté de l'hexagone (0 à 5), dans le même ordre que DIRECTIONS. */
+  cote: number;
+}
+
 export interface Carte {
   id: number;
   nom: string;
   rayon: number;
   active: boolean;
   pions: Pion[];
+  decors?: Decor[];
+  murs?: Mur[];
 }
 
 /** Les 6 directions axiales d'une grille hexagonale (flat-top). */
@@ -74,6 +89,31 @@ export class CarteService {
   /** Vérifie si deux cases sont adjacentes. */
   sontAdjacentes(q1: number, r1: number, q2: number, r2: number): boolean {
     return this.getVoisins(q1, r1).some(v => v.q === q2 && v.r === r2);
+  }
+
+  /** Indice du côté opposé (paires 0-1, 2-3, 4-5), cohérent avec DIRECTIONS. */
+  private readonly OPPOSES = [1, 0, 3, 2, 5, 4];
+
+  /** Renvoie l'indice de direction (0-5) de (q1,r1) vers son voisin (q2,r2), ou -1. */
+  getDirectionVers(q1: number, r1: number, q2: number, r2: number): number {
+    return this.getVoisins(q1, r1).findIndex(v => v.q === q2 && v.r === r2);
+  }
+
+  /**
+   * Vérifie si un mur bloque le passage entre deux cases adjacentes, qu'il ait
+   * été posé du côté de l'une ou de l'autre case (mur "miroir"). Logique
+   * identique à celle du serveur, pour anticiper visuellement le blocage.
+   */
+  existeMurEntre(carte: Carte, q1: number, r1: number, q2: number, r2: number): boolean {
+    const murs = carte.murs ?? [];
+    const direction = this.getDirectionVers(q1, r1, q2, r2);
+    if (direction === -1) return false;
+
+    const directionOpposee = this.OPPOSES[direction];
+    const murCoteA = murs.some(m => m.q === q1 && m.r === r1 && m.cote === direction);
+    const murCoteB = murs.some(m => m.q === q2 && m.r === r2 && m.cote === directionOpposee);
+
+    return murCoteA || murCoteB;
   }
 
   /** Vérifie si une case (q, r) est libre sur une carte donnée. */
@@ -148,6 +188,44 @@ export class CarteService {
     return points.join(' ');
   }
 
+  /** Calcule un sommet (parmi les 6) du contour d'un hexagone flat-top centré sur (cx, cy). */
+  private sommetHexagone(cx: number, cy: number, tailleHex: number, indice: number): { x: number; y: number } {
+    const angle = (Math.PI / 180) * (60 * indice);
+    return { x: cx + tailleHex * Math.cos(angle), y: cy + tailleHex * Math.sin(angle) };
+  }
+
+  /**
+   * Pour chaque direction (0 à 5, dans l'ordre de DIRECTIONS), indique la paire
+   * de sommets (indices 0-5 de pointsHexagone) qui forme le côté correspondant.
+   */
+  private readonly SOMMETS_PAR_COTE: [number, number][] = [
+    [0, 1], // direction 0 : (q+1, r)
+    [3, 4], // direction 1 : (q-1, r)
+    [1, 2], // direction 2 : (q, r+1)
+    [4, 5], // direction 3 : (q, r-1)
+    [5, 0], // direction 4 : (q+1, r-1)
+    [2, 3], // direction 5 : (q-1, r+1)
+  ];
+
+  /**
+   * Calcule les deux points (x1,y1)-(x2,y2) du segment représentant le côté
+   * `cote` (0-5) de l'hexagone situé en (cx, cy) [déjà en pixels, offset inclus].
+   */
+  segmentCote(cx: number, cy: number, tailleHex: number, cote: number): { x1: number; y1: number; x2: number; y2: number } {
+    const [iA, iB] = this.SOMMETS_PAR_COTE[cote];
+    const a = this.sommetHexagone(cx, cy, tailleHex, iA);
+    const b = this.sommetHexagone(cx, cy, tailleHex, iB);
+    return { x1: a.x, y1: a.y, x2: b.x, y2: b.y };
+  }
+
+  /** Renvoie les 6 côtés (index 0-5) avec leur segment, pour affichage des poignées de pose de mur. */
+  tousLesCotes(cx: number, cy: number, tailleHex: number): { cote: number; x1: number; y1: number; x2: number; y2: number; xMid: number; yMid: number }[] {
+    return [0, 1, 2, 3, 4, 5].map(cote => {
+      const seg = this.segmentCote(cx, cy, tailleHex, cote);
+      return { cote, ...seg, xMid: (seg.x1 + seg.x2) / 2, yMid: (seg.y1 + seg.y2) / 2 };
+    });
+  }
+
   /** Génère toutes les cases (q, r) d'une grille hexagonale de rayon donné. */
   genererCasesGrille(rayon: number): { q: number; r: number }[] {
     const cases: { q: number; r: number }[] = [];
@@ -192,6 +270,16 @@ export class CarteService {
 
   mjSupprimerCarte(carteId: number): void {
     this.envoyer({ type: 'MJ_SUPPRIMER_CARTE_COMMAND', carteId });
+  }
+
+  /** Pose un décor sur une case (ou le retire si type est null). */
+  mjPeindreDecor(carteId: number, q: number, r: number, decorType: string | null): void {
+    this.envoyer({ type: 'MJ_PEINDRE_DECOR_COMMAND', carteId, q, r, decorType });
+  }
+
+  /** Bascule la présence d'un mur sur un côté donné (0-5) d'une case. */
+  mjToggleMur(carteId: number, q: number, r: number, cote: number): void {
+    this.envoyer({ type: 'MJ_TOGGLE_MUR_COMMAND', carteId, q, r, cote });
   }
 
   private envoyer(payload: any): void {
