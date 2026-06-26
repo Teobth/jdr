@@ -1,0 +1,73 @@
+.carte-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.carte-container h2 {
+    font-family: var(--font-titre);
+    color: var(--couleur-accent-or);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.info-message {
+    font-family: var(--font-corps);
+    color: var(--couleur-texte-secondaire);
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.grille-hex {
+    max-width: 100%;
+    background-color: #121417;
+    border: 3px solid var(--couleur-accent-or);
+}
+
+.hexagone {
+    fill: var(--couleur-boite-info);
+    stroke: var(--couleur-bordure);
+    stroke-width: 1.5;
+    transition: fill 0.2s;
+}
+
+.hexagone-occupee {
+    fill: #1c1f24;
+}
+
+.hexagone-adjacent {
+    fill: rgba(168, 125, 58, 0.25);
+    stroke: var(--couleur-accent-or);
+    stroke-width: 2;
+}
+
+.case-cliquable {
+    cursor: pointer;
+}
+
+.case-cliquable .hexagone:hover {
+    fill: rgba(168, 125, 58, 0.5);
+}
+
+.pion {
+    fill: var(--couleur-accent-sec);
+    stroke: var(--couleur-texte-primaire);
+    stroke-width: 1.5;
+    pointer-events: none;
+}
+
+.pion-moi {
+    fill: var(--couleur-accent-or);
+    stroke: #fff;
+}
+
+.pion-label {
+    fill: var(--couleur-texte-primaire);
+    font-family: var(--font-corps);
+    font-size: 12px;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+}

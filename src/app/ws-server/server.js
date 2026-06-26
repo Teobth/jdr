@@ -7,7 +7,7 @@ const app = express();
 // Le port que vous utiliserez pour la connexion WebSocket
 const PORT = '3000'; 
 
-const histoire = 1;
+const histoire = 2;
 let dossier = '';
 switch (histoire) {
     case 1:
@@ -31,7 +31,8 @@ const FILES = {
     DOCUMENTS: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/documents.json', 
     SCENARIO: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/scenario.json',
     AFFICHE: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/affiche.json',
-    JOUEURS: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/joueurs.json'
+    JOUEURS: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/joueurs.json',
+    CARTES: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/cartes.json'
 };
 
 // --- CLASSE DE GESTION DES DONNÉES (StateManager) ---
@@ -46,6 +47,7 @@ class StateManager {
         this.scenarioData = this.loadData(FILES.SCENARIO, []);
         this.affichesData = this.loadData(FILES.AFFICHE, []);
         this.joueursData = this.loadData(FILES.JOUEURS, []);
+        this.cartesData = this.loadData(FILES.CARTES, []);
         this.currentDisplayId = 1;
     }
 
@@ -194,6 +196,173 @@ class StateManager {
             nomPersonnage: entry.nomPersonnage || null
         };
     }
+
+    // --- Commandes CARTES (grille hexagonale) ---
+
+    /**
+     * Renvoie la carte actuellement active (visible des joueurs), ou null.
+     */
+    getCarteActive() {
+        return this.cartesData.find(c => c.active) || null;
+    }
+
+    /**
+     * Calcule les 6 voisins axiaux (q, r) d'une case hexagonale.
+     */
+    getVoisins(q, r) {
+        return [
+            { q: q + 1, r: r },
+            { q: q - 1, r: r },
+            { q: q, r: r + 1 },
+            { q: q, r: r - 1 },
+            { q: q + 1, r: r - 1 },
+            { q: q - 1, r: r + 1 }
+        ];
+    }
+
+    /**
+     * Vérifie que (q, r) est bien à l'intérieur d'une grille hexagonale de rayon donné.
+     */
+    estDansLaGrille(q, r, rayon) {
+        const s = -q - r;
+        return Math.abs(q) <= rayon && Math.abs(r) <= rayon && Math.abs(s) <= rayon;
+    }
+
+    /**
+     * Déplacement d'un joueur : ne peut bouger que son propre pion, d'une case adjacente,
+     * et seulement si la case cible est libre et dans la grille.
+     */
+    deplacerPionJoueur(nomPersonnage, qCible, rCible) {
+        const carte = this.getCarteActive();
+        if (!carte) {
+            console.warn('Aucune carte active pour le déplacement.');
+            return;
+        }
+
+        const pion = carte.pions.find(p => p.nomPersonnage === nomPersonnage);
+        if (!pion) {
+            console.warn(`Pion introuvable pour ${nomPersonnage}.`);
+            return;
+        }
+
+        // Vérifier que la case cible est dans la grille
+        if (!this.estDansLaGrille(qCible, rCible, carte.rayon)) {
+            console.warn('Case cible hors de la grille.');
+            return;
+        }
+
+        // Vérifier l'adjacence (mouvement case par case uniquement)
+        const voisins = this.getVoisins(pion.q, pion.r);
+        const estAdjacente = voisins.some(v => v.q === qCible && v.r === rCible);
+        if (!estAdjacente) {
+            console.warn(`Déplacement refusé pour ${nomPersonnage} : case non adjacente.`);
+            return;
+        }
+
+        // Vérifier qu'aucun autre pion n'occupe déjà la case cible
+        const occupee = carte.pions.some(p => p.q === qCible && p.r === rCible);
+        if (occupee) {
+            console.warn('Case cible déjà occupée par un autre pion.');
+            return;
+        }
+
+        pion.q = qCible;
+        pion.r = rCible;
+        this.saveAndBroadcast('CARTES', 'UPDATE_CARTES', this.cartesData);
+    }
+
+    /**
+     * Déplacement libre par le MJ : aucune contrainte d'adjacence, mais la case
+     * doit rester dans la grille et libre.
+     */
+    mjDeplacerPion(carteId, nomPersonnage, qCible, rCible) {
+        const carte = this.cartesData.find(c => c.id === carteId);
+        if (!carte) return;
+
+        const pion = carte.pions.find(p => p.nomPersonnage === nomPersonnage);
+        if (!pion) return;
+
+        if (!this.estDansLaGrille(qCible, rCible, carte.rayon)) {
+            console.warn('Case cible hors de la grille (MJ).');
+            return;
+        }
+
+        const occupee = carte.pions.some(p => p.q === qCible && p.r === rCible && p.nomPersonnage !== nomPersonnage);
+        if (occupee) {
+            console.warn('Case cible déjà occupée (MJ).');
+            return;
+        }
+
+        pion.q = qCible;
+        pion.r = rCible;
+        this.saveAndBroadcast('CARTES', 'UPDATE_CARTES', this.cartesData);
+    }
+
+    /**
+     * Ajoute un pion sur une carte donnée, à une position donnée (par défaut le centre).
+     */
+    mjAjouterPion(carteId, nomPersonnage, q = 0, r = 0) {
+        const carte = this.cartesData.find(c => c.id === carteId);
+        if (!carte) return;
+
+        if (carte.pions.some(p => p.nomPersonnage === nomPersonnage)) {
+            console.warn(`${nomPersonnage} a déjà un pion sur cette carte.`);
+            return;
+        }
+
+        if (carte.pions.some(p => p.q === q && p.r === r)) {
+            console.warn('Case de départ déjà occupée, pion non ajouté.');
+            return;
+        }
+
+        carte.pions.push({ nomPersonnage, q, r });
+        this.saveAndBroadcast('CARTES', 'UPDATE_CARTES', this.cartesData);
+    }
+
+    /**
+     * Retire le pion d'un personnage sur une carte donnée.
+     */
+    mjRetirerPion(carteId, nomPersonnage) {
+        const carte = this.cartesData.find(c => c.id === carteId);
+        if (!carte) return;
+
+        carte.pions = carte.pions.filter(p => p.nomPersonnage !== nomPersonnage);
+        this.saveAndBroadcast('CARTES', 'UPDATE_CARTES', this.cartesData);
+    }
+
+    /**
+     * Crée une nouvelle carte nommée avec un rayon donné.
+     */
+    mjCreerCarte(nom, rayon) {
+        const nouvelId = this.cartesData.length > 0
+            ? Math.max(...this.cartesData.map(c => c.id)) + 1
+            : 1;
+
+        this.cartesData.push({
+            id: nouvelId,
+            nom,
+            rayon,
+            active: false,
+            pions: []
+        });
+        this.saveAndBroadcast('CARTES', 'UPDATE_CARTES', this.cartesData);
+    }
+
+    /**
+     * Définit la carte active (visible des joueurs) ; désactive les autres.
+     */
+    mjActiverCarte(carteId) {
+        this.cartesData.forEach(c => { c.active = (c.id === carteId); });
+        this.saveAndBroadcast('CARTES', 'UPDATE_CARTES', this.cartesData);
+    }
+
+    /**
+     * Supprime une carte.
+     */
+    mjSupprimerCarte(carteId) {
+        this.cartesData = this.cartesData.filter(c => c.id !== carteId);
+        this.saveAndBroadcast('CARTES', 'UPDATE_CARTES', this.cartesData);
+    }
     
     // --- État Initial pour un Nouveau Client ---
     getInitialState() {
@@ -202,6 +371,7 @@ class StateManager {
             documents: this.documentsData,
             scenario: this.scenarioData,
             affiches: this.affichesData,
+            cartes: this.cartesData,
             displayId: this.currentDisplayId,
         };
     }
@@ -282,6 +452,36 @@ wss.on('connection', (ws) => {
                     }
                     break;
                 }
+
+                // --- Commandes Carte (joueur) ---
+                case 'DEPLACER_PION_COMMAND':
+                    stateManager.deplacerPionJoueur(data.nomPersonnage, data.q, data.r);
+                    break;
+
+                // --- Commandes Carte (MJ) ---
+                case 'MJ_DEPLACER_PION_COMMAND':
+                    stateManager.mjDeplacerPion(data.carteId, data.nomPersonnage, data.q, data.r);
+                    break;
+
+                case 'MJ_AJOUTER_PION_COMMAND':
+                    stateManager.mjAjouterPion(data.carteId, data.nomPersonnage, data.q ?? 0, data.r ?? 0);
+                    break;
+
+                case 'MJ_RETIRER_PION_COMMAND':
+                    stateManager.mjRetirerPion(data.carteId, data.nomPersonnage);
+                    break;
+
+                case 'MJ_CREER_CARTE_COMMAND':
+                    stateManager.mjCreerCarte(data.nom, data.rayon);
+                    break;
+
+                case 'MJ_ACTIVER_CARTE_COMMAND':
+                    stateManager.mjActiverCarte(data.carteId);
+                    break;
+
+                case 'MJ_SUPPRIMER_CARTE_COMMAND':
+                    stateManager.mjSupprimerCarte(data.carteId);
+                    break;
                     
                 default:
                     console.warn(`Type de commande inconnu: ${data.type}`);

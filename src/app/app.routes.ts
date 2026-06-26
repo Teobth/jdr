@@ -11,6 +11,8 @@ import { ScenarioAdminComponent } from './Components/admin-scenario';
 import { AfficheComponent } from './Components/admin-affiche';
 import { LoginComponent } from './Components/login';
 import { MonPersonnageComponent } from './Components/monPerso';
+import { CarteComponent } from './Components/carte';
+import { AdminCarteComponent } from './Components/admin-carte';
 import { authGuard } from './service/authGuard';
 import { adminGuard } from './service/adminGuard';
 
@@ -20,6 +22,8 @@ export const routes: Routes = [
   { path: '', component: LieuComponent, canActivate: [authGuard] },
 
   { path: 'mon-personnage', component: MonPersonnageComponent, canActivate: [authGuard] },
+
+  { path: 'carte', component: CarteComponent, canActivate: [authGuard] },
 
   { path: 'personnages', component: PersonnageListComponent, canActivate: [authGuard] },
   
@@ -38,6 +42,7 @@ export const routes: Routes = [
       { path: 'documents', component: AdminDocumentsComponent },
       { path: 'scenario', component: ScenarioAdminComponent },
       { path: 'affiches', component: AfficheComponent },
+      { path: 'carte', component: AdminCarteComponent },
       { path: '', redirectTo: 'scenario', pathMatch: 'full' }
     ]
   }

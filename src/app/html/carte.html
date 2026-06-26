@@ -1,0 +1,49 @@
+<div class="carte-container">
+  @if (carte()) {
+    <h2>{{ carte()!.nom }}</h2>
+
+    @if (!monPion()) {
+      <p class="info-message">Votre pion n'a pas encore été placé sur cette carte par le MJ.</p>
+    } @else {
+      <p class="info-message">Cliquez sur une case adjacente surlignée pour vous y déplacer.</p>
+    }
+
+    <svg
+      [attr.viewBox]="'0 0 ' + dimensionsSvg().largeur + ' ' + dimensionsSvg().hauteur"
+      [attr.width]="dimensionsSvg().largeur"
+      [attr.height]="dimensionsSvg().hauteur"
+      class="grille-hex"
+    >
+      @for (c of cases(); track c.q + '_' + c.r) {
+        <g
+          (click)="onClickCase(c)"
+          [class.case-cliquable]="c.estAdjacenteAuMonPion"
+        >
+          <polygon
+            [attr.points]="c.points"
+            class="hexagone"
+            [class.hexagone-adjacent]="c.estAdjacenteAuMonPion"
+            [class.hexagone-occupee]="!!c.nomPersonnageSurCase"
+          />
+
+          @if (c.nomPersonnageSurCase) {
+            <circle
+              [attr.cx]="c.x"
+              [attr.cy]="c.y"
+              r="18"
+              class="pion"
+              [class.pion-moi]="c.estMonPion"
+            />
+            <text
+              [attr.x]="c.x"
+              [attr.y]="c.y"
+              class="pion-label"
+            >{{ getNomAffiche(c.nomPersonnageSurCase) }}</text>
+          }
+        </g>
+      }
+    </svg>
+  } @else {
+    <p class="info-message">Aucune carte n'est actuellement affichée par le MJ.</p>
+  }
+</div>

@@ -1,0 +1,121 @@
+<h2>Gestion des Cartes</h2>
+
+<div class="admin-carte-layout">
+
+  <!-- Colonne de gauche : liste des cartes + création -->
+  <div class="panneau-cartes">
+    <h3>Cartes existantes</h3>
+
+    @if (cartes().length === 0) {
+      <p class="vide">Aucune carte créée pour le moment.</p>
+    }
+
+    <ul class="liste-cartes">
+      @for (c of cartes(); track c.id) {
+        <li [class.carte-editee]="carteEditee()?.id === c.id">
+          <div class="ligne-carte" (click)="selectionnerCarteEditee(c.id)">
+            <span class="nom-carte">{{ c.nom }}</span>
+            <span class="rayon-carte">rayon {{ c.rayon }}</span>
+            @if (c.active) {
+              <span class="badge-active">ACTIVE</span>
+            }
+          </div>
+          <div class="actions-carte">
+            <button (click)="onActiverCarte(c.id)" [disabled]="c.active">
+              Rendre active
+            </button>
+            <button (click)="onSupprimerCarte(c.id)" class="btn-danger">
+              Supprimer
+            </button>
+          </div>
+        </li>
+      }
+    </ul>
+
+    <hr>
+
+    <h3>Créer une carte</h3>
+    <div class="formulaire-creation">
+      <input
+        type="text"
+        placeholder="Nom de la carte"
+        [(ngModel)]="nouveauNomCarte"
+        name="nouveauNomCarte"
+      />
+      <input
+        type="number"
+        min="1"
+        max="15"
+        [(ngModel)]="nouveauRayonCarte"
+        name="nouveauRayonCarte"
+      />
+      <button (click)="onCreerCarte()">Créer</button>
+    </div>
+  </div>
+
+  <!-- Colonne de droite : édition de la carte sélectionnée -->
+  <div class="panneau-edition">
+    @if (carteEditee()) {
+      <h3>{{ carteEditee()!.nom }}</h3>
+
+      <div class="formulaire-pion">
+        <select [(ngModel)]="personnageAAjouter" name="personnageAAjouter">
+          <option value="" disabled selected>Ajouter un personnage...</option>
+          @for (p of personnagesDisponibles(); track p.nom) {
+            <option [value]="p.nom">{{ p.nom }}</option>
+          }
+        </select>
+        <button (click)="onAjouterPion()" [disabled]="!personnageAAjouter">Ajouter</button>
+      </div>
+
+      @if (pionSelectionne()) {
+        <p class="info-selection">
+          Pion sélectionné : <strong>{{ pionSelectionne() }}</strong> — cliquez une case libre pour le déplacer.
+          <button (click)="annulerSelection()" class="btn-annuler">Annuler</button>
+        </p>
+      } @else {
+        <p class="info-selection">Cliquez sur un pion pour le sélectionner, puis sur une case pour le déplacer.</p>
+      }
+
+      <svg
+        [attr.viewBox]="'0 0 ' + dimensionsSvg().largeur + ' ' + dimensionsSvg().hauteur"
+        [attr.width]="dimensionsSvg().largeur"
+        [attr.height]="dimensionsSvg().hauteur"
+        class="grille-hex"
+      >
+        @for (c of cases(); track c.q + '_' + c.r) {
+          <g (click)="onClickCase(c)" class="case-cliquable">
+            <polygon
+              [attr.points]="c.points"
+              class="hexagone"
+              [class.hexagone-occupee]="!!c.nomPersonnageSurCase"
+              [class.hexagone-selectionnee]="c.nomPersonnageSurCase === pionSelectionne()"
+            />
+
+            @if (c.nomPersonnageSurCase) {
+              <circle [attr.cx]="c.x" [attr.cy]="c.y" r="16" class="pion" />
+              <text [attr.x]="c.x" [attr.y]="c.y" class="pion-label">{{ getNomAffiche(c.nomPersonnageSurCase) }}</text>
+            }
+          </g>
+        }
+      </svg>
+
+      <h4>Pions sur cette carte</h4>
+      @if (carteEditee()!.pions.length === 0) {
+        <p class="vide">Aucun pion sur cette carte.</p>
+      } @else {
+        <ul class="liste-pions">
+          @for (pion of carteEditee()!.pions; track pion.nomPersonnage) {
+            <li>
+              {{ pion.nomPersonnage }} ({{ pion.q }}, {{ pion.r }})
+              <button (click)="onRetirerPion(pion.nomPersonnage)" class="btn-danger">Retirer</button>
+            </li>
+          }
+        </ul>
+      }
+    } @else {
+      <p class="vide">Sélectionnez une carte à gauche pour l'éditer.</p>
+    }
+  </div>
+
+</div>

@@ -1,0 +1,220 @@
+.admin-carte-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.panneau-cartes, .panneau-edition {
+    background-color: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.panneau-cartes h3, .panneau-edition h3 {
+    color: var(--couleur-accent-or);
+    font-family: var(--font-titre);
+    margin-top: 0;
+}
+
+.vide {
+    color: #999;
+    font-style: italic;
+}
+
+.liste-cartes {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.liste-cartes li {
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.liste-cartes li.carte-editee {
+    border-color: var(--couleur-accent-or);
+}
+
+.ligne-carte {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.nom-carte {
+    font-weight: bold;
+    color: #f0f0f0;
+    flex: 1;
+}
+
+.rayon-carte {
+    color: #aaa;
+    font-size: 0.85em;
+}
+
+.badge-active {
+    background-color: #5cb85c;
+    color: #fff;
+    font-size: 0.75em;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.actions-carte {
+    display: flex;
+    gap: 8px;
+}
+
+.actions-carte button {
+    flex: 1;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    background-color: #555;
+    color: #f0f0f0;
+}
+
+.actions-carte button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.btn-danger {
+    background-color: #a33 !important;
+}
+
+.formulaire-creation, .formulaire-pion {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.formulaire-creation input, .formulaire-pion select {
+    flex: 1;
+    min-width: 0;
+    padding: 8px;
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+    border: 1px solid #555;
+    border-radius: 4px;
+}
+
+.formulaire-creation input[type="number"] {
+    flex: 0 0 70px;
+}
+
+.formulaire-creation button, .formulaire-pion button {
+    padding: 8px 14px;
+    background-color: var(--couleur-accent-or);
+    color: #222;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.formulaire-pion {
+    margin-bottom: 15px;
+}
+
+.info-selection {
+    color: #ddd;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.btn-annuler {
+    margin-left: 10px;
+    padding: 4px 10px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.grille-hex {
+    background-color: #121417;
+    border: 2px solid var(--couleur-accent-or);
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.hexagone {
+    fill: #2a2d31;
+    stroke: #555;
+    stroke-width: 1.5;
+    cursor: pointer;
+    transition: fill 0.2s;
+}
+
+.hexagone:hover {
+    fill: #3a3d41;
+}
+
+.hexagone-occupee {
+    fill: #1c1f24;
+}
+
+.hexagone-selectionnee {
+    stroke: var(--couleur-accent-or);
+    stroke-width: 3;
+}
+
+.pion {
+    fill: var(--couleur-accent-sec);
+    stroke: #fff;
+    stroke-width: 1.5;
+    pointer-events: none;
+}
+
+.pion-label {
+    fill: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+}
+
+.liste-pions {
+    list-style: none;
+    padding: 0;
+}
+
+.liste-pions li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    color: #f0f0f0;
+}
+
+.liste-pions li button {
+    padding: 4px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+}
+
+@media (max-width: 800px) {
+    .admin-carte-layout {
+        grid-template-columns: 1fr;
+    }
+}
