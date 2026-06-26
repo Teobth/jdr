@@ -1,0 +1,46 @@
+@let p = personnage();
+
+@if (p) {
+    <div class="detail-card">
+        <h1>{{ p.nom }}</h1>
+        
+        <div class="personnage-description">
+            <div class="photo-wrapper">
+                <a [href]="p.fullImageUrl">
+                    <img [src]="p.fullImageUrl" 
+                        [alt]="'Photo de ' + p.nom" 
+                        class="personnage-photo">
+                </a>
+            </div>
+
+            <div class="stats-container">
+                <p><strong>Age :</strong> <span class="stat-value">{{ p.age }}</span></p>
+                <p><strong>Rôle :</strong> <span class="stat-value">{{ p.profession }}</span></p>
+                <p><strong>Statut :</strong> <span class="stat-value">{{ p.mort ? 'Mort' : 'En vie' }}</span></p>
+            </div>
+        </div>
+        
+        <hr class="separator">
+
+        <div class="revealed-secrets">
+            <h3>Informations Révélées</h3>
+            
+            @if (secretsDebloques().length > 0) {
+                <ul>
+                    @for (secret of secretsDebloques(); track secret.cle) {
+                        <li>
+                            <span class="secret-key">{{ secret.cle }}:</span> 
+                            <span class="secret-value">{{ secret.valeur }}</span>
+                        </li>
+                    }
+                </ul>
+            } @else {
+                <p class="no-secret-message">Aucune information supplémentaire n'a été découverte.</p>
+            }
+        </div>
+    </div>
+} @else {
+    <div class="error-message">
+        <p>Personnage introuvable. Contactez le MJ si le problème persiste.</p>
+    </div>
+}

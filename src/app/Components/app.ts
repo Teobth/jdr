@@ -1,7 +1,7 @@
-
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../service/authService';
 
 @Component({
   standalone: true,
@@ -17,4 +17,11 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class App {
   protected title = 'Jeu de Rôle';
+  protected authService = inject(AuthService);
+  private router = inject(Router);
+
+  onDeconnexion(): void {
+    this.authService.seDeconnecter();
+    this.router.navigateByUrl('/login');
+  }
 }

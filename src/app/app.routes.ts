@@ -9,21 +9,30 @@ import { AdminComponent } from './Components/admin';
 import { DocumentDetailComponent } from './Components/document-detail';
 import { ScenarioAdminComponent } from './Components/admin-scenario';
 import { AfficheComponent } from './Components/admin-affiche';
+import { LoginComponent } from './Components/login';
+import { MonPersonnageComponent } from './Components/monPerso';
+import { authGuard } from './service/authGuard';
+import { adminGuard } from './service/adminGuard';
 
 export const routes: Routes = [
-  { path: '', component: LieuComponent }, 
-  
-  { path: 'personnages', component: PersonnageListComponent }, 
-  
-  { path: 'personnages/:nom', component: PersonnageDetailComponent },
+  { path: 'login', component: LoginComponent },
 
-  { path: 'documents', component: DocumentListComponent },
+  { path: '', component: LieuComponent, canActivate: [authGuard] },
 
-  { path: 'documents/:id', component: DocumentDetailComponent },
+  { path: 'mon-personnage', component: MonPersonnageComponent, canActivate: [authGuard] },
+
+  { path: 'personnages', component: PersonnageListComponent, canActivate: [authGuard] },
+  
+  { path: 'personnages/:nom', component: PersonnageDetailComponent, canActivate: [authGuard] },
+
+  { path: 'documents', component: DocumentListComponent, canActivate: [authGuard] },
+
+  { path: 'documents/:id', component: DocumentDetailComponent, canActivate: [authGuard] },
 
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [adminGuard],
     children: [
       { path: 'personnages', component: AdminPersonnagesComponent },
       { path: 'documents', component: AdminDocumentsComponent },

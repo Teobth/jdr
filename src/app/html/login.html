@@ -1,0 +1,28 @@
+<div class="login-container">
+  <div class="login-card">
+    <h1>Contes de la Crypte</h1>
+    <p class="subtitle">Entrez le code qui vous a été remis</p>
+
+    <form (ngSubmit)="onValider()" class="login-form">
+      <input
+        type="text"
+        inputmode="numeric"
+        maxlength="8"
+        placeholder="Code secret"
+        [(ngModel)]="pinSaisi"
+        name="pin"
+        class="pin-input"
+        autocomplete="off"
+        #pinField
+      />
+
+      <button type="submit" class="btn-connexion" [disabled]="authService.enCoursDeConnexion() || !pinSaisi">
+        {{ authService.enCoursDeConnexion() ? 'Vérification...' : 'Entrer' }}
+      </button>
+    </form>
+
+    @if (authService.erreurConnexion()) {
+      <p class="erreur-message">{{ authService.erreurConnexion() }}</p>
+    }
+  </div>
+</div>

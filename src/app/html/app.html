@@ -2,29 +2,51 @@
   <nav class="main-nav">
     <div class="logo">Contes de la Crypte</div>
     
-    <ul>
-      <li>
-        <a routerLink="/" 
-          routerLinkActive="active-tab"
-          [routerLinkActiveOptions]="{ exact: true }">
-            Lieu
-        </a>
-      </li>
-      
-      <li>
-        <a routerLink="/personnages" 
-           routerLinkActive="active-tab">
-            Rencontres
-        </a>
-      </li>
+    @if (authService.estConnecte()) {
+      <ul>
+        <li>
+          <a routerLink="/" 
+            routerLinkActive="active-tab"
+            [routerLinkActiveOptions]="{ exact: true }">
+              Lieu
+          </a>
+        </li>
 
-      <li>
-        <a routerLink="/documents" 
-           routerLinkActive="active-tab">
-            Documents
-        </a>
-      </li>
-    </ul>
+        @if (!authService.estMJ()) {
+          <li>
+            <a routerLink="/mon-personnage"
+               routerLinkActive="active-tab">
+                Mon Personnage
+            </a>
+          </li>
+        }
+        
+        <li>
+          <a routerLink="/personnages" 
+             routerLinkActive="active-tab">
+              Rencontres
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/documents" 
+             routerLinkActive="active-tab">
+              Documents
+          </a>
+        </li>
+
+        @if (authService.estMJ()) {
+          <li>
+            <a routerLink="/admin"
+               routerLinkActive="active-tab">
+                Admin
+            </a>
+          </li>
+        }
+      </ul>
+
+      <button class="btn-deconnexion" (click)="onDeconnexion()">Déconnexion</button>
+    }
   </nav>
 </header>
 

@@ -7,7 +7,7 @@ const app = express();
 // Le port que vous utiliserez pour la connexion WebSocket
 const PORT = '3000'; 
 
-const histoire = 2;
+const histoire = 1;
 let dossier = '';
 switch (histoire) {
     case 1:
@@ -30,7 +30,8 @@ const FILES = {
     PERSONNAGES: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/personnages.json',
     DOCUMENTS: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/documents.json', 
     SCENARIO: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/scenario.json',
-    AFFICHE: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/affiche.json'
+    AFFICHE: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/affiche.json',
+    JOUEURS: '/home/teo/Documents/JDR/Scénar.json/' + dossier + '/joueurs.json'
 };
 
 // --- CLASSE DE GESTION DES DONNÉES (StateManager) ---
@@ -44,6 +45,7 @@ class StateManager {
         this.documentsData = this.loadData(FILES.DOCUMENTS, []);
         this.scenarioData = this.loadData(FILES.SCENARIO, []);
         this.affichesData = this.loadData(FILES.AFFICHE, []);
+        this.joueursData = this.loadData(FILES.JOUEURS, []);
         this.currentDisplayId = 1;
     }
 
@@ -174,6 +176,24 @@ class StateManager {
             this.saveAndBroadcast('DOCUMENTS', 'UPDATE_DOCUMENTS', this.documentsData); 
         }
     }
+
+    // --- Commandes Authentification ---
+    /**
+     * Vérifie un PIN et renvoie les infos de connexion associées, ou null si invalide.
+     * @param {string} pin - Le code saisi par le joueur.
+     * @returns {{role: string, nomPersonnage: string|null}|null} Infos de connexion, ou null.
+     */
+    verifierPin(pin) {
+        const entry = this.joueursData.find(j => String(j.pin) === String(pin));
+        if (!entry) return null;
+
+        // Rétro-compatibilité : si "role" est absent, on déduit 'mj' ou 'joueur'
+        const role = entry.role || (entry.nomPersonnage ? 'joueur' : 'mj');
+        return {
+            role,
+            nomPersonnage: entry.nomPersonnage || null
+        };
+    }
     
     // --- État Initial pour un Nouveau Client ---
     getInitialState() {
@@ -240,6 +260,28 @@ wss.on('connection', (ws) => {
                 case 'TOGGLE_MORT_COMMAND':
                     stateManager.toggleMort(data.personnageNom); 
                     break;
+
+                case 'LOGIN_COMMAND': {
+                    const infosConnexion = stateManager.verifierPin(data.pin);
+                    if (infosConnexion) {
+                        ws.send(JSON.stringify({
+                            type: 'LOGIN_SUCCESS',
+                            payload: {
+                                nomPersonnage: infosConnexion.nomPersonnage,
+                                role: infosConnexion.role,
+                                pin: data.pin
+                            }
+                        }));
+                        console.log(`Connexion réussie : rôle=${infosConnexion.role}, personnage=${infosConnexion.nomPersonnage ?? '(aucun)'}`);
+                    } else {
+                        ws.send(JSON.stringify({
+                            type: 'LOGIN_FAILED',
+                            payload: { message: 'PIN invalide' }
+                        }));
+                        console.log(`Tentative de connexion échouée avec le PIN : ${data.pin}`);
+                    }
+                    break;
+                }
                     
                 default:
                     console.warn(`Type de commande inconnu: ${data.type}`);
