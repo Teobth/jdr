@@ -168,6 +168,28 @@ class StateManager {
         }
     }
 
+    /**
+     * Met à jour (totalement ou partiellement) la fiche complète d'un personnage
+     * (caractéristiques, compétences, armes, équipement, profil, etc.).
+     * @param {string} personnageNom
+     * @param {object} fichePartielle - objet FicheCthulhu complet ou partiel (merge superficiel).
+     */
+    mettreAJourFiche(personnageNom, fichePartielle) {
+        const perso = this.personnagesData.find(p => p.nom === personnageNom);
+        if (!perso) {
+            console.warn(`Personnage "${personnageNom}" introuvable pour mise à jour de fiche.`);
+            return;
+        }
+
+        perso.fiche = {
+            ...(perso.fiche || {}),
+            ...fichePartielle
+        };
+
+        console.log(`Fiche de ${personnageNom} mise à jour.`);
+        this.saveAndBroadcast('PERSONNAGES', 'UPDATE_PERSONNAGES', this.personnagesData);
+    }
+
     // --- Commandes Documents ---
     toggleAcces(titre) {
         const index = this.documentsData.findIndex(d => d.titre === titre);
@@ -513,6 +535,10 @@ wss.on('connection', (ws) => {
                     
                 case 'TOGGLE_SECRET_COMMAND':
                     stateManager.toggleSecret(data.personnageNom, data.secretCle);
+                    break;
+
+                case 'UPDATE_FICHE_COMMAND':
+                    stateManager.mettreAJourFiche(data.personnageNom, data.fiche);
                     break;
                 
                 case 'TOGGLE_ACCES_COMMAND':

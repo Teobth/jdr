@@ -15,6 +15,7 @@ import { CarteComponent } from './Components/carte';
 import { AdminCarteComponent } from './Components/admin-carte';
 import { authGuard } from './service/authGuard';
 import { adminGuard } from './service/adminGuard';
+import { AdminFichePersonnageComponent } from './Components/admin-fiche-personnage';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -43,7 +44,8 @@ export const routes: Routes = [
       { path: 'scenario', component: ScenarioAdminComponent },
       { path: 'affiches', component: AfficheComponent },
       { path: 'carte', component: AdminCarteComponent },
-      { path: '', redirectTo: 'scenario', pathMatch: 'full' }
+      { path: '', redirectTo: 'scenario', pathMatch: 'full' },
+      { path: 'personnages/:nom/fiche', component: AdminFichePersonnageComponent },
     ]
   }
 

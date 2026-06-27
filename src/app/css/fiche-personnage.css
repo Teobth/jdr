@@ -1,0 +1,340 @@
+/* src/app/css/fiche-personnage.css
+   Grille de fiche d'investigateur (L'Appel de Cthulhu), dans l'esprit Art Déco du site. */
+
+.fiche-toggle-zone {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-fiche-toggle {
+    padding: 14px 36px;
+    background-color: var(--couleur-accent-sec);
+    color: var(--couleur-texte-primaire);
+    border: 2px solid var(--couleur-accent-or);
+    border-radius: 0;
+    font-family: var(--font-titre);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.btn-fiche-toggle:hover {
+    background-color: var(--couleur-accent-or);
+    color: var(--couleur-fond-primaire);
+    box-shadow: 0 0 15px var(--couleur-accent-or);
+}
+
+/* --- Conteneur général de la fiche --- */
+
+.fiche-cthulhu {
+    margin-top: 40px;
+    text-align: left;
+    animation: apparition-fiche 0.4s ease-out;
+}
+
+@keyframes apparition-fiche {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fiche-entete {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.fiche-titre {
+    font-size: 2em;
+    letter-spacing: 0.15em;
+    color: var(--couleur-accent-or);
+    border-bottom: 3px double var(--couleur-accent-sec);
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.fiche-sous-titre {
+    font-family: var(--font-corps);
+    font-style: italic;
+    color: var(--couleur-texte-secondaire);
+    text-transform: none;
+    margin-top: 5px;
+}
+
+/* --- Sections --- */
+
+.fiche-section {
+    background-color: #121417;
+    border: 1px solid var(--couleur-accent-or);
+    border-radius: 0;
+    padding: 25px 30px;
+    margin-bottom: 25px;
+}
+
+.fiche-section-double {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.fiche-section-titre {
+    color: var(--couleur-accent-sec);
+    border-bottom: 1px solid var(--couleur-accent-sec);
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+    letter-spacing: 0.05em;
+}
+
+/* --- État civil & profil : paires clé/valeur --- */
+
+.etat-civil-grille,
+.profil-grille {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 40px;
+}
+
+.etat-civil-grille p,
+.profil-grille p,
+.fiche-section-double p {
+    margin: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px dotted var(--couleur-bordure);
+    text-transform: none;
+}
+
+.etat-civil-grille strong,
+.profil-grille strong,
+.fiche-section-double strong {
+    display: block;
+    color: var(--couleur-accent-or);
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.etat-civil-grille span,
+.profil-grille span,
+.fiche-section-double span {
+    font-family: var(--font-corps);
+    color: var(--couleur-texte-primaire);
+}
+
+/* --- Caractéristiques --- */
+
+.carac-grille {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 12px;
+}
+
+.carac-case {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--couleur-fond-primaire);
+    border: 1px solid var(--couleur-bordure);
+    padding: 14px 4px;
+    transition: border-color 0.2s;
+}
+
+.carac-case:hover {
+    border-color: var(--couleur-accent-or);
+}
+
+.carac-label {
+    font-family: var(--font-titre);
+    font-size: 0.85em;
+    color: var(--couleur-accent-sec);
+    letter-spacing: 0.1em;
+}
+
+.carac-valeur {
+    font-family: var(--font-mono, monospace);
+    font-size: 1.6em;
+    color: var(--couleur-accent-or);
+    font-weight: 700;
+    margin-top: 6px;
+}
+
+/* --- Jauges (PV, PM, SAN, Chance) --- */
+
+.jauges-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.jauge-bloc {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background-color: var(--couleur-fond-primaire);
+    border-left: 4px solid var(--couleur-accent-sec);
+    padding: 12px 16px;
+}
+
+.jauge-label {
+    font-family: var(--font-corps);
+    text-transform: uppercase;
+    font-size: 0.78em;
+    color: var(--couleur-texte-secondaire);
+    letter-spacing: 0.05em;
+}
+
+.jauge-valeur {
+    font-family: var(--font-mono, monospace);
+    font-size: 1.4em;
+    color: var(--couleur-texte-primaire);
+}
+
+.badge-alerte {
+    align-self: flex-start;
+    background-color: #a00000;
+    color: #fff;
+    font-size: 0.72em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 50px;
+    letter-spacing: 0.05em;
+}
+
+.combat-grille {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.combat-bloc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--couleur-fond-primaire);
+    border: 1px solid var(--couleur-bordure);
+    padding: 10px;
+}
+
+/* --- Compétences --- */
+
+.competences-colonnes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 30px;
+}
+
+.competence-liste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.competence-ligne {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 7px 0;
+    border-bottom: 1px dotted var(--couleur-bordure);
+    font-family: var(--font-corps);
+}
+
+.competence-nom {
+    color: var(--couleur-texte-primaire);
+    text-transform: none;
+}
+
+.competence-valeur {
+    font-family: var(--font-mono, monospace);
+    color: var(--couleur-accent-or);
+    font-weight: 700;
+    margin-left: 12px;
+    white-space: nowrap;
+}
+
+/* --- Armes --- */
+
+.armes-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-corps);
+    font-size: 0.92em;
+}
+
+.armes-table th,
+.armes-table td {
+    padding: 9px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--couleur-bordure);
+    text-transform: none;
+}
+
+.armes-table th {
+    color: var(--couleur-accent-or);
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--couleur-accent-sec);
+}
+
+.armes-table td:first-child {
+    color: var(--couleur-accent-sec);
+    font-weight: 700;
+}
+
+/* --- Équipement --- */
+
+.equipement-liste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.equipement-liste li {
+    padding: 8px 0;
+    border-bottom: 1px dotted var(--couleur-bordure);
+    font-family: var(--font-corps);
+    text-transform: none;
+}
+
+/* --- Responsive --- */
+
+@media (max-width: 900px) {
+    .carac-grille {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .competences-colonnes {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .fiche-section-double,
+    .etat-civil-grille,
+    .profil-grille {
+        grid-template-columns: 1fr;
+    }
+
+    .armes-table {
+        font-size: 0.8em;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 600px) {
+    .carac-grille {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .competences-colonnes {
+        grid-template-columns: 1fr;
+    }
+
+    .jauges-grille {
+        grid-template-columns: 1fr 1fr;
+    }
+}

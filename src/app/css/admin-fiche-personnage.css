@@ -1,0 +1,268 @@
+/* src/app/css/admin-fiche-personnage.css */
+
+.admin-fiche-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10px 0 60px;
+}
+
+.lien-retour-admin {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--couleur-accent-or, #a87d3a);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.lien-retour-admin:hover {
+    text-decoration: underline;
+}
+
+.message-confirmation {
+    background-color: #1b3d1b;
+    border: 1px solid #5cb85c;
+    color: #c8f0c8;
+    padding: 10px 16px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.bloc-creation {
+    background-color: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 25px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.bloc-creation button {
+    margin-top: 10px;
+    padding: 10px 24px;
+    background-color: var(--couleur-accent-or, #a87d3a);
+    color: #1c1c1c;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.bloc-creation button:hover {
+    opacity: 0.9;
+}
+
+/* --- Sections pliables --- */
+
+.fiche-admin-section {
+    background-color: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding: 0 20px;
+}
+
+.fiche-admin-section summary {
+    cursor: pointer;
+    padding: 16px 0;
+    color: var(--couleur-accent-or, #a87d3a);
+    font-family: var(--font-titre, inherit);
+    font-weight: bold;
+    letter-spacing: 0.03em;
+    list-style: none;
+}
+
+.fiche-admin-section summary::-webkit-details-marker {
+    display: none;
+}
+
+.fiche-admin-section summary::before {
+    content: '▸ ';
+    color: var(--couleur-accent-sec, #005663);
+}
+
+.fiche-admin-section[open] summary::before {
+    content: '▾ ';
+}
+
+.fiche-admin-section > div,
+.fiche-admin-section > button {
+    margin-bottom: 16px;
+}
+
+/* --- Grilles de champs simples --- */
+
+.grille-champs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+}
+
+.grille-champs-larges {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.grille-champs label,
+.grille-carac label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.85em;
+    color: #ccc;
+}
+
+.grille-champs input,
+.grille-champs textarea,
+.grille-carac input {
+    padding: 8px 10px;
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+    border: 1px solid #555;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.grille-champs textarea {
+    resize: vertical;
+}
+
+.champ-checkbox {
+    flex-direction: row !important;
+    align-items: center;
+    gap: 8px !important;
+}
+
+.champ-checkbox input {
+    width: auto;
+}
+
+/* --- Caractéristiques --- */
+
+.grille-carac {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 12px;
+}
+
+.grille-carac label {
+    align-items: center;
+    text-align: center;
+    color: var(--couleur-accent-sec, #005663);
+    font-weight: bold;
+}
+
+.grille-carac input {
+    width: 100%;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+/* --- Listes dynamiques (compétences, armes, équipement) --- */
+
+.liste-dynamique {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ligne-dynamique {
+    display: grid;
+    gap: 8px;
+    align-items: center;
+}
+
+.ligne-competence {
+    grid-template-columns: 2fr 1fr 1fr auto;
+}
+
+.ligne-arme {
+    grid-template-columns: 1.5fr 0.6fr 0.6fr 0.6fr 1fr 0.8fr 0.6fr 0.6fr 0.8fr auto;
+}
+
+.ligne-equipement {
+    grid-template-columns: 1fr auto;
+}
+
+.ligne-dynamique input {
+    padding: 7px 8px;
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+    border: 1px solid #555;
+    border-radius: 4px;
+    min-width: 0;
+}
+
+.btn-retirer {
+    background-color: #a33;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 1.1em;
+    line-height: 1;
+}
+
+.btn-retirer:hover {
+    background-color: #c44;
+}
+
+.btn-ajouter {
+    background-color: #333;
+    color: var(--couleur-accent-or, #a87d3a);
+    border: 1px dashed var(--couleur-accent-or, #a87d3a);
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.btn-ajouter:hover {
+    background-color: #3a3a2a;
+}
+
+/* --- Actions de bas de page --- */
+
+.fiche-admin-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 20px;
+    position: sticky;
+    bottom: 0;
+    background-color: #1c1c1c;
+    padding: 14px 0;
+    border-top: 2px solid var(--couleur-accent-or, #a87d3a);
+}
+
+.btn-enregistrer {
+    padding: 12px 28px;
+    background-color: #5cb85c;
+    color: #0c1e0c;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-enregistrer:hover {
+    background-color: #6fcf6f;
+}
+
+.btn-annuler-edition {
+    padding: 12px 28px;
+    background-color: #555;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-annuler-edition:hover {
+    background-color: #666;
+}
+
+@media (max-width: 700px) {
+    .ligne-arme {
+        grid-template-columns: 1fr;
+    }
+}

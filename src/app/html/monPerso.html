@@ -38,6 +38,182 @@
                 <p class="no-secret-message">Aucune information supplémentaire n'a été découverte.</p>
             }
         </div>
+
+        @if (fiche(); as f) {
+            <div class="fiche-toggle-zone">
+                <button class="btn-fiche-toggle" (click)="basculerVue()">
+                    {{ afficherFicheComplete() ? 'Masquer la fiche complète' : 'Ouvrir la fiche d\'investigateur' }}
+                </button>
+            </div>
+
+            @if (afficherFicheComplete()) {
+                <div class="fiche-cthulhu">
+
+                    <div class="fiche-entete">
+                        <h2 class="fiche-titre">Fiche d'Investigateur</h2>
+                        <p class="fiche-sous-titre">L'Appel de Cthulhu &middot; Période Classique</p>
+                    </div>
+
+                    <!-- État civil -->
+                    <section class="fiche-section">
+                        <h3 class="fiche-section-titre">État civil</h3>
+                        <div class="etat-civil-grille">
+                            <p><strong>Occupation</strong><span>{{ f.occupation }}</span></p>
+                            <p><strong>Résidence</strong><span>{{ f.residence }}</span></p>
+                            <p><strong>Lieu de naissance</strong><span>{{ f.lieuNaissance }}</span></p>
+                            <p><strong>Sexe</strong><span>{{ f.sexe }}</span></p>
+                        </div>
+                    </section>
+
+                    <!-- Caractéristiques -->
+                    <section class="fiche-section">
+                        <h3 class="fiche-section-titre">Caractéristiques</h3>
+                        <div class="carac-grille">
+                            <div class="carac-case"><span class="carac-label">FOR</span><span class="carac-valeur">{{ f.caracteristiques.FOR }}</span></div>
+                            <div class="carac-case"><span class="carac-label">DEX</span><span class="carac-valeur">{{ f.caracteristiques.DEX }}</span></div>
+                            <div class="carac-case"><span class="carac-label">POU</span><span class="carac-valeur">{{ f.caracteristiques.POU }}</span></div>
+                            <div class="carac-case"><span class="carac-label">CON</span><span class="carac-valeur">{{ f.caracteristiques.CON }}</span></div>
+                            <div class="carac-case"><span class="carac-label">APP</span><span class="carac-valeur">{{ f.caracteristiques.APP }}</span></div>
+                            <div class="carac-case"><span class="carac-label">ÉDU</span><span class="carac-valeur">{{ f.caracteristiques.EDU }}</span></div>
+                            <div class="carac-case"><span class="carac-label">TAI</span><span class="carac-valeur">{{ f.caracteristiques.TAI }}</span></div>
+                            <div class="carac-case"><span class="carac-label">INT</span><span class="carac-valeur">{{ f.caracteristiques.INT }}</span></div>
+                            <div class="carac-case carac-mvt"><span class="carac-label">MVT</span><span class="carac-valeur">{{ f.caracteristiques.MVT }}</span></div>
+                        </div>
+                    </section>
+
+                    <!-- Jauges de vie -->
+                    <section class="fiche-section">
+                        <h3 class="fiche-section-titre">Vitalité</h3>
+                        <div class="jauges-grille">
+                            <div class="jauge-bloc">
+                                <span class="jauge-label">Points de vie</span>
+                                <span class="jauge-valeur">{{ f.pv }} / {{ f.pvMax }}</span>
+                                @if (f.blessureGrave) {
+                                    <span class="badge-alerte">Blessure grave</span>
+                                }
+                            </div>
+                            <div class="jauge-bloc">
+                                <span class="jauge-label">Points de magie</span>
+                                <span class="jauge-valeur">{{ f.pm }} / {{ f.pmMax }}</span>
+                            </div>
+                            <div class="jauge-bloc">
+                                <span class="jauge-label">Santé mentale</span>
+                                <span class="jauge-valeur">{{ f.santeMentale }} / {{ f.santeMentaleMax }}</span>
+                                @if (f.folieTemporaire) {
+                                    <span class="badge-alerte">Folie temporaire</span>
+                                }
+                                @if (f.foliePersistante) {
+                                    <span class="badge-alerte">Folie persistante</span>
+                                }
+                            </div>
+                            <div class="jauge-bloc">
+                                <span class="jauge-label">Chance</span>
+                                <span class="jauge-valeur">{{ f.chance }}</span>
+                            </div>
+                        </div>
+                        <div class="combat-grille">
+                            <div class="combat-bloc"><span class="carac-label">Impact</span><span class="carac-valeur">{{ f.impact }}</span></div>
+                            <div class="combat-bloc"><span class="carac-label">Carrure</span><span class="carac-valeur">{{ f.carrure }}</span></div>
+                            <div class="combat-bloc"><span class="carac-label">Esquive</span><span class="carac-valeur">{{ f.esquive }} %</span></div>
+                        </div>
+                    </section>
+
+                    <!-- Compétences -->
+                    <section class="fiche-section">
+                        <h3 class="fiche-section-titre">Compétences</h3>
+                        <div class="competences-colonnes">
+                            @for (colonne of competencesEnColonnes(); track $index) {
+                                <ul class="competence-liste">
+                                    @for (c of colonne; track c.nom) {
+                                        <li class="competence-ligne">
+                                            <span class="competence-nom">{{ c.nom }}</span>
+                                            <span class="competence-valeur">{{ c.valeur }} %</span>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                    </section>
+
+                    <!-- Armes -->
+                    @if (f.armes.length > 0) {
+                        <section class="fiche-section">
+                            <h3 class="fiche-section-titre">Armes</h3>
+                            <table class="armes-table">
+                                <thead>
+                                    <tr>
+                                        <th>Arme</th>
+                                        <th>Ord.</th>
+                                        <th>Maj.</th>
+                                        <th>Ext.</th>
+                                        <th>Dégâts</th>
+                                        <th>Portée</th>
+                                        <th>Cad.</th>
+                                        <th>Cap.</th>
+                                        <th>Panne</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (arme of f.armes; track arme.nom) {
+                                        <tr>
+                                            <td>{{ arme.nom }}</td>
+                                            <td>{{ arme.ordinaire }}</td>
+                                            <td>{{ arme.majeur }}</td>
+                                            <td>{{ arme.extreme }}</td>
+                                            <td>{{ arme.degats }}</td>
+                                            <td>{{ arme.portee }}</td>
+                                            <td>{{ arme.cadence }}</td>
+                                            <td>{{ arme.capacite }}</td>
+                                            <td>{{ arme.panne }}</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </section>
+                    }
+
+                    <!-- Équipement et richesse -->
+                    <section class="fiche-section fiche-section-double">
+                        <div>
+                            <h3 class="fiche-section-titre">Équipement et possessions</h3>
+                            @if (f.equipement.length > 0) {
+                                <ul class="equipement-liste">
+                                    @for (item of f.equipement; track item) {
+                                        <li>{{ item }}</li>
+                                    }
+                                </ul>
+                            } @else {
+                                <p class="no-secret-message">Aucun équipement renseigné.</p>
+                            }
+                        </div>
+                        <div>
+                            <h3 class="fiche-section-titre">Richesse</h3>
+                            <p><strong>Dépenses courantes</strong><span>{{ f.richesse.depensesCourantes }}</span></p>
+                            <p><strong>Espèces</strong><span>{{ f.richesse.especes }}</span></p>
+                            <p><strong>Capital</strong><span>{{ f.richesse.capital }}</span></p>
+                        </div>
+                    </section>
+
+                    <!-- Profil narratif -->
+                    <section class="fiche-section">
+                        <h3 class="fiche-section-titre">Profil</h3>
+                        <div class="profil-grille">
+                            <p><strong>Description</strong><span>{{ f.profil.description }}</span></p>
+                            <p><strong>Traits</strong><span>{{ f.profil.traits }}</span></p>
+                            <p><strong>Idéologie et croyances</strong><span>{{ f.profil.ideologieCroyances }}</span></p>
+                            <p><strong>Séquelles et cicatrices</strong><span>{{ f.profil.sequellesCicatrices }}</span></p>
+                            <p><strong>Personnes importantes</strong><span>{{ f.profil.personnesImportantes }}</span></p>
+                            <p><strong>Phobies et manies</strong><span>{{ f.profil.phobiesManies }}</span></p>
+                            <p><strong>Lieux significatifs</strong><span>{{ f.profil.lieuxSignificatifs }}</span></p>
+                            <p><strong>Ouvrages occultes, sorts et artefacts</strong><span>{{ f.profil.ouvragesOccultes }}</span></p>
+                            <p><strong>Biens précieux</strong><span>{{ f.profil.biensPrecieux }}</span></p>
+                            <p><strong>Rencontres avec des entités étranges</strong><span>{{ f.profil.rencontresEntites }}</span></p>
+                        </div>
+                    </section>
+
+                </div>
+            }
+        }
     </div>
 } @else {
     <div class="error-message">

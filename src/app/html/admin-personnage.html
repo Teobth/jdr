@@ -28,6 +28,13 @@
           {{ p.mort ? 'Mort' : 'Vivant' }}
         </strong>
       </p>
+
+      <p>
+        <a [routerLink]="['/admin/personnages', p.nom, 'fiche']" class="lien-fiche-complete">
+          {{ p.fiche ? '📋 Éditer la fiche complète' : '✚ Créer la fiche complète' }}
+        </a>
+      </p>
+
     @if(p.rencontre) {
     <hr>
       <div class="secrets-management">

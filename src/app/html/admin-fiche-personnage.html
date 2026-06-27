@@ -1,0 +1,240 @@
+<div class="admin-fiche-page">
+
+    <a routerLink="/admin/personnages" class="lien-retour-admin">&larr; Retour aux personnages</a>
+
+    @if (personnage(); as p) {
+        <h2>Fiche d'investigateur — {{ p.nom }}</h2>
+
+        @if (messageConfirmation()) {
+            <p class="message-confirmation">{{ messageConfirmation() }}</p>
+        }
+
+        @if (!ficheExiste()) {
+            <div class="bloc-creation">
+                @if (p.fiche) {
+                    <!-- Cas improbable : fiche existe côté serveur mais brouillon pas encore chargé -->
+                    <button (click)="chargerFichePourEdition()">Éditer la fiche existante</button>
+                } @else {
+                    <p>Ce personnage n'a pas encore de fiche d'investigateur complète.</p>
+                    <button (click)="creerFiche()">Créer la fiche</button>
+                }
+            </div>
+        }
+
+        @if (p.fiche && !brouillon()) {
+            <div class="bloc-creation">
+                <button (click)="chargerFichePourEdition()">Éditer la fiche</button>
+            </div>
+        }
+
+        @if (brouillon(); as f) {
+            <form class="fiche-admin-form" (ngSubmit)="enregistrer()">
+
+                <!-- État civil -->
+                <details class="fiche-admin-section" open>
+                    <summary>État civil</summary>
+                    <div class="grille-champs">
+                        <label>Occupation
+                            <input type="text" [(ngModel)]="f.occupation" name="occupation">
+                        </label>
+                        <label>Résidence
+                            <input type="text" [(ngModel)]="f.residence" name="residence">
+                        </label>
+                        <label>Lieu de naissance
+                            <input type="text" [(ngModel)]="f.lieuNaissance" name="lieuNaissance">
+                        </label>
+                        <label>Sexe
+                            <input type="text" [(ngModel)]="f.sexe" name="sexe">
+                        </label>
+                    </div>
+                </details>
+
+                <!-- Caractéristiques -->
+                <details class="fiche-admin-section" open>
+                    <summary>Caractéristiques</summary>
+                    <div class="grille-carac">
+                        <label>FOR <input type="number" [(ngModel)]="f.caracteristiques.FOR" name="FOR"></label>
+                        <label>DEX <input type="number" [(ngModel)]="f.caracteristiques.DEX" name="DEX"></label>
+                        <label>POU <input type="number" [(ngModel)]="f.caracteristiques.POU" name="POU"></label>
+                        <label>CON <input type="number" [(ngModel)]="f.caracteristiques.CON" name="CON"></label>
+                        <label>APP <input type="number" [(ngModel)]="f.caracteristiques.APP" name="APP"></label>
+                        <label>ÉDU <input type="number" [(ngModel)]="f.caracteristiques.EDU" name="EDU"></label>
+                        <label>TAI <input type="number" [(ngModel)]="f.caracteristiques.TAI" name="TAI"></label>
+                        <label>INT <input type="number" [(ngModel)]="f.caracteristiques.INT" name="INT"></label>
+                        <label>MVT <input type="number" [(ngModel)]="f.caracteristiques.MVT" name="MVT"></label>
+                    </div>
+                </details>
+
+                <!-- Vitalité -->
+                <details class="fiche-admin-section" open>
+                    <summary>Vitalité et combat</summary>
+                    <div class="grille-champs">
+                        <label>PV actuels
+                            <input type="number" [(ngModel)]="f.pv" name="pv">
+                        </label>
+                        <label>PV max.
+                            <input type="number" [(ngModel)]="f.pvMax" name="pvMax">
+                        </label>
+                        <label class="champ-checkbox">
+                            <input type="checkbox" [(ngModel)]="f.blessureGrave" name="blessureGrave">
+                            Blessure grave
+                        </label>
+
+                        <label>PM actuels
+                            <input type="number" [(ngModel)]="f.pm" name="pm">
+                        </label>
+                        <label>PM max.
+                            <input type="number" [(ngModel)]="f.pmMax" name="pmMax">
+                        </label>
+
+                        <label>Santé mentale actuelle
+                            <input type="number" [(ngModel)]="f.santeMentale" name="santeMentale">
+                        </label>
+                        <label>Santé mentale max.
+                            <input type="number" [(ngModel)]="f.santeMentaleMax" name="santeMentaleMax">
+                        </label>
+                        <label>Santé mentale initiale
+                            <input type="number" [(ngModel)]="f.santeMentaleInitiale" name="santeMentaleInitiale">
+                        </label>
+                        <label class="champ-checkbox">
+                            <input type="checkbox" [(ngModel)]="f.folieTemporaire" name="folieTemporaire">
+                            Folie temporaire
+                        </label>
+                        <label class="champ-checkbox">
+                            <input type="checkbox" [(ngModel)]="f.foliePersistante" name="foliePersistante">
+                            Folie persistante
+                        </label>
+
+                        <label>Chance
+                            <input type="number" [(ngModel)]="f.chance" name="chance">
+                        </label>
+                        <label>Impact
+                            <input type="text" [(ngModel)]="f.impact" name="impact">
+                        </label>
+                        <label>Carrure
+                            <input type="number" [(ngModel)]="f.carrure" name="carrure">
+                        </label>
+                        <label>Esquive (%)
+                            <input type="number" [(ngModel)]="f.esquive" name="esquive">
+                        </label>
+                    </div>
+                </details>
+
+                <!-- Compétences -->
+                <details class="fiche-admin-section">
+                    <summary>Compétences ({{ f.competences.length }})</summary>
+                    <div class="liste-dynamique">
+                        @for (c of f.competences; track $index) {
+                            <div class="ligne-dynamique ligne-competence">
+                                <input type="text" placeholder="Nom de la compétence" [(ngModel)]="c.nom" [name]="'comp-nom-' + $index">
+                                <input type="number" placeholder="Base %" [(ngModel)]="c.base" [name]="'comp-base-' + $index">
+                                <input type="number" placeholder="Valeur %" [(ngModel)]="c.valeur" [name]="'comp-valeur-' + $index">
+                                <button type="button" class="btn-retirer" (click)="retirerCompetence($index)" title="Retirer cette compétence">&times;</button>
+                            </div>
+                        }
+                    </div>
+                    <button type="button" class="btn-ajouter" (click)="ajouterCompetence()">+ Ajouter une compétence</button>
+                </details>
+
+                <!-- Armes -->
+                <details class="fiche-admin-section">
+                    <summary>Armes ({{ f.armes.length }})</summary>
+                    <div class="liste-dynamique">
+                        @for (arme of f.armes; track $index) {
+                            <div class="ligne-dynamique ligne-arme">
+                                <input type="text" placeholder="Nom" [(ngModel)]="arme.nom" [name]="'arme-nom-' + $index">
+                                <input type="text" placeholder="Ord." [(ngModel)]="arme.ordinaire" [name]="'arme-ord-' + $index">
+                                <input type="text" placeholder="Maj." [(ngModel)]="arme.majeur" [name]="'arme-maj-' + $index">
+                                <input type="text" placeholder="Ext." [(ngModel)]="arme.extreme" [name]="'arme-ext-' + $index">
+                                <input type="text" placeholder="Dégâts" [(ngModel)]="arme.degats" [name]="'arme-degats-' + $index">
+                                <input type="text" placeholder="Portée" [(ngModel)]="arme.portee" [name]="'arme-portee-' + $index">
+                                <input type="text" placeholder="Cad." [(ngModel)]="arme.cadence" [name]="'arme-cadence-' + $index">
+                                <input type="text" placeholder="Cap." [(ngModel)]="arme.capacite" [name]="'arme-capacite-' + $index">
+                                <input type="text" placeholder="Panne" [(ngModel)]="arme.panne" [name]="'arme-panne-' + $index">
+                                <button type="button" class="btn-retirer" (click)="retirerArme($index)" title="Retirer cette arme">&times;</button>
+                            </div>
+                        }
+                    </div>
+                    <button type="button" class="btn-ajouter" (click)="ajouterArme()">+ Ajouter une arme</button>
+                </details>
+
+                <!-- Équipement -->
+                <details class="fiche-admin-section">
+                    <summary>Équipement et possessions ({{ f.equipement.length }})</summary>
+                    <div class="liste-dynamique">
+                        @for (item of f.equipement; track $index) {
+                            <div class="ligne-dynamique ligne-equipement">
+                                <input type="text" placeholder="Objet" [(ngModel)]="f.equipement[$index]" [name]="'equip-' + $index">
+                                <button type="button" class="btn-retirer" (click)="retirerEquipement($index)" title="Retirer cet objet">&times;</button>
+                            </div>
+                        }
+                    </div>
+                    <button type="button" class="btn-ajouter" (click)="ajouterEquipement()">+ Ajouter un objet</button>
+                </details>
+
+                <!-- Richesse -->
+                <details class="fiche-admin-section">
+                    <summary>Richesse</summary>
+                    <div class="grille-champs">
+                        <label>Dépenses courantes
+                            <input type="text" [(ngModel)]="f.richesse.depensesCourantes" name="depensesCourantes">
+                        </label>
+                        <label>Espèces
+                            <input type="text" [(ngModel)]="f.richesse.especes" name="especes">
+                        </label>
+                        <label>Capital
+                            <input type="text" [(ngModel)]="f.richesse.capital" name="capital">
+                        </label>
+                    </div>
+                </details>
+
+                <!-- Profil narratif -->
+                <details class="fiche-admin-section">
+                    <summary>Profil</summary>
+                    <div class="grille-champs grille-champs-larges">
+                        <label>Description
+                            <textarea [(ngModel)]="f.profil.description" name="description" rows="2"></textarea>
+                        </label>
+                        <label>Idéologie et croyances
+                            <textarea [(ngModel)]="f.profil.ideologieCroyances" name="ideologieCroyances" rows="2"></textarea>
+                        </label>
+                        <label>Personnes importantes
+                            <textarea [(ngModel)]="f.profil.personnesImportantes" name="personnesImportantes" rows="2"></textarea>
+                        </label>
+                        <label>Lieux significatifs
+                            <textarea [(ngModel)]="f.profil.lieuxSignificatifs" name="lieuxSignificatifs" rows="2"></textarea>
+                        </label>
+                        <label>Biens précieux
+                            <textarea [(ngModel)]="f.profil.biensPrecieux" name="biensPrecieux" rows="2"></textarea>
+                        </label>
+                        <label>Traits
+                            <textarea [(ngModel)]="f.profil.traits" name="traits" rows="2"></textarea>
+                        </label>
+                        <label>Séquelles et cicatrices
+                            <textarea [(ngModel)]="f.profil.sequellesCicatrices" name="sequellesCicatrices" rows="2"></textarea>
+                        </label>
+                        <label>Phobies et manies
+                            <textarea [(ngModel)]="f.profil.phobiesManies" name="phobiesManies" rows="2"></textarea>
+                        </label>
+                        <label>Ouvrages occultes, sorts et artefacts
+                            <textarea [(ngModel)]="f.profil.ouvragesOccultes" name="ouvragesOccultes" rows="2"></textarea>
+                        </label>
+                        <label>Rencontres avec des entités étranges
+                            <textarea [(ngModel)]="f.profil.rencontresEntites" name="rencontresEntites" rows="2"></textarea>
+                        </label>
+                    </div>
+                </details>
+
+                <div class="fiche-admin-actions">
+                    <button type="submit" class="btn-enregistrer">Enregistrer la fiche</button>
+                    <button type="button" class="btn-annuler-edition" (click)="annulerEdition()">Annuler</button>
+                </div>
+
+            </form>
+        }
+
+    } @else {
+        <p>Personnage introuvable.</p>
+    }
+
+</div>
