@@ -5,9 +5,21 @@
 <div class="scenario-tracker-page">
     <div class="tracker-header">
         <h1>Suivi de l'Intrigue Principale</h1>
-            <button (click)="basculerFiltre()" class="btn-admin-filter">
-                {{ afficherSeulementNonCompletes ? 'Afficher TOUT le scénario' : 'Masquer les étapes COMPLÉTÉES' }}
-            </button>
+        
+        <div class="chapter-tabs" style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+            @for(chapitre of listeChapitres; track chapitre) {
+                <button 
+                    (click)="selectionnerChapitre(chapitre)"
+                    [style.background-color]="chapitreSelectionne === chapitre ? '#ff9800' : '#333'"
+                    style="color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;">
+                    {{ chapitre }}
+                </button>
+            }
+        </div>
+
+        <button (click)="basculerFiltre()" class="btn-admin-filter">
+            {{ afficherSeulementNonCompletes ? 'Afficher TOUT le scénario' : 'Masquer les étapes COMPLÉTÉES' }}
+        </button>
         @if(afficherSeulementNonCompletes) {
             <p style="color: orange;">
                 <em>Filtre actif : étapes complétées masquées</em>
@@ -17,11 +29,32 @@
 
     <div class="scenario-list">
         @for(step of filteredScenario; track step.id) {
-            <div class="step-card">
+            <div class="step-card" [style.border-left]="isExpanded(step.id) ? '4px solid #ff9800' : 'none'">
                 <div class="step-info">
-                    <span class="step-id">{{ step.id }}</span>
-                    <h2>{{ step.title }}</h2>
-                    <p class="description">{{ step.description }}</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="step-id">ID: {{ step.id }}</span>
+                        <small style="color: #888; font-style: italic;">{{ step.chapter || 'Général' }}</small>
+                    </div>
+                    
+                    <h2 (click)="toggleExpand(step.id)" style="cursor: pointer; display: inline-block;">
+                        {{ step.title }} 
+                        <span style="font-size: 0.6em; color: #ff9800; margin-left: 10px;">
+                            {{ isExpanded(step.id) ? '▲ Moins d\'infos' : '▼ Plus d\'infos' }}
+                        </span>
+                    </h2>
+                    
+                    <!-- AFFICHAGE CONDITIONNEL -->
+                    @if (isExpanded(step.id)) {
+                        <!-- Mode complet pour quand tu creuses l'étape -->
+                        <p class="description" style="white-space: pre-wrap; margin-top: 10px; line-height: 1.5; color: #eee;">
+                            {{ step.description }}
+                        </p>
+                    } @else {
+                        <!-- Mode light pour scanner ton scénario d'un coup d'œil -->
+                        <p class="description" style="margin-top: 10px; color: #aaa; font-style: italic;">
+                            {{ getShortSummary(step) }}
+                        </p>
+                    }
                 </div>
 
                 <div class="step-status">
@@ -54,8 +87,8 @@
                 </div>
             </div>
         } @empty {
-            <div style="padding: 40px; text-align: center; background: #f9f9f9; border-radius: 8px;">
-                <p>Aucune étape à afficher avec ce filtre.</p>
+            <div style="padding: 40px; text-align: center; background: #222; border-radius: 8px; color: #aaa;">
+                <p>Aucune étape à afficher dans cette section.</p>
             </div>
         }
     </div>

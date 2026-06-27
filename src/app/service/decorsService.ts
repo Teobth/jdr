@@ -26,7 +26,7 @@ export const TYPES_DECOR: TypeDecor[] = [
     categorie: 'nature',
     couleur: '#3d7a3d',
     rendu: (cx, cy, e) => `
-      <rect x="${cx - e * 0.08}" y="${cy}" width="${e * 0.16}" height="${e * 0.5}" fill="#5a3a22" />
+      <rect x="${cx - e * 0.08}" y="${cy}" width="${e * 0.25}" height="${e * 0.8}" fill="#a26b40" />
       <circle cx="${cx}" cy="${cy - e * 0.15}" r="${e * 0.55}" fill="#3d7a3d" stroke="#274d27" stroke-width="1.5" />
       <circle cx="${cx - e * 0.3}" cy="${cy + e * 0.05}" r="${e * 0.35}" fill="#4a8f4a" stroke="#274d27" stroke-width="1.5" />
       <circle cx="${cx + e * 0.3}" cy="${cy + e * 0.05}" r="${e * 0.35}" fill="#4a8f4a" stroke="#274d27" stroke-width="1.5" />
@@ -38,15 +38,17 @@ export const TYPES_DECOR: TypeDecor[] = [
     categorie: 'nature',
     couleur: '#7a7a78',
     rendu: (cx, cy, e) => `
-      <polygon points="
-        ${cx - e * 0.6},${cy + e * 0.35}
-        ${cx - e * 0.35},${cy - e * 0.25}
-        ${cx},${cy - e * 0.5}
-        ${cx + e * 0.4},${cy - e * 0.2}
-        ${cx + e * 0.55},${cy + e * 0.35}
-        ${cx + e * 0.1},${cy + e * 0.5}
-        ${cx - e * 0.3},${cy + e * 0.5}
-      " fill="#7a7a78" stroke="#4a4a48" stroke-width="1.5" />
+      <g transform="translate(${cx}, ${cy}) scale(1.5) translate(${-cx}, ${-cy})">
+        <polygon points="
+          ${cx - e * 0.6},${cy + e * 0.35}
+          ${cx - e * 0.35},${cy - e * 0.25}
+          ${cx},${cy - e * 0.5}
+          ${cx + e * 0.4},${cy - e * 0.2}
+          ${cx + e * 0.55},${cy + e * 0.35}
+          ${cx + e * 0.1},${cy + e * 0.5}
+          ${cx - e * 0.3},${cy + e * 0.5}
+        " fill="#7a7a78" stroke="#4a4a48" stroke-width="1.5" />
+      </g>
       <line x1="${cx - e * 0.2}" y1="${cy - e * 0.1}" x2="${cx + e * 0.15}" y2="${cy + e * 0.2}" stroke="#5a5a58" stroke-width="1.2" />
     `
   },
@@ -98,15 +100,20 @@ export const TYPES_DECOR: TypeDecor[] = [
     label: 'Eau',
     categorie: 'nature',
     couleur: '#2f6f8f',
-    rendu: (cx, cy, e) => `
-      <path d="M ${cx - e * 0.55} ${cy - e * 0.1}
-               Q ${cx - e * 0.3} ${cy - e * 0.35}, ${cx} ${cy - e * 0.1}
-               Q ${cx + e * 0.3} ${cy + e * 0.15}, ${cx + e * 0.55} ${cy - e * 0.1}
-               L ${cx + e * 0.55} ${cy + e * 0.4}
-               Q ${cx + 0.3 * e} ${cy + e * 0.6}, ${cx} ${cy + e * 0.4}
-               Q ${cx - e * 0.3} ${cy + e * 0.2}, ${cx - e * 0.55} ${cy + e * 0.4} Z"
-            fill="#2f6f8f" stroke="#1c4a60" stroke-width="1.2" />
-    `
+    rendu: (cx, cy, e) => {
+      const r = e * 1.5; // Rayon approximatif pour l'hexagone
+      const points = [];
+      for (let i = 0; i < 6; i++) {
+        const angle = (Math.PI / 3) * i;
+        points.push(`${cx + r * Math.cos(angle)},${cy + r * Math.sin(angle)}`);
+      }
+      return `
+        <polygon points="${points.join(' ')}" fill="#2f6f8f" stroke="#1c4a60" stroke-width="1.2" />
+        
+        <path d="M ${cx - r * 0.7} ${cy - r * 0.3} Q ${cx - r * 0.35} ${cy - r * 0.5}, ${cx} ${cy - r * 0.3} T ${cx + r * 0.7} ${cy - r * 0.3}" stroke="#509bba" stroke-width="0.8" fill="none" />
+        <path d="M ${cx - r * 0.5} ${cy - r * 0.1} Q ${cx - r * 0.25} ${cy - r * 0.3}, ${cx} ${cy - r * 0.1} T ${cx + r * 0.5} ${cy - r * 0.1}" stroke="#509bba" stroke-width="0.8" fill="none" opacity="0.6"/>
+      `;
+    }
   },
   {
     id: 'herbe',
@@ -114,9 +121,17 @@ export const TYPES_DECOR: TypeDecor[] = [
     categorie: 'nature',
     couleur: '#6a9b3f',
     rendu: (cx, cy, e) => `
-      <line x1="${cx - e * 0.3}" y1="${cy + e * 0.4}" x2="${cx - e * 0.4}" y2="${cy - e * 0.3}" stroke="#6a9b3f" stroke-width="${e * 0.1}" stroke-linecap="round" />
-      <line x1="${cx}" y1="${cy + e * 0.4}" x2="${cx - e * 0.05}" y2="${cy - e * 0.45}" stroke="#79ad4c" stroke-width="${e * 0.1}" stroke-linecap="round" />
-      <line x1="${cx + e * 0.3}" y1="${cy + e * 0.4}" x2="${cx + e * 0.4}" y2="${cy - e * 0.3}" stroke="#6a9b3f" stroke-width="${e * 0.1}" stroke-linecap="round" />
+      <!-- Brins d'arrière-plan (plus sombres pour la profondeur) -->
+      <line x1="${cx - e * 0.4}" y1="${cy + e * 0.4}" x2="${cx - e * 0.5}" y2="${cy - e * 0.2}" stroke="#5b8735" stroke-width="${e * 0.1}" stroke-linecap="round" />
+      <line x1="${cx + e * 0.4}" y1="${cy + e * 0.4}" x2="${cx + e * 0.5}" y2="${cy - e * 0.2}" stroke="#5b8735" stroke-width="${e * 0.1}" stroke-linecap="round" />
+      
+      <!-- Brins principaux (gauche et droite) -->
+      <line x1="${cx - e * 0.2}" y1="${cy + e * 0.4}" x2="${cx - e * 0.35}" y2="${cy - e * 0.4}" stroke="#6a9b3f" stroke-width="${e * 0.1}" stroke-linecap="round" />
+      <line x1="${cx + e * 0.2}" y1="${cy + e * 0.4}" x2="${cx + e * 0.35}" y2="${cy - e * 0.4}" stroke="#6a9b3f" stroke-width="${e * 0.1}" stroke-linecap="round" />
+      
+      <!-- Brins centraux et d'avant-plan (plus clairs pour la lumière) -->
+      <line x1="${cx}" y1="${cy + e * 0.4}" x2="${cx - e * 0.05}" y2="${cy - e * 0.5}" stroke="#79ad4c" stroke-width="${e * 0.1}" stroke-linecap="round" />
+      <line x1="${cx - e * 0.1}" y1="${cy + e * 0.4}" x2="${cx + e * 0.15}" y2="${cy - e * 0.35}" stroke="#89bc5c" stroke-width="${e * 0.08}" stroke-linecap="round" />
     `
   },
   {
@@ -179,13 +194,15 @@ export const TYPES_DECOR: TypeDecor[] = [
     categorie: 'structure',
     couleur: '#9a7a4a',
     rendu: (cx, cy, e) => `
-      <rect x="${cx - e * 0.6}" y="${cy - e * 0.15}" width="${e * 1.2}" height="${e * 0.3}" fill="#9a7a4a" stroke="#5a3a22" stroke-width="1.2" />
-      <line x1="${cx - e * 0.45}" y1="${cy - e * 0.15}" x2="${cx - e * 0.45}" y2="${cy + e * 0.15}" stroke="#5a3a22" stroke-width="1" />
-      <line x1="${cx - e * 0.15}" y1="${cy - e * 0.15}" x2="${cx - e * 0.15}" y2="${cy + e * 0.15}" stroke="#5a3a22" stroke-width="1" />
-      <line x1="${cx + e * 0.15}" y1="${cy - e * 0.15}" x2="${cx + e * 0.15}" y2="${cy + e * 0.15}" stroke="#5a3a22" stroke-width="1" />
-      <line x1="${cx + e * 0.45}" y1="${cy - e * 0.15}" x2="${cx + e * 0.45}" y2="${cy + e * 0.15}" stroke="#5a3a22" stroke-width="1" />
-      <line x1="${cx - e * 0.6}" y1="${cy - e * 0.25}" x2="${cx + e * 0.6}" y2="${cy - e * 0.25}" stroke="#6a4a2a" stroke-width="${e * 0.08}" />
-      <line x1="${cx - e * 0.6}" y1="${cy + e * 0.25}" x2="${cx + e * 0.6}" y2="${cy + e * 0.25}" stroke="#6a4a2a" stroke-width="${e * 0.08}" />
+      <g transform="translate(${cx}, ${cy}) scale(1.5) translate(${-cx}, ${-cy})">
+        <rect x="${cx - e * 0.6}" y="${cy - e * 0.15}" width="${e * 1.2}" height="${e * 0.3}" fill="#9a7a4a" stroke="#5a3a22" stroke-width="1.2" />
+        <line x1="${cx - e * 0.45}" y1="${cy - e * 0.15}" x2="${cx - e * 0.45}" y2="${cy + e * 0.15}" stroke="#5a3a22" stroke-width="1" />
+        <line x1="${cx - e * 0.15}" y1="${cy - e * 0.15}" x2="${cx - e * 0.15}" y2="${cy + e * 0.15}" stroke="#5a3a22" stroke-width="1" />
+        <line x1="${cx + e * 0.15}" y1="${cy - e * 0.15}" x2="${cx + e * 0.15}" y2="${cy + e * 0.15}" stroke="#5a3a22" stroke-width="1" />
+        <line x1="${cx + e * 0.45}" y1="${cy - e * 0.15}" x2="${cx + e * 0.45}" y2="${cy + e * 0.15}" stroke="#5a3a22" stroke-width="1" />
+        <line x1="${cx - e * 0.6}" y1="${cy - e * 0.25}" x2="${cx + e * 0.6}" y2="${cy - e * 0.25}" stroke="#6a4a2a" stroke-width="${e * 0.08}" />
+        <line x1="${cx - e * 0.6}" y1="${cy + e * 0.25}" x2="${cx + e * 0.6}" y2="${cy + e * 0.25}" stroke="#6a4a2a" stroke-width="${e * 0.08}" />
+      </g>
     `
   },
   {
@@ -238,8 +255,8 @@ export const TYPES_DECOR: TypeDecor[] = [
     couleur: '#8a6238',
     rendu: (cx, cy, e) => `
       <ellipse cx="${cx}" cy="${cy - e * 0.1}" rx="${e * 0.5}" ry="${e * 0.2}" fill="#8a6238" stroke="#4a2f18" stroke-width="1.5" />
-      <line x1="${cx - e * 0.35}" y1="${cy}" x2="${cx - e * 0.3}" y2="${cy + e * 0.4}" stroke="#5a3a22" stroke-width="${e * 0.08}" />
-      <line x1="${cx + e * 0.35}" y1="${cy}" x2="${cx + e * 0.3}" y2="${cy + e * 0.4}" stroke="#5a3a22" stroke-width="${e * 0.08}" />
+      <line x1="${cx - e * 0.35}" y1="${cy}" x2="${cx - e * 0.3}" y2="${cy + e * 0.4}" stroke="#8a6238" stroke-width="${e * 0.08}" />
+      <line x1="${cx + e * 0.35}" y1="${cy}" x2="${cx + e * 0.3}" y2="${cy + e * 0.4}" stroke="#8a6238" stroke-width="${e * 0.08}" />
     `
   },
   {
@@ -263,7 +280,21 @@ export const TYPES_DECOR: TypeDecor[] = [
       <line x1="${cx - e * 0.32}" y1="${cy - e * 0.2}" x2="${cx + e * 0.32}" y2="${cy - e * 0.2}" stroke="#5a3a18" stroke-width="1.2" />
       <line x1="${cx - e * 0.32}" y1="${cy + e * 0.2}" x2="${cx + e * 0.32}" y2="${cy + e * 0.2}" stroke="#5a3a18" stroke-width="1.2" />
     `
-  }
+  },
+  {
+    id: 'debris_bois',
+    label: 'Débris de bois',
+    categorie: 'special',
+    couleur: '#8a5a36',
+    rendu: (cx, cy, e) => `
+      <line x1="${cx - e * 0.4}" y1="${cy + e * 0.2}" x2="${cx + e * 0.3}" y2="${cy - e * 0.3}" stroke="#8a5a36" stroke-width="${e * 0.12}" stroke-linecap="round" />
+      <line x1="${cx - e * 0.2}" y1="${cy + e * 0.05}" x2="${cx + e * 0.2}" y2="${cy - e * 0.22}" stroke="#5c3a21" stroke-width="${e * 0.02}" />
+      
+      <line x1="${cx - e * 0.1}" y1="${cy - e * 0.3}" x2="${cx + e * 0.4}" y2="${cy + e * 0.1}" stroke="#a67246" stroke-width="${e * 0.09}" stroke-linecap="round" />
+      
+      <polygon points="${cx - e * 0.3},${cy - e * 0.05} ${cx - e * 0.1},${cy - e * 0.1} ${cx - e * 0.2},${cy + e * 0.1}" fill="#704323" />
+    `
+  },
 ];
 
 export function getTypeDecor(id: string | null | undefined): TypeDecor | undefined {
