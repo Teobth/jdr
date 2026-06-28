@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -32,6 +32,7 @@ interface CaseAffichee {
   selector: 'app-admin-carte',
   imports: [CommonModule, FormsModule],
   templateUrl: '../html/admin-carte.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../css/admin-carte.css']
 })
 export class AdminCarteComponent {

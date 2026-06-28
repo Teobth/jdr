@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { Doc, DocumentService } from '../service/documentService';
 import { RouterModule } from '@angular/router';
@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-admin-documents',
   imports: [CommonModule, RouterModule],
   templateUrl: '../html/admin-document.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../css/admin.css']
 })
 export class AdminDocumentsComponent {

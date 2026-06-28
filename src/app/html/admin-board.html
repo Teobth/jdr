@@ -1,0 +1,168 @@
+<h2>Murder Board</h2>
+
+<p class="board-instructions">
+  Glissez les cartes pour les organiser. Cliquez sur le trombone <strong>🖇</strong> d'une carte puis sur une autre carte pour créer un lien.
+</p>
+
+@if (carteEnAttenteDeLien(); as enAttente) {
+  <div class="bandeau-lien-actif">
+    Sélectionnez la carte à lier à <strong>{{ enAttente.titre }}</strong>
+    <button (click)="annulerLien()" class="btn-annuler-lien">Annuler</button>
+  </div>
+}
+
+<div class="board-layout">
+
+  <div class="board-zone" #boardZone [style.height.px]="hauteurBoard()">
+
+    <svg class="board-svg" [attr.height]="hauteurBoard()">
+      @for (c of connexionsAffichees(); track c.lien.id) {
+        <line
+          [attr.x1]="c.x1" [attr.y1]="c.y1"
+          [attr.x2]="c.x2" [attr.y2]="c.y2"
+          class="fil-connexion">
+        </line>
+        @if (c.lien.note) {
+          <text
+            [attr.x]="(c.x1 + c.x2) / 2"
+            [attr.y]="(c.y1 + c.y2) / 2 - 6"
+            class="etiquette-lien">
+            {{ c.lien.note }}
+          </text>
+        }
+      }
+    </svg>
+
+    @for (carte of toutesLesCartes(); track carte.type + carte.id) {
+      <div
+        cdkDrag
+        class="carte-board"
+        [class.carte-personnage]="carte.type === 'personnage'"
+        [class.carte-document]="carte.type === 'document'"
+        [class.carte-grisee]="carte.grise"
+        [class.carte-selectionnee]="carteSelectionneeCle() === (carte.type + ':' + carte.id)"
+        [class.carte-en-attente]="carteEnAttenteCle() === (carte.type + ':' + carte.id)"
+        [style.left.px]="carte.x"
+        [style.top.px]="carte.y"
+        (cdkDragMoved)="onDragMoved(carte, $event)"
+        (cdkDragEnded)="onDragEnded(carte, $event)"
+        (click)="cliquerCarte(carte)">
+
+        <button class="poignee-lien" (click)="demarrerLien(carte, $event)" title="Créer un lien">🖇</button>
+
+        <img [src]="carte.imageUrl" [alt]="carte.titre" class="carte-image">
+        <div class="carte-info">
+          <span class="carte-titre">{{ carte.titre }}</span>
+          <span class="carte-sous-titre">{{ carte.sousTitre }}</span>
+        </div>
+        @if (carte.grise) {
+          <span class="badge-grise">{{ carte.type === 'personnage' ? 'Mort' : 'Caché' }}</span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="board-panneau">
+    @if (carteSelectionnee(); as carte) {
+
+      <div class="panneau-entete">
+        <span class="panneau-type">{{ carte.type === 'personnage' ? 'Personnage' : 'Document' }}</span>
+        <button (click)="fermerPanneau()" class="btn-fermer-panneau" title="Fermer">&times;</button>
+      </div>
+
+      <h3 class="panneau-titre">{{ carte.titre }}</h3>
+
+      @if (carte.type === 'personnage') {
+        @if (getPersonnageDetail(carte); as p) {
+          <p class="panneau-sous-info">{{ p.age }} ans &middot; {{ p.profession }}</p>
+
+          <div class="panneau-statut-actions">
+            <button
+              (click)="toggleRencontre(carte)"
+              [class.actif]="p.rencontre"
+              [class.inactif]="!p.rencontre"
+              class="btn-toggle-statut">
+              {{ p.rencontre ? 'Rencontré' : 'Non rencontré' }}
+            </button>
+            <button
+              (click)="toggleMort(carte)"
+              [class.inactif]="p.mort"
+              [class.actif]="!p.mort"
+              class="btn-toggle-statut">
+              {{ p.mort ? 'Mort' : 'Vivant' }}
+            </button>
+          </div>
+
+          @if (p.secrets.length > 0) {
+            <div class="panneau-section">
+              <h4>Secrets</h4>
+              <table class="secret-table">
+                <tbody>
+                  @for (secret of p.secrets; track secret.cle) {
+                    <tr
+                      (click)="toggleSecret(carte, secret.cle)"
+                      [class.revele-active]="secret.debloque"
+                      style="cursor: pointer;">
+                      <td>{{ secret.cle }}</td>
+                      <td>{{ secret.valeur }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+
+          <a [routerLink]="['/admin/personnages', p.nom, 'fiche']" class="lien-fiche-complete-board">
+            {{ p.fiche ? 'Éditer la fiche complète' : 'Créer la fiche complète' }}
+          </a>
+        }
+      } @else {
+        @if (getDocumentDetail(carte); as d) {
+          <p class="panneau-sous-info">Document</p>
+
+          <button
+            (click)="toggleAccesDocument(carte)"
+            [class.actif]="d.accessible"
+            [class.inactif]="!d.accessible"
+            class="btn-toggle-statut">
+            {{ d.accessible ? 'Visible des joueurs' : 'Caché des joueurs' }}
+          </button>
+
+          <p class="panneau-description">{{ d.contenu }}</p>
+        }
+      }
+
+      <hr class="separateur-panneau">
+
+      <div class="panneau-section">
+        <h4>Liens ({{ liensDeLaSelection().length }})</h4>
+
+        @if (liensDeLaSelection().length > 0) {
+          @for (item of liensDeLaSelection(); track item.lien.id) {
+            <div class="lien-ligne-board">
+              <img [src]="item.autreCarte?.imageUrl" [alt]="item.autreCarte?.titre" class="lien-avatar">
+              <div class="lien-infos">
+                <span class="lien-nom">{{ item.autreCarte?.titre }}</span>
+                <input
+                  type="text"
+                  class="lien-note-input"
+                  placeholder="Ajouter une note..."
+                  [value]="item.lien.note"
+                  (change)="modifierNoteLien(item.lien.id, $any($event.target).value)">
+              </div>
+              <button (click)="supprimerLien(item.lien.id)" class="btn-supprimer-lien" title="Supprimer ce lien">&times;</button>
+            </div>
+          }
+        } @else {
+          <p class="texte-vide">Aucun lien pour le moment. Utilisez le trombone sur la carte pour en créer un.</p>
+        }
+      </div>
+
+    } @else {
+      <div class="panneau-vide">
+        <p>Sélectionnez une carte pour voir son détail et ses liens.</p>
+      </div>
+    }
+  </div>
+
+</div>

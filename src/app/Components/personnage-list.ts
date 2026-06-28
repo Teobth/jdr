@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { RouterLink } from '@angular/router';
 import { PersonnageService, Personnage } from '../service/personnageService';
@@ -9,6 +9,7 @@ import { ImageBuilderService } from '../service/imageBuilderService';
   imports: [CommonModule, RouterLink], 
   selector: 'app-personnage-list',
   templateUrl: '../html/personnage-list.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../css/personnage-list.css']
 })
 

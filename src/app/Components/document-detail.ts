@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DocumentService } from '../service/documentService'; 
@@ -8,6 +8,7 @@ import { DocumentService } from '../service/documentService';
   selector: 'app-document-detail',
   templateUrl: '../html/document-detail.html',
   styleUrls: ['../css/document-detail.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CommonModule, RouterLink] 
 })
 export class DocumentDetailComponent {

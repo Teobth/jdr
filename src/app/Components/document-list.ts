@@ -1,4 +1,4 @@
-import { Component, computed, OnInit } from '@angular/core';
+import { Component, computed, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Doc, DocumentService } from '../service/documentService';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
     RouterLink
   ],
   templateUrl: '../html/document-list.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: '../css/document-list.css'
 })
 

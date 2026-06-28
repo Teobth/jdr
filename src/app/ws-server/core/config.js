@@ -26,7 +26,8 @@ const FILES = {
     AFFICHE: path.join(RACINE_DONNEES, 'affiche.json'),
     JOUEURS: path.join(RACINE_DONNEES, 'joueurs.json'),
     CARTES: path.join(RACINE_DONNEES, 'cartes.json'),
-    ACTES: path.join(RACINE_DONNEES, 'actes.json')
+    ACTES: path.join(RACINE_DONNEES, 'actes.json'),
+    LIENS: path.join(RACINE_DONNEES, 'liens.json')
 };
 
 module.exports = {

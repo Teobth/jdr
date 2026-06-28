@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-admin',
   imports: [RouterModule],
   templateUrl: '../html/admin.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../css/admin.css']
 })
 export class AdminComponent {

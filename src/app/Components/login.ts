@@ -1,4 +1,4 @@
-import { Component, inject, effect } from '@angular/core';
+import { Component, inject, effect, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/authService';
@@ -8,6 +8,7 @@ import { AuthService } from '../service/authService';
   selector: 'app-login',
   imports: [FormsModule],
   templateUrl: '../html/login.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../css/login.css']
 })
 export class LoginComponent {

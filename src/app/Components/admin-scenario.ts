@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -37,6 +37,7 @@ function brouillonVierge(chapitreParDefaut: string): BrouillonEtape {
   templateUrl: '../html/admin-scenario.html',
   styleUrls: ['../css/admin.css', '../css/admin-scenario.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RouterModule, FormsModule, AfficheComponent, CommonModule]
 })
 export class ScenarioAdminComponent {

@@ -6,7 +6,7 @@
         
         <div class="personnage-description">
             <div class="photo-wrapper">
-                <a [href]="personnage()?.fullImageUrl">
+                <a [href]="$safeNavigationMigration(personnage()?.fullImageUrl)">
                     <img [src]="p.fullImageUrl" 
                         [alt]="'Photo de ' + p.nom" 
                         class="personnage-photo">

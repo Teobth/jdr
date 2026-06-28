@@ -2,9 +2,7 @@ import { Routes } from '@angular/router';
 import { LieuComponent } from './Components/lieu'; 
 import { PersonnageListComponent } from './Components/personnage-list'; 
 import { PersonnageDetailComponent } from './Components/personnage-detail';
-import { AdminPersonnagesComponent } from './Components/admin-personnage';
 import { DocumentListComponent } from './Components/document-list';
-import { AdminDocumentsComponent } from './Components/admin-document';
 import { AdminComponent } from './Components/admin';
 import { DocumentDetailComponent } from './Components/document-detail';
 import { ScenarioAdminComponent } from './Components/admin-scenario';
@@ -16,6 +14,7 @@ import { AdminCarteComponent } from './Components/admin-carte';
 import { authGuard } from './service/authGuard';
 import { adminGuard } from './service/adminGuard';
 import { AdminFichePersonnageComponent } from './Components/admin-fiche-personnage';
+import { AdminBoardComponent } from './Components/admin-board';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -39,8 +38,7 @@ export const routes: Routes = [
     component: AdminComponent,
     canActivate: [adminGuard],
     children: [
-      { path: 'personnages', component: AdminPersonnagesComponent },
-      { path: 'documents', component: AdminDocumentsComponent },
+      { path: 'board', component: AdminBoardComponent },
       { path: 'scenario', component: ScenarioAdminComponent },
       { path: 'affiches', component: AfficheComponent },
       { path: 'carte', component: AdminCarteComponent },

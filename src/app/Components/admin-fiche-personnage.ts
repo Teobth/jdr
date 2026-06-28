@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -70,6 +70,7 @@ function ficheVierge(): FicheCthulhu {
   selector: 'app-admin-fiche-personnage',
   imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: '../html/admin-fiche-personnage.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../css/admin.css', '../css/admin-fiche-personnage.css']
 })
 export class AdminFichePersonnageComponent {

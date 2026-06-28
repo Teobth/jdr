@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
@@ -10,6 +10,7 @@ import { ImageBuilderService } from '../service/imageBuilderService';
   selector: 'app-home',
   templateUrl: '../html/lieu.html', 
   styleUrls: ['../css/lieu.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CommonModule, RouterModule, FormsModule]
 })
 

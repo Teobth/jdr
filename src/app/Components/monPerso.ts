@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PersonnageService, FicheCthulhu, Competence } from '../service/personnageService';
 import { AuthService } from '../service/authService';
@@ -8,6 +8,7 @@ import { AuthService } from '../service/authService';
   selector: 'app-mon-personnage',
   templateUrl: '../html/monPerso.html',
   styleUrls: ['../css/personnage-detail.css', '../css/fiche-personnage.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CommonModule]
 })
 export class MonPersonnageComponent {

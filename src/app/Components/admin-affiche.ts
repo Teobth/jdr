@@ -1,4 +1,4 @@
-import { Component, inject, signal, effect, PLATFORM_ID } from '@angular/core';
+import { Component, inject, signal, effect, PLATFORM_ID, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LieuService } from '../service/lieuService';
@@ -12,6 +12,7 @@ const SESSION_STORAGE_KEY = 'selectedDisplayId';
   selector: 'app-admin-affiche',
   imports: [RouterModule, FormsModule],
   templateUrl: '../html/admin-affiche.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../css/admin.css']
 })
 export class AfficheComponent {

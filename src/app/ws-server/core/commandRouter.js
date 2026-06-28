@@ -9,7 +9,7 @@
  * @param {import('ws').WebSocket} ws - La connexion du client à l'origine du message (utile pour répondre directement, ex: login).
  */
 function buildCommandHandlers(stores, ws) {
-    const { scenario, personnages, documents, actes, auth, lieu, cartes } = stores;
+    const { scenario, personnages, documents, actes, auth, lieu, cartes, liens } = stores;
 
     return {
         // --- Scénario ---
@@ -25,6 +25,11 @@ function buildCommandHandlers(stores, ws) {
 
         // --- Documents ---
         TOGGLE_ACCES_COMMAND: (data) => documents.toggleAcces(data.documentTitre),
+
+        // --- Liens (murder board) ---
+        MJ_CREER_LIEN_COMMAND: (data) => liens.creerLien(data),
+        MJ_MODIFIER_NOTE_LIEN_COMMAND: (data) => liens.modifierNote(data.lienId, data.note),
+        MJ_SUPPRIMER_LIEN_COMMAND: (data) => liens.supprimerLien(data.lienId),
 
         // --- Actes ---
         TOGGLE_ACTE_ACTIF_COMMAND: (data) => actes.toggleActif(data.acte),

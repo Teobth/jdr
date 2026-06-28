@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CarteService } from '../service/carteService';
@@ -26,6 +26,7 @@ interface CaseAffichee {
   selector: 'app-carte',
   imports: [CommonModule],
   templateUrl: '../html/carte.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../css/carte.css']
 })
 export class CarteComponent {

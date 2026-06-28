@@ -2,9 +2,9 @@
     <h2>Détails du Document</h2>
     
     <div class="photo-wrapper">
-        <a [href]="doc()?.fullImageUrl">
-            <img [src]="doc()?.fullImageUrl" 
-                [alt]="'Doc ' + doc()?.id" 
+        <a [href]="$safeNavigationMigration(doc()?.fullImageUrl)">
+            <img [src]="$safeNavigationMigration(doc()?.fullImageUrl)" 
+                [alt]="'Doc ' + $safeNavigationMigration(doc()?.id)" 
                 class="document-image">
         </a>
     </div>

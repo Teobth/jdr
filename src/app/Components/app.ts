@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../service/authService';
@@ -8,6 +8,7 @@ import { AuthService } from '../service/authService';
   selector: 'app-root',
   templateUrl: '../html/app.html',
   styleUrls: ['../css/app.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     RouterOutlet,
     RouterLink,
