@@ -260,14 +260,15 @@ export const TYPES_DECOR: TypeDecor[] = [
     `
   },
   {
-    id: 'lit',
-    label: 'Lit',
+    id: 'tente',
+    label: 'Tente',
     categorie: 'structure',
-    couleur: '#6a4a8a',
+    couleur: '#2e6f40',
     rendu: (cx, cy, e) => `
-      <rect x="${cx - e * 0.5}" y="${cy - e * 0.1}" width="${e * 1.0}" height="${e * 0.45}" rx="${e * 0.05}" fill="#5a3a22" stroke="#3a2412" stroke-width="1.5" />
-      <rect x="${cx - e * 0.42}" y="${cy - e * 0.02}" width="${e * 0.84}" height="${e * 0.28}" fill="#6a4a8a" />
-      <rect x="${cx - e * 0.42}" y="${cy - e * 0.3}" width="${e * 0.22}" height="${e * 0.3}" rx="${e * 0.04}" fill="#f0ece0" stroke="#3a2412" stroke-width="1" />
+      <ellipse cx="${cx}" cy="${cy + e * 0.3}" rx="${e * 0.55}" ry="${e * 0.12}" fill="rgba(0,0,0,0.15)" />
+      <polygon points="${cx},${cy - e * 0.4} ${cx - e * 0.5},${cy + e * 0.3} ${cx},${cy + e * 0.35}" fill="#3a8a4e" />
+      <polygon points="${cx},${cy - e * 0.4} ${cx + e * 0.5},${cy + e * 0.3} ${cx},${cy + e * 0.35}" fill="#255c33" />
+      <polygon points="${cx},${cy - e * 0.05} ${cx - e * 0.2},${cy + e * 0.35} ${cx + e * 0.2},${cy + e * 0.35}" fill="#14301b" />
     `
   },
   {

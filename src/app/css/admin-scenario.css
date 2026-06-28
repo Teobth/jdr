@@ -1,0 +1,420 @@
+.scenario-page {
+    padding: 10px 0 40px;
+}
+
+/* --- Barre d'outils --- */
+
+.scenario-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.chapter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.chapter-tab {
+    background-color: #222;
+    color: #aaa;
+    border: 1px solid #555;
+    padding: 8px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+}
+
+.chapter-tab:hover {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+.chapter-tab.tab-active {
+    background-color: var(--couleur-accent-or);
+    color: #1c1c1c;
+    border-color: var(--couleur-accent-or);
+    font-weight: bold;
+}
+
+.toolbar-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-nouvelle-etape {
+    background-color: var(--couleur-accent-sec);
+    color: #f0f0f0;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-nouvelle-etape:hover {
+    opacity: 0.9;
+}
+
+/* --- Disposition générale : timeline + panneau --- */
+
+.scenario-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.scenario-vide {
+    padding: 40px;
+    text-align: center;
+    background: #222;
+    border-radius: 8px;
+    color: #aaa;
+}
+
+/* --- Timeline --- */
+
+.chapitre-bloc {
+    margin-bottom: 30px;
+}
+
+.chapitre-titre {
+    color: var(--couleur-accent-or);
+    font-family: var(--font-titre);
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #444;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 26px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background-color: #555;
+}
+
+.timeline-noeud {
+    position: relative;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.timeline-noeud .puce {
+    position: absolute;
+    left: -26px;
+    top: 14px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #1c1c1c;
+    z-index: 1;
+}
+
+.timeline-noeud .puce.bloque { background-color: #a00000; }
+.timeline-noeud .puce.en-cours { background-color: #a87a00; }
+.timeline-noeud .puce.complete { background-color: #007000; }
+
+.noeud-carte {
+    background-color: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 12px 16px;
+    transition: border-color 0.2s, transform 0.15s;
+}
+
+.timeline-noeud:hover .noeud-carte {
+    border-color: var(--couleur-accent-or);
+    transform: translateY(-2px);
+}
+
+.noeud-selectionne .noeud-carte {
+    border-color: var(--couleur-accent-or);
+    border-width: 2px;
+    background-color: #313131;
+}
+
+.noeud-entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.noeud-titre {
+    font-weight: bold;
+    color: #f0f0f0;
+    font-size: 1.05em;
+}
+
+.noeud-statut {
+    flex-shrink: 0;
+    font-size: 0.72em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+.noeud-statut.bloque { background-color: #a00000; color: #fff; }
+.noeud-statut.en-cours { background-color: #a87a00; color: #fff; }
+.noeud-statut.complete { background-color: #007000; color: #fff; }
+
+.noeud-resume {
+    color: #aaa;
+    font-size: 0.9em;
+    font-style: italic;
+    margin: 0;
+}
+
+.noeud-liens {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.lien-badge {
+    font-size: 0.78em;
+    background-color: #1c1c1c;
+    color: #ccc;
+    border: 1px solid #444;
+    padding: 2px 9px;
+    border-radius: 50px;
+}
+
+/* --- Panneau contextuel (droite) --- */
+
+.scenario-panneau {
+    background-color: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 20px;
+    position: sticky;
+    top: 20px;
+    min-height: 200px;
+}
+
+.panneau-vide {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    padding: 40px 10px;
+}
+
+.panneau-entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.panneau-chapitre {
+    color: var(--couleur-accent-sec);
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 0.05em;
+    font-weight: bold;
+}
+
+.btn-fermer-panneau {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.4em;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.btn-fermer-panneau:hover {
+    color: #f0f0f0;
+}
+
+.panneau-titre {
+    color: var(--couleur-accent-or);
+    margin: 0 0 10px;
+    font-size: 1.4em;
+}
+
+.panneau-description {
+    white-space: pre-wrap;
+    color: #ddd;
+    line-height: 1.5;
+    margin: 14px 0;
+}
+
+.panneau-statut-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+}
+
+.separateur-panneau {
+    border: none;
+    border-top: 1px solid #444;
+    margin: 20px 0;
+}
+
+.panneau-section {
+    margin-bottom: 18px;
+}
+
+.panneau-section h4 {
+    color: #ccc;
+    font-size: 0.95em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.lien-ligne {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    color: #f0f0f0;
+}
+
+.lien-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #555;
+}
+
+.lien-icone-doc {
+    font-size: 1.1em;
+}
+
+.texte-vide {
+    color: #888;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.panneau-actions-bas {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-editer-etape {
+    flex: 1;
+    padding: 10px;
+    background-color: var(--couleur-accent-sec);
+    color: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-supprimer-etape {
+    padding: 10px 16px;
+    background-color: #a33;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-supprimer-etape:hover {
+    background-color: #c44;
+}
+
+/* --- Formulaire de création/édition --- */
+
+.form-etape {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-etape label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.88em;
+    color: #ccc;
+}
+
+.form-etape input[type="text"],
+.form-etape textarea,
+.form-etape select {
+    padding: 8px 10px;
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+    border: 1px solid #555;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.form-etape textarea {
+    resize: vertical;
+}
+
+.form-section-liens {
+    border-top: 1px solid #444;
+    padding-top: 12px;
+}
+
+.form-section-liens h4 {
+    color: #ccc;
+    font-size: 0.92em;
+    margin-bottom: 8px;
+}
+
+.liste-checkbox {
+    max-height: 180px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-right: 4px;
+}
+
+.checkbox-ligne {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 8px !important;
+    color: #ddd;
+    font-size: 0.92em;
+    cursor: pointer;
+}
+
+.checkbox-ligne input {
+    width: auto;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+@media (max-width: 900px) {
+    .scenario-layout {
+        grid-template-columns: 1fr;
+    }
+    .scenario-panneau {
+        position: static;
+    }
+}

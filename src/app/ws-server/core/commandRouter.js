@@ -14,6 +14,9 @@ function buildCommandHandlers(stores, ws) {
     return {
         // --- Scénario ---
         UPDATE_STATUS_COMMAND: (data) => scenario.updateStatus(data.stepId, data.newStatus),
+        MJ_CREER_ETAPE_COMMAND: (data) => scenario.creerEtape(data),
+        MJ_MODIFIER_ETAPE_COMMAND: (data) => scenario.modifierEtape(data.stepId, data),
+        MJ_SUPPRIMER_ETAPE_COMMAND: (data) => scenario.supprimerEtape(data.stepId),
 
         // --- Personnages ---
         TOGGLE_RENCONTRE_COMMAND: (data) => personnages.toggleRencontre(data.personnageNom),

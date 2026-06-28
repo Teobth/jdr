@@ -2,94 +2,233 @@
 
 <app-admin-affiche></app-admin-affiche>
 
-<div class="scenario-tracker-page">
-    <div class="tracker-header">
-        <h1>Suivi de l'Intrigue Principale</h1>
-        
-        <div class="chapter-tabs" style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-            @for(chapitre of listeChapitres; track chapitre) {
-                <button 
-                    (click)="selectionnerChapitre(chapitre)"
-                    [style.background-color]="chapitreSelectionne === chapitre ? '#ff9800' : '#333'"
-                    style="color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;">
-                    {{ chapitre }}
-                </button>
-            }
-        </div>
+<div class="scenario-page">
 
-        <button (click)="basculerFiltre()" class="btn-admin-filter">
-            {{ afficherSeulementNonCompletes ? 'Afficher TOUT le scénario' : 'Masquer les étapes COMPLÉTÉES' }}
+  <div class="scenario-toolbar">
+    <div class="chapter-tabs">
+      @for (chapitre of listeChapitres(); track chapitre) {
+        <button
+          (click)="selectionnerChapitre(chapitre)"
+          [class.tab-active]="chapitreSelectionne() === chapitre"
+          class="chapter-tab">
+          {{ chapitre }}
         </button>
-        @if(afficherSeulementNonCompletes) {
-            <p style="color: orange;">
-                <em>Filtre actif : étapes complétées masquées</em>
-            </p>
-        }
+      }
     </div>
 
-    <div class="scenario-list">
-        @for(step of filteredScenario; track step.id) {
-            <div class="step-card" [style.border-left]="isExpanded(step.id) ? '4px solid #ff9800' : 'none'">
-                <div class="step-info">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span class="step-id">ID: {{ step.id }}</span>
-                        <small style="color: #888; font-style: italic;">{{ step.chapter || 'Général' }}</small>
-                    </div>
-                    
-                    <h2 (click)="toggleExpand(step.id)" style="cursor: pointer; display: inline-block;">
-                        {{ step.title }} 
-                        <span style="font-size: 0.6em; color: #ff9800; margin-left: 10px;">
-                            {{ isExpanded(step.id) ? '▲ Moins d\'infos' : '▼ Plus d\'infos' }}
-                        </span>
-                    </h2>
-                    
-                    <!-- AFFICHAGE CONDITIONNEL -->
-                    @if (isExpanded(step.id)) {
-                        <!-- Mode complet pour quand tu creuses l'étape -->
-                        <p class="description" style="white-space: pre-wrap; margin-top: 10px; line-height: 1.5; color: #eee;">
-                            {{ step.description }}
-                        </p>
-                    } @else {
-                        <!-- Mode light pour scanner ton scénario d'un coup d'œil -->
-                        <p class="description" style="margin-top: 10px; color: #aaa; font-style: italic;">
-                            {{ getShortSummary(step) }}
-                        </p>
-                    }
-                </div>
-
-                <div class="step-status">
-                    <span class="status-badge" [class]="getStatusClass(step.status)">
-                        {{ step.status }}
-                    </span>
-
-                    <div class="status-actions">
-                        <button 
-                            (click)="updateStatus(step, 'EN COURS')"
-                            [disabled]="step.status === 'EN COURS'"
-                            class="btn-action btn-in-progress">
-                            En Cours
-                        </button>
-                        
-                        <button 
-                            (click)="updateStatus(step, 'COMPLÉTÉ')"
-                            [disabled]="step.status === 'COMPLÉTÉ'"
-                            class="btn-action btn-complete">
-                            Complété
-                        </button>
-                        
-                        <button 
-                            (click)="updateStatus(step, 'BLOQUÉ')"
-                            [disabled]="step.status === 'BLOQUÉ'"
-                            class="btn-action btn-blocked">
-                            Bloqué
-                        </button>
-                    </div>
-                </div>
-            </div>
-        } @empty {
-            <div style="padding: 40px; text-align: center; background: #222; border-radius: 8px; color: #aaa;">
-                <p>Aucune étape à afficher dans cette section.</p>
-            </div>
-        }
+    <div class="toolbar-actions">
+      <button (click)="basculerFiltre()" class="btn-admin-filter">
+        {{ afficherSeulementNonCompletes() ? 'Afficher TOUT le scénario' : 'Masquer les étapes COMPLÉTÉES' }}
+      </button>
+      <button (click)="ouvrirCreation()" class="btn-nouvelle-etape">
+        + Nouvelle étape
+      </button>
     </div>
+  </div>
+
+  <div class="scenario-layout">
+
+    <!-- Colonne gauche : timeline par chapitre -->
+    <div class="scenario-timeline-zone">
+      @for (groupe of chapitresAffiches(); track groupe.chapter) {
+        <div class="chapitre-bloc">
+          <h3 class="chapitre-titre">{{ groupe.chapter }}</h3>
+
+          <div class="timeline">
+            @for (step of groupe.etapes; track step.id) {
+              <div
+                class="timeline-noeud"
+                [class.noeud-selectionne]="etapeSelectionneeId() === step.id"
+                (click)="selectionnerEtape(step)">
+
+                <span class="puce" [class]="getStatusClass(step.status)"></span>
+
+                <div class="noeud-carte">
+                  <div class="noeud-entete">
+                    <span class="noeud-titre">{{ step.title }}</span>
+                    <span class="noeud-statut" [class]="getStatusClass(step.status)">{{ step.status }}</span>
+                  </div>
+
+                  <p class="noeud-resume">{{ getShortSummary(step) }}</p>
+
+                  @if ((step.personnagesLies?.length ?? 0) > 0 || (step.documentsLies?.length ?? 0) > 0) {
+                    <div class="noeud-liens">
+                      @if ((step.personnagesLies?.length ?? 0) > 0) {
+                        <span class="lien-badge">{{ step.personnagesLies?.length }} personnage(s)</span>
+                      }
+                      @if ((step.documentsLies?.length ?? 0) > 0) {
+                        <span class="lien-badge">{{ step.documentsLies?.length }} document(s)</span>
+                      }
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      } @empty {
+        <div class="scenario-vide">
+          <p>Aucune étape à afficher dans cette section.</p>
+        </div>
+      }
+    </div>
+
+    <!-- Colonne droite : panneau contextuel -->
+    <div class="scenario-panneau">
+
+      @switch (modePanneau()) {
+
+        @case ('detail') {
+          @if (etapeSelectionnee(); as step) {
+            <div class="panneau-entete">
+              <span class="panneau-chapitre">{{ step.chapter }}</span>
+              <button (click)="fermerPanneau()" class="btn-fermer-panneau" title="Fermer">&times;</button>
+            </div>
+
+            <h3 class="panneau-titre">{{ step.title }}</h3>
+            <span class="status-badge" [class]="getStatusClass(step.status)">{{ step.status }}</span>
+
+            <p class="panneau-description">{{ step.description }}</p>
+
+            <div class="panneau-statut-actions">
+              <button
+                (click)="updateStatus(step, 'EN COURS')"
+                [disabled]="step.status === 'EN COURS'"
+                class="btn-action btn-in-progress">
+                En Cours
+              </button>
+              <button
+                (click)="updateStatus(step, 'COMPLÉTÉ')"
+                [disabled]="step.status === 'COMPLÉTÉ'"
+                class="btn-action btn-complete">
+                Complété
+              </button>
+              <button
+                (click)="updateStatus(step, 'BLOQUÉ')"
+                [disabled]="step.status === 'BLOQUÉ'"
+                class="btn-action btn-blocked">
+                Bloqué
+              </button>
+            </div>
+
+            <hr class="separateur-panneau">
+
+            <div class="panneau-section">
+              <h4>Personnages liés</h4>
+              @if (personnagesLiesAffiches().length > 0) {
+                @for (p of personnagesLiesAffiches(); track p.nom) {
+                  <div class="lien-ligne">
+                    <img [src]="p.fullImageUrl" [alt]="p.nom" class="lien-avatar">
+                    <span>{{ p.nom }}</span>
+                  </div>
+                }
+              } @else {
+                <p class="texte-vide">Aucun personnage lié.</p>
+              }
+            </div>
+
+            <div class="panneau-section">
+              <h4>Documents liés</h4>
+              @if (documentsLiesAffiches().length > 0) {
+                @for (d of documentsLiesAffiches(); track d.id) {
+                  <div class="lien-ligne">
+                    <span class="lien-icone-doc">📄</span>
+                    <span>{{ d.titre }}</span>
+                  </div>
+                }
+              } @else {
+                <p class="texte-vide">Aucun document lié.</p>
+              }
+            </div>
+
+            <div class="panneau-actions-bas">
+              <button (click)="ouvrirEdition(step)" class="btn-editer-etape">Modifier l'étape</button>
+              <button (click)="supprimerEtape(step)" class="btn-supprimer-etape">Supprimer</button>
+            </div>
+          }
+        }
+
+        @case ('formulaire') {
+          @if (brouillon(); as b) {
+            <div class="panneau-entete">
+              <span class="panneau-chapitre">{{ b.id === null ? 'Nouvelle étape' : 'Modifier l\'étape' }}</span>
+              <button (click)="annulerFormulaire()" class="btn-fermer-panneau" title="Annuler">&times;</button>
+            </div>
+
+            <form class="form-etape" (ngSubmit)="enregistrerFormulaire()">
+              <label>Titre
+                <input type="text" [(ngModel)]="b.title" name="title" required>
+              </label>
+
+              <label>Chapitre
+                <input type="text" [(ngModel)]="b.chapter" name="chapter" required>
+              </label>
+
+              <label>Résumé court (affiché dans la timeline)
+                <input type="text" [(ngModel)]="b.summary" name="summary">
+              </label>
+
+              <label>Description complète
+                <textarea [(ngModel)]="b.description" name="description" rows="5"></textarea>
+              </label>
+
+              <label>Statut
+                <select [(ngModel)]="b.status" name="status">
+                  <option value="BLOQUÉ">Bloqué</option>
+                  <option value="EN COURS">En cours</option>
+                  <option value="COMPLÉTÉ">Complété</option>
+                </select>
+              </label>
+
+              <div class="form-section-liens">
+                <h4>Personnages liés</h4>
+                <div class="liste-checkbox">
+                  @for (p of personnagesDisponibles(); track p.nom) {
+                    <label class="checkbox-ligne">
+                      <input
+                        type="checkbox"
+                        [checked]="b.personnagesLies.includes(p.nom)"
+                        (change)="toggleParticipant(p.nom)">
+                      {{ p.nom }}
+                    </label>
+                  } @empty {
+                    <p class="texte-vide">Aucun personnage disponible.</p>
+                  }
+                </div>
+              </div>
+
+              <div class="form-section-liens">
+                <h4>Documents liés</h4>
+                <div class="liste-checkbox">
+                  @for (d of documentsDisponibles(); track d.id) {
+                    <label class="checkbox-ligne">
+                      <input
+                        type="checkbox"
+                        [checked]="b.documentsLies.includes(d.id)"
+                        (change)="toggleDocumentLie(d.id)">
+                      {{ d.titre }}
+                    </label>
+                  } @empty {
+                    <p class="texte-vide">Aucun document disponible.</p>
+                  }
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-enregistrer">Enregistrer</button>
+                <button type="button" (click)="annulerFormulaire()" class="btn-annuler-edition">Annuler</button>
+              </div>
+            </form>
+          }
+        }
+
+        @default {
+          <div class="panneau-vide">
+            <p>Sélectionnez une étape dans la timeline pour voir son détail, ou créez-en une nouvelle.</p>
+          </div>
+        }
+      }
+
+    </div>
+  </div>
 </div>
