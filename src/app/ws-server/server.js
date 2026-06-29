@@ -12,6 +12,7 @@ const { AuthStore } = require('./domains/authStore');
 const { LieuStore } = require('./domains/lieuStore');
 const { CartesStore } = require('./domains/cartes/cartesStore');
 const { LiensStore } = require('./domains/liensStore');
+const { PositionsStore } = require('./domains/positionsStore');
 
 // --- SERVEUR HTTP D'IMAGES ---
 
@@ -37,7 +38,8 @@ const stores = {
     auth: new AuthStore(),
     lieu: new LieuStore(wss),
     cartes: new CartesStore(wss),
-    liens: new LiensStore(wss)
+    liens: new LiensStore(wss),
+    positions: new PositionsStore(wss)
 };
 
 /** Construit le payload INITIAL_STATE envoyé à chaque nouveau client. */
@@ -50,7 +52,8 @@ function getInitialState() {
         cartes: stores.cartes.getAll(),
         actesActifs: stores.actes.getAll(),
         displayId: stores.lieu.getCurrentDisplayId(),
-        liens: stores.liens.getAll()
+        liens: stores.liens.getAll(),
+        positions: stores.positions.getAll()
     };
 }
 

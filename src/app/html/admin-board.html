@@ -1,8 +1,17 @@
 <h2>Murder Board</h2>
 
 <p class="board-instructions">
-  Glissez les cartes pour les organiser. Cliquez sur le trombone <strong>🖇</strong> d'une carte puis sur une autre carte pour créer un lien.
+  Glissez les cartes pour les organiser (la position est sauvegardée). Cliquez sur le trombone <strong>🖇</strong> d'une carte puis sur une autre carte pour créer un lien.
 </p>
+
+<div class="board-toolbar">
+  <button (click)="ouvrirCreationPersonnage()" class="btn-creer-entite btn-creer-personnage">
+    + Nouveau personnage
+  </button>
+  <button (click)="ouvrirCreationDocument()" class="btn-creer-entite btn-creer-document">
+    + Nouveau document
+  </button>
+</div>
 
 @if (carteEnAttenteDeLien(); as enAttente) {
   <div class="bandeau-lien-actif">
@@ -63,7 +72,53 @@
   </div>
 
   <div class="board-panneau">
-    @if (carteSelectionnee(); as carte) {
+
+    @if (modeFormulaireCreation() === 'personnage') {
+
+      <div class="panneau-entete">
+        <span class="panneau-type">Nouveau personnage</span>
+        <button (click)="annulerCreation()" class="btn-fermer-panneau" title="Annuler">&times;</button>
+      </div>
+
+      <form class="form-creation" (ngSubmit)="validerCreationPersonnage()">
+        <label>Nom
+          <input type="text" [ngModel]="nouveauPersonnageNom()" (ngModelChange)="nouveauPersonnageNom.set($event)" name="nom" required autofocus>
+        </label>
+        <label>Âge
+          <input type="number" [ngModel]="nouveauPersonnageAge()" (ngModelChange)="nouveauPersonnageAge.set($event)" name="age">
+        </label>
+        <label>Profession
+          <input type="text" [ngModel]="nouveauPersonnageProfession()" (ngModelChange)="nouveauPersonnageProfession.set($event)" name="profession">
+        </label>
+        <p class="texte-vide">Le portrait, le statut "rencontré" et les secrets se règlent ensuite depuis la fiche.</p>
+        <div class="form-actions">
+          <button type="submit" class="btn-enregistrer">Créer</button>
+          <button type="button" (click)="annulerCreation()" class="btn-annuler-edition">Annuler</button>
+        </div>
+      </form>
+
+    } @else if (modeFormulaireCreation() === 'document') {
+
+      <div class="panneau-entete">
+        <span class="panneau-type">Nouveau document</span>
+        <button (click)="annulerCreation()" class="btn-fermer-panneau" title="Annuler">&times;</button>
+      </div>
+
+      <form class="form-creation" (ngSubmit)="validerCreationDocument()">
+        <label>Titre
+          <input type="text" [ngModel]="nouveauDocumentTitre()" (ngModelChange)="nouveauDocumentTitre.set($event)" name="titre" required autofocus>
+        </label>
+        <label>Contenu
+          <textarea [ngModel]="nouveauDocumentContenu()" (ngModelChange)="nouveauDocumentContenu.set($event)" name="contenu" rows="6"></textarea>
+        </label>
+        <p class="texte-vide">L'image et la visibilité aux joueurs se règlent ensuite depuis le board.</p>
+        <div class="form-actions">
+          <button type="submit" class="btn-enregistrer">Créer</button>
+          <button type="button" (click)="annulerCreation()" class="btn-annuler-edition">Annuler</button>
+        </div>
+      </form>
+
+    } @else if (carteSelectionnee(); as carte) {
 
       <div class="panneau-entete">
         <span class="panneau-type">{{ carte.type === 'personnage' ? 'Personnage' : 'Document' }}</span>
@@ -158,9 +213,15 @@
         }
       </div>
 
+      <hr class="separateur-panneau">
+
+      <button (click)="supprimerCarte(carte)" class="btn-supprimer-carte">
+        Supprimer {{ carte.type === 'personnage' ? 'ce personnage' : 'ce document' }}
+      </button>
+
     } @else {
       <div class="panneau-vide">
-        <p>Sélectionnez une carte pour voir son détail et ses liens.</p>
+        <p>Sélectionnez une carte pour voir son détail et ses liens, ou créez un nouveau personnage/document.</p>
       </div>
     }
   </div>

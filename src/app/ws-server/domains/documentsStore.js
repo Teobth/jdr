@@ -19,6 +19,47 @@ class DocumentsStore {
         console.log(`Statut d'accessibilité de ${titre} basculé: ${document.accessible}.`);
         saveAndBroadcast(this.wss, FILES.DOCUMENTS, 'UPDATE_DOCUMENTS', this.data);
     }
+
+    /**
+     * Crée un nouveau document vierge.
+     * @param {{titre: string, contenu?: string, imageUrl?: string}} champs
+     */
+    creerDocument(champs) {
+        if (!champs || !champs.titre || !champs.titre.trim()) {
+            console.warn('Création de document refusée : titre requis.');
+            return;
+        }
+
+        const nouvelId = this.data.length > 0
+            ? Math.max(...this.data.map(d => d.id)) + 1
+            : 1;
+
+        const nouveauDocument = {
+            id: nouvelId,
+            titre: champs.titre.trim(),
+            contenu: champs.contenu || '',
+            accessible: false,
+            imageUrl: champs.imageUrl || ''
+        };
+
+        this.data.push(nouveauDocument);
+        console.log(`Document créé : "${nouveauDocument.titre}" (id ${nouvelId}).`);
+        saveAndBroadcast(this.wss, FILES.DOCUMENTS, 'UPDATE_DOCUMENTS', this.data);
+    }
+
+    /** Supprime un document par son id. */
+    supprimerDocument(id) {
+        const tailleAvant = this.data.length;
+        this.data = this.data.filter(d => d.id !== id);
+
+        if (this.data.length === tailleAvant) {
+            console.warn(`Suppression refusée : document ${id} non trouvé.`);
+            return;
+        }
+
+        console.log(`Document ${id} supprimé.`);
+        saveAndBroadcast(this.wss, FILES.DOCUMENTS, 'UPDATE_DOCUMENTS', this.data);
+    }
 }
 
 module.exports = { DocumentsStore };

@@ -40,6 +40,66 @@ class PersonnagesStore {
         console.log(`Secret "${secretCle}" de ${personnageNom} basculé: ${secret.debloque}`);
         saveAndBroadcast(this.wss, FILES.PERSONNAGES, 'UPDATE_PERSONNAGES', this.data);
     }
+
+    /** Le MJ envoie la fiche complète (ou un patch partiel) pour un personnage donné. */
+    mettreAJourFiche(personnageNom, fiche) {
+        const personnage = this.data.find(p => p.nom === personnageNom);
+        if (!personnage) {
+            console.warn(`Mise à jour de fiche refusée : personnage "${personnageNom}" non trouvé.`);
+            return;
+        }
+        if (!fiche) return;
+
+        personnage.fiche = fiche;
+        console.log(`Fiche complète mise à jour pour ${personnageNom}.`);
+        saveAndBroadcast(this.wss, FILES.PERSONNAGES, 'UPDATE_PERSONNAGES', this.data);
+    }
+
+    /**
+     * Crée un nouveau personnage vierge.
+     * @param {{nom: string, age?: number, profession?: string, portraitUrl?: string}} champs
+     */
+    creerPersonnage(champs) {
+        if (!champs || !champs.nom || !champs.nom.trim()) {
+            console.warn('Création de personnage refusée : nom requis.');
+            return;
+        }
+
+        const nomNormalise = champs.nom.trim();
+        const existeDeja = this.data.some(p => p.nom.toLowerCase() === nomNormalise.toLowerCase());
+        if (existeDeja) {
+            console.warn(`Création refusée : un personnage nommé "${nomNormalise}" existe déjà.`);
+            return;
+        }
+
+        const nouveauPersonnage = {
+            nom: nomNormalise,
+            age: champs.age ?? 0,
+            profession: champs.profession || '',
+            rencontre: false,
+            mort: false,
+            portraitUrl: champs.portraitUrl || '',
+            secrets: []
+        };
+
+        this.data.push(nouveauPersonnage);
+        console.log(`Personnage créé : "${nomNormalise}".`);
+        saveAndBroadcast(this.wss, FILES.PERSONNAGES, 'UPDATE_PERSONNAGES', this.data);
+    }
+
+    /** Supprime un personnage par son nom. */
+    supprimerPersonnage(nom) {
+        const tailleAvant = this.data.length;
+        this.data = this.data.filter(p => p.nom !== nom);
+
+        if (this.data.length === tailleAvant) {
+            console.warn(`Suppression refusée : personnage "${nom}" non trouvé.`);
+            return;
+        }
+
+        console.log(`Personnage "${nom}" supprimé.`);
+        saveAndBroadcast(this.wss, FILES.PERSONNAGES, 'UPDATE_PERSONNAGES', this.data);
+    }
 }
 
 module.exports = { PersonnagesStore };

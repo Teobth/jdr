@@ -118,6 +118,14 @@ export interface Personnage {
   fiche?: FicheCthulhu;
 }
 
+/** Champs nécessaires pour créer un personnage vierge. */
+export interface NouveauPersonnage {
+  nom: string;
+  age?: number;
+  profession?: string;
+  portraitUrl?: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class PersonnageService {
   private imageBuilder = inject(ImageBuilderService);
@@ -220,6 +228,30 @@ export class PersonnageService {
       });
     } else {
       console.error("Tentative de mise à jour de fiche sans connexion WebSocket.");
+    }
+  }
+
+  /** Crée un nouveau personnage vierge (rencontre=false, mort=false, sans secrets). */
+  creerPersonnage(champs: NouveauPersonnage): void {
+    if (this.socket$) {
+      this.socket$.next({
+        type: 'MJ_CREER_PERSONNAGE_COMMAND',
+        ...champs
+      });
+    } else {
+      console.error("Tentative de création de personnage sans connexion WebSocket.");
+    }
+  }
+
+  /** Supprime un personnage (et, côté serveur, ses liens et sa position sur le board). */
+  supprimerPersonnage(nom: string): void {
+    if (this.socket$) {
+      this.socket$.next({
+        type: 'MJ_SUPPRIMER_PERSONNAGE_COMMAND',
+        nom
+      });
+    } else {
+      console.error("Tentative de suppression de personnage sans connexion WebSocket.");
     }
   }
 }

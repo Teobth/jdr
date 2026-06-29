@@ -14,6 +14,13 @@ export interface Doc {
   imageUrl: string;
 }
 
+/** Champs nécessaires pour créer un document vierge. */
+export interface NouveauDocument {
+  titre: string;
+  contenu?: string;
+  imageUrl?: string;
+}
+
 @Injectable({
   providedIn: 'root' 
 })
@@ -73,6 +80,30 @@ export class DocumentService {
       });
     } else {
         console.error("Tentative de toggleRencontre sans connexion WebSocket (Serveur ou non connecté).");
+    }
+  }
+
+  /** Crée un nouveau document vierge (accessible=false par défaut). */
+  creerDocument(champs: NouveauDocument): void {
+    if (this.socket$) {
+      this.socket$.next({
+        type: 'MJ_CREER_DOCUMENT_COMMAND',
+        ...champs
+      });
+    } else {
+      console.error("Tentative de création de document sans connexion WebSocket.");
+    }
+  }
+
+  /** Supprime un document (et, côté serveur, ses liens et sa position sur le board). */
+  supprimerDocument(id: number): void {
+    if (this.socket$) {
+      this.socket$.next({
+        type: 'MJ_SUPPRIMER_DOCUMENT_COMMAND',
+        id
+      });
+    } else {
+      console.error("Tentative de suppression de document sans connexion WebSocket.");
     }
   }
 }

@@ -2,10 +2,11 @@ import { Component, computed, ElementRef, inject, signal, ViewChild } from '@ang
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { DragDropModule, CdkDragMove, CdkDragEnd } from '@angular/cdk/drag-drop';
+import { DragDropModule, CdkDragEnd } from '@angular/cdk/drag-drop';
 import { PersonnageService, Personnage } from '../service/personnageService';
 import { DocumentService, Doc } from '../service/documentService';
 import { LiensService, Lien, TypeEntite } from '../service/liensService';
+import { PositionsService } from '../service/positionsService';
 
 /** Carte affichée sur le board, qu'elle représente un personnage ou un document. */
 interface CarteBoard {
@@ -34,13 +35,11 @@ export class AdminBoardComponent {
   private personnageService = inject(PersonnageService);
   private documentService = inject(DocumentService);
   private liensService = inject(LiensService);
+  private positionsService = inject(PositionsService);
 
   @ViewChild('boardZone') boardZoneRef!: ElementRef<HTMLDivElement>;
 
-  /** Positions courantes des cartes, indexées par "type:id". Recalculées au chargement, modifiables par drag. */
-  private positions = signal<Map<string, { x: number; y: number }>>(new Map());
-
-  /** Largeur disponible du board, mesurée au premier rendu pour le rangement automatique. */
+  /** Largeur disponible du board, utilisée pour le rangement automatique des cartes jamais déplacées. */
   private largeurBoard = signal(900);
 
   readonly cartesPersonnages = computed<CarteBoard[]>(() => {
@@ -62,8 +61,8 @@ export class AdminBoardComponent {
   ]);
 
   private construireCarte(type: TypeEntite, id: string | number, source: any, indexGlobal: number): CarteBoard {
-    const cle = this.cle(type, id);
-    const positionSauvee = this.positions().get(cle);
+    // Position persistée côté serveur en priorité ; sinon rangement automatique en grille.
+    const positionSauvee = this.positionsService.getPosition(type, id);
     const colonnes = Math.max(1, Math.floor(this.largeurBoard() / (LARGEUR_CARTE + MARGE)));
     const rangementAuto = {
       x: MARGE + (indexGlobal % colonnes) * (LARGEUR_CARTE + MARGE),
@@ -93,10 +92,12 @@ export class AdminBoardComponent {
     return `${type}:${id}`;
   }
 
-  // --- Déplacement (CDK drag&drop en mode libre, pas de liste) ---
+  // --- Déplacement (CDK drag&drop en mode libre, persisté côté serveur) ---
 
-  onDragMoved(carte: CarteBoard, event: CdkDragMove): void {
-    // Force le recalcul des chemins SVG pendant le drag, sans persister la position tout de suite.
+  /** Position en cours de glissement, utilisée uniquement pour redessiner les fils en direct. */
+  readonly positionTemporaire = signal<{ cle: string; x: number; y: number } | null>(null);
+
+  onDragMoved(carte: CarteBoard, event: { distance: { x: number; y: number } }): void {
     this.positionTemporaire.set({
       cle: this.cle(carte.type, carte.id),
       x: carte.x + event.distance.x,
@@ -105,19 +106,15 @@ export class AdminBoardComponent {
   }
 
   onDragEnded(carte: CarteBoard, event: CdkDragEnd): void {
-    const cle = this.cle(carte.type, carte.id);
-    const nouvelleMap = new Map(this.positions());
-    nouvelleMap.set(cle, {
-      x: carte.x + event.distance.x,
-      y: carte.y + event.distance.y
-    });
-    this.positions.set(nouvelleMap);
+    const nouvelleX = carte.x + event.distance.x;
+    const nouvelleY = carte.y + event.distance.y;
+
+    // Persistance immédiate côté serveur ; le rendu se remet à jour via le signal positionsSignal.
+    this.positionsService.enregistrerPosition(carte.type, carte.id, nouvelleX, nouvelleY);
+
     event.source.reset();
     this.positionTemporaire.set(null);
   }
-
-  /** Position en cours de glissement, utilisée uniquement pour redessiner les fils en direct. */
-  readonly positionTemporaire = signal<{ cle: string; x: number; y: number } | null>(null);
 
   positionAffichee(carte: CarteBoard): { x: number; y: number } {
     const temp = this.positionTemporaire();
@@ -158,6 +155,7 @@ export class AdminBoardComponent {
       return;
     }
 
+    this.modeFormulaireCreation.set(null);
     this.carteSelectionneeCle.set(this.cle(carte.type, carte.id));
   }
 
@@ -172,6 +170,7 @@ export class AdminBoardComponent {
 
   fermerPanneau(): void {
     this.carteSelectionneeCle.set(null);
+    this.modeFormulaireCreation.set(null);
   }
 
   // --- Connexions affichées sur le board (lignes SVG) ---
@@ -235,7 +234,7 @@ export class AdminBoardComponent {
     this.liensService.supprimerLien(lienId);
   }
 
-  // --- Actions personnage / document (déplacées depuis les anciens panneaux admin) ---
+  // --- Actions personnage / document (panneau détail) ---
 
   toggleRencontre(carte: CarteBoard): void {
     const p = this.personnageService.personnagesSignal().find(pp => pp.nom === carte.id);
@@ -262,5 +261,70 @@ export class AdminBoardComponent {
 
   getDocumentDetail(carte: CarteBoard): Doc | undefined {
     return this.documentService.documentsSignal().find(d => d.id === carte.id);
+  }
+
+  supprimerCarte(carte: CarteBoard): void {
+    if (carte.type === 'personnage') {
+      this.personnageService.supprimerPersonnage(String(carte.id));
+    } else {
+      this.documentService.supprimerDocument(carte.id as number);
+    }
+    this.fermerPanneau();
+  }
+
+  // --- Création de personnage / document depuis le board ---
+
+  /** Quel formulaire de création afficher dans le panneau ('personnage' | 'document' | null). */
+  readonly modeFormulaireCreation = signal<'personnage' | 'document' | null>(null);
+
+  readonly nouveauPersonnageNom = signal('');
+  readonly nouveauPersonnageAge = signal<number | null>(null);
+  readonly nouveauPersonnageProfession = signal('');
+
+  readonly nouveauDocumentTitre = signal('');
+  readonly nouveauDocumentContenu = signal('');
+
+  ouvrirCreationPersonnage(): void {
+    this.carteSelectionneeCle.set(null);
+    this.nouveauPersonnageNom.set('');
+    this.nouveauPersonnageAge.set(null);
+    this.nouveauPersonnageProfession.set('');
+    this.modeFormulaireCreation.set('personnage');
+  }
+
+  ouvrirCreationDocument(): void {
+    this.carteSelectionneeCle.set(null);
+    this.nouveauDocumentTitre.set('');
+    this.nouveauDocumentContenu.set('');
+    this.modeFormulaireCreation.set('document');
+  }
+
+  annulerCreation(): void {
+    this.modeFormulaireCreation.set(null);
+  }
+
+  validerCreationPersonnage(): void {
+    const nom = this.nouveauPersonnageNom().trim();
+    if (!nom) return;
+
+    this.personnageService.creerPersonnage({
+      nom,
+      age: this.nouveauPersonnageAge() ?? undefined,
+      profession: this.nouveauPersonnageProfession().trim()
+    });
+
+    this.modeFormulaireCreation.set(null);
+  }
+
+  validerCreationDocument(): void {
+    const titre = this.nouveauDocumentTitre().trim();
+    if (!titre) return;
+
+    this.documentService.creerDocument({
+      titre,
+      contenu: this.nouveauDocumentContenu().trim()
+    });
+
+    this.modeFormulaireCreation.set(null);
   }
 }

@@ -9,7 +9,7 @@
  * @param {import('ws').WebSocket} ws - La connexion du client à l'origine du message (utile pour répondre directement, ex: login).
  */
 function buildCommandHandlers(stores, ws) {
-    const { scenario, personnages, documents, actes, auth, lieu, cartes, liens } = stores;
+    const { scenario, personnages, documents, actes, auth, lieu, cartes, liens, positions } = stores;
 
     return {
         // --- Scénario ---
@@ -22,14 +22,30 @@ function buildCommandHandlers(stores, ws) {
         TOGGLE_RENCONTRE_COMMAND: (data) => personnages.toggleRencontre(data.personnageNom),
         TOGGLE_MORT_COMMAND: (data) => personnages.toggleMort(data.personnageNom),
         TOGGLE_SECRET_COMMAND: (data) => personnages.toggleSecret(data.personnageNom, data.secretCle),
+        UPDATE_FICHE_COMMAND: (data) => personnages.mettreAJourFiche(data.personnageNom, data.fiche),
+        MJ_CREER_PERSONNAGE_COMMAND: (data) => personnages.creerPersonnage(data),
+        MJ_SUPPRIMER_PERSONNAGE_COMMAND: (data) => {
+            personnages.supprimerPersonnage(data.nom);
+            liens.supprimerLiensDe('personnage', data.nom);
+            positions.supprimerPosition('personnage', data.nom);
+        },
 
         // --- Documents ---
         TOGGLE_ACCES_COMMAND: (data) => documents.toggleAcces(data.documentTitre),
+        MJ_CREER_DOCUMENT_COMMAND: (data) => documents.creerDocument(data),
+        MJ_SUPPRIMER_DOCUMENT_COMMAND: (data) => {
+            documents.supprimerDocument(data.id);
+            liens.supprimerLiensDe('document', data.id);
+            positions.supprimerPosition('document', data.id);
+        },
 
         // --- Liens (murder board) ---
         MJ_CREER_LIEN_COMMAND: (data) => liens.creerLien(data),
         MJ_MODIFIER_NOTE_LIEN_COMMAND: (data) => liens.modifierNote(data.lienId, data.note),
         MJ_SUPPRIMER_LIEN_COMMAND: (data) => liens.supprimerLien(data.lienId),
+
+        // --- Positions (murder board) ---
+        MJ_DEPLACER_CARTE_BOARD_COMMAND: (data) => positions.mettreAJourPosition(data.entiteType, data.entiteId, data.x, data.y),
 
         // --- Actes ---
         TOGGLE_ACTE_ACTIF_COMMAND: (data) => actes.toggleActif(data.acte),
