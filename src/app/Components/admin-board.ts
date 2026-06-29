@@ -16,6 +16,8 @@ interface CarteBoard {
   sousTitre: string;
   imageUrl: string;
   grise: boolean; // mort (personnage) ou non-accessible (document) -> affichage atténué
+  /** Uniquement pertinent pour les personnages ; undefined pour les documents. */
+  rencontre?: boolean;
   x: number;
   y: number;
 }
@@ -74,6 +76,7 @@ export class AdminBoardComponent {
       return {
         type, id, titre: p.nom, sousTitre: p.profession,
         imageUrl: (p as any).fullImageUrl, grise: p.mort,
+        rencontre: p.rencontre,
         x: positionSauvee?.x ?? rangementAuto.x,
         y: positionSauvee?.y ?? rangementAuto.y
       };
@@ -272,6 +275,16 @@ export class AdminBoardComponent {
     this.fermerPanneau();
   }
 
+  /** Met à jour le chemin d'image d'une carte existante (personnage ou document), depuis le panneau détail. */
+  modifierImageCarte(carte: CarteBoard, nouveauChemin: string): void {
+    const chemin = nouveauChemin.trim();
+    if (carte.type === 'personnage') {
+      this.personnageService.modifierPortrait(String(carte.id), chemin);
+    } else {
+      this.documentService.modifierImage(carte.id as number, chemin);
+    }
+  }
+
   // --- Création de personnage / document depuis le board ---
 
   /** Quel formulaire de création afficher dans le panneau ('personnage' | 'document' | null). */
@@ -280,15 +293,18 @@ export class AdminBoardComponent {
   readonly nouveauPersonnageNom = signal('');
   readonly nouveauPersonnageAge = signal<number | null>(null);
   readonly nouveauPersonnageProfession = signal('');
+  readonly nouveauPersonnagePortraitUrl = signal('');
 
   readonly nouveauDocumentTitre = signal('');
   readonly nouveauDocumentContenu = signal('');
+  readonly nouveauDocumentImageUrl = signal('');
 
   ouvrirCreationPersonnage(): void {
     this.carteSelectionneeCle.set(null);
     this.nouveauPersonnageNom.set('');
     this.nouveauPersonnageAge.set(null);
     this.nouveauPersonnageProfession.set('');
+    this.nouveauPersonnagePortraitUrl.set('');
     this.modeFormulaireCreation.set('personnage');
   }
 
@@ -296,6 +312,7 @@ export class AdminBoardComponent {
     this.carteSelectionneeCle.set(null);
     this.nouveauDocumentTitre.set('');
     this.nouveauDocumentContenu.set('');
+    this.nouveauDocumentImageUrl.set('');
     this.modeFormulaireCreation.set('document');
   }
 
@@ -310,7 +327,8 @@ export class AdminBoardComponent {
     this.personnageService.creerPersonnage({
       nom,
       age: this.nouveauPersonnageAge() ?? undefined,
-      profession: this.nouveauPersonnageProfession().trim()
+      profession: this.nouveauPersonnageProfession().trim(),
+      portraitUrl: this.nouveauPersonnagePortraitUrl().trim()
     });
 
     this.modeFormulaireCreation.set(null);
@@ -322,7 +340,8 @@ export class AdminBoardComponent {
 
     this.documentService.creerDocument({
       titre,
-      contenu: this.nouveauDocumentContenu().trim()
+      contenu: this.nouveauDocumentContenu().trim(),
+      imageUrl: this.nouveauDocumentImageUrl().trim()
     });
 
     this.modeFormulaireCreation.set(null);

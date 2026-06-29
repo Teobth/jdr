@@ -60,6 +60,19 @@ class DocumentsStore {
         console.log(`Document ${id} supprimé.`);
         saveAndBroadcast(this.wss, FILES.DOCUMENTS, 'UPDATE_DOCUMENTS', this.data);
     }
+
+    /** Met à jour uniquement le chemin de l'image d'un document existant. */
+    modifierImage(id, imageUrl) {
+        const document = this.data.find(d => d.id === id);
+        if (!document) {
+            console.warn(`Modification d'image refusée : document ${id} non trouvé.`);
+            return;
+        }
+
+        document.imageUrl = imageUrl || '';
+        console.log(`Image du document ${id} mise à jour.`);
+        saveAndBroadcast(this.wss, FILES.DOCUMENTS, 'UPDATE_DOCUMENTS', this.data);
+    }
 }
 
 module.exports = { DocumentsStore };

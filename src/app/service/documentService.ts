@@ -106,4 +106,17 @@ export class DocumentService {
       console.error("Tentative de suppression de document sans connexion WebSocket.");
     }
   }
+
+  /** Met à jour uniquement le chemin de l'image d'un document existant. */
+  modifierImage(id: number, imageUrl: string): void {
+    if (this.socket$) {
+      this.socket$.next({
+        type: 'MJ_MODIFIER_IMAGE_DOCUMENT_COMMAND',
+        id,
+        imageUrl
+      });
+    } else {
+      console.error("Tentative de modification d'image sans connexion WebSocket.");
+    }
+  }
 }

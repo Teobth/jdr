@@ -58,6 +58,21 @@
         }
       }
     </svg>
+
+    @if (legendePions().length > 0) {
+      <div class="legende-pions">
+        <h3 class="legende-titre">Qui est qui ?</h3>
+        <ul class="legende-liste">
+          @for (entree of legendePions(); track entree.nomComplet) {
+            <li class="legende-item" [class.legende-item-moi]="entree.estMoi">
+              <span class="legende-initiales">{{ entree.initiales }}</span>
+              <span class="legende-nom">{{ entree.nomComplet }}{{ entree.estMoi ? ' (vous)' : '' }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+
   } @else {
     <p class="info-message">Aucune carte n'est actuellement affichée par le MJ.</p>
   }

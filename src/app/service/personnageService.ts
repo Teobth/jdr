@@ -254,6 +254,19 @@ export class PersonnageService {
       console.error("Tentative de suppression de personnage sans connexion WebSocket.");
     }
   }
+
+  /** Met à jour uniquement le chemin du portrait d'un personnage existant. */
+  modifierPortrait(nom: string, portraitUrl: string): void {
+    if (this.socket$) {
+      this.socket$.next({
+        type: 'MJ_MODIFIER_PORTRAIT_COMMAND',
+        nom,
+        portraitUrl
+      });
+    } else {
+      console.error("Tentative de modification de portrait sans connexion WebSocket.");
+    }
+  }
 }
 
 /**

@@ -24,6 +24,7 @@ function buildCommandHandlers(stores, ws) {
         TOGGLE_SECRET_COMMAND: (data) => personnages.toggleSecret(data.personnageNom, data.secretCle),
         UPDATE_FICHE_COMMAND: (data) => personnages.mettreAJourFiche(data.personnageNom, data.fiche),
         MJ_CREER_PERSONNAGE_COMMAND: (data) => personnages.creerPersonnage(data),
+        MJ_MODIFIER_PORTRAIT_COMMAND: (data) => personnages.modifierPortrait(data.nom, data.portraitUrl),
         MJ_SUPPRIMER_PERSONNAGE_COMMAND: (data) => {
             personnages.supprimerPersonnage(data.nom);
             liens.supprimerLiensDe('personnage', data.nom);
@@ -33,6 +34,7 @@ function buildCommandHandlers(stores, ws) {
         // --- Documents ---
         TOGGLE_ACCES_COMMAND: (data) => documents.toggleAcces(data.documentTitre),
         MJ_CREER_DOCUMENT_COMMAND: (data) => documents.creerDocument(data),
+        MJ_MODIFIER_IMAGE_DOCUMENT_COMMAND: (data) => documents.modifierImage(data.id, data.imageUrl),
         MJ_SUPPRIMER_DOCUMENT_COMMAND: (data) => {
             documents.supprimerDocument(data.id);
             liens.supprimerLiensDe('document', data.id);

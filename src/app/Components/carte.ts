@@ -21,6 +21,13 @@ interface CaseAffichee {
   segmentsMurs: { x1: number; y1: number; x2: number; y2: number }[];
 }
 
+/** Une entrée de la légende : initiale(s) affichée(s) sur la carte -> nom complet du personnage. */
+interface EntreeLegende {
+  initiales: string;
+  nomComplet: string;
+  estMoi: boolean;
+}
+
 @Component({
   standalone: true,
   selector: 'app-carte',
@@ -94,6 +101,35 @@ export class CarteComponent {
         segmentsMurs
       };
     });
+  });
+
+  /**
+   * Légende statique : pour chaque pion réellement présent sur la carte active,
+   * associe les initiales affichées dans l'hexagone à son nom complet, pour
+   * permettre au joueur de s'y retrouver sans deviner qui est qui.
+   */
+  readonly legendePions = computed<EntreeLegende[]>(() => {
+    const carte = this.carte();
+    if (!carte) return [];
+
+    const monNom = this.monNom()?.toLowerCase();
+
+    // On garde l'ordre d'apparition des pions tel que défini sur la carte, sans doublons.
+    const nomsVus = new Set<string>();
+    const entrees: EntreeLegende[] = [];
+
+    for (const pion of carte.pions) {
+      if (nomsVus.has(pion.nomPersonnage)) continue;
+      nomsVus.add(pion.nomPersonnage);
+
+      entrees.push({
+        initiales: this.getNomAffiche(pion.nomPersonnage),
+        nomComplet: pion.nomPersonnage,
+        estMoi: pion.nomPersonnage.toLowerCase() === monNom
+      });
+    }
+
+    return entrees;
   });
 
   getNomAffiche(nomPersonnage: string | null): string {

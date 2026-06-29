@@ -67,6 +67,12 @@
         @if (carte.grise) {
           <span class="badge-grise">{{ carte.type === 'personnage' ? 'Mort' : 'Caché' }}</span>
         }
+        @if (carte.type === 'personnage') {
+          <span class="badge-rencontre" [class.badge-rencontre-oui]="carte.rencontre" [class.badge-rencontre-non]="!carte.rencontre">
+            {{ carte.rencontre ? ' ' : ' ' }}
+            <!-- {{ carte.rencontre ? 'Rencontré' : 'Non rencontré' }} -->
+          </span>
+        }
       </div>
     }
   </div>
@@ -90,7 +96,10 @@
         <label>Profession
           <input type="text" [ngModel]="nouveauPersonnageProfession()" (ngModelChange)="nouveauPersonnageProfession.set($event)" name="profession">
         </label>
-        <p class="texte-vide">Le portrait, le statut "rencontré" et les secrets se règlent ensuite depuis la fiche.</p>
+        <label>Chemin de l'image (ex: :3002/images/portraits/nom.png)
+          <input type="text" [ngModel]="nouveauPersonnagePortraitUrl()" (ngModelChange)="nouveauPersonnagePortraitUrl.set($event)" name="portraitUrl" placeholder=":3002/images/portraits/...">
+        </label>
+        <p class="texte-vide">Le statut "rencontré" et les secrets se règlent ensuite depuis la fiche.</p>
         <div class="form-actions">
           <button type="submit" class="btn-enregistrer">Créer</button>
           <button type="button" (click)="annulerCreation()" class="btn-annuler-edition">Annuler</button>
@@ -111,7 +120,10 @@
         <label>Contenu
           <textarea [ngModel]="nouveauDocumentContenu()" (ngModelChange)="nouveauDocumentContenu.set($event)" name="contenu" rows="6"></textarea>
         </label>
-        <p class="texte-vide">L'image et la visibilité aux joueurs se règlent ensuite depuis le board.</p>
+        <label>Chemin de l'image (ex: :3002/images/documents/nom.png)
+          <input type="text" [ngModel]="nouveauDocumentImageUrl()" (ngModelChange)="nouveauDocumentImageUrl.set($event)" name="imageUrl" placeholder=":3002/images/documents/...">
+        </label>
+        <p class="texte-vide">La visibilité aux joueurs se règle ensuite depuis le board.</p>
         <div class="form-actions">
           <button type="submit" class="btn-enregistrer">Créer</button>
           <button type="button" (click)="annulerCreation()" class="btn-annuler-edition">Annuler</button>
@@ -126,6 +138,15 @@
       </div>
 
       <h3 class="panneau-titre">{{ carte.titre }}</h3>
+
+      <label class="champ-image-board">
+        Chemin de l'image
+        <input
+          type="text"
+          [value]="carte.imageUrl ? (carte.type === 'personnage' ? getPersonnageDetail(carte)?.portraitUrl : getDocumentDetail(carte)?.imageUrl) : ''"
+          (change)="modifierImageCarte(carte, $any($event.target).value)"
+          placeholder=":3002/images/...">
+      </label>
 
       @if (carte.type === 'personnage') {
         @if (getPersonnageDetail(carte); as p) {

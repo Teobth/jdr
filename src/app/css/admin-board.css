@@ -253,6 +253,22 @@
     border-radius: 50px;
 }
 
+.badge-rencontre {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    padding: 2px 7px;
+    border-radius: 50px;
+}
+
+.badge-rencontre-oui {
+    background-color: #6fcf6f;
+}
+
+.badge-rencontre-non {
+    background-color: #c81010;
+}
+
 .poignee-lien {
     position: absolute;
     top: -10px;
@@ -332,6 +348,24 @@
     color: #aaa;
     font-size: 0.9em;
     margin: 0 0 14px;
+}
+
+.champ-image-board {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.82em;
+    color: #ccc;
+    margin-bottom: 14px;
+}
+
+.champ-image-board input {
+    padding: 7px 9px;
+    background-color: #1c1c1c;
+    color: #ddd;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-size: 0.95em;
 }
 
 .panneau-description {

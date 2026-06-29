@@ -79,3 +79,75 @@
     stroke-linecap: round;
     pointer-events: none;
 }
+
+/* --- Légende des personnages présents sur la carte --- */
+
+.legende-pions {
+    margin-top: 24px;
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--couleur-boite-info);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: 8px;
+    padding: 16px 20px;
+}
+
+.legende-titre {
+    font-family: var(--font-titre);
+    color: var(--couleur-accent-or);
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    margin: 0 0 12px;
+    text-align: center;
+}
+
+.legende-liste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+}
+
+.legende-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-radius: 4px;
+}
+
+.legende-item-moi {
+    background-color: rgba(168, 125, 58, 0.15);
+}
+
+.legende-initiales {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: var(--couleur-accent-sec);
+    color: var(--couleur-texte-primaire);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75em;
+    font-weight: 700;
+}
+
+.legende-item-moi .legende-initiales {
+    background-color: var(--couleur-accent-or);
+    color: var(--couleur-fond-primaire);
+}
+
+.legende-nom {
+    font-family: var(--font-corps);
+    color: var(--couleur-texte-primaire);
+    font-size: 0.9em;
+}
+
+.legende-item-moi .legende-nom {
+    font-weight: 700;
+    color: var(--couleur-accent-or);
+}

@@ -100,6 +100,19 @@ class PersonnagesStore {
         console.log(`Personnage "${nom}" supprimé.`);
         saveAndBroadcast(this.wss, FILES.PERSONNAGES, 'UPDATE_PERSONNAGES', this.data);
     }
+
+    /** Met à jour uniquement le chemin du portrait d'un personnage existant. */
+    modifierPortrait(nom, portraitUrl) {
+        const personnage = this.data.find(p => p.nom === nom);
+        if (!personnage) {
+            console.warn(`Modification de portrait refusée : personnage "${nom}" non trouvé.`);
+            return;
+        }
+
+        personnage.portraitUrl = portraitUrl || '';
+        console.log(`Portrait de "${nom}" mis à jour.`);
+        saveAndBroadcast(this.wss, FILES.PERSONNAGES, 'UPDATE_PERSONNAGES', this.data);
+    }
 }
 
 module.exports = { PersonnagesStore };
