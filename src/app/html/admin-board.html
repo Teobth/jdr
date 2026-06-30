@@ -96,8 +96,11 @@
         <label>Profession
           <input type="text" [ngModel]="nouveauPersonnageProfession()" (ngModelChange)="nouveauPersonnageProfession.set($event)" name="profession">
         </label>
-        <label>Chemin de l'image (ex: :3002/images/portraits/nom.png)
-          <input type="text" [ngModel]="nouveauPersonnagePortraitUrl()" (ngModelChange)="nouveauPersonnagePortraitUrl.set($event)" name="portraitUrl" placeholder=":3002/images/portraits/...">
+        <label>Chemin de l'image
+          <input type="text" 
+                [ngModel]="nouveauPersonnagePortraitUrl()" 
+                (ngModelChange)="nouveauPersonnagePortraitUrl.set($event)" 
+                name="portraitUrl">
         </label>
         <p class="texte-vide">Le statut "rencontré" et les secrets se règlent ensuite depuis la fiche.</p>
         <div class="form-actions">
@@ -120,8 +123,8 @@
         <label>Contenu
           <textarea [ngModel]="nouveauDocumentContenu()" (ngModelChange)="nouveauDocumentContenu.set($event)" name="contenu" rows="6"></textarea>
         </label>
-        <label>Chemin de l'image (ex: :3002/images/documents/nom.png)
-          <input type="text" [ngModel]="nouveauDocumentImageUrl()" (ngModelChange)="nouveauDocumentImageUrl.set($event)" name="imageUrl" placeholder=":3002/images/documents/...">
+        <label>Chemin de l'image
+          <input type="text" [ngModel]="nouveauDocumentImageUrl()" (ngModelChange)="nouveauDocumentImageUrl.set($event)" name="imageUrl">
         </label>
         <p class="texte-vide">La visibilité aux joueurs se règle ensuite depuis le board.</p>
         <div class="form-actions">

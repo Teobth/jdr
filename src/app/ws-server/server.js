@@ -13,6 +13,8 @@ const { LieuStore } = require('./domains/lieuStore');
 const { CartesStore } = require('./domains/cartes/cartesStore');
 const { LiensStore } = require('./domains/liensStore');
 const { PositionsStore } = require('./domains/positionsStore');
+const { PositionsJoueursStore } = require('./domains/positionsJoueursStore');
+const { LiensJoueursStore } = require('./domains/liensJoueursStore');
 
 // --- SERVEUR HTTP D'IMAGES ---
 
@@ -39,7 +41,9 @@ const stores = {
     lieu: new LieuStore(wss),
     cartes: new CartesStore(wss),
     liens: new LiensStore(wss),
-    positions: new PositionsStore(wss)
+    positions: new PositionsStore(wss),
+    liensJoueurs: new LiensJoueursStore(wss),
+    positionsJoueurs: new PositionsJoueursStore(wss)
 };
 
 /** Construit le payload INITIAL_STATE envoyé à chaque nouveau client. */
@@ -53,7 +57,9 @@ function getInitialState() {
         actesActifs: stores.actes.getAll(),
         displayId: stores.lieu.getCurrentDisplayId(),
         liens: stores.liens.getAll(),
-        positions: stores.positions.getAll()
+        positions: stores.positions.getAll(),
+        liensJoueurs: stores.liensJoueurs.getAll(),
+        positionsJoueurs: stores.positionsJoueurs.getAll()
     };
 }
 

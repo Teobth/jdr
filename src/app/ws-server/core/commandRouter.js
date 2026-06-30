@@ -9,8 +9,7 @@
  * @param {import('ws').WebSocket} ws - La connexion du client à l'origine du message (utile pour répondre directement, ex: login).
  */
 function buildCommandHandlers(stores, ws) {
-    const { scenario, personnages, documents, actes, auth, lieu, cartes, liens, positions } = stores;
-
+    const { scenario, personnages, documents, actes, auth, lieu, cartes, liens, positions, liensJoueurs, positionsJoueurs } = stores;
     return {
         // --- Scénario ---
         UPDATE_STATUS_COMMAND: (data) => scenario.updateStatus(data.stepId, data.newStatus),
@@ -29,6 +28,8 @@ function buildCommandHandlers(stores, ws) {
             personnages.supprimerPersonnage(data.nom);
             liens.supprimerLiensDe('personnage', data.nom);
             positions.supprimerPosition('personnage', data.nom);
+            liensJoueurs.supprimerLiensDe('personnage', data.nom);
+            positionsJoueurs.supprimerPosition('personnage', data.nom);
         },
 
         // --- Documents ---
@@ -39,6 +40,8 @@ function buildCommandHandlers(stores, ws) {
             documents.supprimerDocument(data.id);
             liens.supprimerLiensDe('document', data.id);
             positions.supprimerPosition('document', data.id);
+            liensJoueurs.supprimerLiensDe('document', data.id);
+            positionsJoueurs.supprimerPosition('document', data.id);
         },
 
         // --- Liens (murder board) ---
@@ -46,8 +49,16 @@ function buildCommandHandlers(stores, ws) {
         MJ_MODIFIER_NOTE_LIEN_COMMAND: (data) => liens.modifierNote(data.lienId, data.note),
         MJ_SUPPRIMER_LIEN_COMMAND: (data) => liens.supprimerLien(data.lienId),
 
+        // --- Liens joueurs (board partagé) ---
+        JOUEUR_CREER_LIEN_COMMAND: (data) => liensJoueurs.creerLien(data),
+        JOUEUR_MODIFIER_NOTE_LIEN_COMMAND: (data) => liensJoueurs.modifierNote(data.lienId, data.note),
+        JOUEUR_SUPPRIMER_LIEN_COMMAND: (data) => liensJoueurs.supprimerLien(data.lienId),
+
         // --- Positions (murder board) ---
         MJ_DEPLACER_CARTE_BOARD_COMMAND: (data) => positions.mettreAJourPosition(data.entiteType, data.entiteId, data.x, data.y),
+
+        // --- Positions joueurs (board partagé) ---
+        JOUEUR_DEPLACER_CARTE_BOARD_COMMAND: (data) => positionsJoueurs.mettreAJourPosition(data.entiteType, data.entiteId, data.x, data.y),
 
         // --- Actes ---
         TOGGLE_ACTE_ACTIF_COMMAND: (data) => actes.toggleActif(data.acte),

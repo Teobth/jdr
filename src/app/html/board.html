@@ -1,0 +1,104 @@
+<h2>Tableau d'enquête</h2>
+
+<p class="board-instructions">
+  Glissez les cartes pour les organiser. Cliquez sur le trombone <strong>🖇</strong> d'une carte
+  puis sur une autre carte pour créer un lien. Ce tableau est partagé avec tous les joueurs.
+</p>
+
+@if (carteEnAttenteDeLien(); as enAttente) {
+  <div class="bandeau-lien-actif">
+    Sélectionnez la carte à lier à <strong>{{ enAttente.titre }}</strong>
+    <button (click)="annulerLien()" class="btn-annuler-lien">Annuler</button>
+  </div>
+}
+
+<div class="board-layout">
+
+  <div class="board-zone" #boardZone [style.height.px]="hauteurBoard()">
+
+    <svg class="board-svg" [attr.height]="hauteurBoard()">
+      @for (c of connexionsAffichees(); track c.lien.id) {
+        <line
+          [attr.x1]="c.x1" [attr.y1]="c.y1"
+          [attr.x2]="c.x2" [attr.y2]="c.y2"
+          class="fil-connexion">
+        </line>
+        @if (c.lien.note) {
+          <text
+            [attr.x]="(c.x1 + c.x2) / 2"
+            [attr.y]="(c.y1 + c.y2) / 2 - 6"
+            class="etiquette-lien">
+            {{ c.lien.note }}
+          </text>
+        }
+      }
+    </svg>
+
+    @for (carte of toutesLesCartes(); track carte.type + carte.id) {
+      <div
+        cdkDrag
+        class="carte-board"
+        [class.carte-personnage]="carte.type === 'personnage'"
+        [class.carte-document]="carte.type === 'document'"
+        [class.carte-selectionnee]="carteSelectionneeCle() === (carte.type + ':' + carte.id)"
+        [class.carte-en-attente]="carteEnAttenteCle() === (carte.type + ':' + carte.id)"
+        [style.left.px]="carte.x"
+        [style.top.px]="carte.y"
+        (cdkDragMoved)="onDragMoved(carte, $event)"
+        (cdkDragEnded)="onDragEnded(carte, $event)"
+        (click)="cliquerCarte(carte)">
+
+        <button class="poignee-lien" (click)="demarrerLien(carte, $event)" title="Créer un lien">🖇</button>
+
+        <img [src]="carte.imageUrl" [alt]="carte.titre" class="carte-image">
+        <div class="carte-info">
+          <span class="carte-titre">{{ carte.titre }}</span>
+          <span class="carte-sous-titre">{{ carte.sousTitre }}</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="board-panneau">
+    @if (carteSelectionnee(); as carte) {
+      <div class="panneau-entete">
+        <span class="panneau-type">{{ carte.type === 'personnage' ? 'Personnage' : 'Document' }}</span>
+        <button (click)="fermerPanneau()" class="btn-fermer-panneau" title="Fermer">&times;</button>
+      </div>
+
+      <h3 class="panneau-titre">{{ carte.titre }}</h3>
+      <p class="panneau-sous-info">{{ carte.sousTitre }}</p>
+
+      <hr class="separateur-panneau">
+
+      <div class="panneau-section">
+        <h4>Vos liens ({{ liensDeLaSelection().length }})</h4>
+
+        @if (liensDeLaSelection().length > 0) {
+          @for (item of liensDeLaSelection(); track item.lien.id) {
+            <div class="lien-ligne-board">
+              <img [src]="item.autreCarte?.imageUrl" [alt]="item.autreCarte?.titre" class="lien-avatar">
+              <div class="lien-infos">
+                <span class="lien-nom">{{ item.autreCarte?.titre }}</span>
+                <input
+                  type="text"
+                  class="lien-note-input"
+                  placeholder="Ajouter une note..."
+                  [value]="item.lien.note"
+                  (change)="modifierNoteLien(item.lien.id, $any($event.target).value)">
+              </div>
+              <button (click)="supprimerLien(item.lien.id)" class="btn-supprimer-lien" title="Supprimer ce lien">&times;</button>
+            </div>
+          }
+        } @else {
+          <p class="texte-vide">Aucun lien pour le moment. Utilisez le trombone sur la carte pour en créer un.</p>
+        }
+      </div>
+    } @else {
+      <div class="panneau-vide">
+        <p>Sélectionnez une carte pour voir ses liens, ou utilisez le trombone pour en créer un nouveau.</p>
+      </div>
+    }
+  </div>
+
+</div>

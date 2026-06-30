@@ -15,6 +15,7 @@ import { authGuard } from './service/authGuard';
 import { adminGuard } from './service/adminGuard';
 import { AdminFichePersonnageComponent } from './Components/admin-fiche-personnage';
 import { AdminBoardComponent } from './Components/admin-board';
+import { CarteBoardComponent } from './Components/board';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,6 +33,8 @@ export const routes: Routes = [
   { path: 'documents', component: DocumentListComponent, canActivate: [authGuard] },
 
   { path: 'documents/:id', component: DocumentDetailComponent, canActivate: [authGuard] },
+
+    { path: 'enquete', component: CarteBoardComponent, canActivate: [authGuard] },
 
   {
     path: 'admin',

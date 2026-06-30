@@ -41,6 +41,13 @@ export class AdminBoardComponent {
 
   @ViewChild('boardZone') boardZoneRef!: ElementRef<HTMLDivElement>;
 
+  private readonly IMAGE_PREFIXE = ':3002/images/portraits/'
+
+  readonly portraitUrlFinal = computed(() => {
+    const url = this.nouveauPersonnagePortraitUrl().trim();
+    return url ? `${this.IMAGE_PREFIXE}${url}.png` : '';
+  });
+
   /** Largeur disponible du board, utilisée pour le rangement automatique des cartes jamais déplacées. */
   private largeurBoard = signal(900);
 
@@ -328,7 +335,7 @@ export class AdminBoardComponent {
       nom,
       age: this.nouveauPersonnageAge() ?? undefined,
       profession: this.nouveauPersonnageProfession().trim(),
-      portraitUrl: this.nouveauPersonnagePortraitUrl().trim()
+      portraitUrl: this.portraitUrlFinal()
     });
 
     this.modeFormulaireCreation.set(null);
