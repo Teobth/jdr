@@ -13,6 +13,7 @@ interface CarteBoardJoueur {
   titre: string;
   sousTitre: string;
   imageUrl: string;
+  grise: boolean;
   x: number;
   y: number;
 }
@@ -69,7 +70,7 @@ export class CarteBoardComponent {
       const p = source as Personnage;
       return {
         type, id, titre: p.nom, sousTitre: p.profession,
-        imageUrl: (p as any).fullImageUrl,
+        imageUrl: (p as any).fullImageUrl, grise: p.mort,
         x: positionSauvee?.x ?? rangementAuto.x,
         y: positionSauvee?.y ?? rangementAuto.y
       };
@@ -77,7 +78,7 @@ export class CarteBoardComponent {
       const d = source as Doc;
       return {
         type, id, titre: d.titre, sousTitre: 'Document',
-        imageUrl: (d as any).fullImageUrl,
+        imageUrl: (d as any).fullImageUrl, grise: !d.accessible,
         x: positionSauvee?.x ?? rangementAuto.x,
         y: positionSauvee?.y ?? rangementAuto.y
       };

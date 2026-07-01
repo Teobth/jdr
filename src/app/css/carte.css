@@ -21,6 +21,7 @@
 
 .grille-hex {
     max-width: 100%;
+    height: auto;
     background-color: #121417;
     border: 3px solid var(--couleur-accent-or);
 }
@@ -73,7 +74,6 @@
 }
 
 .mur-trait {
-    /* stroke: var(--couleur-accent-or); */
     stroke:#fff;
     stroke-width: 4;
     stroke-linecap: round;
@@ -150,4 +150,28 @@
 .legende-item-moi .legende-nom {
     font-weight: 700;
     color: var(--couleur-accent-or);
+}
+
+/* --- Adaptations Mobile --- */
+@media (max-width: 700px) {
+    .carte-container {
+        padding: 16px 8px;
+    }
+
+    .carte-container h2 {
+        font-size: 1.3em;
+    }
+
+    .info-message {
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+    .legende-pions {
+        padding: 12px 14px;
+    }
+
+    .legende-liste {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
 }

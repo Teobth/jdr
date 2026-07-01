@@ -9,18 +9,27 @@
   :root {
     --nav-bg-color: #1e1e1e;
     --nav-text-color: #e0e0e0;
-    --nav-active-color: #d4a373; /* Couleur accentuation (cuivré) */   
+    --nav-active-color: #d4a373; /* Couleur accentuée (cuivré) */   
   }
 }
 
 /* --- Style de la Barre de Navigation --- */
 .main-nav {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center; /* Centrer les liens */
     background-color: var(--nav-bg-color);
     padding: 10px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px; /* Espace entre la nav et le contenu */
+    row-gap: 6px;
+}
+
+.main-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 4px;
 }
 
 .main-nav a {
@@ -40,21 +49,42 @@
 
 /* --- Style de l'Onglet ACTIF --- */
 .main-nav a.active-link {
-    /* Mettre en évidence l'onglet actif avec la couleur accentuée */
     color: var(--nav-active-color); 
-    
-    /* Soulignement épais pour indiquer l'onglet actif */
     border-bottom: 3px solid var(--nav-active-color);
-    
     background-color: rgba(var(--nav-active-color), 0.1);
 }
 
-/* --- Style global du router-outlet (pour une transition plus douce) --- */
-
-/* La transition n'est pas automatique avec le router-outlet et est un sujet complexe.
-   Cependant, on peut s'assurer que le contenu principal est bien stylisé. */
 main {
     padding: 0 20px;
     margin: 0 auto;
     max-width: 1600px;
+}
+
+/* --- Adaptations Mobile --- */
+@media (max-width: 700px) {
+    .main-nav {
+        padding: 8px 0;
+    }
+
+    .main-nav ul {
+        gap: 4px;
+    }
+
+    .main-nav a {
+        padding: 8px 12px;
+        margin: 0 4px;
+        font-size: 0.9em;
+    }
+
+    main {
+        padding: 0 12px;
+    }
+}
+
+@media (max-width: 420px) {
+    .main-nav a {
+        padding: 7px 9px;
+        margin: 0 2px;
+        font-size: 0.82em;
+    }
 }

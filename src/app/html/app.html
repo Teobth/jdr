@@ -5,6 +5,13 @@
     @if (authService.estConnecte()) {
       <ul>
 
+        <li>
+          <a routerLink="/lieu" 
+            routerLinkActive="active-tab">
+              Lieu
+          </a>
+        </li>
+
         @if (!authService.estMJ()) {
           <li>
             <a routerLink="/"
@@ -20,32 +27,11 @@
             </a>
           </li>
         }
-
-        <li>
-          <a routerLink="/lieu" 
-            routerLinkActive="active-tab">
-              Lieu
-          </a>
-        </li>
         
         <li>
           <a routerLink="/enquete"
             routerLinkActive="active-tab">
               Enquête
-          </a>
-        </li>
-
-        <li>
-          <a routerLink="/personnages" 
-             routerLinkActive="active-tab">
-              Rencontres
-          </a>
-        </li>
-
-        <li>
-          <a routerLink="/documents" 
-             routerLinkActive="active-tab">
-              Documents
           </a>
         </li>
 

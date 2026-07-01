@@ -90,3 +90,29 @@
     font-family: var(--font-mono);
     font-weight: bold;
 }
+
+/* --- Adaptations Mobile --- */
+@media (max-width: 480px) {
+    :host {
+        padding: 12px;
+        min-height: 70vh;
+    }
+
+    .login-card {
+        padding: 30px 20px;
+    }
+
+    .login-card h1 {
+        font-size: 1.5em;
+        letter-spacing: 0.08em;
+    }
+
+    .pin-input {
+        font-size: 1.2em;
+        padding: 12px 14px;
+    }
+
+    .btn-connexion {
+        padding: 13px 20px;
+    }
+}

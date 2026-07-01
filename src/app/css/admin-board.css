@@ -141,6 +141,11 @@
     border-radius: 8px;
     overflow: hidden;
     min-height: 400px;
+    /* Maj */
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
 }
 
 .board-svg {

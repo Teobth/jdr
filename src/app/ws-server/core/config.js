@@ -2,11 +2,12 @@ const path = require('path');
 
 // --- CHOIX DE L'HISTOIRE EN COURS ---
 // Changez cette valeur pour basculer entre les scénarios.
-const HISTOIRE = 2;
+const HISTOIRE = 3;
 
 const DOSSIERS_HISTOIRE = {
     1: 'Par cinq mètres de fond',
-    2: 'Les maudits'
+    2: 'Les maudits',
+    3: "Le rejeton d'Azathoth"
 };
 
 const dossier = DOSSIERS_HISTOIRE[HISTOIRE] || 'Les maudits';
@@ -17,8 +18,6 @@ const WS_PORT = 3000;
 const IMAGES_PORT = 3000 + HISTOIRE;
 
 // --- CHEMINS DES FICHIERS DE DONNÉES ---
-// Toute nouvelle "store" de données doit ajouter sa clé ici, plutôt que
-// d'écrire un chemin en dur ailleurs dans le code.
 const FILES = {
     PERSONNAGES: path.join(RACINE_DONNEES, 'personnages.json'),
     DOCUMENTS: path.join(RACINE_DONNEES, 'documents.json'),

@@ -1,22 +1,13 @@
 <div class="admin-control-panel">
   <h3>Sélection de l'Affiche Publique</h3>
 
-  @if (options() && options().length > 0) {
-    <select 
-      [ngModel]="selectedDisplayId()" 
-      (ngModelChange)="onDisplayChange($event)">
-
-      @if (selectedDisplayId() === undefined) {
-        <option [ngValue]="undefined" disabled selected>Choisissez une option</option>
-      }
-      
+  @if (options().length > 0) {
+    <select [ngModel]="selectedDisplayId()" (ngModelChange)="onDisplayChange($event)">
       @for (option of options(); track option.id) {
-        <option [ngValue]="option.id">
-          {{ option.nom }} 
-        </option>
+        <option [ngValue]="option.id">{{ option.nom }}</option>
       }
     </select>
   } @else {
-    <p>Chargement des options ou aucune option disponible...</p>
+    <p style="color: red;">Aucune option reçue via WebSocket. Vérifie la connexion !</p>
   }
 </div>

@@ -1,58 +1,42 @@
-import { Injectable, inject, PLATFORM_ID, OnDestroy, signal } from '@angular/core'; // <--- AJOUT signal
 import { isPlatformBrowser } from '@angular/common';
+import { computed, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { BehaviorSubject } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { WS_BASE_URL } from '../constante';
 
-export interface Lieu {
-  id: number;
-  nom?: string;
-  imageUrl?: string;
-  description?: { balise: string; contenu: string }[];
-}
+export interface Lieu { id: number; nom: string; imageUrl?: string; [key: string]: any; }
 
 @Injectable({ providedIn: 'root' })
-export class LieuService implements OnDestroy {  
+export class LieuService {
   private platformId = inject(PLATFORM_ID);
   private socket$: WebSocketSubject<any> | null = null;
-  
-  // 1. On stocke les données brutes du serveur ici
-  readonly donneesServeur = signal<any>(null);
 
-  private lieuActuelSubject = new BehaviorSubject<Lieu | null>(null);
-  readonly lieuActuel = toSignal(this.lieuActuelSubject.asObservable(), { initialValue: null });
+  // Signal pour la liste complète des données
+  readonly donneesServeur = signal<any>({ affiches: [] });
+  // Signal pour le lieu actuellement sélectionné
+  readonly lieuActuel = signal<Lieu | null>(null);
+
+  readonly optionsSignal = computed(() => this.donneesServeur().affiches);
 
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
       this.socket$ = webSocket(WS_BASE_URL);
       this.socket$.subscribe({
-        next: (msg) => this.dispatchMessage(msg),
-        error: (err) => console.error('Erreur WebSocket:', err),
+        next: (message) => {
+          if (message.type === 'INITIAL_STATE') {
+            // Supposons que le serveur envoie tout le payload ici
+            this.donneesServeur.set(message.payload);
+          } else if (message.type === 'UPDATE_DISPLAY_ID') {
+            // Si le serveur notifie un changement de lieu actif
+            const id = message.displayId;
+            const trouve = this.donneesServeur().affiches?.find((a: any) => Number(a.id) === Number(id));
+            if (trouve) this.lieuActuel.set(trouve);
+          }
+        }
       });
     }
   }
 
-  private dispatchMessage(msg: any): void {
-    if (msg.type === 'INITIAL_STATE') {
-      this.donneesServeur.set(msg.payload);
-      this.lieuActuelSubject.next({
-        id: Number(msg.payload.displayId)
-      });
-    }
-    if (msg.type === 'UPDATE_DISPLAY_ID') {
-      const newId = msg.payload?.displayId;
-      if (newId !== undefined) {
-        this.lieuActuelSubject.next({ id: Number(newId) });
-      }
-    }
-  }
-
-  public sendDisplayChoice(payload: any): void {
-    if (this.socket$) this.socket$.next(payload);
-  }
-
-  ngOnDestroy(): void {
-    this.socket$?.complete();
+  sendDisplayChoice(payload: any): void {
+    this.socket$?.next(payload);
   }
 }

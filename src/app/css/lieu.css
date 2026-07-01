@@ -88,3 +88,49 @@ h2 {
   object-fit: cover; 
   object-position: top; 
 }
+
+/* --- Adaptations Mobile --- */
+@media (max-width: 700px) {
+    :host {
+        padding: 20px 10px;
+    }
+
+    .adventure-intro {
+        padding: 25px 20px;
+        margin: 15px auto;
+    }
+
+    h2 {
+        font-size: 1.8em;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+    }
+
+    .adventure-intro h1 {
+        font-size: 1.6em;
+    }
+
+    .adventure-intro h3 {
+        font-size: 1.2em;
+    }
+
+    .adventure-intro p {
+        font-size: 1em;
+        margin-bottom: 16px;
+    }
+
+    .lore-box {
+        margin: 20px auto;
+        padding: 16px;
+    }
+
+    .lore-box h3 {
+        font-size: 1.2em;
+    }
+
+    .call-to-action {
+        width: 100%;
+        text-align: center;
+        padding: 14px 20px;
+    }
+}

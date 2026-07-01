@@ -18,19 +18,19 @@ export class LieuComponent {
   private lieuService = inject(LieuService);
   private imageBuilder = inject(ImageBuilderService);
 
+  // Utilisation directe des signaux du service
   readonly detailsAffiche = computed(() => {
-    const lieuRecu = this.lieuService.lieuActuel();
+    const lieuActuel = this.lieuService.lieuActuel();
     const data = this.lieuService.donneesServeur();
 
-    if (!lieuRecu || !data) return undefined;
+    if (!lieuActuel || !data.affiches) return undefined;
 
-    return data.affiches?.find(
-      (item: any) => Number(item.id) === Number(lieuRecu.id)
+    return data.affiches.find(
+      (item: any) => Number(item.id) === Number(lieuActuel.id)
     );
   });
 
-
-  protected getUrl(l:Lieu) {
-    return this.imageBuilder.generateImageUrl(l.imageUrl || '')
+  protected getUrl(l: Lieu) {
+    return this.imageBuilder.generateImageUrl(l.imageUrl || '');
   }
 }

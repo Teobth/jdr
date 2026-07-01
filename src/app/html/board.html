@@ -55,6 +55,9 @@
           <span class="carte-titre">{{ carte.titre }}</span>
           <span class="carte-sous-titre">{{ carte.sousTitre }}</span>
         </div>
+        @if (carte.grise) {
+          <span class="badge-grise">{{ carte.type === 'personnage' ? 'Mort' : 'Caché' }}</span>
+        }
       </div>
     }
   </div>
@@ -68,6 +71,9 @@
 
       <h3 class="panneau-titre">{{ carte.titre }}</h3>
       <p class="panneau-sous-info">{{ carte.sousTitre }}</p>
+      <a [href]="carte.type === 'personnage' ? '/personnages/' + carte.id : '/documents/' + carte.id">
+        Voir le détail
+      </a>
 
       <hr class="separateur-panneau">
 

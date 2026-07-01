@@ -6,17 +6,14 @@
 }
 
 .document-image {
-    /* Limiter la taille de l'image pour qu'elle ne prenne pas toute la carte */
     max-width: 100%;
     width: 300px; 
     height: auto; 
 
-    /* Styles d'habillage pour le thème */
     border: 5px solid var(--couleur-accent-sec);
     border-radius: 5px; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
     
-    /* Assurer que l'image est bien cadrée sans déformation excessive */
     object-fit: cover; 
 }
 
@@ -38,7 +35,7 @@
     text-transform: none;
 }
 
-/* Titre du Personnage */
+/* Titre du Document */
 .detail-card h2 {
     font-size: 3em;
     font-family: var(--font-titre);
@@ -68,15 +65,12 @@
     font-size: 1.2em;
 }
 
-/* Suppression de la bordure pour la dernière ligne */
 .stats-container p:last-child {
     border-bottom: none;
 }
 
-
-/* Bloc contenant le texte long (doit être appliqué à une <div> ou <p> entourant le contenu) */
+/* Bloc contenant le texte long */
 .content-block { 
-    /* Similaire au style des autres lignes */
     padding: 10px 0;
     border-bottom: 1px dotted var(--couleur-bordure);
     font-size: 1.2em;
@@ -86,7 +80,6 @@
 }
 
 .content-block strong {
-    /* Le titre "Contenu" se met sur une ligne pour laisser le texte s'étaler en dessous */
     display: block; 
     margin-bottom: 5px;
     
@@ -96,7 +89,6 @@
 }
 
 .content-text {
-    /* Styles pour la valeur de contenu */
     font-family: Arial, sans-serif;
     color: var(--couleur-texte-primaire);
     font-size: 1.3em;
@@ -104,14 +96,12 @@
     white-space: pre-wrap;
 }
 
-/* Règle générale pour les Strong (clé de stat) */
 .stats-container strong {
     color: var(--couleur-accent-sec);
     text-transform: uppercase;
     font-weight: 700;
 }
 
-/* Valeur de la Statistique (Ex: 18) */
 .stat-value {
     font-family: var(--font-titre);
     color: var(--couleur-accent-or);
@@ -133,4 +123,47 @@
 
 .back-link:hover {
     background-color: var(--couleur-accent-or);
+}
+
+/* --- Adaptations Mobile --- */
+@media (max-width: 700px) {
+    :host {
+        padding: 20px 10px;
+    }
+
+    .detail-card {
+        padding: 18px 16px;
+    }
+
+    .detail-card h2 {
+        font-size: 1.8em;
+        letter-spacing: 1px;
+        margin-bottom: 18px;
+        padding-bottom: 10px;
+    }
+
+    .document-image {
+        width: 100%;
+        max-width: 260px;
+    }
+
+    .stats-container {
+        padding: 14px 16px;
+    }
+
+    .stats-container p,
+    .content-block {
+        font-size: 1em;
+    }
+
+    .content-text {
+        font-size: 1.05em;
+    }
+
+    .back-link {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
 }

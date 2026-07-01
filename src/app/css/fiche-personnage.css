@@ -303,6 +303,10 @@
 /* --- Responsive --- */
 
 @media (max-width: 900px) {
+    .fiche-section {
+        padding: 18px 16px;
+    }
+
     .carac-grille {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -336,5 +340,30 @@
 
     .jauges-grille {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .fiche-titre {
+        font-size: 1.4em;
+        letter-spacing: 0.06em;
+    }
+
+    .fiche-section-titre {
+        font-size: 1.1em;
+    }
+
+    .btn-fiche-toggle {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 18px;
+    }
+}
+
+@media (max-width: 420px) {
+    .jauges-grille {
+        grid-template-columns: 1fr;
+    }
+
+    .combat-grille {
+        grid-template-columns: 1fr;
     }
 }

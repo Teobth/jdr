@@ -70,7 +70,6 @@
         @if (carte.type === 'personnage') {
           <span class="badge-rencontre" [class.badge-rencontre-oui]="carte.rencontre" [class.badge-rencontre-non]="!carte.rencontre">
             {{ carte.rencontre ? ' ' : ' ' }}
-            <!-- {{ carte.rencontre ? 'Rencontré' : 'Non rencontré' }} -->
           </span>
         }
       </div>
